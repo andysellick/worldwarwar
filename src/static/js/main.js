@@ -1,4 +1,43 @@
-/* globals Matter, www */
+/* globals Matter, www, Deferred */
+
+var loaders = [];
+var imgpath = 'static/img/';
+var imageloadprogress = 0;
+var imageloadtotal = 0;
+
+var allimages = [
+	{
+		'name': 'countries',
+		'images': ['britain.svg'],
+		'dir': ''
+	},
+];
+
+//preload images
+function loadFile(src,array,num){
+	var deferred = new Deferred();
+	var sprite = new Image();
+	sprite.onload = function() {
+		array[num] = sprite;
+		deferred.resolve();
+		imageloadprogress++;
+		//document.getElementById('loading').style.width = (imageloadprogress / imageloadtotal) * 100 + '%';
+	};
+	sprite.src = src;
+    return deferred.promise();
+}
+
+//loop through and call all the preload images
+function callAllPreloads(array,dir){
+    for(var z = 0; z < array.length; z++){
+        loaders.push(loadFile(dir + array[z], array, z));
+    }
+}
+
+for(var im = 0; im < allimages.length; im++){
+	imageloadtotal += allimages[im].images.length;
+	callAllPreloads(allimages[im].images, imgpath + allimages[im].dir + '/');
+}
 
 (function( window, undefined ) {
 var www = {
@@ -11,12 +50,14 @@ var www = {
 	Body: Matter.Body,
 	Bodies: Matter.Bodies,
 	Events: Matter.Events,
+	Svg: Matter.Svg,
 	w: 0,
 	h: 0,
 	bullets: [],
 	
 	general: {
 		init: function(){
+			console.log(allimages[0].images[0]);
 			//set size of canvas
 			www.ctx = www.canvas.getContext('2d');
 			var targetw = www.parentel.offsetWidth;
@@ -37,7 +78,7 @@ var www = {
 					width: www.w,
 					height: www.h,
 					background:'#aaaaaa',
-					wireframes: true
+					wireframes: false
 				}
 			});
 
@@ -46,13 +87,29 @@ var www = {
 				www.general.clickDown(e);
 			},false);
 		
-			//create an object
-			www.mycountry = www.Bodies.rectangle((www.canvas.width / 2), (www.canvas.height / 2), (www.canvas.height / 100) * 10, (www.canvas.height / 100) * 10);
+			//create player object			
+			www.mycountry = www.Bodies.rectangle((www.canvas.width / 2), (www.canvas.height / 2), (www.canvas.height / 100) * 10, (www.canvas.height / 100) * 10, {
+				render: {
+					sprite: {
+						texture: '/static/img/britain.svg',
+						xScale: 0.09
+					}
+				}
+			});
 			www.mycountry.mytype = 'mycountry';
 			//console.log('mycountry',www.mycountry.mytype);
 			www.World.add(www.engine.world, [www.mycountry]);
 			
-			var enemy = www.Bodies.rectangle((www.canvas.width / 4), (www.canvas.height / 4), (www.canvas.height / 100) * 10, (www.canvas.height / 100) * 10);
+			
+			//test enemies
+			var enemy = www.Bodies.rectangle((www.canvas.width / 4), (www.canvas.height / 4), (www.canvas.height / 100) * 10, (www.canvas.height / 100) * 10, {
+				render: {
+					sprite: {
+						texture: '/static/img/ireland.svg',
+						xScale: 0.05
+					}
+				}
+			});
 			enemy.mytype = 'enemy';
 			enemy.myhealth = 10;
 			www.World.add(www.engine.world, [enemy]);
@@ -108,7 +165,8 @@ var www = {
 			return([w,h]);
 		},	
 	
-		//click on page, return x/y position
+		//click to fire
+		//FIXME bug here - the larger the screen, the lower the speed of the bullet. On small screens bullet is so fast as to be invisible
 		clickDown: function(e){
 			var rect = www.canvas.getBoundingClientRect();
 			var x = e.clientX - rect.left;
@@ -118,28 +176,55 @@ var www = {
 				y = e.changedTouches[0].pageY - rect.top;
 			}
 			//console.log(x,y);
-			var bullet = www.Bodies.fromVertices(www.mycountry.position.x,www.mycountry.position.y, [Matter.Vector.create(0,0),Matter.Vector.create(20,0),Matter.Vector.create(10,10),Matter.Vector.create(0,10)]);
+			//var bullet = www.Bodies.fromVertices(www.mycountry.position.x,www.mycountry.position.y, [Matter.Vector.create(0,0),Matter.Vector.create(20,0),Matter.Vector.create(10,10),Matter.Vector.create(0,10)]);
+			
+			var bullet = www.Bodies.circle(www.mycountry.position.x,www.mycountry.position.y,www.canvas.width / 200);
 			bullet.mytype = 'bullet';
-			www.World.add(www.engine.world, [bullet]);			
+			www.World.add(www.engine.world, [bullet]);		
+/*
+			var dirx = x - www.mycountry.position.x;
+			var diry = y - www.mycountry.position.y;
+			
+			dirx = Math.max(-1,Math.min(1,dirx));
+			diry = Math.max(-1,Math.min(1,diry));
+			
+			dirx += www.mycountry.position.x;
+			diry += www.mycountry.position.y;
+			
+			
+			console.log('x',dirx,www.mycountry.position.x);
+			console.log('y',diry,www.mycountry.position.y);
+
+			var myvect = {
+				x: dirx - www.mycountry.position.x,
+				y: diry - www.mycountry.position.y
+			};
+*/			
 			
 			var myvect = {
 				x: x - bullet.position.x,
 				y: y - bullet.position.y
 			};
+			
 			//console.log('Not normalised:',myvect);
 			//normalise the vector, http://stackoverflow.com/questions/3592040/javascript-function-that-works-like-actionscripts-normalize1
+			
 			var len = Math.sqrt(myvect.x * myvect.x + myvect.y * myvect.y);
 			myvect.x /= len;
-			myvect.y /= len;		
+			myvect.y /= len;	
+			
+			
+			//need something like 800 for small screens, more like 100 for large			
 			var scaleby = 200; //weirdly the vector still needs to be massively shrunk still
+			//console.log(scaleby);
 			myvect.x /= scaleby;
 			myvect.y /= scaleby;			
+			
 			//console.log('Normalised:',myvect);
 			
 			www.Body.applyForce(bullet, bullet.position, myvect);
-			//www.Body.applyForce(bullet, bullet.position, Matter.Vector.create(0.01,0.01));
 		},
-		
+			
 		//this approach doesn't seem to be working
 		gameLoop: function(){
 			//console.log('loop');
@@ -153,7 +238,12 @@ window.www = www;
 })(window);
 
 window.onload = function(){
-	www.general.init();
+	Deferred.when(loaders).then(
+    	function(){
+			www.general.init();
+		    //js.general.addClass(document.getElementById('loading'),'fadeout');
+		}
+    );	
 	
 	var resize;
 	window.addEventListener('resize', function(event){
