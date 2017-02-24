@@ -1,43 +1,4 @@
-/* globals Matter, www, Deferred */
-
-var loaders = [];
-var imgpath = 'static/img/';
-var imageloadprogress = 0;
-var imageloadtotal = 0;
-
-var allimages = [
-	{
-		'name': 'countries',
-		'images': ['britain.svg'],
-		'dir': ''
-	},
-];
-
-//preload images
-function loadFile(src,array,num){
-	var deferred = new Deferred();
-	var sprite = new Image();
-	sprite.onload = function() {
-		array[num] = sprite;
-		deferred.resolve();
-		imageloadprogress++;
-		//document.getElementById('loading').style.width = (imageloadprogress / imageloadtotal) * 100 + '%';
-	};
-	sprite.src = src;
-    return deferred.promise();
-}
-
-//loop through and call all the preload images
-function callAllPreloads(array,dir){
-    for(var z = 0; z < array.length; z++){
-        loaders.push(loadFile(dir + array[z], array, z));
-    }
-}
-
-for(var im = 0; im < allimages.length; im++){
-	imageloadtotal += allimages[im].images.length;
-	callAllPreloads(allimages[im].images, imgpath + allimages[im].dir + '/');
-}
+/* globals Matter, www, Deferred, allcountries, spritepath */
 
 (function( window, undefined ) {
 var www = {
@@ -51,73 +12,61 @@ var www = {
 	Bodies: Matter.Bodies,
 	Events: Matter.Events,
 	Svg: Matter.Svg,
+	render: 0,
 	w: 0,
 	h: 0,
 	bullets: [],
+	enemycount: 0,
+	chosen: 0, //the country chosen by the player
 	
 	general: {
 		init: function(){
-			console.log(allimages[0].images[0]);
-			//set size of canvas
+			www.general.initCountrySelect();
+			www.general.showPopup('intro');
 			www.ctx = www.canvas.getContext('2d');
-			var targetw = www.parentel.offsetWidth;
-			var targeth = www.parentel.offsetHeight;
-			var sizes = www.general.calculateAspectRatio(1200,500,targetw,targeth);
-			www.w = sizes[0];
-			www.h = sizes[1];
-			
+			www.general.setCanvasSize();
+			www.general.createEvents();
+			//www.general.initGame();
+		},
+		
+		initCountrySelect: function(){
+			for(var c = 0; c < allcountries.length; c++){
+				var opt = document.createElement('option');
+				opt.value = c;
+				opt.innerHTML = allcountries[c].name;
+				document.getElementById('choosecountry').appendChild(opt);				
+			}
+		},
+		
+		initGame: function(){
 			// create an engine
 			www.engine = www.Engine.create();
 			www.engine.world.gravity.y = 0; //turn off gravity
 
 			// create a renderer
-			var render = www.Render.create({
+			www.render = www.Render.create({
 				canvas: www.canvas,
 				engine: www.engine,
 				options: {
 					width: www.w,
 					height: www.h,
 					background:'#aaaaaa',
-					wireframes: false
+					wireframes: false,
+					showVelocity: true,
+					showCollisions: true,
+					showAxes: true,
+					showAngleIndicator: true,
+					showPositions: true,
+					showIds: true,
+					showShadows: true
 				}
 			});
 
-			var ondown = ((document.ontouchstart!==null)?'mousedown':'touchstart');
-			www.canvas.addEventListener(ondown,function(e){
-				www.general.clickDown(e);
-			},false);
-		
-			//create player object			
-			www.mycountry = www.Bodies.rectangle((www.canvas.width / 2), (www.canvas.height / 2), (www.canvas.height / 100) * 10, (www.canvas.height / 100) * 10, {
-				render: {
-					sprite: {
-						texture: '/static/img/britain.svg',
-						xScale: 0.09
-					}
-				}
-			});
-			www.mycountry.mytype = 'mycountry';
-			//console.log('mycountry',www.mycountry.mytype);
+			www.mycountry = www.general.createPlayer(www.chosen,'mycountry');			
 			www.World.add(www.engine.world, [www.mycountry]);
-			
-			
-			//test enemies
-			var enemy = www.Bodies.rectangle((www.canvas.width / 4), (www.canvas.height / 4), (www.canvas.height / 100) * 10, (www.canvas.height / 100) * 10, {
-				render: {
-					sprite: {
-						texture: '/static/img/ireland.svg',
-						xScale: 0.05
-					}
-				}
-			});
-			enemy.mytype = 'enemy';
-			enemy.myhealth = 10;
-			www.World.add(www.engine.world, [enemy]);
-
-			var enemy2 = www.Bodies.rectangle((www.canvas.width / 5), (www.canvas.height / 5), (www.canvas.height / 100) * 10, (www.canvas.height / 100) * 10);
-			enemy2.mytype = 'enemy';
-			enemy2.myhealth = 10;
-			www.World.add(www.engine.world, [enemy2]);
+			//allcountries.splice(www.chosen,1);
+						
+			www.general.createEnemies();
 			
 			//console.log(www.w,www.h);
 			//create the boundary FIXME why do widths and heights need to be doubled??
@@ -127,16 +76,67 @@ var www = {
 			var leftline = www.Bodies.rectangle(0,0,5,www.h * 2, { isStatic: true });
 			www.World.add(www.engine.world, [topline,rightline,bottomline,leftline]);
 
+			www.general.createMatterEvents();
+			
 			// run the engine
 			www.Engine.run(www.engine);	
 
 			// run the renderer
-			www.Render.run(render);
-			//www.general.gameLoop();
+			www.Render.run(www.render);
+		},
+		
+		showPopup: function(whichone){
+			www.general.hideAllPopups();
+			document.getElementById(whichone).dataset.shown = 'true';
+		},
+		
+		hideAllPopups: function(){
+			var popups = document.getElementsByClassName('popup');
+			for(var p = 0; p < popups.length; p++){
+				popups[p].dataset.shown = 'false';
+			}
+		},
+		
+		createEvents: function(){
+			//start the game by choosing a country
+			var beginning = ((document.ontouchstart!==null)?'mousedown':'touchstart');
+			document.getElementById('startgame').addEventListener(beginning,function(e){
+				var dd = document.getElementById('choosecountry');
+				www.chosen = parseInt(dd.options[dd.selectedIndex].value);
+				www.general.initGame();
+				www.general.hideAllPopups();
+			},false);
 			
+			//game over, restart			
+			var replay = ((document.ontouchstart!==null)?'mousedown':'touchstart');
+			document.getElementById('playagain').addEventListener(replay,function(e){
+				www.general.showPopup('intro');
+			},false);
+			
+			//click to fire
+			var ondown = ((document.ontouchstart!==null)?'mousedown':'touchstart');
+			www.canvas.addEventListener(ondown,function(e){
+				www.general.clickDown(e);
+			},false);
+			
+		},
+		
+		createMatterEvents: function(){		
+			//on object collision
 			www.Events.on(www.engine,'collisionStart',function(e){
+				//console.log(www.engine.world.bodies);
+				
 				//console.log(e.pairs[0].bodyA);
 				var collided = [e.pairs[0].bodyA,e.pairs[0].bodyB];
+				var solongs = [
+					'Say goodbye to',
+					'No more',
+					'The world is better off without',
+					'So long,',
+					'We can live without',
+					'Good riddance to',
+					'We don\'t need'
+				];
 				
 				if(e.pairs[0].bodyA.mytype !== 'mycountry' && e.pairs[0].bodyB.mytype !== 'mycountry'){
 					for(var x = 0; x < collided.length; x++){
@@ -147,14 +147,56 @@ var www = {
 						else if(collided[x].mytype === 'enemy'){
 							collided[x].myhealth -= 1;
 							if(collided[x].myhealth <= 0){
+								var things = '';
+								for(var t = 0; t < collided[x].mythings.length - 1; t++){
+									things += collided[x].mythings[t] + ', ';
+								}
+								things += 'and ' + collided[x].mythings[collided[x].mythings.length - 1];
+								
+								//update the messages window
+								var div = document.createElement('div');
+								div.className = 'message';
+								var title = document.createElement('p');
+								title.className = 'title';
+								title.innerHTML = 'You destroyed ' + collided[x].myname + '!';
+								div.appendChild(title);
+								var desc = document.createElement('p');
+								desc.className = 'desc';
+								desc.innerHTML = solongs[www.general.randomInt(0,solongs.length - 1)] + ' ' + things;
+								div.appendChild(desc);
+								document.getElementById('messages').insertBefore(div,document.getElementById('messages').firstChild);
 								www.World.remove(www.engine.world, collided[x]);
+								www.enemycount--;
+								if(www.enemycount <= 0){
+									www.general.gameOver();
+								}
 							}
 						}
 					}
 				}
-				
-			});
+			});		
 		},
+		
+		randomInt: function(min,max){
+			return Math.floor(Math.random()*(max-min+1)+min);
+		},
+		
+		//set size of canvas
+		setCanvasSize: function(){
+			var targetw = www.parentel.offsetWidth;
+			var targeth = www.parentel.offsetHeight;
+			var sizes = www.general.calculateAspectRatio(1200,500,targetw,targeth);
+			www.canvas.width = sizes[0];
+			www.canvas.height = sizes[1];
+			www.w = sizes[0];
+			www.h = sizes[1];
+			if(www.render){
+				www.render.options.width = sizes[0];
+				www.render.options.height = sizes[0];
+				//fixme this works when the screen resizes - unfortunately we also need to rescale and reposition all the objects in the canvas as well. Does matter.js have a function for doing this automatically?
+			}
+		},
+		
 		//given a width and height representing an aspect ratio, and the size of the containing thing, return the largest w and h matching that aspect ratio
 		calculateAspectRatio: function(idealw,idealh,parentw,parenth){
 			var aspect = Math.floor((parenth / idealh) * idealw);
@@ -164,6 +206,47 @@ var www = {
 			var h = (w / idealw) * idealh;
 			return([w,h]);
 		},	
+		
+		//create player object
+		createPlayer: function(which,type){
+			var me = allcountries[which];
+			var xpos = (www.canvas.width / 100) * me.x;
+			var ypos = (www.canvas.height / 100) * me.y;
+			var w = (www.canvas.width / 100) * me.w;
+			var h = (www.canvas.height / 100) * me.h; //fixme object size as a percentage means if the canvas aspect ratio changes then so do the objects
+			//me.sprite.style.fill = 'yellow';
+			
+			var sprite = spritepath + me.sprite;
+			
+			var thisobj = www.Bodies.rectangle(xpos, ypos, w, h, {
+				render: {
+					sprite: {
+						texture: sprite,
+						xScale: me.xScale,
+						strokeStyle: 'red',
+						lineWidth: 3,
+						fillStyle: 'green'
+					}
+				}
+			});
+			thisobj.myname = me.name;
+			thisobj.mytype = type;
+			thisobj.myhealth = 10;
+			thisobj.mythings = me.unique;
+			return(thisobj);
+		},
+		
+		//once the player has been chosen, create the rest of the countries
+		createEnemies: function(){
+			for(var i = 0; i < allcountries.length; i++){
+				if(i !== www.chosen){
+					var enemy = www.general.createPlayer(i,'enemy');
+					//www.enemies.push(enemy); //do we need to store these?				
+					www.World.add(www.engine.world, [enemy]);
+					www.enemycount++;
+				}
+			}
+		},
 	
 		//click to fire
 		//FIXME bug here - the larger the screen, the lower the speed of the bullet. On small screens bullet is so fast as to be invisible
@@ -180,27 +263,9 @@ var www = {
 			
 			var bullet = www.Bodies.circle(www.mycountry.position.x,www.mycountry.position.y,www.canvas.width / 200);
 			bullet.mytype = 'bullet';
-			www.World.add(www.engine.world, [bullet]);		
-/*
-			var dirx = x - www.mycountry.position.x;
-			var diry = y - www.mycountry.position.y;
+			www.World.add(www.engine.world, [bullet]);
 			
-			dirx = Math.max(-1,Math.min(1,dirx));
-			diry = Math.max(-1,Math.min(1,diry));
-			
-			dirx += www.mycountry.position.x;
-			diry += www.mycountry.position.y;
-			
-			
-			console.log('x',dirx,www.mycountry.position.x);
-			console.log('y',diry,www.mycountry.position.y);
-
-			var myvect = {
-				x: dirx - www.mycountry.position.x,
-				y: diry - www.mycountry.position.y
-			};
-*/			
-			
+			/* this works but the sizing bug happens here */
 			var myvect = {
 				x: x - bullet.position.x,
 				y: y - bullet.position.y
@@ -212,43 +277,57 @@ var www = {
 			var len = Math.sqrt(myvect.x * myvect.x + myvect.y * myvect.y);
 			myvect.x /= len;
 			myvect.y /= len;	
-			
-			
+						
 			//need something like 800 for small screens, more like 100 for large			
 			var scaleby = 200; //weirdly the vector still needs to be massively shrunk still
 			//console.log(scaleby);
 			myvect.x /= scaleby;
 			myvect.y /= scaleby;			
 			
-			//console.log('Normalised:',myvect);
-			
+			//console.log('Normalised:',myvect);			
 			www.Body.applyForce(bullet, bullet.position, myvect);
-		},
+
+			/* okay, new approach, incomplete, so far doesn't work. Idea was to turn vectors into percentages
+			var percx = (x / www.canvas.width) * 100;
+			var percy = (y / www.canvas.height) * 100;
 			
-		//this approach doesn't seem to be working
-		gameLoop: function(){
-			//console.log('loop');
-			window.requestAnimationFrame(www.general.gameLoop);
-			//www.Engine.update(www.engine,1000);
+			var percbx = (bullet.position.x / www.canvas.width) * 100;
+			var percby = (bullet.position.y / www.canvas.height) * 100;
+			
+			var myvect = {
+				x: percx - percbx,
+				y: percy - percby
+			};
+			//normalise
+			var len = Math.sqrt(myvect.x * myvect.x + myvect.y * myvect.y);
+			myvect.x /= len;
+			myvect.y /= len;	
+		
+			var scaleby = 200; //weirdly the vector still needs to be massively shrunk still
+			//console.log(scaleby);
+			myvect.x /= scaleby;
+			myvect.y /= scaleby;			
+
+			console.log(myvect);
+			www.Body.applyForce(bullet, bullet.position, myvect);
+			*/
+		},
+		
+		gameOver: function(){
+			www.general.showPopup('gamewon');
 		}
-	
 	}
 };
 window.www = www;
 })(window);
 
 window.onload = function(){
-	Deferred.when(loaders).then(
-    	function(){
-			www.general.init();
-		    //js.general.addClass(document.getElementById('loading'),'fadeout');
-		}
-    );	
+	www.general.init();
 	
 	var resize;
 	window.addEventListener('resize', function(event){
 		clearTimeout(resize);
-		resize = setTimeout(0,200);
+		resize = setTimeout(www.general.setCanvasSize,200);
 	});
 };
 
