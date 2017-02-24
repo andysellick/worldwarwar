@@ -25,13 +25,18 @@
 		position:fixed;
 		bottom:0;
 		right:0;
-		padding:0.5em;
 		max-width:30%;
-		max-height:20%;
 		overflow-y:auto;
 		background:rgba(255,255,255,0.5);
 		.message {
-			padding:0 0 1em 0;
+			display:none;
+			min-height:80px;
+			padding:0.5em;
+			
+			&:first-child {
+				display:block;
+			}
+			
 			.title {
 				padding:0 0 0.5em 0;
 				.fontcalculate(12);
@@ -68,6 +73,11 @@
 			background:@white;
 			border-radius:3px;
 			text-align:center;
+			
+			.title {
+				.fontcalculate(20);
+				font-weight:bold;
+			}
 		}
 	}
 

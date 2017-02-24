@@ -15,9 +15,10 @@ var www = {
 	render: 0,
 	w: 0,
 	h: 0,
-	bullets: [],
 	enemycount: 0,
+	enemies: [],
 	chosen: 0, //the country chosen by the player
+	timer: 0,
 	
 	general: {
 		init: function(){
@@ -39,6 +40,9 @@ var www = {
 		},
 		
 		initGame: function(){
+			www.enemies = [];
+			clearInterval(www.timer);
+			document.getElementById('messages').innerHTML = '';
 			// create an engine
 			www.engine = www.Engine.create();
 			www.engine.world.gravity.y = 0; //turn off gravity
@@ -70,10 +74,10 @@ var www = {
 			
 			//console.log(www.w,www.h);
 			//create the boundary FIXME why do widths and heights need to be doubled??
-			var topline = www.Bodies.rectangle(0,0,www.w * 2,5, { isStatic: true });
-			var rightline = www.Bodies.rectangle(www.w,0,5,www.h * 2, { isStatic: true });
-			var bottomline = www.Bodies.rectangle(0,www.h,www.w * 2,5, { isStatic: true });
-			var leftline = www.Bodies.rectangle(0,0,5,www.h * 2, { isStatic: true });
+			var topline = www.Bodies.rectangle(0,-5,www.w * 2,5, { isStatic: true });
+			var rightline = www.Bodies.rectangle(www.w + 5,0,5,www.h * 2, { isStatic: true });
+			var bottomline = www.Bodies.rectangle(0,www.h + 5,www.w * 2,5, { isStatic: true });
+			var leftline = www.Bodies.rectangle(-5,0,5,www.h * 2, { isStatic: true });
 			www.World.add(www.engine.world, [topline,rightline,bottomline,leftline]);
 
 			www.general.createMatterEvents();
@@ -83,6 +87,8 @@ var www = {
 
 			// run the renderer
 			www.Render.run(www.render);
+			
+			www.timer = setInterval(www.general.gameLoop,1000);
 		},
 		
 		showPopup: function(whichone){
@@ -135,9 +141,11 @@ var www = {
 					'So long,',
 					'We can live without',
 					'Good riddance to',
-					'We don\'t need'
+					'We don\'t need',
+					'Who needs'
 				];
 				
+				//FIXME this needs rewriting now other countries fire as well
 				if(e.pairs[0].bodyA.mytype !== 'mycountry' && e.pairs[0].bodyB.mytype !== 'mycountry'){
 					for(var x = 0; x < collided.length; x++){
 						//if object is a bullet, remove it
@@ -151,7 +159,7 @@ var www = {
 								for(var t = 0; t < collided[x].mythings.length - 1; t++){
 									things += collided[x].mythings[t] + ', ';
 								}
-								things += 'and ' + collided[x].mythings[collided[x].mythings.length - 1];
+								things += 'and ' + collided[x].mythings[collided[x].mythings.length - 1] + '.';
 								
 								//update the messages window
 								var div = document.createElement('div');
@@ -166,6 +174,7 @@ var www = {
 								div.appendChild(desc);
 								document.getElementById('messages').insertBefore(div,document.getElementById('messages').firstChild);
 								www.World.remove(www.engine.world, collided[x]);
+								www.enemies.splice(x,1);
 								www.enemycount--;
 								if(www.enemycount <= 0){
 									www.general.gameOver();
@@ -241,7 +250,7 @@ var www = {
 			for(var i = 0; i < allcountries.length; i++){
 				if(i !== www.chosen){
 					var enemy = www.general.createPlayer(i,'enemy');
-					//www.enemies.push(enemy); //do we need to store these?				
+					www.enemies.push(enemy); 
 					www.World.add(www.engine.world, [enemy]);
 					www.enemycount++;
 				}
@@ -258,13 +267,19 @@ var www = {
 				x = e.changedTouches[0].pageX - rect.left;
 				y = e.changedTouches[0].pageY - rect.top;
 			}
-			//console.log(x,y);
-			//var bullet = www.Bodies.fromVertices(www.mycountry.position.x,www.mycountry.position.y, [Matter.Vector.create(0,0),Matter.Vector.create(20,0),Matter.Vector.create(10,10),Matter.Vector.create(0,10)]);
 			
-			var bullet = www.Bodies.circle(www.mycountry.position.x,www.mycountry.position.y,www.canvas.width / 200);
+			var bullet = www.general.createBullet(www.mycountry.position.x,www.mycountry.position.y);			
+			www.general.fireBullet(bullet,x,y);
+		},
+		
+		createBullet: function(posx,posy){
+			var bullet = www.Bodies.circle(posx,posy,www.canvas.width / 200);
 			bullet.mytype = 'bullet';
 			www.World.add(www.engine.world, [bullet]);
-			
+			return(bullet);
+		},
+		
+		fireBullet: function(bullet,x,y){			
 			/* this works but the sizing bug happens here */
 			var myvect = {
 				x: x - bullet.position.x,
@@ -272,8 +287,7 @@ var www = {
 			};
 			
 			//console.log('Not normalised:',myvect);
-			//normalise the vector, http://stackoverflow.com/questions/3592040/javascript-function-that-works-like-actionscripts-normalize1
-			
+			//normalise the vector, http://stackoverflow.com/questions/3592040/javascript-function-that-works-like-actionscripts-normalize1			
 			var len = Math.sqrt(myvect.x * myvect.x + myvect.y * myvect.y);
 			myvect.x /= len;
 			myvect.y /= len;	
@@ -313,8 +327,18 @@ var www = {
 			*/
 		},
 		
+		gameLoop: function(){
+			console.log('moo');
+			for(var e = 0; e < www.enemies.length; e++){
+				var bullet = www.general.createBullet(www.enemies[e].position.x,www.enemies[e].position.y);			
+				var x = www.general.randomInt(0,www.canvas.width);
+				var y = www.general.randomInt(0,www.canvas.height);
+				www.general.fireBullet(bullet,x,y);				
+			}
+		},
+		
 		gameOver: function(){
-			www.general.showPopup('gamewon');
+			www.general.showPopup('gamewon');			
 		}
 	}
 };
