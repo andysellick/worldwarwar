@@ -98,6 +98,7 @@ var www = {
 		
 		//set size of canvas
 		setCanvasSize: function(){
+			console.log('setting canvas size');
 			var targetw = www.parentel.offsetWidth;
 			var targeth = www.parentel.offsetHeight;
 			//account for padding within the parent element
@@ -126,19 +127,7 @@ var www = {
 			var h = (w / idealw) * idealh;
 			return([w,h]);
 		},	
-				
-		showPopup: function(whichone){
-			www.general.hideAllPopups();
-			document.getElementById(whichone).dataset.shown = 'true';
-		},
-		
-		hideAllPopups: function(){
-			var popups = document.getElementsByClassName('popup');
-			for(var p = 0; p < popups.length; p++){
-				popups[p].dataset.shown = 'false';
-			}
-		},
-		
+					
 		createEvents: function(){
 			//start the game by choosing a country
 			var beginning = ((document.ontouchstart!==null)?'mousedown':'touchstart');
@@ -436,6 +425,18 @@ var www = {
 				y: -myvect.y
 			};
 			www.Body.applyForce(origin, origin.position, recoil);
+		},
+
+		showPopup: function(whichone){
+			www.general.hideAllPopups();
+			document.getElementById(whichone).dataset.shown = 'true';
+		},
+		
+		hideAllPopups: function(){
+			var popups = document.getElementsByClassName('popup');
+			for(var p = 0; p < popups.length; p++){
+				popups[p].dataset.shown = 'false';
+			}
 		},
 		
 		gameLoop: function(){
