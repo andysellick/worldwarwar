@@ -16,6 +16,8 @@ var www = {
 	render: 0,
 	w: 0,
 	h: 0,
+	idealw: 650, 
+	idealh: 365, //effectively 16:9
 	enemycount: 0,
 	enemyhealth: 10,
 	playerhealth: 10,
@@ -86,10 +88,45 @@ var www = {
 			www.Engine.run(www.engine);	// run the engine			
 			www.Render.run(www.render); // run the renderer
 			
-			www.timer = setInterval(www.general.gameLoop,1000);		//FIXME put this back	
+			//www.timer = setInterval(www.general.gameLoop,1000);		//FIXME put this back	
 			//www.Bounds.translate(www.render.bounds,{x:-100,y:-200});
 		},
 		
+		randomInt: function(min,max){
+			return Math.floor(Math.random()*(max-min+1)+min);
+		},
+		
+		//set size of canvas
+		setCanvasSize: function(){
+			var targetw = www.parentel.offsetWidth;
+			var targeth = www.parentel.offsetHeight;
+			//account for padding within the parent element
+			var computedStyle = getComputedStyle(www.parentel);
+			targetw -= parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight);
+			targeth -= parseFloat(computedStyle.paddingTop) + parseFloat(computedStyle.paddingBottom);
+			
+			var sizes = www.general.calculateAspectRatio(www.idealw,www.idealh,targetw,targeth);
+			www.canvas.width = sizes[0];
+			www.canvas.height = sizes[1];
+			www.w = sizes[0];
+			www.h = sizes[1];
+			if(www.render){
+				www.render.options.width = sizes[0];
+				www.render.options.height = sizes[0];
+				//fixme this works when the screen resizes - unfortunately we also need to rescale and reposition all the objects in the canvas as well. Does matter.js have a function for doing this automatically?
+			}
+		},
+		
+		//given a width and height representing an aspect ratio, and the size of the containing thing, return the largest w and h matching that aspect ratio
+		calculateAspectRatio: function(idealw,idealh,parentw,parenth){
+			var aspect = Math.floor((parenth / idealh) * idealw);
+			var cwidth = Math.min(idealw, parentw);
+			var cheight = Math.min(idealh, parenth);
+			var w = Math.min(parentw,aspect);
+			var h = (w / idealw) * idealh;
+			return([w,h]);
+		},	
+				
 		showPopup: function(whichone){
 			www.general.hideAllPopups();
 			document.getElementById(whichone).dataset.shown = 'true';
@@ -124,7 +161,7 @@ var www = {
 			
 			//click to fire
 			var ondown = ((document.ontouchstart!==null)?'mousedown':'touchstart');
-			www.canvas.addEventListener(ondown,function(e){
+			document.getElementById('canvasparent').addEventListener(ondown,function(e){ //FIXME using the canvas parent for this click event, so making our own canvas isn't necessary now
 				www.general.clickDown(e);
 			},false);
 			
@@ -154,15 +191,14 @@ var www = {
 				
 				//www.Body.translate(www.engine.world.bodies,{x:diffx,y:diffy});
 				
-				//this works
-				www.Bounds.translate(www.render.bounds,{x:-diffx,y:-diffy});
+				//FIXME this moves the screen to follow the player but breaks the mouse position for firing - it's also not super smooth
+				//www.Bounds.translate(www.render.bounds,{x:-diffx,y:-diffy});
 				
 			});
 		
 			//on object collision
 			www.Events.on(www.engine,'collisionStart',function(e){
 				//console.log(www.engine.world.bodies);				
-				//console.log(e.pairs[0].bodyA);
 				
 				var collided = [e.pairs[0].bodyA,e.pairs[0].bodyB];
 				var bullets = [];
@@ -170,7 +206,6 @@ var www = {
 				
 				var obj1 = e.pairs[0].bodyA;
 				var obj2 = e.pairs[0].bodyB;
-				
 				/*
 					possible scenarios:
 						both objects are bullets - do something
@@ -197,9 +232,14 @@ var www = {
 				}
 				//one bullet, one country
 				else if(bullets.length === 1 && countries.length === 1){
+					//if the bullet did not originate from this country, inflict damage
 					if(bullets[0].myorigin !== countries[0].id){
 						www.general.inflictDamage(countries[0]);
 						www.World.remove(www.engine.world, bullets[0]);
+					}
+					//otherwise, this bullet just came from this country, so disable the collision
+					else {
+						e.pairs[0].isActive = false;
 					}
 				}
 				//anything else we don't care about
@@ -256,36 +296,6 @@ var www = {
 			}
 		},
 		
-		randomInt: function(min,max){
-			return Math.floor(Math.random()*(max-min+1)+min);
-		},
-		
-		//set size of canvas
-		setCanvasSize: function(){
-			var targetw = www.parentel.offsetWidth;
-			var targeth = www.parentel.offsetHeight;
-			var sizes = www.general.calculateAspectRatio(1200,500,targetw,targeth);
-			www.canvas.width = sizes[0];
-			www.canvas.height = sizes[1];
-			www.w = sizes[0];
-			www.h = sizes[1];
-			if(www.render){
-				www.render.options.width = sizes[0];
-				www.render.options.height = sizes[0];
-				//fixme this works when the screen resizes - unfortunately we also need to rescale and reposition all the objects in the canvas as well. Does matter.js have a function for doing this automatically?
-			}
-		},
-		
-		//given a width and height representing an aspect ratio, and the size of the containing thing, return the largest w and h matching that aspect ratio
-		calculateAspectRatio: function(idealw,idealh,parentw,parenth){
-			var aspect = Math.floor((parenth / idealh) * idealw);
-			var cwidth = Math.min(idealw, parentw);
-			var cheight = Math.min(idealh, parenth);
-			var w = Math.min(parentw,aspect);
-			var h = (w / idealw) * idealh;
-			return([w,h]);
-		},	
-		
 		//FIXME this is pretty ugly
 		drawBoundary: function(){
 			var walloptions = { isStatic: true };
@@ -328,6 +338,7 @@ var www = {
 			
 			var x = (relw / 100) * obj.x;
 			var y = (relh / 100) * obj.y;
+			//FIXME this doesn't account for canvas scale yet
 			var w = obj.w * www.scaleFactor;
 			var h = obj.h * www.scaleFactor;
 			
@@ -384,9 +395,9 @@ var www = {
 				y = e.changedTouches[0].pageY - rect.top;
 			}
 			
-			console.log(www.mycountry);
+			//console.log(www.mycountry);
 			var bullet = www.general.createBullet(www.mycountry.position.x,www.mycountry.position.y,www.mycountry.id);			
-			www.general.fireBullet(bullet,x,y);
+			www.general.fireBullet(bullet,x,y,www.mycountry);
 		},
 		
 		//FIXME might be better to create the bullet outside of the object then apply a specific force to simulate recoil
@@ -398,8 +409,8 @@ var www = {
 			return(bullet);
 		},
 		
-		fireBullet: function(bullet,x,y){			
-			/* this works but the sizing bug happens here */
+		fireBullet: function(bullet,x,y,origin){			
+			/* FIXME this works but the sizing bug happens here */
 			var myvect = {
 				x: x - bullet.position.x,
 				y: y - bullet.position.y
@@ -412,38 +423,19 @@ var www = {
 			myvect.y /= len;	
 						
 			//need something like 800 for small screens, more like 100 for large			
-			var scaleby = 200; //weirdly the vector still needs to be massively shrunk still
+			var scaleby = 200; //FIXME weirdly the vector still needs to be massively shrunk still
 			//console.log(scaleby);
 			myvect.x /= scaleby;
-			myvect.y /= scaleby;			
-			
+			myvect.y /= scaleby;				
 			//console.log('Normalised:',myvect);			
 			www.Body.applyForce(bullet, bullet.position, myvect);
-
-			/* okay, new approach, incomplete, so far doesn't work. Idea was to turn vectors into percentages
-			var percx = (x / www.canvas.width) * 100;
-			var percy = (y / www.canvas.height) * 100;
 			
-			var percbx = (bullet.position.x / www.canvas.width) * 100;
-			var percby = (bullet.position.y / www.canvas.height) * 100;
-			
-			var myvect = {
-				x: percx - percbx,
-				y: percy - percby
+			//create recoil to move the country
+			var recoil = {
+				x: -myvect.x,
+				y: -myvect.y
 			};
-			//normalise
-			var len = Math.sqrt(myvect.x * myvect.x + myvect.y * myvect.y);
-			myvect.x /= len;
-			myvect.y /= len;	
-		
-			var scaleby = 200; //weirdly the vector still needs to be massively shrunk still
-			//console.log(scaleby);
-			myvect.x /= scaleby;
-			myvect.y /= scaleby;			
-
-			console.log(myvect);
-			www.Body.applyForce(bullet, bullet.position, myvect);
-			*/
+			www.Body.applyForce(origin, origin.position, recoil);
 		},
 		
 		gameLoop: function(){
@@ -452,7 +444,7 @@ var www = {
 					var bullet = www.general.createBullet(www.enemies[e].position.x,www.enemies[e].position.y,www.enemies[e].id);			
 					var x = www.general.randomInt(0,www.canvas.width);
 					var y = www.general.randomInt(0,www.canvas.height);
-					www.general.fireBullet(bullet,x,y);				
+					www.general.fireBullet(bullet,x,y,www.enemies[e]);				
 				}
 			}		
 		},
