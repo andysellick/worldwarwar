@@ -20,16 +20,17 @@ var www = {
 	origy: 0, //used to keep track of view position changes
 	render: 0,
 	w: 0,
-	h: 0,
-	idealw: 650, 
-	idealh: 365, //effectively 16:9
+	h: 0, //used to set width and height of canvas
+	idealw: 1600, 
+	idealh: 900, 
 	enemycount: 0,
 	enemyhealth: 10,
 	playerhealth: 10,
+	boundswidth: 5, //used to determine the thickness of the walls we build to limit the game
 	enemies: [],
 	chosen: 0, //the country chosen by the player
 	timer: 0,
-	scaleFactor: 1, //global variable of how big to draw everything and where positioned. A value of 1 should draw everything to fit in one screen, 0.5 would be half the screen, etc.
+	scaleFactor: 0.5, //how big to draw everything. Game should normally be twice width/height of canvas, scale of 0.5 will fit everything in
 	
 	general: {
 		init: function(){
@@ -40,15 +41,6 @@ var www = {
 			www.general.createEvents();
 						
 			www.general.initGame(); //FIXME remove this
-		},
-		
-		initCountrySelect: function(){
-			for(var c = 0; c < allcountries.length; c++){
-				var opt = document.createElement('option');
-				opt.value = c;
-				opt.innerHTML = allcountries[c].name;
-				document.getElementById('choosecountry').appendChild(opt);				
-			}
 		},
 		
 		initGame: function(){
@@ -78,13 +70,6 @@ var www = {
 				}
 			});
 			
-			/* FIXME need to use the scale to set these bounds. Or do we 
-			www.engine.world.bounds.min.x = 100;
-			www.engine.world.bounds.min.y = 100;
-			www.engine.world.bounds.max.x = 1000;
-			www.engine.world.bounds.max.y = 500;
-			*/
-			
 			// add mouse control
 			www.mouse = www.Mouse.create(www.render.canvas);
 			www.mouseConstraint = www.MouseConstraint.create(www.engine, {
@@ -102,12 +87,10 @@ var www = {
 			www.viewportCentre = {
 				x: www.render.options.width * 0.5,
 				y: www.render.options.height * 0.5
-			};			
-			// make the world bounds a little bigger than the render bounds
-			www.engine.world.bounds.min.x = -300;
-			www.engine.world.bounds.min.y = -300;
-			www.engine.world.bounds.max.x = 1100;
-			www.engine.world.bounds.max.y = 900;
+			};		
+
+			www.general.setWorldSize();
+			
 			// keep track of current bounds scale (view zoom)
 			www.boundsScaleTarget = 1;
 			www.boundsScale = {
@@ -115,9 +98,8 @@ var www = {
 				y: 1
 			};			
 			
-
 			www.mycountry = www.general.createPlayer(www.chosen,'player',www.playerhealth);	
-			console.log('mycountry position',www.mycountry.position.x,www.mycountry.position.y);
+			//FIXME at this point we might want to recentre the canvas onto the player, not sure yet how
 			www.general.createEnemies();		
 			www.general.drawBoundary();
 			www.general.createMatterEvents();			
@@ -126,7 +108,25 @@ var www = {
 			www.Render.run(www.render); // run the renderer
 			
 			//www.timer = setInterval(www.general.gameLoop,1000);		//FIXME put this back	
-			//www.Bounds.translate(www.render.bounds,{x:-100,y:-200});
+		},
+		
+		//set up world size and boundaries
+		setWorldSize: function(){
+			//make the world bounds twice as big as the canvas (render bounds)
+			www.worldw = (www.w * www.scaleFactor) * 2;
+			www.worldh = (www.h * www.scaleFactor) * 2;
+			var minx = (www.w - www.worldw) / 2;
+			var miny = (www.h - www.worldh) / 2;
+			var maxx = minx + www.worldw;
+			var maxy = miny + www.worldh;
+			
+			console.log('World size',www.worldw,www.worldh,minx,miny,maxx,maxy);
+		
+			www.engine.world.bounds.min.x = minx; //-300;
+			www.engine.world.bounds.min.y = miny; //-300;
+			www.engine.world.bounds.max.x = maxx; //1100;
+			www.engine.world.bounds.max.y = maxy; //900;
+			console.log('World bounds are',www.engine.world.bounds);
 		},
 		
 		randomInt: function(min,max){
@@ -144,15 +144,8 @@ var www = {
 			targeth -= parseFloat(computedStyle.paddingTop) + parseFloat(computedStyle.paddingBottom);
 			
 			var sizes = www.general.calculateAspectRatio(www.idealw,www.idealh,targetw,targeth);
-			www.canvas.width = sizes[0];
-			www.canvas.height = sizes[1];
-			www.w = sizes[0];
-			www.h = sizes[1];
-			if(www.render){
-				www.render.options.width = sizes[0];
-				www.render.options.height = sizes[0];
-				//fixme this works when the screen resizes - unfortunately we also need to rescale and reposition all the objects in the canvas as well. Does matter.js have a function for doing this automatically?
-			}
+			www.w = www.canvas.width = sizes[0];
+			www.h = www.canvas.height = sizes[1];
 		},
 		
 		//given a width and height representing an aspect ratio, and the size of the containing thing, return the largest w and h matching that aspect ratio
@@ -186,6 +179,7 @@ var www = {
 			},false);
 			
 			//click to fire
+			//we could use matter's built in mouse click stuff for this but it only works within the canvas, we want it outside as well
 			var ondown = ((document.ontouchstart!==null)?'mousedown':'touchstart');
 			document.getElementById('canvasparent').addEventListener(ondown,function(e){ //FIXME using the canvas parent for this click event, so making our own canvas isn't necessary now
 				www.general.clickDown(e);
@@ -212,8 +206,6 @@ var www = {
 		
 			//on object collision
 			www.Events.on(www.engine,'collisionStart',function(e){
-				//console.log(www.engine.world.bodies);				
-				
 				var collided = [e.pairs[0].bodyA,e.pairs[0].bodyB];
 				var bullets = [];
 				var countries = [];
@@ -221,11 +213,9 @@ var www = {
 				var obj1 = e.pairs[0].bodyA;
 				var obj2 = e.pairs[0].bodyB;
 				/*
-					possible scenarios:
+					scenarios of interest:
 						both objects are bullets - do something
 						one object is a bullet and one is a country - do something
-						both objects are countries
-						one object is a country and one is a wall
 				*/
 				//first sort the two colliding objects
 				for(var x = 0; x < collided.length; x++){
@@ -236,8 +226,6 @@ var www = {
 						countries.push(collided[x]);
 					}
 				}
-				//FIXME need to add in that only cause damage if bullet myorigin is not equal to collision object id
-							
 				//two bullets
 				//FIXME maybe more fun if bullets simply deflect each other?
 				if(bullets.length === 2){
@@ -256,9 +244,8 @@ var www = {
 						e.pairs[0].isActive = false;
 					}
 				}
-				//anything else we don't care about
+				//this is a bullet has hit a wall, just remove the bullet
 				else if(bullets.length === 1){
-					//console.log(bullets);
 					www.World.remove(www.engine.world, bullets[0]);					
 				}
 			});	
@@ -300,24 +287,34 @@ var www = {
 				}				
 				
 				//reposition the screen to keep the player centered
+				var diffx = www.mycountry.myxpos - www.mycountry.position.x;
+				var diffy = www.mycountry.myypos - www.mycountry.position.y;
+				www.mycountry.myxpos = www.mycountry.position.x;
+				www.mycountry.myypos = www.mycountry.position.y;								
+				www.origx += diffx;
+				www.origy += diffy;
+				
+				/*
 				var diffx = www.mycountry.myxpos - www.mycountry.bounds.min.x;
 				var diffy = www.mycountry.myypos - www.mycountry.bounds.min.y;
+				console.log('Translating:',www.mycountry.myxpos,www.mycountry.bounds.min.x,diffx,diffy);
 				www.mycountry.myxpos = www.mycountry.bounds.min.x;
 				www.mycountry.myypos = www.mycountry.bounds.min.y;				
 				www.origx += diffx;
 				www.origy += diffy;
-				www.Bounds.translate(www.render.bounds,{x:-diffx,y:-diffy});				
-				
+				*/
+				//console.log('Ah wait this isnt right the first time',diffx,diffy);
+				www.Bounds.translate(www.render.bounds,{x:-diffx,y:-diffy});
 			});
 			
 			/*
-			//this seems to be a better way of doing mouse clicks
+			//proper matter way of doing mouse clicks
 			www.Events.on(www.mouseConstraint, 'mousedown', function(e) {
 				if(www.mouseConstraint.mouse.button === 0){
 					//console.log(e.mouse);
-					www.general.clickDown(e.mouse.position);
 					//var mousePosition = e.mouse.position;
 					//console.log('clicked',mousePosition);
+					www.general.clickDown(e.mouse.position);
 				}
 			});
 			*/
@@ -336,7 +333,8 @@ var www = {
 						'We can live without',
 						'Good riddance to',
 						'We don\'t need',
-						'Who needs'
+						'Who needs',
+						'Take a hike,'
 					];
 					var things = '';
 					for(var t = 0; t < country.mythings.length - 1; t++){
@@ -372,34 +370,40 @@ var www = {
 		//FIXME this is pretty ugly
 		drawBoundary: function(){
 			var walloptions = { isStatic: true };
+			//FIXME the walls aren't being drawn at the visual boundaries of the space - they all seem to be offset down and right slightly
+			//top edge
 			var wall1 = {
-				x:50,
-				y:0,
-				w:www.w,
-				h:5
-			};			
-			www.general.drawRectangle(wall1,walloptions);
+				x:www.engine.world.bounds.min.x + (www.worldw / 2),
+				y:www.engine.world.bounds.min.y, 
+				w:www.worldw,
+				h:www.boundswidth
+			};
+			//right edge
 			var wall2 = {
-				x:100,
-				y:50,
-				w:5,
-				h:www.h
-			};			
-			www.general.drawRectangle(wall2,walloptions);
+				x:www.engine.world.bounds.max.x,
+				y:www.engine.world.bounds.min.y + (www.worldh / 2),
+				w:www.boundswidth,
+				h:www.worldh
+			};		
+			//bottom edge
 			var wall3 = {
-				x:50,
-				y:100,
-				w:www.w,
-				h:5
+				x:www.engine.world.bounds.min.x + (www.worldw / 2),
+				y:www.engine.world.bounds.max.y,
+				w:www.worldw,
+				h:www.boundswidth
 			};			
-			www.general.drawRectangle(wall3,walloptions);
+			//left edge
 			var wall4 = {
-				x:0,
-				y:50,
-				w:5,
-				h:www.h
+				x:www.engine.world.bounds.min.x,
+				y:www.engine.world.bounds.min.y + (www.worldh / 2),
+				w:www.boundswidth,
+				h:www.worldh
 			};			
-			www.general.drawRectangle(wall4,walloptions);
+			var topwall = www.Bodies.rectangle(wall1.x,wall1.y,wall1.w,wall1.h,walloptions);				
+			var rightwall = www.Bodies.rectangle(wall2.x,wall2.y,wall2.w,wall2.h,walloptions);
+			var bottomwall = www.Bodies.rectangle(wall3.x,wall3.y,wall3.w,wall3.h,walloptions);
+			var leftwall = www.Bodies.rectangle(wall4.x,wall4.y,wall4.w,wall4.h,walloptions);
+			www.World.add(www.engine.world, [topwall,rightwall,bottomwall,leftwall]);
 		},
 		
 		//draw an object based on the scale value. Remember the x/y creation point of an object represents the middle of where the object will be created
@@ -467,12 +471,7 @@ var www = {
 				x = e.changedTouches[0].pageX - rect.left;
 				y = e.changedTouches[0].pageY - rect.top;
 			}
-			//console.log(x,y);
-			
-			//console.log('Bounds',www.render.bounds,www.viewportCentre);
-			//console.log('mycountry position',www.mycountry.position.x,www.mycountry.position.y);
-
-			console.log(www.origx,www.origy);
+			//adjust click position based on any translations to the world
 			x -= www.origx;
 			y -= www.origy;
 			
@@ -520,6 +519,16 @@ var www = {
 			www.Body.applyForce(origin, origin.position, recoil);
 		},
 
+		//populate the select dropdown on the first screen to hold the list of all available countries
+		initCountrySelect: function(){
+			for(var c = 0; c < allcountries.length; c++){
+				var opt = document.createElement('option');
+				opt.value = c;
+				opt.innerHTML = allcountries[c].name;
+				document.getElementById('choosecountry').appendChild(opt);				
+			}
+		},
+		
 		showPopup: function(whichone){
 			www.general.hideAllPopups();
 			document.getElementById(whichone).dataset.shown = 'true';
@@ -558,12 +567,14 @@ window.www = www;
 })(window);
 
 window.onload = function(){
+	console.log('BEGIN');
 	www.general.init();
-	
+	/*
 	var resize;
 	window.addEventListener('resize', function(event){
 		clearTimeout(resize);
-		resize = setTimeout(www.general.setCanvasSize,200);
+		resize = setTimeout(www.general.setCanvasSize,500);
 	});
+	*/
 };
 

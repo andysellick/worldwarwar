@@ -9,7 +9,7 @@ var allcountries = [
 		'xScale': 0.09, //apparently yScale is not needed
 		//x and y pos and w and h are stored as percentages
 		'x': 50, 
-		'y': 40,
+		'y': 30,
 		'w': 30,
 		'h': 30,
 		'unique': [
@@ -22,7 +22,7 @@ var allcountries = [
 		'sprite': 'ireland.svg',
 		'xScale': 0.035, //apparently yScale is not needed
 		//x and y pos and w and h are stored as percentages
-		'x': 46.5, 
+		'x': 43.5, 
 		'y': 45,
 		'w': 30,
 		'h': 30,
