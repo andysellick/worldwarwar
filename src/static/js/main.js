@@ -12,7 +12,12 @@ var www = {
 	Bodies: Matter.Bodies,
 	Events: Matter.Events,
 	Svg: Matter.Svg,
+	Mouse: Matter.Mouse,
+	MouseConstraint: Matter.MouseConstraint,
 	Bounds: Matter.Bounds,
+	Vector: Matter.Vector,
+	origx: 0,
+	origy: 0, //used to keep track of view position changes
 	render: 0,
 	w: 0,
 	h: 0,
@@ -79,8 +84,40 @@ var www = {
 			www.engine.world.bounds.max.x = 1000;
 			www.engine.world.bounds.max.y = 500;
 			*/
+			
+			// add mouse control
+			www.mouse = www.Mouse.create(www.render.canvas);
+			www.mouseConstraint = www.MouseConstraint.create(www.engine, {
+				mouse: www.mouse,
+				constraint: {
+					stiffness: 0.2,
+					render: {
+						visible: false
+					}
+				}
+			});						
+			www.World.add(www.engine.world, www.mouseConstraint);
+			www.render.mouse = www.mouse; // keep the mouse in sync with rendering
+			// get the centre of the viewport
+			www.viewportCentre = {
+				x: www.render.options.width * 0.5,
+				y: www.render.options.height * 0.5
+			};			
+			// make the world bounds a little bigger than the render bounds
+			www.engine.world.bounds.min.x = -300;
+			www.engine.world.bounds.min.y = -300;
+			www.engine.world.bounds.max.x = 1100;
+			www.engine.world.bounds.max.y = 900;
+			// keep track of current bounds scale (view zoom)
+			www.boundsScaleTarget = 1;
+			www.boundsScale = {
+				x: 1,
+				y: 1
+			};			
+			
 
 			www.mycountry = www.general.createPlayer(www.chosen,'player',www.playerhealth);	
+			console.log('mycountry position',www.mycountry.position.x,www.mycountry.position.y);
 			www.general.createEnemies();		
 			www.general.drawBoundary();
 			www.general.createMatterEvents();			
@@ -152,8 +189,7 @@ var www = {
 			var ondown = ((document.ontouchstart!==null)?'mousedown':'touchstart');
 			document.getElementById('canvasparent').addEventListener(ondown,function(e){ //FIXME using the canvas parent for this click event, so making our own canvas isn't necessary now
 				www.general.clickDown(e);
-			},false);
-			
+			},false);			
 		},
 		
 		createMatterEvents: function(){		
@@ -172,17 +208,6 @@ var www = {
 				var avgy = www.mycountry.bounds.min.y + ((www.mycountry.bounds.max.y - www.mycountry.bounds.min.y) / 2);
 				console.log('avg',avgx,avgy);
 				*/
-				
-				var diffx = www.mycountry.myxpos - www.mycountry.bounds.min.x;
-				var diffy = www.mycountry.myypos - www.mycountry.bounds.min.y;
-				www.mycountry.myxpos = www.mycountry.bounds.min.x;
-				www.mycountry.myypos = www.mycountry.bounds.min.y;
-				
-				//www.Body.translate(www.engine.world.bodies,{x:diffx,y:diffy});
-				
-				//FIXME this moves the screen to follow the player but breaks the mouse position for firing - it's also not super smooth
-				//www.Bounds.translate(www.render.bounds,{x:-diffx,y:-diffy});
-				
 			});
 		
 			//on object collision
@@ -236,7 +261,66 @@ var www = {
 					//console.log(bullets);
 					www.World.remove(www.engine.world, bullets[0]);					
 				}
-			});		
+			});	
+			
+			/* https://github.com/liabru/matter-js/blob/master/examples/views.js */
+			// use the engine tick event to control our view
+			www.Events.on(www.engine, 'beforeTick', function(e) {
+				var translate;
+				// mouse wheel controls zoom
+				var scaleFactor = www.mouse.wheelDelta * -0.1;
+				if (scaleFactor !== 0) {
+					if ((scaleFactor < 0 && www.boundsScale.x >= 0.6) || (scaleFactor > 0 && www.boundsScale.x <= 1.4)) {
+						www.boundsScaleTarget += scaleFactor;
+					}
+				}	
+
+				// if scale has changed
+				if (Math.abs(www.boundsScale.x - www.boundsScaleTarget) > 0.01) {
+					// smoothly tween scale factor
+					scaleFactor = (www.boundsScaleTarget - www.boundsScale.x) * 0.2;
+					www.boundsScale.x += scaleFactor;
+					www.boundsScale.y += scaleFactor;
+
+					// scale the render bounds
+					www.render.bounds.max.x = www.render.bounds.min.x + www.render.options.width * www.boundsScale.x;
+					www.render.bounds.max.y = www.render.bounds.min.y + www.render.options.height * www.boundsScale.y;
+
+					// translate so zoom is from centre of view
+					translate = {
+						x: www.render.options.width * scaleFactor * -0.5,
+						y: www.render.options.height * scaleFactor * -0.5
+					};
+
+					www.Bounds.translate(www.render.bounds, translate);
+
+					// update mouse
+					www.Mouse.setScale(www.mouse, www.boundsScale);
+					www.Mouse.setOffset(www.mouse, www.render.bounds.min);
+				}				
+				
+				//reposition the screen to keep the player centered
+				var diffx = www.mycountry.myxpos - www.mycountry.bounds.min.x;
+				var diffy = www.mycountry.myypos - www.mycountry.bounds.min.y;
+				www.mycountry.myxpos = www.mycountry.bounds.min.x;
+				www.mycountry.myypos = www.mycountry.bounds.min.y;				
+				www.origx += diffx;
+				www.origy += diffy;
+				www.Bounds.translate(www.render.bounds,{x:-diffx,y:-diffy});				
+				
+			});
+			
+			/*
+			//this seems to be a better way of doing mouse clicks
+			www.Events.on(www.mouseConstraint, 'mousedown', function(e) {
+				if(www.mouseConstraint.mouse.button === 0){
+					//console.log(e.mouse);
+					www.general.clickDown(e.mouse.position);
+					//var mousePosition = e.mouse.position;
+					//console.log('clicked',mousePosition);
+				}
+			});
+			*/
 		},
 		
 		//reduce health and 'kill' a country
@@ -383,6 +467,14 @@ var www = {
 				x = e.changedTouches[0].pageX - rect.left;
 				y = e.changedTouches[0].pageY - rect.top;
 			}
+			//console.log(x,y);
+			
+			//console.log('Bounds',www.render.bounds,www.viewportCentre);
+			//console.log('mycountry position',www.mycountry.position.x,www.mycountry.position.y);
+
+			console.log(www.origx,www.origy);
+			x -= www.origx;
+			y -= www.origy;
 			
 			//console.log(www.mycountry);
 			var bullet = www.general.createBullet(www.mycountry.position.x,www.mycountry.position.y,www.mycountry.id);			
@@ -400,6 +492,7 @@ var www = {
 		
 		fireBullet: function(bullet,x,y,origin){			
 			/* FIXME this works but the sizing bug happens here */
+			
 			var myvect = {
 				x: x - bullet.position.x,
 				y: y - bullet.position.y
@@ -412,7 +505,7 @@ var www = {
 			myvect.y /= len;	
 						
 			//need something like 800 for small screens, more like 100 for large			
-			var scaleby = 200; //FIXME weirdly the vector still needs to be massively shrunk still
+			var scaleby = 500; //FIXME weirdly the vector still needs to be massively shrunk still
 			//console.log(scaleby);
 			myvect.x /= scaleby;
 			myvect.y /= scaleby;				
