@@ -10,8 +10,8 @@ var allcountries = [
 		//x and y pos and w and h are stored as percentages
 		'x': 50, 
 		'y': 30,
-		'w': 30,
-		'h': 30,
+		'w': 40,
+		'h': 40,
 		'unique': [
 			'Shakespeare',
 			'the Beatles',
@@ -24,8 +24,8 @@ var allcountries = [
 		//x and y pos and w and h are stored as percentages
 		'x': 43.5, 
 		'y': 45,
-		'w': 30,
-		'h': 30,
+		'w': 40,
+		'h': 40,
 		'unique': [
 			'Guinness',
 			'Sudocrem',
@@ -38,8 +38,8 @@ var allcountries = [
 		//x and y pos and w and h are stored as percentages
 		'x': 55, 
 		'y': 65,
-		'w': 30,
-		'h': 30,
+		'w': 40,
+		'h': 40,
 		'unique': [
 			'the Rabies vaccine',
 			'champagne',
@@ -51,8 +51,8 @@ var allcountries = [
 		'xScale': 0.02, 
 		'x': 56, 
 		'y': 53,
-		'w': 30,
-		'h': 30,
+		'w': 40,
+		'h': 40,
 		'unique': [
 			'roller skates',
 			'saxophones',

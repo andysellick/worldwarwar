@@ -30,7 +30,7 @@ var www = {
 	enemies: [],
 	chosen: 0, //the country chosen by the player
 	timer: 0,
-	scaleFactor: 0.5, //how big to draw everything. Game should normally be twice width/height of canvas, scale of 0.5 will fit everything in
+	scaleFactor: 1, //how big to draw everything. Game should normally be twice width/height of canvas, scale of 0.5 will fit everything in
 	
 	general: {
 		init: function(){
@@ -142,8 +142,8 @@ var www = {
 			var computedStyle = getComputedStyle(www.parentel);
 			targetw -= parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight);
 			targeth -= parseFloat(computedStyle.paddingTop) + parseFloat(computedStyle.paddingBottom);
-			
 			var sizes = www.general.calculateAspectRatio(www.idealw,www.idealh,targetw,targeth);
+			
 			www.w = www.canvas.width = sizes[0];
 			www.h = www.canvas.height = sizes[1];
 		},
@@ -370,7 +370,6 @@ var www = {
 		//FIXME this is pretty ugly
 		drawBoundary: function(){
 			var walloptions = { isStatic: true };
-			//FIXME the walls aren't being drawn at the visual boundaries of the space - they all seem to be offset down and right slightly
 			//top edge
 			var wall1 = {
 				x:www.engine.world.bounds.min.x + (www.worldw / 2),
@@ -409,6 +408,7 @@ var www = {
 		//draw an object based on the scale value. Remember the x/y creation point of an object represents the middle of where the object will be created
 		//pass x and y as percentages of overall canvas, i.e. must be between 0 and 100
 		//w and h should be number values unrelated to percentage, but could still be passed as e.g. canvas width / 2
+		/* not actually using this function right now
 		drawRectangle: function(obj,options){		
 			var relw = www.canvas.width * www.scaleFactor;
 			var relh = www.canvas.height * www.scaleFactor;
@@ -423,6 +423,7 @@ var www = {
 			www.World.add(www.engine.world, [newobj]);
 			return(newobj);
 		},
+		*/
 		
 		//create player object
 		createPlayer: function(which,type,health){
@@ -438,7 +439,17 @@ var www = {
 					}
 				}
 			};			
-			var thisobj = www.general.drawRectangle(me,options);
+			//var thisobj = www.general.drawRectangle(me,options);
+			var x = www.engine.world.bounds.min.x + ((www.worldw / 100) * me.x);
+			var y = www.engine.world.bounds.min.y + ((www.worldh / 100) * me.y);
+			var percscalex = (www.worldw / www.idealw) * 100;
+			//var percscaley = (www.worldh / www.idealh) * 100;
+			//console.log(percscalex,percscaley);
+			var w = (me.w / 100) * percscalex;
+			var h = (me.h / 100) * percscalex;
+			
+			var thisobj = www.Bodies.rectangle(x,y,w,h,options);
+			
 			thisobj.myxpos = thisobj.position.x;
 			thisobj.myypos = thisobj.position.y;
 			thisobj.myname = me.name;
@@ -446,6 +457,8 @@ var www = {
 			thisobj.myobjtype = type;
 			thisobj.myhealth = health;
 			thisobj.mythings = me.unique;
+
+			www.World.add(www.engine.world, [thisobj]);			
 			return(thisobj);
 		},
 		
@@ -511,10 +524,10 @@ var www = {
 			//console.log('Normalised:',myvect);			
 			www.Body.applyForce(bullet, bullet.position, myvect);
 			
-			//create recoil to move the country
+			//create recoil to move the country, opposite direction to bullet and half the power
 			var recoil = {
-				x: -myvect.x,
-				y: -myvect.y
+				x: -(myvect.x / 2),
+				y: -(myvect.y / 2)
 			};
 			www.Body.applyForce(origin, origin.position, recoil);
 		},
