@@ -6,12 +6,11 @@ var spritepath = '/static/img/';
 var allcountries = [
 	{	'name': 'Britain',
 		'sprite': 'britain.svg',
-		'xScale': 0.09, //apparently yScale is not needed
+		'xScale': 0.07, //apparently yScale is not needed
 		//x and y pos and w and h are stored as percentages
-		'x': 50, 
-		'y': 30,
-		'w': 40,
-		'h': 40,
+		'x': 46.5, 
+		'y': 23,
+		'w': 10,
 		'unique': [
 			'Shakespeare',
 			'the Beatles',
@@ -22,10 +21,9 @@ var allcountries = [
 		'sprite': 'ireland.svg',
 		'xScale': 0.035, //apparently yScale is not needed
 		//x and y pos and w and h are stored as percentages
-		'x': 43.5, 
-		'y': 45,
-		'w': 40,
-		'h': 40,
+		'x': 45.5, 
+		'y': 24,
+		'w': 6,
 		'unique': [
 			'Guinness',
 			'Sudocrem',
@@ -39,7 +37,6 @@ var allcountries = [
 		'x': 55, 
 		'y': 65,
 		'w': 40,
-		'h': 40,
 		'unique': [
 			'the Rabies vaccine',
 			'champagne',
@@ -52,7 +49,6 @@ var allcountries = [
 		'x': 56, 
 		'y': 53,
 		'w': 40,
-		'h': 40,
 		'unique': [
 			'roller skates',
 			'saxophones',

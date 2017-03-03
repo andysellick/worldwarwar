@@ -30,7 +30,7 @@ var www = {
 	enemies: [],
 	chosen: 0, //the country chosen by the player
 	timer: 0,
-	scaleFactor: 1, //how big to draw everything. Game should normally be twice width/height of canvas, scale of 0.5 will fit everything in
+	scaleFactor: 0.5, //how big to draw everything. Game should normally be twice width/height of canvas, scale of 0.5 will fit everything in
 	
 	general: {
 		init: function(){
@@ -59,14 +59,15 @@ var www = {
 					height: www.h,
 					background:'#aaaaaa',
 					hasBounds: true,
-					//wireframes: false,
+					showBounds: true,
+					wireframes: false,
 					showVelocity: true,
 					showCollisions: true,
-					showAxes: true,
-					showAngleIndicator: true,
+					//showAxes: true,
+					//showAngleIndicator: true,
 					showPositions: true,
-					showIds: true,
-					showShadows: true
+					//showIds: true,
+					//showShadows: true
 				}
 			});
 			
@@ -96,10 +97,18 @@ var www = {
 			www.boundsScale = {
 				x: 1,
 				y: 1
-			};			
-			
+			};					
 			www.mycountry = www.general.createPlayer(www.chosen,'player',www.playerhealth);	
-			//FIXME at this point we might want to recentre the canvas onto the player, not sure yet how
+			
+			//at this point we recentre the canvas onto the player FIXME uncomment
+			/*
+			var translate = {
+				x: www.mycountry.position.x - (www.w / 2),
+				y: www.mycountry.position.y - (www.h / 2)
+			};
+			www.Bounds.translate(www.render.bounds, translate);
+			*/
+			
 			www.general.createEnemies();		
 			www.general.drawBoundary();
 			www.general.createMatterEvents();			
@@ -107,7 +116,7 @@ var www = {
 			www.Engine.run(www.engine);	// run the engine			
 			www.Render.run(www.render); // run the renderer
 			
-			//www.timer = setInterval(www.general.gameLoop,1000);		//FIXME put this back	
+			//www.timer = setInterval(www.general.gameLoop,500);		//FIXME put this back	
 		},
 		
 		//set up world size and boundaries
@@ -120,13 +129,13 @@ var www = {
 			var maxx = minx + www.worldw;
 			var maxy = miny + www.worldh;
 			
-			console.log('World size',www.worldw,www.worldh,minx,miny,maxx,maxy);
+			//console.log('World size',www.worldw,www.worldh,minx,miny,maxx,maxy);
 		
 			www.engine.world.bounds.min.x = minx; //-300;
 			www.engine.world.bounds.min.y = miny; //-300;
 			www.engine.world.bounds.max.x = maxx; //1100;
 			www.engine.world.bounds.max.y = maxy; //900;
-			console.log('World bounds are',www.engine.world.bounds);
+			//console.log('World bounds are',www.engine.world.bounds);
 		},
 		
 		randomInt: function(min,max){
@@ -428,27 +437,28 @@ var www = {
 		//create player object
 		createPlayer: function(which,type,health){
 			var me = allcountries[which];
+			var x = www.engine.world.bounds.min.x + ((www.worldw / 100) * me.x);
+			var y = www.engine.world.bounds.min.y + ((www.worldh / 100) * me.y);
+			var percscalex = (www.worldw / www.idealw) * 100;
+			var w = (me.w / 100) * percscalex;
 			var options = {
+				density: 0.0001,
+				friction: 0,
+				restitution: 0.8, //how much a collision will cause a bounce, 0 to 1
+				frictionAir: 0,
+				mass: 0.5,
+				//inverseInertia: 1, //don't know what this property does
 				render: {
 					sprite: {
 						texture: spritepath + me.sprite,
 						xScale: www.scaleFactor * me.xScale,
 						strokeStyle: 'red',
 						lineWidth: 3,
-						fillStyle: 'green'
+						fillStyle: 'green',
 					}
 				}
 			};			
-			//var thisobj = www.general.drawRectangle(me,options);
-			var x = www.engine.world.bounds.min.x + ((www.worldw / 100) * me.x);
-			var y = www.engine.world.bounds.min.y + ((www.worldh / 100) * me.y);
-			var percscalex = (www.worldw / www.idealw) * 100;
-			//var percscaley = (www.worldh / www.idealh) * 100;
-			//console.log(percscalex,percscaley);
-			var w = (me.w / 100) * percscalex;
-			var h = (me.h / 100) * percscalex;
-			
-			var thisobj = www.Bodies.rectangle(x,y,w,h,options);
+			var thisobj = www.Bodies.polygon(x,y,7,w,options);
 			
 			thisobj.myxpos = thisobj.position.x;
 			thisobj.myypos = thisobj.position.y;
@@ -495,7 +505,14 @@ var www = {
 		
 		//FIXME might be better to create the bullet outside of the object then apply a specific force to simulate recoil
 		createBullet: function(posx,posy,origin){
-			var bullet = www.Bodies.circle(posx,posy,www.canvas.width / 200);
+			var options = {
+				density: 0.001,
+				friction: 0.1,
+				restitution: 1,
+				frictionAir: 0,
+				mass: 0.05,
+			};
+			var bullet = www.Bodies.circle(posx,posy,www.canvas.width / 200, options);
 			bullet.mytype = 'bullet';
 			bullet.myorigin = origin;
 			www.World.add(www.engine.world, [bullet]);
@@ -557,10 +574,12 @@ var www = {
 		gameLoop: function(){
 			for(var e = 0; e < www.enemies.length; e++){
 				if(www.enemies[e].myhealth > 0){
-					var bullet = www.general.createBullet(www.enemies[e].position.x,www.enemies[e].position.y,www.enemies[e].id);			
-					var x = www.general.randomInt(0,www.canvas.width);
-					var y = www.general.randomInt(0,www.canvas.height);
-					www.general.fireBullet(bullet,x,y,www.enemies[e]);				
+					if(www.general.randomInt(0,1)){
+						var bullet = www.general.createBullet(www.enemies[e].position.x,www.enemies[e].position.y,www.enemies[e].id);			
+						var x = www.general.randomInt(0,www.canvas.width);
+						var y = www.general.randomInt(0,www.canvas.height);
+						www.general.fireBullet(bullet,x,y,www.enemies[e]);				
+					}
 				}
 			}		
 		},
