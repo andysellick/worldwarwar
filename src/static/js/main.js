@@ -61,11 +61,11 @@ var www = {
 					hasBounds: true,
 					showBounds: true,
 					wireframes: false,
-					showVelocity: true,
-					showCollisions: true,
+					//showVelocity: true,
+					//showCollisions: true,
 					//showAxes: true,
 					//showAngleIndicator: true,
-					showPositions: true,
+					//showPositions: true,
 					//showIds: true,
 					//showShadows: true
 				}
@@ -474,6 +474,7 @@ var www = {
 		
 		//once the player has been chosen, create the rest of the countries
 		createEnemies: function(){
+			console.log('Found',allcountries.length,'countries. There should be 196.');
 			for(var i = 0; i < allcountries.length; i++){
 				if(i !== www.chosen){
 					var enemy = www.general.createPlayer(i,'enemy',www.enemyhealth);
