@@ -30,17 +30,22 @@ var www = {
 	enemies: [],
 	chosen: 0, //the country chosen by the player
 	timer: 0,
-	scaleFactor: 0.5, //how big to draw everything. Game should normally be twice width/height of canvas, scale of 0.5 will fit everything in
+	scaleFactor: 4, //how big to draw everything. Game should normally be twice width/height of canvas, scale of 0.5 will fit everything in
+	debug: 1,
 	
 	general: {
 		init: function(){
 			www.general.initCountrySelect();
-			//www.general.showPopup('intro'); //FIXME put this back
+			if(!www.debug){
+				www.general.showPopup('intro');
+			}
 			www.ctx = www.canvas.getContext('2d');
 			www.general.setCanvasSize();
 			www.general.createEvents();
 						
-			www.general.initGame(); //FIXME remove this
+			if(www.debug){
+				www.general.initGame();
+			}
 		},
 		
 		initGame: function(){
@@ -57,7 +62,7 @@ var www = {
 				options: {
 					width: www.w,
 					height: www.h,
-					background:'#aaaaaa',
+					background:'#ff0000',
 					hasBounds: true,
 					showBounds: true,
 					wireframes: false,
@@ -107,16 +112,35 @@ var www = {
 				y: www.mycountry.position.y - (www.h / 2)
 			};
 			www.Bounds.translate(www.render.bounds, translate);
-			*/
+			*/	
 			
 			www.general.createEnemies();		
+
+			//FIXME temporarily focus on the last country added
+			if(www.debug){
+				var translate = {
+					x: www.enemies[www.enemies.length - 1].position.x - (www.w / 2),
+					y: www.enemies[www.enemies.length - 1].position.y - (www.h / 2)
+				};
+			}
+			else {
+				var translate = {
+					x: www.mycountry.position.x - (www.w / 2),
+					y: www.mycountry.position.y - (www.h / 2)
+				};
+			}
+			www.Bounds.translate(www.render.bounds, translate);
+			
+			
 			www.general.drawBoundary();
 			www.general.createMatterEvents();			
 			
 			www.Engine.run(www.engine);	// run the engine			
 			www.Render.run(www.render); // run the renderer
 			
-			//www.timer = setInterval(www.general.gameLoop,500);		//FIXME put this back	
+			if(!www.debug){
+				www.timer = setInterval(www.general.gameLoop,500);
+			}
 		},
 		
 		//set up world size and boundaries
@@ -266,7 +290,7 @@ var www = {
 				// mouse wheel controls zoom
 				var scaleFactor = www.mouse.wheelDelta * -0.1;
 				if (scaleFactor !== 0) {
-					if ((scaleFactor < 0 && www.boundsScale.x >= 0.6) || (scaleFactor > 0 && www.boundsScale.x <= 1.4)) {
+					if ((scaleFactor < 0 && www.boundsScale.x >= 0.3) || (scaleFactor > 0 && www.boundsScale.x <= 2.4)) { //these two numbers control the min and max zoom levels
 						www.boundsScaleTarget += scaleFactor;
 					}
 				}	
@@ -451,7 +475,8 @@ var www = {
 				render: {
 					sprite: {
 						texture: spritepath + me.sprite,
-						xScale: www.scaleFactor * me.xScale,
+						//xScale: ((www.scaleFactor * me.xScale) / 100) * percscalex,
+						xScale: ((me.xScale) / 100) * percscalex,
 						strokeStyle: 'red',
 						lineWidth: 3,
 						fillStyle: 'green',
@@ -504,7 +529,6 @@ var www = {
 			www.general.fireBullet(bullet,x,y,www.mycountry);
 		},
 		
-		//FIXME might be better to create the bullet outside of the object then apply a specific force to simulate recoil
 		createBullet: function(posx,posy,origin){
 			var options = {
 				density: 0.001,
