@@ -464,6 +464,7 @@ var www = {
 						texture: spritepath + me.sprite,
 						//xScale: ((www.scaleFactor * me.xScale) / 100) * percscalex,
 						xScale: ((me.xScale) / 100) * percscalex,
+						//yScale: ((me.yScale) / 100) * percscalex,
 						strokeStyle: 'red',
 						lineWidth: 3,
 						fillStyle: 'green',

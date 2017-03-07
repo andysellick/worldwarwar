@@ -1,16 +1,17 @@
 
 var spritepath = '/static/img/';
 
-
-//map images from https://github.com/djaiss/mapsicon
+//map images now from https://www.amcharts.com/svg-maps/
+//previous map images from https://github.com/djaiss/mapsicon
 var allcountries = [
 	{	'name': 'Britain',
 		'sprite': 'britain.svg',
-		'xScale': 0.04, //apparently yScale is not needed
+		'xScale': 0.1, //apparently yScale is not needed
+		'yScale': 0.2,
 		//x and y pos are stored as percentages
-		'x': 46.8, 
-		'y': 22.2,
-		'w': 11,
+		'x': 45, 
+		'y': 40,
+		'w': 17,
 		'unique': [
 			'Shakespeare',
 			'the Beatles',
@@ -19,10 +20,11 @@ var allcountries = [
 	},
 	{	'name': 'Ireland',
 		'sprite': 'ireland.svg',
-		'xScale': 0.017,
-		'x': 45.67, 
-		'y': 23.13,
-		'w': 6,
+		'xScale': 0.1,
+		'yScale': 0.1,
+		'x': 43.14, 
+		'y': 42.6,
+		'w': 10,
 		'unique': [
 			'Guinness',
 			'Sudocrem',
@@ -31,10 +33,10 @@ var allcountries = [
 	},
 	{	'name': 'France',
 		'sprite': 'france.svg',
-		'xScale': 0.037, 
-		'x': 48, 
-		'y': 27.3,
-		'w': 15,
+		'xScale': 0.1, 
+		'x': 47.05, 
+		'y': 49.5,
+		'w': 23,
 		'unique': [
 			'the Rabies vaccine',
 			'champagne',
@@ -43,10 +45,10 @@ var allcountries = [
 	},
 	{	'name': 'Belgium',
 		'sprite': 'belgium.svg',
-		'xScale': 0.0095, 
-		'x': 48.3, 
-		'y': 24.95,
-		'w': 4,
+		'xScale': 0.1, 
+		'x': 47.7, 
+		'y': 45.57,
+		'w': 7,
 		'unique': [
 			'roller skates',
 			'saxophones',
@@ -55,10 +57,10 @@ var allcountries = [
 	},
 	{	'name': 'Spain',
 		'sprite': 'spain.svg',
-		'xScale': 0.033, 
-		'x': 46.85, 
-		'y': 30.7,
-		'w': 13,
+		'xScale': 0.1, 
+		'x': 45.28, 
+		'y': 55.2,
+		'w': 24,
 		'unique': [
 			'laryngoscopy',
 			'paella',
@@ -67,10 +69,10 @@ var allcountries = [
 	},
 	{	'name': 'Portugal',
 		'sprite': 'portugal.svg',
-		'xScale': 0.016, 
-		'x': 45.7, 
-		'y': 30.88,
-		'w': 3,
+		'xScale': 0.1, 
+		'x': 43.23, 
+		'y': 55.53,
+		'w': 7,
 		'unique': [
 			'eslicarbazepine acetate',
 			'cerebral angiography',
@@ -79,10 +81,10 @@ var allcountries = [
 	},
 	{	'name': 'The Netherlands',
 		'sprite': 'netherlands.svg',
-		'xScale': 0.0115, 
-		'x': 48.47, 
-		'y': 23.95,
-		'w': 3,
+		'xScale': 0.1, 
+		'x': 48, 
+		'y': 43.83,
+		'w': 6,
 		'unique': [
 			'the electrocardiograph',
 			'the microscope',
@@ -91,9 +93,9 @@ var allcountries = [
 	},
 	{	'name': 'Luxembourg',
 		'sprite': 'luxembourg.svg',
-		'xScale': 0.003, 
-		'x': 48.65, 
-		'y': 25.35,
+		'xScale': 0.1, 
+		'x': 48.27, 
+		'y': 46.265,
 		'w': 2,
 		'unique': [
 			'bouneschlupp',
@@ -103,16 +105,18 @@ var allcountries = [
 	},
 	{	'name': 'Germany',
 		'sprite': 'germany.svg',
-		'xScale': 0.029, 
-		'x': 49.68, 
-		'y': 24.53,
-		'w': 10,
+		'xScale': 0.1, 
+		'x': 49.92, 
+		'y': 44.75,
+		'w': 16,
 		'unique': [
 			'aspirin',
 			'the integrated circuit',
 			'the diesel engine'
 		]		
 	},
+];
+var temp = [
 	{	'name': 'Switzerland',
 		'sprite': 'switzerland.svg',
 		'xScale': 0.013, 
@@ -388,9 +392,43 @@ var allcountries = [
 			''
 		]		
 	},
+	{	'name': 'Estonia',
+		'sprite': 'estonia.svg',
+		'xScale': 0.014, 
+		'x': 53.4, 
+		'y': 19.75,
+		'w': 4,
+		'unique': [
+			'',
+			'', //FIXME
+			'Skype'
+		]		
+	},
+	{	'name': 'Sweden',
+		'sprite': 'sweden.svg',
+		'xScale': 0.06, 
+		'x': 51.3, 
+		'y': 17.4,
+		'w': 10,
+		'unique': [
+			'Bluetooth',
+			'celsius',
+			'styrofoam'
+		]		
+	},
+	{	'name': 'Russia',
+		'sprite': 'russia.svg',
+		'xScale': 0.25, 
+		'x': 66, 
+		'y': 20,
+		'w': 10,
+		'unique': [
+			'',
+			'',
+			''
+		]		
+	},
 
-];
-var temp = [
 
 	
 	
@@ -398,4 +436,6 @@ var temp = [
 
 //alter SVGS:
 //background #CBE6A3
-//border black, 5px
+
+//1090, 720
+//500, 300
