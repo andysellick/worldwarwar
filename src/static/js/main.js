@@ -62,7 +62,7 @@ var www = {
 				options: {
 					width: www.w,
 					height: www.h,
-					background:'#ff0000',
+					background:'#aa0000',
 					hasBounds: true,
 					showBounds: true,
 					wireframes: false,
@@ -94,7 +94,6 @@ var www = {
 				x: www.render.options.width * 0.5,
 				y: www.render.options.height * 0.5
 			};		
-
 			www.general.setWorldSize();
 			
 			// keep track of current bounds scale (view zoom)
@@ -103,19 +102,10 @@ var www = {
 				x: 1,
 				y: 1
 			};					
-			www.mycountry = www.general.createPlayer(www.chosen,'player',www.playerhealth);	
-			
-			//at this point we recentre the canvas onto the player FIXME uncomment
-			/*
-			var translate = {
-				x: www.mycountry.position.x - (www.w / 2),
-				y: www.mycountry.position.y - (www.h / 2)
-			};
-			www.Bounds.translate(www.render.bounds, translate);
-			*/	
-			
+			www.mycountry = www.general.createPlayer(www.chosen,'player',www.playerhealth);			
 			www.general.createEnemies();		
 
+			//recentre the canvas onto the player
 			var translate = {
 				x: www.mycountry.position.x - (www.w / 2),
 				y: www.mycountry.position.y - (www.h / 2)
@@ -127,8 +117,7 @@ var www = {
 					y: www.enemies[www.enemies.length - 1].position.y - (www.h / 2)
 				};
 			}
-			www.Bounds.translate(www.render.bounds, translate);
-			
+			www.Bounds.translate(www.render.bounds, translate);			
 			
 			www.general.drawBoundary();
 			www.general.createMatterEvents();			
