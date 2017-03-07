@@ -116,17 +116,15 @@ var www = {
 			
 			www.general.createEnemies();		
 
-			//FIXME temporarily focus on the last country added
+			var translate = {
+				x: www.mycountry.position.x - (www.w / 2),
+				y: www.mycountry.position.y - (www.h / 2)
+			};			
+			//focus on the last country added
 			if(www.debug){
-				var translate = {
+				translate = {
 					x: www.enemies[www.enemies.length - 1].position.x - (www.w / 2),
 					y: www.enemies[www.enemies.length - 1].position.y - (www.h / 2)
-				};
-			}
-			else {
-				var translate = {
-					x: www.mycountry.position.x - (www.w / 2),
-					y: www.mycountry.position.y - (www.h / 2)
 				};
 			}
 			www.Bounds.translate(www.render.bounds, translate);
@@ -576,12 +574,29 @@ var www = {
 
 		//populate the select dropdown on the first screen to hold the list of all available countries
 		initCountrySelect: function(){
+			var sorted = [];
 			for(var c = 0; c < allcountries.length; c++){
+				var d = {'name': allcountries[c].name,'value':c};
+				sorted.push(d);
+			}
+			sorted.sort(www.general.sortStuff);
+			console.log(sorted);
+			for(var o = 0; o < sorted.length; o++){
 				var opt = document.createElement('option');
-				opt.value = c;
-				opt.innerHTML = allcountries[c].name;
+				opt.value = sorted[o].value;
+				opt.innerHTML = sorted[o].name;
 				document.getElementById('choosecountry').appendChild(opt);				
 			}
+		},
+		
+		sortStuff: function(a,b){
+			if (a.name < b.name){
+				return -1;
+			}
+			if (a.name > b.name){
+				return 1;
+			}
+			return 0;			
 		},
 		
 		showPopup: function(whichone){
