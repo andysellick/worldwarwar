@@ -424,27 +424,7 @@ var www = {
 			var leftwall = www.Bodies.rectangle(wall4.x,wall4.y,wall4.w,wall4.h,walloptions);
 			www.World.add(www.engine.world, [topwall,rightwall,bottomwall,leftwall]);
 		},
-		
-		//draw an object based on the scale value. Remember the x/y creation point of an object represents the middle of where the object will be created
-		//pass x and y as percentages of overall canvas, i.e. must be between 0 and 100
-		//w and h should be number values unrelated to percentage, but could still be passed as e.g. canvas width / 2
-		/* not actually using this function right now
-		drawRectangle: function(obj,options){		
-			var relw = www.canvas.width * www.scaleFactor;
-			var relh = www.canvas.height * www.scaleFactor;
 			
-			var x = (relw / 100) * obj.x;
-			var y = (relh / 100) * obj.y;
-			//FIXME this doesn't account for canvas scale yet
-			var w = obj.w * www.scaleFactor;
-			var h = obj.h * www.scaleFactor;
-			
-			var newobj = www.Bodies.rectangle(x,y,w,h,options);
-			www.World.add(www.engine.world, [newobj]);
-			return(newobj);
-		},
-		*/
-		
 		//create player object
 		createPlayer: function(which,type,health){
 			var me = allcountries[which];
@@ -471,7 +451,12 @@ var www = {
 					}
 				}
 			};			
+			//most countries fit into a roughly round polygon, but some (e.g. russia) require a specific width and height, set as a rectangle
 			var thisobj = www.Bodies.polygon(x,y,7,w,options);
+			if(typeof(me.h) !== 'undefined'){
+				var h = (me.h / 100) * percscalex;
+				thisobj = www.Bodies.rectangle(x,y,w,h,options);
+			}
 			
 			thisobj.myxpos = thisobj.position.x;
 			thisobj.myypos = thisobj.position.y;

@@ -200,14 +200,12 @@ var allcountries = [
 			'potica'
 		]		
 	},
-];
-var temp = [
 	{	'name': 'Slovakia',
 		'sprite': 'slovakia.svg',
 		'xScale': 0.11, 
-		'x': 51.85, 
-		'y': 25.95,
-		'w': 4,
+		'x': 52.18, 
+		'y': 22.82,
+		'w': 3,
 		'unique': [
 			'plastic ice skates',
 			'the Skocjan caves',
@@ -217,8 +215,8 @@ var temp = [
 	{	'name': 'Hungary',
 		'sprite': 'hungary.svg',
 		'xScale': 0.11, 
-		'x': 51.85, 
-		'y': 26.85,
+		'x': 52.15, 
+		'y': 23.6,
 		'w': 4,
 		'unique': [
 			'the biro',
@@ -229,9 +227,9 @@ var temp = [
 	{	'name': 'Croatia',
 		'sprite': 'croatia.svg',
 		'xScale': 0.11, 
-		'x': 51.1, 
-		'y': 28.45,
-		'w': 4,
+		'x': 51.457, 
+		'y': 25,
+		'w': 3,
 		'unique': [
 			'the necktie',
 			'dalmatians',
@@ -241,9 +239,9 @@ var temp = [
 	{	'name': 'Bosnia and Herzegovina',
 		'sprite': 'bosniaandherz.svg',
 		'xScale': 0.11, 
-		'x': 51.44, 
-		'y': 28.9,
-		'w': 3,
+		'x': 51.75, 
+		'y': 25.32,
+		'w': 2,
 		'unique': [
 			'Ivo Andric',
 			'Mesa Selimovic'
@@ -252,8 +250,8 @@ var temp = [
 	{	'name': 'Serbia',
 		'sprite': 'serbia.svg',
 		'xScale': 0.11, 
-		'x': 52.25, 
-		'y': 28.8,
+		'x': 52.52, 
+		'y': 25.25,
 		'w': 6,
 		'unique': [
 			'alternating current',
@@ -264,8 +262,8 @@ var temp = [
 	{	'name': 'Montenegro',
 		'sprite': 'montenegro.svg',
 		'xScale': 0.11, 
-		'x': 51.85, 
-		'y': 29.6,
+		'x': 52.135, 
+		'y': 25.95,
 		'w': 2,
 		'unique': [
 			'',
@@ -276,8 +274,8 @@ var temp = [
 	{	'name': 'Albania',
 		'sprite': 'albania.svg',
 		'xScale': 0.11, 
-		'x': 52.07, 
-		'y': 30.5,
+		'x': 52.38, 
+		'y': 26.78,
 		'w': 2,
 		'unique': [
 			'John Belushi',
@@ -288,8 +286,8 @@ var temp = [
 	{	'name': 'Macedonia',
 		'sprite': 'macedonia.svg',
 		'xScale': 0.11, 
-		'x': 52.45, 
-		'y': 30.25,
+		'x': 52.75, 
+		'y': 26.53,
 		'w': 3,
 		'unique': [
 			'',
@@ -300,8 +298,8 @@ var temp = [
 	{	'name': 'Greece',
 		'sprite': 'greece.svg',
 		'xScale': 0.11, 
-		'x': 53, 
-		'y': 32.1,
+		'x': 53.395, 
+		'y': 28.28,
 		'w': 12,
 		'unique': [
 			'democracy',
@@ -312,8 +310,8 @@ var temp = [
 	{	'name': 'Bulgaria',
 		'sprite': 'bulgaria.svg',
 		'xScale': 0.11, 
-		'x': 53.35, 
-		'y': 29.6,
+		'x': 53.64, 
+		'y': 25.935,
 		'w': 6,
 		'unique': [
 			'cyrillic script',
@@ -324,8 +322,8 @@ var temp = [
 	{	'name': 'Romania',
 		'sprite': 'romania.svg',
 		'xScale': 0.11, 
-		'x': 53.3, 
-		'y': 27.6,
+		'x': 53.5, 
+		'y': 24.24,
 		'w': 9,
 		'unique': [
 			'the Teclu burner',
@@ -336,8 +334,8 @@ var temp = [
 	{	'name': 'Moldova',
 		'sprite': 'moldova.svg',
 		'xScale': 0.11, 
-		'x': 54.1, 
-		'y': 26.9,
+		'x': 54.22, 
+		'y': 23.7,
 		'w': 3,
 		'unique': [
 			'',
@@ -348,8 +346,8 @@ var temp = [
 	{	'name': 'Ukraine',
 		'sprite': 'ukraine.svg',
 		'xScale': 0.11, 
-		'x': 54.8, 
-		'y': 26.15,
+		'x': 54.9, 
+		'y': 22.98,
 		'w': 10,
 		'unique': [
 			'postal codes',
@@ -359,9 +357,9 @@ var temp = [
 	},
 	{	'name': 'Belarus',
 		'sprite': 'belarus.svg',
-		'xScale': 0.025, 
-		'x': 54, 
-		'y': 22.8,
+		'xScale': 0.11, 
+		'x': 53.99, 
+		'y': 20.24,
 		'w': 8,
 		'unique': [
 			'minsk computers',
@@ -371,9 +369,9 @@ var temp = [
 	},
 	{	'name': 'Lithuania',
 		'sprite': 'lithuania.svg',
-		'xScale': 0.014, 
-		'x': 53.15, 
-		'y': 21.85,
+		'xScale': 0.11, 
+		'x': 52.99, 
+		'y': 19.5,
 		'w': 5,
 		'unique': [
 			'',
@@ -383,10 +381,10 @@ var temp = [
 	},
 	{	'name': 'Latvia',
 		'sprite': 'latvia.svg',
-		'xScale': 0.016, 
-		'x': 53.34, 
-		'y': 20.8,
-		'w': 4,
+		'xScale': 0.11, 
+		'x': 53.13, 
+		'y': 18.64,
+		'w': 3,
 		'unique': [
 			'',
 			'', //FIXME
@@ -395,9 +393,9 @@ var temp = [
 	},
 	{	'name': 'Estonia',
 		'sprite': 'estonia.svg',
-		'xScale': 0.014, 
-		'x': 53.4, 
-		'y': 19.75,
+		'xScale': 0.11, 
+		'x': 53.13, 
+		'y': 17.78,
 		'w': 4,
 		'unique': [
 			'',
@@ -405,30 +403,482 @@ var temp = [
 			'Skype'
 		]		
 	},
+	{	'name': 'Russia',
+		'sprite': 'russia.svg',
+		'xScale': 0.11, 
+		'x': 69.6, 
+		'y': 17.2,
+		'w': 450,
+		'h': 60,
+		'unique': [
+			'space suits',
+			'nuclear power plants',
+			'Isaac Asimov'
+		]		
+	},
+	{	'name': 'Finland',
+		'sprite': 'finland.svg',
+		'xScale': 0.11, 
+		'x': 53.18, 
+		'y': 14.79,
+		'w': 10,
+		'unique': [
+			'ice skates',
+			'the heart rate monitor',
+			'Linux'
+		]		
+	},
 	{	'name': 'Sweden',
 		'sprite': 'sweden.svg',
-		'xScale': 0.06, 
-		'x': 51.3, 
-		'y': 17.4,
-		'w': 10,
+		'xScale': 0.11, 
+		'x': 51.5, 
+		'y': 16.12,
+		'w': 8,
 		'unique': [
 			'Bluetooth',
 			'celsius',
 			'styrofoam'
 		]		
 	},
-	{	'name': 'Russia',
-		'sprite': 'russia.svg',
-		'xScale': 0.25, 
-		'x': 66, 
-		'y': 20,
-		'w': 10,
+	{	'name': 'Norway',
+		'sprite': 'norway.svg',
+		'xScale': 0.11, 
+		'x': 51.36, 
+		'y': 14.99,
+		'w': 30,
+		'h': 2,
 		'unique': [
-			'',
-			'',
+			'aerosol spray',
+			'the cheese slicer',
+			'object oriented programming'
+		]		
+	},
+	{	'name': 'Turkey',
+		'sprite': 'turkey.svg',
+		'xScale': 0.11, 
+		'x': 56.11, 
+		'y': 27.95,
+		'w': 60,
+		'h': 20,
+		'unique': [
+			'the Turkish bath',
+			'Turkish coffee',
+			'Turkish carpets'
+		]		
+	},
+	{	'name': 'Syria',
+		'sprite': 'syria.svg',
+		'xScale': 0.11, 
+		'x': 57.15, 
+		'y': 30.15,
+		'w': 8,
+		'unique': [
+			'Steve Jobs',
+			'', //FIXME
 			''
 		]		
 	},
+	{	'name': 'Lebanon',
+		'sprite': 'lebanon.svg',
+		'xScale': 0.11, 
+		'x': 56.37, 
+		'y': 30.65,
+		'w': 2,
+		'unique': [
+			'Samir Sammoun',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Israel',
+		'sprite': 'israel.svg',
+		'xScale': 0.11, 
+		'x': 56.2, 
+		'y': 31.98,
+		'w': 3,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Jordan',
+		'sprite': 'jordan.svg',
+		'xScale': 0.11, 
+		'x': 56.79, 
+		'y': 32.04,
+		'w': 5,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Iraq',
+		'sprite': 'iraq.svg',
+		'xScale': 0.11, 
+		'x': 58.47, 
+		'y': 31.01,
+		'w': 8,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Saudi Arabia',
+		'sprite': 'saudiarabia.svg',
+		'xScale': 0.11, 
+		'x': 59.1, 
+		'y': 35.79,
+		'w': 22,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Kuwait',
+		'sprite': 'kuwait.svg',
+		'xScale': 0.11, 
+		'x': 59.46, 
+		'y': 33.1,
+		'w': 2,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Qatar',
+		'sprite': 'qatar.svg',
+		'xScale': 0.11, 
+		'x': 60.49, 
+		'y': 35.25,
+		'w': 2,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'United Arab Emirates',
+		'sprite': 'uae.svg',
+		'xScale': 0.11, 
+		'x': 61.26, 
+		'y': 35.719,
+		'w': 7,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Oman',
+		'sprite': 'oman.svg',
+		'xScale': 0.11, 
+		'x': 61.87, 
+		'y': 37.23,
+		'w': 8,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Yemen',
+		'sprite': 'yemen.svg',
+		'xScale': 0.11, 
+		'x': 60.09, 
+		'y': 40.38,
+		'w': 13,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},	
+	{	'name': 'Egypt',
+		'sprite': 'egypt.svg',
+		'xScale': 0.11, 
+		'x': 55.19, 
+		'y': 34.55,
+		'w': 18,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},		
+	{	'name': 'Libya',
+		'sprite': 'libya.svg',
+		'xScale': 0.11, 
+		'x': 51.89, 
+		'y': 34.71,
+		'w': 22,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},	
+	{	'name': 'Tunisia',
+		'sprite': 'tunisia.svg',
+		'xScale': 0.11, 
+		'x': 49.83, 
+		'y': 30.75,
+		'w': 8,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},			
+	{	'name': 'Algeria',
+		'sprite': 'algeria.svg',
+		'xScale': 0.11, 
+		'x': 47.92, 
+		'y': 33.8,
+		'w': 24,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},			
+	{	'name': 'Morocco',
+		'sprite': 'morocco.svg',
+		'xScale': 0.11, 
+		'x': 45.64, 
+		'y': 31.83,
+		'w': 13,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},		
+	{	'name': 'Western Sahara',
+		'sprite': 'westernsahara.svg',
+		'xScale': 0.11, 
+		'x': 44.08, 
+		'y': 35.85,
+		'w': 7,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},	
+	{	'name': 'Mauritania',
+		'sprite': 'mauritania.svg',
+		'xScale': 0.11, 
+		'x': 44.6, 
+		'y': 37.54,
+		'w': 10,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},		
+	{	'name': 'Mali',
+		'sprite': 'mali.svg',
+		'xScale': 0.11, 
+		'x': 46.38, 
+		'y': 39.38,
+		'w': 15,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},		
+	{	'name': 'Senegal',
+		'sprite': 'senegal.svg',
+		'xScale': 0.11, 
+		'x': 43.57, 
+		'y': 41.02,
+		'w': 3,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'The Gambia',
+		'sprite': 'gambia.svg',
+		'xScale': 0.11, 
+		'x': 43.32, 
+		'y': 41.6,
+		'w': 2,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},	
+	{	'name': 'Guinea-Bissau',
+		'sprite': 'guineabissau.svg',
+		'xScale': 0.11, 
+		'x': 43.345, 
+		'y': 42.46,
+		'w': 2,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},	
+	{	'name': 'Guinea',
+		'sprite': 'guinea.svg',
+		'xScale': 0.11, 
+		'x': 44.37, 
+		'y': 43.45,
+		'w': 4,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},		
+	{	'name': 'Sierra Leone',
+		'sprite': 'sierraleone.svg',
+		'xScale': 0.11, 
+		'x': 44.22, 
+		'y': 44.235,
+		'w': 3,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},		
+	{	'name': 'Liberia',
+		'sprite': 'liberia.svg',
+		'xScale': 0.11, 
+		'x': 44.84, 
+		'y': 45.3,
+		'w': 4,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},		
+	{	'name': 'Cote d\'Ivoire',
+		'sprite': 'cotedeivoire.svg',
+		'xScale': 0.11, 
+		'x': 45.875, 
+		'y': 44.71,
+		'w': 10,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},			
+	{	'name': 'Burkina Faso',
+		'sprite': 'burkinafaso.svg',
+		'xScale': 0.11, 
+		'x': 46.94, 
+		'y': 42.22,
+		'w': 10,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},	
+	{	'name': 'Ghana',
+		'sprite': 'ghana.svg',
+		'xScale': 0.11, 
+		'x': 47.06, 
+		'y': 44.52,
+		'w': 5,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},		
+	{	'name': 'Togo',
+		'sprite': 'togo.svg',
+		'xScale': 0.11, 
+		'x': 47.54, 
+		'y': 44.16,
+		'w': 2,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},		
+	{	'name': 'Benin',
+		'sprite': 'benin.svg',
+		'xScale': 0.11, 
+		'x': 47.94, 
+		'y': 43.79,
+		'w': 4,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},		
+	{	'name': 'Niger',
+		'sprite': 'niger.svg',
+		'xScale': 0.11, 
+		'x': 49.52, 
+		'y': 39.38,
+		'w': 20,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},		
+	{	'name': 'Nigeria',
+		'sprite': 'nigeria.svg',
+		'xScale': 0.11, 
+		'x': 49.66, 
+		'y': 43.9,
+		'w': 14,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},		
+	{	'name': 'Chad',
+		'sprite': 'chad.svg',
+		'xScale': 0.11, 
+		'x': 52.29, 
+		'y': 40.5,
+		'w': 18,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},		
+	{	'name': 'Sudan',
+		'sprite': 'sudan.svg',
+		'xScale': 0.11, 
+		'x': 55.32, 
+		'y': 40.1,
+		'w': 24,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},		
+
+	
+	
+];
+var temp = [
 
 
 	
@@ -440,3 +890,13 @@ var temp = [
 
 //1090, 720
 //500, 300
+
+/*
+macedonia is a really awkward shape
+russia appears to own a chunk of land on the coast between Poland and Lithuania
+norway is also a really awkward shape
+western sahara isn't a place? Confusing
+there are a LOT of countries
+potentially provocative - should Palestine be in here?
+fascinating learning experience - didn't even know benin existed
+*/

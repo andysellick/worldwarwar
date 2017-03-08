@@ -114,7 +114,7 @@ gulp.task('styles', () => {
   	}))
   	.pipe($.rename({suffix: '.min'}))
   	.pipe($.cssnano())
-  	.pipe($.sourcemaps.write('./_maps'))
+  	//.pipe($.sourcemaps.write('./_maps'))
   	.pipe(gulp.dest(paths.styles.dest))
   	.pipe(browserSync.stream({match: '*.css'}));
 });
@@ -138,9 +138,9 @@ gulp.task('scripts', () => {
     .pipe($.concat('main.js'))
     .pipe($.bytediff.start())
     .pipe($.rename({suffix: '.min'}))
-    .pipe($.babel({presets: ['es2015']}))
-    .pipe($.ngAnnotate())
-    .pipe($.uglify())
+    //.pipe($.babel({presets: ['es2015']}))
+    //.pipe($.ngAnnotate())
+    //.pipe($.uglify())
     .pipe($.bytediff.stop())
     .pipe(gulp.dest(paths.scripts.dest))
     .pipe(browserSync.stream());

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="19.592175mm"
+   height="58.085793mm"
+   viewBox="0 0 19.592175 58.085793"
+   version="1.1"
+   id="svg11830"
+   inkscape:version="0.92.0 r15299"
+   sodipodi:docname="togo.svg">
+  <defs
+     id="defs11824" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35"
+     inkscape:cx="37.024581"
+     inkscape:cy="109.76843"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata11827">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(26.805016,-119.79044)">
+    <path
+       inkscape:connector-curvature="0"
+       id="tg"
+       class="landxx tg"
+       d="m -26.765331,119.8603 c 1.967369,0.51843 3.987898,0.7125 5.86219,1.55129 1.515391,0.68059 3.894845,0.2685 5.024731,-0.26321 -0.784275,2.20398 -2.445904,5.95923 -0.664642,8.0901 0.996963,1.20699 4.679121,2.57349 4.838624,4.21119 0.239291,2.44856 -0.305741,5.28659 0.943802,7.52248 1.3957576,2.50571 2.0737136,4.21651 2.0205296,7.19148 -0.132924,5.17892 0,10.32859 0.132923,15.51151 0,0.80954 0.265871,3.8922 -1.16978,3.84831 0.478559,1.49945 0.212688,3.20095 0.930513,4.63261 0.584878,1.16579 1.435627,2.2465 1.555285,3.59706 -2.113583,0.19674 -4.2138756,1.14717 -6.1280606,2.01123 0,-0.9837 -2.459194,-2.21993 -3.123836,-2.80748 -1.395757,-1.26018 -2.485773,-2.12288 -3.363102,-3.74596 -1.209675,-2.20661 1.129886,-4.3707 1.063436,-6.61854 0,-1.49811 -1.714813,-1.65365 -1.409071,-3.0986 0.358925,-1.7427 1.342597,-2.71839 1.11662,-4.63657 -0.132924,-1.01558 -0.332321,-2.06838 0,-3.07464 0.199397,-0.6301 1.090016,-1.20968 0.877329,-1.91419 -0.584878,-1.97136 -2.578827,-2.83141 -3.283363,-4.63392 2.219926,-0.21402 0.744405,-3.36977 1.409047,-4.80009 0.372215,-0.78561 0.451979,-2.1056 0,-2.89652 -0.757695,-1.52337 -1.887581,0.13426 -2.990912,-0.0532 0.611482,-0.83746 0,-1.84637 1.435652,-1.62838 -0.305742,-1.57788 0.810855,-4.28831 0.279161,-5.6083 -0.917223,-2.27177 0.717801,-2.51634 -1.635049,-3.8483 -1.20965,-0.6939 -2.924438,-3.06535 -2.764935,-4.51694 0.132948,-1.14052 1.18307,-1.8557 0.731116,-3.08796 -0.186107,-0.49182 -1.289414,-0.51575 -1.674894,-0.93183"
+       style="fill:#cbe6a3;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.14449541;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">
+      <title
+         id="title1745">Togo</title>
+    </path>
+  </g>
+</svg>
