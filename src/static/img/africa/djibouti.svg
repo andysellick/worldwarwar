@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="16.560684mm"
+   height="20.452454mm"
+   viewBox="0 0 16.560684 20.452454"
+   version="1.1"
+   id="svg15828"
+   inkscape:version="0.92.0 r15299"
+   sodipodi:docname="djibouti.svg">
+  <defs
+     id="defs15822" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35"
+     inkscape:cx="-27.275648"
+     inkscape:cy="-672.77826"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata15825">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(9.7922466,49.625036)">
+    <path
+       inkscape:connector-curvature="0"
+       id="dj"
+       class="landxx dj"
+       d="m -9.3438704,-30.190561 c 0,-3.085281 -1.1963596,-6.151964 0.6779315,-8.940826 1.4090715,-2.09764 2.6984851,-4.001189 3.9081349,-6.203809 1.4356268,-2.572182 2.1534525,-1.195045 4.18727151,-0.647384 1.0368568,0.276508 0.9836728,-1.343912 1.3824678,-1.879622 0.62477099,-0.829476 1.71478799,-1.157805 2.57882699,-1.66029 0.890619,1.951402 4.625936,5.58836 2.818094,7.868091 -0.917199,1.16978 -3.788477,2.504394 -5.170944,3.046749 -1.40904739,0.556984 -1.59515479,2.226571 -3.2035992,2.485773 1.0501463,1.361218 4.2138762,-0.88132 5.7425562,-0.288459 2.764935,1.072759 0,3.781856 -0.731115,5.303892 -1.116596,2.297013 -2.88456849,-0.09305 -4.6126466,0.356248 -1.7679721,0.46393 -6.3939082,2.775571 -7.5769781,0.559637"
+       style="fill:#cbe6a3;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.14449541;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">
+      <title
+         id="title1620">Djibouti</title>
+    </path>
+  </g>
+</svg>

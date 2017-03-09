@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="20.487217mm"
+   height="20.262377mm"
+   viewBox="0 0 20.487217 20.262377"
+   version="1.1"
+   id="svg27295"
+   inkscape:version="0.92.0 r15299"
+   sodipodi:docname="rwanda.svg">
+  <defs
+     id="defs27289" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35"
+     inkscape:cx="1028.716"
+     inkscape:cy="-78.851766"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata27292">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(289.19004,-107.70809)">
+    <path
+       inkscape:connector-curvature="0"
+       id="rw"
+       class="landxx rw"
+       d="m -289.02765,124.2953 c -0.70454,-1.45025 2.95102,-3.93072 2.91115,-5.86352 0,-3.39633 1.46223,-4.8692 4.36009,-6.55342 0.3589,-0.21003 2.10027,-1.30669 2.55224,-0.95444 0.61146,0.47457 0.83744,2.11359 1.82114,1.02491 0.77098,-0.85474 3.30994,-4.61798 4.71899,-4.12348 -0.66465,1.94741 1.01025,4.40527 1.90089,5.8489 1.10331,1.80385 2.23319,4.90642 1.94077,6.97745 -0.37222,2.60543 -1.86103,2.9444 -4.05435,2.10828 -2.49909,-0.94913 -3.11055,1.31465 -5.25071,-0.57957 -0.30574,2.35151 -0.13295,4.91705 -2.95104,5.50725 -1.44892,0.30041 -2.80481,0.48917 -3.50934,-0.96108 -0.78428,-1.59516 -2.85797,-1.46754 -3.01749,0.43866 -0.90391,-0.84276 -1.3426,-1.62173 -1.42234,-2.86994"
+       style="fill:#cbe6a3;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.14449541;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">
+      <title
+         id="title1736">Rwanda</title>
+    </path>
+  </g>
+</svg>

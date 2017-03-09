@@ -26,7 +26,7 @@ var www = {
 	enemycount: 0,
 	enemyhealth: 10,
 	playerhealth: 10,
-	boundswidth: 5, //used to determine the thickness of the walls we build to limit the game
+	boundswidth: 20, //used to determine the thickness of the walls we build to limit the game
 	enemies: [],
 	chosen: 0, //the country chosen by the player
 	timer: 0,
@@ -118,7 +118,7 @@ var www = {
 				};
 			}
 			www.Bounds.translate(www.render.bounds, translate);			
-			
+	
 			www.general.drawBoundary();
 			www.general.createMatterEvents();			
 			
@@ -177,7 +177,17 @@ var www = {
 			var h = (w / idealw) * idealh;
 			return([w,h]);
 		},	
-					
+/*	
+		//jquery's addClass without jquery
+		addClass: function(el,className){
+			if(el.classList){
+				el.classList.add(className);
+			}
+			else {
+				el.className += ' ' + className;
+			}
+		},
+*/	
 		createEvents: function(){
 			//start the game by choosing a country
 			var beginning = ((document.ontouchstart!==null)?'mousedown':'touchstart');
@@ -277,7 +287,7 @@ var www = {
 				// mouse wheel controls zoom
 				var scaleFactor = www.mouse.wheelDelta * -0.1;
 				if (scaleFactor !== 0) {
-					if ((scaleFactor < 0 && www.boundsScale.x >= 0.3) || (scaleFactor > 0 && www.boundsScale.x <= 2.4)) { //these two numbers control the min and max zoom levels
+					if ((scaleFactor < 0 && www.boundsScale.x >= 0.6) || (scaleFactor > 0 && www.boundsScale.x <= 1.4)) { //these two numbers control the min and max zoom levels
 						www.boundsScaleTarget += scaleFactor;
 					}
 				}	
@@ -441,10 +451,10 @@ var www = {
 				//inverseInertia: 1, //don't know what this property does
 				render: {
 					sprite: {
-						texture: spritepath + me.sprite,
+						texture: spritepath + me.dir + me.sprite,
 						//xScale: ((www.scaleFactor * me.xScale) / 100) * percscalex,
 						xScale: ((me.xScale) / 100) * percscalex,
-						//yScale: ((me.yScale) / 100) * percscalex,
+						yScale: ((me.xScale) / 100) * percscalex,
 						strokeStyle: 'red',
 						lineWidth: 3,
 						fillStyle: 'green',
@@ -614,7 +624,6 @@ window.www = www;
 })(window);
 
 window.onload = function(){
-	console.log('BEGIN');
 	www.general.init();
 	/*
 	var resize;

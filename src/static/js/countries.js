@@ -1,11 +1,18 @@
-
 var spritepath = '/static/img/';
+var direurope = 'europe/';
+var dirasia = 'asia/';
+var dirafrica = 'africa/';
+var diroceania = 'oceania/';
+var dirnamerica = 'namerica/';
+var dirsamerica = 'samerica/';
+
 
 //map images now from https://en.wikipedia.org/wiki/Wikipedia%3aBlank_maps#/media/File:BlankMap-World6.svg
 //previous map images from https://www.amcharts.com/svg-maps/
 //previous map images from https://github.com/djaiss/mapsicon
 var allcountries = [
 	{	'name': 'Britain',
+		'dir': direurope,
 		'sprite': 'britain.svg',
 		'xScale': 0.11, //apparently yScale is not needed
 		'yScale': 0.2,
@@ -20,6 +27,7 @@ var allcountries = [
 		]
 	},
 	{	'name': 'Ireland',
+		'dir': direurope,
 		'sprite': 'ireland.svg',
 		'xScale': 0.11,
 		'yScale': 0.1,
@@ -32,7 +40,22 @@ var allcountries = [
 			'Clofazimine'
 		]		
 	},
+	{	'name': 'Iceland',
+		'dir': direurope,
+		'sprite': 'iceland.svg',
+		'xScale': 0.11,
+		'yScale': 0.1,
+		'x': 44, 
+		'y': 14.1,
+		'w': 9,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
 	{	'name': 'France',
+		'dir': direurope,
 		'sprite': 'france.svg',
 		'xScale': 0.11, 
 		'x': 48.2, 
@@ -45,6 +68,7 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'Belgium',
+		'dir': direurope,
 		'sprite': 'belgium.svg',
 		'xScale': 0.11, 
 		'x': 48.64, 
@@ -57,6 +81,7 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'Spain',
+		'dir': direurope,
 		'sprite': 'spain.svg',
 		'xScale': 0.11, 
 		'x': 46.96, 
@@ -69,6 +94,7 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'Portugal',
+		'dir': direurope,
 		'sprite': 'portugal.svg',
 		'xScale': 0.11, 
 		'x': 45.55, 
@@ -80,7 +106,21 @@ var allcountries = [
 			'the carrack'
 		]		
 	},
+	{	'name': 'Andorra',
+		'dir': direurope,
+		'sprite': 'andorra.svg',
+		'xScale': 0.11, 
+		'x': 47.85,
+		'y': 26.01,
+		'w': 0.8,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
 	{	'name': 'The Netherlands',
+		'dir': direurope,
 		'sprite': 'netherlands.svg',
 		'xScale': 0.11, 
 		'x': 48.84, 
@@ -93,6 +133,7 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'Luxembourg',
+		'dir': direurope,
 		'sprite': 'luxembourg.svg',
 		'xScale': 0.11, 
 		'x': 48.99, 
@@ -105,6 +146,7 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'Germany',
+		'dir': direurope,
 		'sprite': 'germany.svg',
 		'xScale': 0.11, 
 		'x': 50.05, 
@@ -117,6 +159,7 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'Switzerland',
+		'dir': direurope,
 		'sprite': 'switzerland.svg',
 		'xScale': 0.11, 
 		'x': 49.495, 
@@ -129,6 +172,7 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'Italy',
+		'dir': direurope,
 		'sprite': 'italy.svg',
 		'xScale': 0.11, 
 		'x': 50.59, 
@@ -141,6 +185,7 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'Austria',
+		'dir': direurope,
 		'sprite': 'austria.svg',
 		'xScale': 0.11, 
 		'x': 50.72, 
@@ -153,6 +198,7 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'Denmark',
+		'dir': direurope,
 		'sprite': 'denmark.svg',
 		'xScale': 0.11, 
 		'x': 50, 
@@ -165,6 +211,7 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'The Czech Republic',
+		'dir': direurope,
 		'sprite': 'czechrepublic.svg',
 		'xScale': 0.11, 
 		'x': 51.2, 
@@ -177,6 +224,7 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'Poland',
+		'dir': direurope,
 		'sprite': 'poland.svg',
 		'xScale': 0.11, 
 		'x': 52.03, 
@@ -189,6 +237,7 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'Slovenia',
+		'dir': direurope,
 		'sprite': 'slovenia.svg',
 		'xScale': 0.11, 
 		'x': 51.09, 
@@ -201,18 +250,20 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'Slovakia',
+		'dir': direurope,
 		'sprite': 'slovakia.svg',
 		'xScale': 0.11, 
 		'x': 52.18, 
 		'y': 22.82,
 		'w': 3,
 		'unique': [
-			'plastic ice skates',
-			'the Skocjan caves',
-			'potica'
+			'',
+			'', //FIXME
+			''
 		]		
 	},
 	{	'name': 'Hungary',
+		'dir': direurope,
 		'sprite': 'hungary.svg',
 		'xScale': 0.11, 
 		'x': 52.15, 
@@ -225,6 +276,7 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'Croatia',
+		'dir': direurope,
 		'sprite': 'croatia.svg',
 		'xScale': 0.11, 
 		'x': 51.457, 
@@ -237,6 +289,7 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'Bosnia and Herzegovina',
+		'dir': direurope,
 		'sprite': 'bosniaandherz.svg',
 		'xScale': 0.11, 
 		'x': 51.75, 
@@ -248,6 +301,7 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'Serbia',
+		'dir': direurope,
 		'sprite': 'serbia.svg',
 		'xScale': 0.11, 
 		'x': 52.52, 
@@ -260,6 +314,7 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'Montenegro',
+		'dir': direurope,
 		'sprite': 'montenegro.svg',
 		'xScale': 0.11, 
 		'x': 52.135, 
@@ -272,6 +327,7 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'Albania',
+		'dir': direurope,
 		'sprite': 'albania.svg',
 		'xScale': 0.11, 
 		'x': 52.38, 
@@ -284,6 +340,7 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'Macedonia',
+		'dir': direurope,
 		'sprite': 'macedonia.svg',
 		'xScale': 0.11, 
 		'x': 52.75, 
@@ -296,6 +353,7 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'Greece',
+		'dir': direurope,
 		'sprite': 'greece.svg',
 		'xScale': 0.11, 
 		'x': 53.395, 
@@ -308,6 +366,7 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'Bulgaria',
+		'dir': direurope,
 		'sprite': 'bulgaria.svg',
 		'xScale': 0.11, 
 		'x': 53.64, 
@@ -320,6 +379,7 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'Romania',
+		'dir': direurope,
 		'sprite': 'romania.svg',
 		'xScale': 0.11, 
 		'x': 53.5, 
@@ -332,6 +392,7 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'Moldova',
+		'dir': direurope,
 		'sprite': 'moldova.svg',
 		'xScale': 0.11, 
 		'x': 54.22, 
@@ -344,6 +405,7 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'Ukraine',
+		'dir': direurope,
 		'sprite': 'ukraine.svg',
 		'xScale': 0.11, 
 		'x': 54.9, 
@@ -356,6 +418,7 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'Belarus',
+		'dir': direurope,
 		'sprite': 'belarus.svg',
 		'xScale': 0.11, 
 		'x': 53.99, 
@@ -368,6 +431,7 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'Lithuania',
+		'dir': direurope,
 		'sprite': 'lithuania.svg',
 		'xScale': 0.11, 
 		'x': 52.99, 
@@ -380,6 +444,7 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'Latvia',
+		'dir': direurope,
 		'sprite': 'latvia.svg',
 		'xScale': 0.11, 
 		'x': 53.13, 
@@ -392,6 +457,7 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'Estonia',
+		'dir': direurope,
 		'sprite': 'estonia.svg',
 		'xScale': 0.11, 
 		'x': 53.13, 
@@ -404,10 +470,11 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'Russia',
+		'dir': direurope,
 		'sprite': 'russia.svg',
 		'xScale': 0.11, 
 		'x': 69.6, 
-		'y': 17.2,
+		'y': 17.23,
 		'w': 450,
 		'h': 60,
 		'unique': [
@@ -416,7 +483,22 @@ var allcountries = [
 			'Isaac Asimov'
 		]		
 	},
+	{	'name': 'Kazakhstan',
+		'dir': direurope,
+		'sprite': 'kazakhstan.svg',
+		'xScale': 0.11, 
+		'x': 63.06, 
+		'y': 23.21,
+		'w': 130,
+		'h': 40,
+		'unique': [
+			'',
+			'',
+			''
+		]		
+	},
 	{	'name': 'Finland',
+		'dir': direurope,
 		'sprite': 'finland.svg',
 		'xScale': 0.11, 
 		'x': 53.18, 
@@ -429,6 +511,7 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'Sweden',
+		'dir': direurope,
 		'sprite': 'sweden.svg',
 		'xScale': 0.11, 
 		'x': 51.5, 
@@ -441,6 +524,7 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'Norway',
+		'dir': direurope,
 		'sprite': 'norway.svg',
 		'xScale': 0.11, 
 		'x': 51.36, 
@@ -454,6 +538,7 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'Turkey',
+		'dir': direurope,
 		'sprite': 'turkey.svg',
 		'xScale': 0.11, 
 		'x': 56.11, 
@@ -466,7 +551,60 @@ var allcountries = [
 			'Turkish carpets'
 		]		
 	},
+	{	'name': 'Cyprus',
+		'dir': direurope,
+		'sprite': 'cyprus.svg',
+		'xScale': 0.11, 
+		'x': 55.7, 
+		'y': 30.1,
+		'w': 2,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Armenia',
+		'dir': direurope,
+		'sprite': 'armenia.svg',
+		'xScale': 0.11, 
+		'x': 58.45, 
+		'y': 27.36,
+		'w': 4,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Azerbaijan',
+		'dir': dirasia,
+		'sprite': 'azerbaijan.svg',
+		'xScale': 0.11, 
+		'x': 59.09, 
+		'y': 27.31,
+		'w': 2,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Georgia',
+		'dir': direurope,
+		'sprite': 'georgia.svg',
+		'xScale': 0.11, 
+		'x': 57.98, 
+		'y': 26.15,
+		'w': 2,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
 	{	'name': 'Syria',
+		'dir': dirasia,
 		'sprite': 'syria.svg',
 		'xScale': 0.11, 
 		'x': 57.15, 
@@ -479,6 +617,7 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'Lebanon',
+		'dir': dirasia,
 		'sprite': 'lebanon.svg',
 		'xScale': 0.11, 
 		'x': 56.37, 
@@ -491,6 +630,7 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'Israel',
+		'dir': dirasia,
 		'sprite': 'israel.svg',
 		'xScale': 0.11, 
 		'x': 56.2, 
@@ -503,6 +643,7 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'Jordan',
+		'dir': dirasia,
 		'sprite': 'jordan.svg',
 		'xScale': 0.11, 
 		'x': 56.79, 
@@ -515,6 +656,7 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'Iraq',
+		'dir': dirasia,
 		'sprite': 'iraq.svg',
 		'xScale': 0.11, 
 		'x': 58.47, 
@@ -527,6 +669,7 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'Saudi Arabia',
+		'dir': dirasia,
 		'sprite': 'saudiarabia.svg',
 		'xScale': 0.11, 
 		'x': 59.1, 
@@ -539,6 +682,7 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'Kuwait',
+		'dir': dirasia,
 		'sprite': 'kuwait.svg',
 		'xScale': 0.11, 
 		'x': 59.46, 
@@ -551,6 +695,7 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'Qatar',
+		'dir': dirasia,
 		'sprite': 'qatar.svg',
 		'xScale': 0.11, 
 		'x': 60.49, 
@@ -563,6 +708,7 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'United Arab Emirates',
+		'dir': dirasia,
 		'sprite': 'uae.svg',
 		'xScale': 0.11, 
 		'x': 61.26, 
@@ -575,6 +721,7 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'Oman',
+		'dir': dirasia,
 		'sprite': 'oman.svg',
 		'xScale': 0.11, 
 		'x': 61.87, 
@@ -587,6 +734,7 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'Yemen',
+		'dir': dirasia,
 		'sprite': 'yemen.svg',
 		'xScale': 0.11, 
 		'x': 60.09, 
@@ -599,6 +747,7 @@ var allcountries = [
 		]		
 	},	
 	{	'name': 'Egypt',
+		'dir': dirafrica,
 		'sprite': 'egypt.svg',
 		'xScale': 0.11, 
 		'x': 55.19, 
@@ -611,6 +760,7 @@ var allcountries = [
 		]		
 	},		
 	{	'name': 'Libya',
+		'dir': dirafrica,
 		'sprite': 'libya.svg',
 		'xScale': 0.11, 
 		'x': 51.89, 
@@ -623,6 +773,7 @@ var allcountries = [
 		]		
 	},	
 	{	'name': 'Tunisia',
+		'dir': dirafrica,
 		'sprite': 'tunisia.svg',
 		'xScale': 0.11, 
 		'x': 49.83, 
@@ -635,6 +786,7 @@ var allcountries = [
 		]		
 	},			
 	{	'name': 'Algeria',
+		'dir': dirafrica,
 		'sprite': 'algeria.svg',
 		'xScale': 0.11, 
 		'x': 47.92, 
@@ -647,6 +799,7 @@ var allcountries = [
 		]		
 	},			
 	{	'name': 'Morocco',
+		'dir': dirafrica,
 		'sprite': 'morocco.svg',
 		'xScale': 0.11, 
 		'x': 45.64, 
@@ -659,6 +812,7 @@ var allcountries = [
 		]		
 	},		
 	{	'name': 'Western Sahara',
+		'dir': dirafrica,
 		'sprite': 'westernsahara.svg',
 		'xScale': 0.11, 
 		'x': 44.08, 
@@ -671,6 +825,7 @@ var allcountries = [
 		]		
 	},	
 	{	'name': 'Mauritania',
+		'dir': dirafrica,
 		'sprite': 'mauritania.svg',
 		'xScale': 0.11, 
 		'x': 44.6, 
@@ -683,6 +838,7 @@ var allcountries = [
 		]		
 	},		
 	{	'name': 'Mali',
+		'dir': dirafrica,
 		'sprite': 'mali.svg',
 		'xScale': 0.11, 
 		'x': 46.38, 
@@ -695,6 +851,7 @@ var allcountries = [
 		]		
 	},		
 	{	'name': 'Senegal',
+		'dir': dirafrica,
 		'sprite': 'senegal.svg',
 		'xScale': 0.11, 
 		'x': 43.57, 
@@ -707,6 +864,7 @@ var allcountries = [
 		]		
 	},
 	{	'name': 'The Gambia',
+		'dir': dirafrica,
 		'sprite': 'gambia.svg',
 		'xScale': 0.11, 
 		'x': 43.32, 
@@ -719,6 +877,7 @@ var allcountries = [
 		]		
 	},	
 	{	'name': 'Guinea-Bissau',
+		'dir': dirafrica,
 		'sprite': 'guineabissau.svg',
 		'xScale': 0.11, 
 		'x': 43.345, 
@@ -731,6 +890,7 @@ var allcountries = [
 		]		
 	},	
 	{	'name': 'Guinea',
+		'dir': dirafrica,
 		'sprite': 'guinea.svg',
 		'xScale': 0.11, 
 		'x': 44.37, 
@@ -743,6 +903,7 @@ var allcountries = [
 		]		
 	},		
 	{	'name': 'Sierra Leone',
+		'dir': dirafrica,
 		'sprite': 'sierraleone.svg',
 		'xScale': 0.11, 
 		'x': 44.22, 
@@ -755,6 +916,7 @@ var allcountries = [
 		]		
 	},		
 	{	'name': 'Liberia',
+		'dir': dirafrica,
 		'sprite': 'liberia.svg',
 		'xScale': 0.11, 
 		'x': 44.84, 
@@ -767,7 +929,8 @@ var allcountries = [
 		]		
 	},		
 	{	'name': 'Cote d\'Ivoire',
-		'sprite': 'cotedeivoire.svg',
+		'dir': dirafrica,
+		'sprite': 'cotedivoire.svg',
 		'xScale': 0.11, 
 		'x': 45.875, 
 		'y': 44.71,
@@ -779,6 +942,7 @@ var allcountries = [
 		]		
 	},			
 	{	'name': 'Burkina Faso',
+		'dir': dirafrica,
 		'sprite': 'burkinafaso.svg',
 		'xScale': 0.11, 
 		'x': 46.94, 
@@ -791,6 +955,7 @@ var allcountries = [
 		]		
 	},	
 	{	'name': 'Ghana',
+		'dir': dirafrica,
 		'sprite': 'ghana.svg',
 		'xScale': 0.11, 
 		'x': 47.06, 
@@ -803,6 +968,7 @@ var allcountries = [
 		]		
 	},		
 	{	'name': 'Togo',
+		'dir': dirafrica,
 		'sprite': 'togo.svg',
 		'xScale': 0.11, 
 		'x': 47.54, 
@@ -815,6 +981,7 @@ var allcountries = [
 		]		
 	},		
 	{	'name': 'Benin',
+		'dir': dirafrica,
 		'sprite': 'benin.svg',
 		'xScale': 0.11, 
 		'x': 47.94, 
@@ -827,6 +994,7 @@ var allcountries = [
 		]		
 	},		
 	{	'name': 'Niger',
+		'dir': dirafrica,
 		'sprite': 'niger.svg',
 		'xScale': 0.11, 
 		'x': 49.52, 
@@ -839,11 +1007,12 @@ var allcountries = [
 		]		
 	},		
 	{	'name': 'Nigeria',
+		'dir': dirafrica,
 		'sprite': 'nigeria.svg',
 		'xScale': 0.11, 
 		'x': 49.66, 
 		'y': 43.9,
-		'w': 14,
+		'w': 10,
 		'unique': [
 			'',
 			'', //FIXME
@@ -851,6 +1020,7 @@ var allcountries = [
 		]		
 	},		
 	{	'name': 'Chad',
+		'dir': dirafrica,
 		'sprite': 'chad.svg',
 		'xScale': 0.11, 
 		'x': 52.29, 
@@ -863,6 +1033,7 @@ var allcountries = [
 		]		
 	},		
 	{	'name': 'Sudan',
+		'dir': dirafrica,
 		'sprite': 'sudan.svg',
 		'xScale': 0.11, 
 		'x': 55.32, 
@@ -874,14 +1045,978 @@ var allcountries = [
 			''
 		]		
 	},		
+	{	'name': 'Eritrea',
+		'dir': dirafrica,
+		'sprite': 'eritrea.svg',
+		'xScale': 0.11, 
+		'x': 57.79, 
+		'y': 40.66,
+		'w': 6,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},		
+	{	'name': 'Djibouti',
+		'dir': dirafrica,
+		'sprite': 'djibouti.svg',
+		'xScale': 0.11, 
+		'x': 58.52, 
+		'y': 42.46,
+		'w': 3,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},		
+	{	'name': 'Ethiopia',
+		'dir': dirafrica,
+		'sprite': 'ethiopia.svg',
+		'xScale': 0.11, 
+		'x': 58.075, 
+		'y': 43.89,
+		'w': 10,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},		
+	{	'name': 'Somalia',
+		'dir': dirafrica,
+		'sprite': 'somalia.svg',
+		'xScale': 0.11, 
+		'x': 59.555, 
+		'y': 46.03,
+		'w': 10,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},		
+	{	'name': 'South Sudan',
+		'dir': dirafrica,
+		'sprite': 'southsudan.svg',
+		'xScale': 0.11, 
+		'x': 55.21, 
+		'y': 44.53,
+		'w': 14,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},	
+	
+	{	'name': 'Central Africa Republic',
+		'dir': dirafrica,
+		'sprite': 'car.svg',
+		'xScale': 0.11, 
+		'x': 52.91, 
+		'y': 45.23,
+		'w': 12,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Cameroon',
+		'dir': dirafrica,
+		'sprite': 'cameroon.svg',
+		'xScale': 0.11, 
+		'x': 50.56, 
+		'y': 44.82,
+		'w': 10,
+		'h': 40,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Equatorial Guinea',
+		'dir': dirafrica,
+		'sprite': 'equatorialguinea.svg',
+		'xScale': 0.11, 
+		'x': 49.92, 
+		'y': 47.47,
+		'w': 5,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Gabon',
+		'dir': dirafrica,
+		'sprite': 'gabon.svg',
+		'xScale': 0.11, 
+		'x': 50.412, 
+		'y': 49.16,
+		'w': 8,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Republic of the Congo',
+		'dir': dirafrica,
+		'sprite': 'republicofthecongo.svg',
+		'xScale': 0.11, 
+		'x': 51.28, 
+		'y': 49.1,
+		'w': 6,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Democratic Republic of the Congo',
+		'dir': dirafrica,
+		'sprite': 'democraticrepublicofthecongo.svg',
+		'xScale': 0.11, 
+		'x': 53.18, 
+		'y': 50.9,
+		'w': 20,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Uganda',
+		'dir': dirafrica,
+		'sprite': 'uganda.svg',
+		'xScale': 0.11, 
+		'x': 55.875, 
+		'y': 48,
+		'w': 8,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Kenya',
+		'dir': dirafrica,
+		'sprite': 'kenya.svg',
+		'xScale': 0.11, 
+		'x': 57.38, 
+		'y': 48.77,
+		'w': 12,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Rwanda',
+		'dir': dirafrica,
+		'sprite': 'rwanda.svg',
+		'xScale': 0.11, 
+		'x': 55.2, 
+		'y': 49.79,
+		'w': 2,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Burundi',
+		'dir': dirafrica,
+		'sprite': 'burundi.svg',
+		'xScale': 0.11, 
+		'x': 55.22, 
+		'y': 50.57,
+		'w': 3,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Tanzania',
+		'dir': dirafrica,
+		'sprite': 'tanzania.svg',
+		'xScale': 0.11, 
+		'x': 56.6, 
+		'y': 52.14,
+		'w': 15,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Zambia',
+		'dir': dirafrica,
+		'sprite': 'zambia.svg',
+		'xScale': 0.11, 
+		'x': 54.7, 
+		'y': 55.73,
+		'w': 14,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Angola',
+		'dir': dirafrica,
+		'sprite': 'angola.svg',
+		'xScale': 0.11, 
+		'x': 52.1, 
+		'y': 54.7,
+		'w': 18,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Namibia',
+		'dir': dirafrica,
+		'sprite': 'namibia.svg',
+		'xScale': 0.11, 
+		'x': 52.24, 
+		'y': 60.94,
+		'w': 14,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Botswana',
+		'dir': dirafrica,
+		'sprite': 'botswana.svg',
+		'xScale': 0.11, 
+		'x': 53.79, 
+		'y': 60.62,
+		'w': 12,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Zimbabwe',
+		'dir': dirafrica,
+		'sprite': 'zimbabwe.svg',
+		'xScale': 0.11, 
+		'x': 54.98, 
+		'y': 58.87,
+		'w': 10,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Malawi',
+		'dir': dirafrica,
+		'sprite': 'malawi.svg',
+		'xScale': 0.11, 
+		'x': 56.33, 
+		'y': 55.79,
+		'w': 4,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Mozambique',
+		'dir': dirafrica,
+		'sprite': 'mozambique.svg',
+		'xScale': 0.11, 
+		'x': 56.69, 
+		'y': 58.69,
+		'w': 16,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Madagascar',
+		'dir': dirafrica,
+		'sprite': 'madagascar.svg',
+		'xScale': 0.11, 
+		'x': 59.6, 
+		'y': 58.69,
+		'w': 14,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'South Africa',
+		'dir': dirafrica,
+		'sprite': 'southafrica.svg',
+		'xScale': 0.11, 
+		'x': 53.8, 
+		'y': 63.89,
+		'w': 17,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Turkmenistan',
+		'dir': dirasia,
+		'sprite': 'turkmenistan.svg',
+		'xScale': 0.11, 
+		'x': 62.1, 
+		'y': 27.95,
+		'w': 12,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Iran',
+		'dir': dirasia,
+		'sprite': 'iran.svg',
+		'xScale': 0.11, 
+		'x': 61.02, 
+		'y': 31.43,
+		'w': 20,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Uzbekistan',
+		'dir': dirasia,
+		'sprite': 'uzbekistan.svg',
+		'xScale': 0.11, 
+		'x': 63.11, 
+		'y': 26.67,
+		'w': 8,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Kyrgyzstan',
+		'dir': dirasia,
+		'sprite': 'kyrgyzstan.svg',
+		'xScale': 0.11, 
+		'x': 65.65, 
+		'y': 26.73,
+		'w': 6,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Tajikistan',
+		'dir': dirasia,
+		'sprite': 'tajikistan.svg',
+		'xScale': 0.11, 
+		'x': 64.99, 
+		'y': 27.97,
+		'w': 8,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Afghanistan',
+		'dir': dirasia,
+		'sprite': 'afghanistan.svg',
+		'xScale': 0.11, 
+		'x': 64.32, 
+		'y': 30.62,
+		'w': 10,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Pakistan',
+		'dir': dirasia,
+		'sprite': 'pakistan.svg',
+		'xScale': 0.11, 
+		'x': 64.91, 
+		'y': 32.51,
+		'w': 10,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'India',
+		'dir': dirasia,
+		'sprite': 'india.svg',
+		'xScale': 0.11, 
+		'x': 68.76, 
+		'y': 37.45,
+		'w': 24,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Nepal',
+		'dir': dirasia,
+		'sprite': 'nepal.svg',
+		'xScale': 0.11, 
+		'x': 68.9, 
+		'y': 33.57,
+		'w': 5,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'China',
+		'dir': dirasia,
+		'sprite': 'china.svg',
+		'xScale': 0.11, 
+		'x': 72.25, 
+		'y': 29.66,
+		'w': 140,
+		'h': 50,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Mongolia',
+		'dir': dirasia,
+		'sprite': 'mongolia.svg',
+		'xScale': 0.11, 
+		'x': 71.75, 
+		'y': 23.8,
+		'w': 100,
+		'h': 30,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Bhutan',
+		'dir': dirasia,
+		'sprite': 'bhutan.svg',
+		'xScale': 0.11, 
+		'x': 70.51, 
+		'y': 34.06,
+		'w': 6,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Bangladesh',
+		'dir': dirasia,
+		'sprite': 'bangladesh.svg',
+		'xScale': 0.11, 
+		'x': 70.68, 
+		'y': 36.09,
+		'w': 8,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Myanmar',
+		'dir': dirasia,
+		'sprite': 'myanmar.svg',
+		'xScale': 0.11, 
+		'x': 72.35, 
+		'y': 38.42,
+		'w': 15,
+		'h': 60,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Thailand',
+		'dir': dirasia,
+		'sprite': 'thailand.svg',
+		'xScale': 0.11, 
+		'x': 73.78, 
+		'y': 41.71,
+		'w': 10,
+		'h': 60,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Laos',
+		'dir': dirasia,
+		'sprite': 'laos.svg',
+		'xScale': 0.11, 
+		'x': 74.37, 
+		'y': 38.95,
+		'w': 8,
+		'h': 30,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Vietnam',
+		'dir': dirasia,
+		'sprite': 'vietnam.svg',
+		'xScale': 0.11, 
+		'x': 74.87, 
+		'y': 40.15,
+		'w': 6,
+		'h': 25,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Cambodia',
+		'dir': dirasia,
+		'sprite': 'cambodia.svg',
+		'xScale': 0.11, 
+		'x': 74.86, 
+		'y': 42.07,
+		'w': 4,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Taiwan',
+		'dir': dirasia,
+		'sprite': 'taiwan.svg',
+		'xScale': 0.11, 
+		'x': 78.1, 
+		'y': 36.5,
+		'w': 4,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'North Korea',
+		'dir': dirasia,
+		'sprite': 'northkorea.svg',
+		'xScale': 0.11, 
+		'x': 78.38, 
+		'y': 27.25,
+		'w': 9,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'South Korea',
+		'dir': dirasia,
+		'sprite': 'southkorea.svg',
+		'xScale': 0.11, 
+		'x': 79.11, 
+		'y': 29.6,
+		'w': 9,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Japan',
+		'dir': dirasia,
+		'sprite': 'japan.svg',
+		'xScale': 0.11, 
+		'x': 80.9, 
+		'y': 30.1,
+		'w': 18,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Malaysia',
+		'dir': dirasia,
+		'sprite': 'malaysia.svg',
+		'xScale': 0.11, 
+		'x': 76.185, 
+		'y': 46.48,
+		'w': 70,
+		'h': 20,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Indonesia',
+		'dir': dirasia,
+		'sprite': 'indonesia.svg',
+		'xScale': 0.11, 
+		'x': 78.45, 
+		'y': 50,
+		'w': 170,
+		'h': 40,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Papua New Guinea',
+		'dir': diroceania,
+		'sprite': 'papuanewguinea.svg',
+		'xScale': 0.11, 
+		'x': 86.41, 
+		'y': 52.12,
+		'w': 60,
+		'h': 40,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Australia',
+		'dir': diroceania,
+		'sprite': 'australia.svg',
+		'xScale': 0.11, 
+		'x': 81.7, 
+		'y': 62.9,
+		'w': 60,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'New Zealand',
+		'dir': diroceania,
+		'sprite': 'newzealand.svg',
+		'xScale': 0.11, 
+		'x': 89, 
+		'y': 71.5,
+		'w': 16,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Greenland',
+		'dir': direurope,
+		'sprite': 'greenland.svg',
+		'xScale': 0.11, 
+		'x': 41, 
+		'y': 11.5,
+		'w': 40,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Canada',
+		'dir': dirnamerica,
+		'sprite': 'canada.svg',
+		'xScale': 0.11, 
+		'x': 27.1, 
+		'y': 16.5,
+		'w': 210,
+		'h': 90,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'United States (mainland)',
+		'dir': dirnamerica,
+		'sprite': 'us_main.svg',
+		'xScale': 0.11, 
+		'x': 23.25, 
+		'y': 28.51,
+		'w': 180,
+		'h': 60,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'United States (Alaska)',
+		'dir': dirnamerica,
+		'sprite': 'us_alaska.svg',
+		'xScale': 0.11, 
+		'x': 15.39, 
+		'y': 15.47,
+		'w': 30,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'United States (Hawaii)',
+		'dir': dirnamerica,
+		'sprite': 'us_hawaii.svg',
+		'xScale': 0.11, 
+		'x': 4.5, 
+		'y': 38.5,
+		'w': 6,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Mexico',
+		'dir': dirnamerica,
+		'sprite': 'mexico.svg',
+		'xScale': 0.11, 
+		'x': 20.05, 
+		'y': 35.73,
+		'w': 25,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Guatemala',
+		'dir': dirnamerica,
+		'sprite': 'guatemala.svg',
+		'xScale': 0.11, 
+		'x': 22.53, 
+		'y': 39.9,
+		'w': 7,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Honduras',
+		'dir': dirnamerica,
+		'sprite': 'honduras.svg',
+		'xScale': 0.11, 
+		'x': 23.56, 
+		'y': 40.49,
+		'w': 5,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'El Salvador',
+		'dir': dirnamerica,
+		'sprite': 'elsalvador.svg',
+		'xScale': 0.11, 
+		'x': 22.81, 
+		'y': 40.98,
+		'w': 3,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Belize',
+		'dir': dirnamerica,
+		'sprite': 'belize.svg',
+		'xScale': 0.11, 
+		'x': 23.02, 
+		'y': 39.15,
+		'w': 3,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Nicaragua',
+		'dir': dirnamerica,
+		'sprite': 'nicaragua.svg',
+		'xScale': 0.11, 
+		'x': 23.75, 
+		'y': 41.48,
+		'w': 4,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Costa Rica',
+		'dir': dirnamerica,
+		'sprite': 'costarica.svg',
+		'xScale': 0.11, 
+		'x': 23.94, 
+		'y': 43.22,
+		'w': 5,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Panama',
+		'dir': dirnamerica,
+		'sprite': 'panama.svg',
+		'xScale': 0.11, 
+		'x': 25.01, 
+		'y': 43.88,
+		'w': 5,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Cuba',
+		'dir': dirnamerica,
+		'sprite': 'cuba.svg',
+		'xScale': 0.11, 
+		'x': 26, 
+		'y': 36.8,
+		'w': 30,
+		'h': 6,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'The Bahamas',
+		'dir': dirnamerica,
+		'sprite': 'bahamas.svg',
+		'xScale': 0.11, 
+		'x': 27, 
+		'y': 35.6,
+		'w': 8,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Jamaica',
+		'dir': dirnamerica,
+		'sprite': 'jamaica.svg',
+		'xScale': 0.11, 
+		'x': 26.5, 
+		'y': 38.5,
+		'w': 3,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Haiti',
+		'dir': dirnamerica,
+		'sprite': 'haiti.svg',
+		'xScale': 0.11, 
+		'x': 27.6, 
+		'y': 38,
+		'w': 4,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Dominican Republic',
+		'dir': dirnamerica,
+		'sprite': 'dominicanrepublic.svg',
+		'xScale': 0.11, 
+		'x': 28.35, 
+		'y': 38.16,
+		'w': 6,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Puerto Rico',
+		'dir': dirnamerica,
+		'sprite': 'puertorico.svg',
+		'xScale': 0.11, 
+		'x': 29.3, 
+		'y': 38.3,
+		'w': 2,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Colombia',
+		'dir': dirsamerica,
+		'sprite': 'colombia.svg',
+		'xScale': 0.11, 
+		'x': 26.875, 
+		'y': 46.18,
+		'w': 16,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Venezuela',
+		'dir': dirsamerica,
+		'sprite': 'venezuela.svg',
+		'xScale': 0.11, 
+		'x': 28.63, 
+		'y': 44.94,
+		'w': 14,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
 
 	
 	
+	
+	
+
+
 ];
 var temp = [
-
-
-	
 	
 ];
 
@@ -892,11 +2027,17 @@ var temp = [
 //500, 300
 
 /*
+ended up restarting with country positioning and three different sets of images 3 times...
+gave up on inventions towards the end of europe
+textures aren't drawn until shapes on screen, but shapes usually are overlapped by textures
 macedonia is a really awkward shape
 russia appears to own a chunk of land on the coast between Poland and Lithuania
 norway is also a really awkward shape
 western sahara isn't a place? Confusing
 there are a LOT of countries
 potentially provocative - should Palestine be in here?
-fascinating learning experience - didn't even know benin existed
+fascinating learning experience - didn't even know benin existed, central african republic
+azerbaijan is hugging armenia
+had to break the US into chunks. Noone else was this unhelpful. Thanks, US.
+Too small to include (probably): Malta, Liechtenstein, Monaco, San Marino (is this a country inside Italy??), Vatican City, Lesotho (literally inside SA), Swaziland, Fiji, Kiribati, Marshall Islands, Micronesia, Nauru, Palau, Samoa, Solomon Islands, Tonga, Tuvalu, Vanatu, Barbados, Dominica, Antigua and Barbuda,
 */
