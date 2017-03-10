@@ -13,7 +13,7 @@
     }
 		
     .canvasparent {			
-		//padding:40px; //FIXME uncomment
+		padding:40px; //FIXME uncomment
     	height:100vh;		
 		.border-box;
 		background:silver;
@@ -83,6 +83,23 @@
 				.fontcalculate(20);
 				font-weight:bold;
 			}
+		}
+	}
+	
+	.hud {
+		position:fixed;
+		top:0;
+		left:0;
+		padding:1em;
+		background:rgba(255,255,255,0.5);
+		
+		.healthbar {
+			position:absolute;
+			top:0;
+			left:0;
+			height:0.5em;
+			background:green;
+			.transition( all 0.3s );
 		}
 	}
 

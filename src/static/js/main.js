@@ -1,5 +1,10 @@
 /* globals Matter, www, Deferred, allcountries, spritepath */
 
+//date shim
+if (!Date.now) {
+    Date.now = function() { return new Date().getTime(); };
+}
+
 (function( window, undefined ) {
 var www = {
 	parentel: document.getElementById('canvasparent'),
@@ -24,14 +29,20 @@ var www = {
 	idealw: 1600, 
 	idealh: 900, 
 	enemycount: 0,
-	enemyhealth: 10,
+	enemyhealth: 1,
+	enemiesfire: 1,
+	firechance: 1, //used to calculate the probability that a country will fire in any given loop of the game
 	playerhealth: 10,
-	boundswidth: 20, //used to determine the thickness of the walls we build to limit the game
+	playerscore: 0,
+	boundswidth: 100, //used to determine the thickness of the walls we build to limit the game
 	enemies: [],
+	bullets: [],
+	bulletlife: 800, //how many milliseconds a bullet should exist for
 	chosen: 0, //the country chosen by the player
 	timer: 0,
-	scaleFactor: 0.5, //how big to draw everything. Game should normally be twice width/height of canvas, scale of 0.5 will fit everything in
-	debug: 1,
+	scaleFactor: 1, //how big to draw everything. Game should normally be twice width/height of canvas, scale of 0.5 will fit everything in
+	debug: 0,
+	mode: 3,
 	
 	general: {
 		init: function(){
@@ -49,7 +60,28 @@ var www = {
 		},
 		
 		initGame: function(){
+			//setup game attributes according to mode
+			if(www.mode === 1){
+				//just float around destroying the world, sandbox
+				www.enemyhealth = 1;
+				www.enemiesfire = 0;
+			}
+			else if(www.mode === 2){
+				//reasonable level of violence
+				www.enemyhealth = 3;
+				www.enemiesfire = 1;
+				www.firechance = 20;
+			}
+			else {
+				//extreme
+				www.playerhealth = 2;
+				www.enemyhealth = 1;
+				www.enemiesfire = 1;
+				www.firechance = 5;
+			}
+			
 			www.enemies = [];
+			www.playerscore = 0;
 			document.getElementById('messages').innerHTML = '';			
 			www.engine = www.Engine.create(); // create an engine
 			www.engine.world.gravity.y = 0; //turn off gravity
@@ -64,7 +96,7 @@ var www = {
 					height: www.h,
 					background:'#aa0000',
 					hasBounds: true,
-					showBounds: true,
+					//showBounds: true,
 					wireframes: false,
 					//showVelocity: true,
 					//showCollisions: true,
@@ -101,31 +133,36 @@ var www = {
 			www.boundsScale = {
 				x: 1,
 				y: 1
-			};					
-			www.mycountry = www.general.createPlayer(www.chosen,'player',www.playerhealth);			
+			};		
+			if(www.debug){
+				www.chosen = allcountries.length - 1;
+			}
+			www.mycountry = www.general.createPlayer(www.chosen,'player',www.playerhealth,www.chosen);			
 			www.general.createEnemies();		
-/*
+
 			//recentre the canvas onto the player
 			var translate = {
 				x: www.mycountry.position.x - (www.w / 2),
 				y: www.mycountry.position.y - (www.h / 2)
 			};			
 			//focus on the last country added
+			/*
 			if(www.debug){
 				translate = {
 					x: www.enemies[www.enemies.length - 1].position.x - (www.w / 2),
 					y: www.enemies[www.enemies.length - 1].position.y - (www.h / 2)
 				};
 			}
+			*/
 			www.Bounds.translate(www.render.bounds, translate);			
-*/	
+	
 			www.general.drawBoundary();
 			www.general.createMatterEvents();			
 			
 			www.Engine.run(www.engine);	// run the engine			
 			www.Render.run(www.render); // run the renderer
 			
-			if(!www.debug){
+			if(!www.debug && www.enemiesfire){
 				www.timer = setInterval(www.general.gameLoop,500);
 			}
 		},
@@ -218,35 +255,42 @@ var www = {
 		
 		createMatterEvents: function(){		
 			www.Events.on(www.engine,'collisionEnd',function(e){
-				//www.Body.translate(www.engine.world.bodies,{x:-100,y:10});
-				//console.log(www.engine.world.bodies);
-
-				//console.log('Speed',www.mycountry.speed,www.mycountry.angularSpeed);
-				//bounds.min is the left/top edge, bounds.max is the right/bottom edge
-				//console.log('Min',www.mycountry.bounds.min.x,www.mycountry.bounds.min.y);
-				//console.log('Max',www.mycountry.bounds.max.x,www.mycountry.bounds.max.y);
-				
-				//these are the midpoint positions of the object
-				/*
-				var avgx = www.mycountry.bounds.min.x + ((www.mycountry.bounds.max.x - www.mycountry.bounds.min.x) / 2);
-				var avgy = www.mycountry.bounds.min.y + ((www.mycountry.bounds.max.y - www.mycountry.bounds.min.y) / 2);
-				console.log('avg',avgx,avgy);
-				*/
 			});
 		
 			//on object collision
-			www.Events.on(www.engine,'collisionStart',function(e){
+			www.Events.on(www.engine,'collisionStart',function(e){			
+				var obj1 = e.pairs[0].bodyA;
+				var obj2 = e.pairs[0].bodyB;
+								
+				//don't care about country/country collisions, or country/wall
+				if(obj1.myobjtype === 'bullet' || obj2.myobjtype === 'bullet'){
+					if(obj1.myobjtype === 'player' || obj2.myobjtype === 'player'){
+						console.log('you got hit');
+					}					
+					//console.log('Collision!',obj1.myorigin,obj1.myid,obj1.myname);
+					//console.log('Collision!',obj2.myorigin,obj2.myid,obj2.myname);
+					//console.log();
+										
+					//this bullet just came from this country, so disable the collision
+					if(obj1.myorigin === obj2.myid || obj2.myorigin === obj1.myid){
+						e.pairs[0].isActive = false;
+					}
+					else {
+						e.pairs[0].bodyA.myhealth = Math.max(0, e.pairs[0].bodyA.myhealth - 1);
+						e.pairs[0].bodyB.myhealth = Math.max(0, e.pairs[0].bodyB.myhealth - 1);
+						if(e.pairs[0].bodyA.myhealth === 0){
+							www.general.killObject(e.pairs[0].bodyA,e.pairs[0].bodyB.myid);
+						}
+						if(e.pairs[0].bodyB.myhealth === 0){
+							www.general.killObject(e.pairs[0].bodyB,e.pairs[0].bodyA.myid);
+						}
+					}
+				}
+/*				
 				var collided = [e.pairs[0].bodyA,e.pairs[0].bodyB];
 				var bullets = [];
 				var countries = [];
-				
-				var obj1 = e.pairs[0].bodyA;
-				var obj2 = e.pairs[0].bodyB;
-				/*
-					scenarios of interest:
-						both objects are bullets - do something
-						one object is a bullet and one is a country - do something
-				*/
+
 				//first sort the two colliding objects
 				for(var x = 0; x < collided.length; x++){
 					if(collided[x].mytype === 'bullet'){
@@ -256,28 +300,24 @@ var www = {
 						countries.push(collided[x]);
 					}
 				}
-				//two bullets
-				//FIXME maybe more fun if bullets simply deflect each other?
-				if(bullets.length === 2){
-					www.World.remove(www.engine.world, bullets[0]);
-					www.World.remove(www.engine.world, bullets[1]);
-				}
 				//one bullet, one country
-				else if(bullets.length === 1 && countries.length === 1){
+				if(bullets.length === 1 && countries.length === 1){
+					
 					//if the bullet did not originate from this country, inflict damage
 					if(bullets[0].myorigin !== countries[0].id){
-						www.general.inflictDamage(countries[0]);
+						www.general.inflictDamage(countries[0],bullets[0].myorigin);
 						www.World.remove(www.engine.world, bullets[0]);
 					}
 					//otherwise, this bullet just came from this country, so disable the collision
 					else {
 						e.pairs[0].isActive = false;
 					}
-				}
+				}				
 				//this is a bullet has hit a wall, just remove the bullet
 				else if(bullets.length === 1){
 					www.World.remove(www.engine.world, bullets[0]);					
 				}
+*/
 			});	
 			
 			/* https://github.com/liabru/matter-js/blob/master/examples/views.js */
@@ -324,17 +364,22 @@ var www = {
 				www.origx += diffx;
 				www.origy += diffy;
 				
-				/*
-				var diffx = www.mycountry.myxpos - www.mycountry.bounds.min.x;
-				var diffy = www.mycountry.myypos - www.mycountry.bounds.min.y;
-				console.log('Translating:',www.mycountry.myxpos,www.mycountry.bounds.min.x,diffx,diffy);
-				www.mycountry.myxpos = www.mycountry.bounds.min.x;
-				www.mycountry.myypos = www.mycountry.bounds.min.y;				
-				www.origx += diffx;
-				www.origy += diffy;
-				*/
-				//console.log('Ah wait this isnt right the first time',diffx,diffy);
 				www.Bounds.translate(www.render.bounds,{x:-diffx,y:-diffy});
+				
+				//check to see if we should remove any bullets
+				var now = Date.now();
+				for(var b = 0; b < www.bullets.length; b++){
+					var lifespan = now - www.bullets[b].mycreated;
+					if(lifespan > www.bulletlife){
+						www.World.remove(www.engine.world, www.bullets[b]);
+					}
+				}
+				
+				//now update the HUD
+				document.getElementById('score').innerHTML = www.playerscore;
+				document.getElementById('count').innerHTML = www.enemycount;
+				document.getElementById('health').style.width = www.mycountry.myhealth * 10 + '%';
+				
 			});
 			
 			/*
@@ -351,55 +396,87 @@ var www = {
 		},
 		
 		//reduce health and 'kill' a country
-		inflictDamage: function(country,x){
-			country.myhealth -= 1;
-			if(country.myhealth <= 0){			
-				if(country.myobjtype === 'enemy'){
+		killObject: function(country,origin){
+			//console.log('killObject',country.myname);
+			//console.log(country,origin);
+			if(country.myobjtype === 'enemy'){
+				if(origin === www.mycountry.myid){
+					console.log('Score!');
+					www.playerscore++;
+				}					
+				
+				var things = '';
+				if(country.mythings.length > 0){
 					var solongs = [
 						'Say goodbye to',
 						'No more',
-						'The world is better off without',
 						'So long,',
+						'So much for',
 						'We can live without',
-						'Good riddance to',
 						'We don\'t need',
 						'Who needs',
 						'Take a hike,'
 					];
-					var things = '';
-					for(var t = 0; t < country.mythings.length - 1; t++){
-						things += country.mythings[t] + ', ';
+					//if there's more than one item, construct a sentence with them
+					if(country.mythings.length > 1){
+						for(var t = 0; t < country.mythings.length - 1; t++){
+							things += country.mythings[t] + ', ';
+						}
+						things += 'and ' + country.mythings[country.mythings.length - 1];
 					}
-					things += 'and ' + country.mythings[country.mythings.length - 1] + '.';
-					
-					//update the messages window
-					var div = document.createElement('div');
-					div.className = 'message';
-					var title = document.createElement('p');
-					title.className = 'title';
-					title.innerHTML = country.myname + ' has been destroyed';
-					div.appendChild(title);
-					var desc = document.createElement('p');
-					desc.className = 'desc';
-					desc.innerHTML = solongs[www.general.randomInt(0,solongs.length - 1)] + ' ' + things;
-					div.appendChild(desc);
-					document.getElementById('messages').insertBefore(div,document.getElementById('messages').firstChild);
-
-					www.World.remove(www.engine.world, country);
-					www.enemycount--;
-					if(www.enemycount <= 0){
-						www.general.gameWon();
+					//otherwise just output the one thing
+					else {
+						things = country.mythings[0];
 					}
+					things = solongs[www.general.randomInt(0,solongs.length - 1)] + ' ' + things + '.';
 				}
-				else if(country.myobjtype === 'player'){
-					www.general.gameLost();
-				}				
+				else {
+					var insults = [
+						'Take a hike, foreign country!',
+						'Take that, people I\'ve never met!',
+						'Adios, strangers!',
+						'Your country is less good than some arbitrary standard!',
+						'In your collective faces!',
+						'We disliked you because you were different from us!',
+						'See you in Helsinki!'
+					];
+					things = insults[www.general.randomInt(0,insults.length - 1)];
+				}
+				
+				//update the messages window
+				var div = document.createElement('div');
+				div.className = 'message';
+				var title = document.createElement('p');
+				title.className = 'title';
+				title.innerHTML = country.myname + ' has been destroyed';
+				div.appendChild(title);
+				var desc = document.createElement('p');
+				desc.className = 'desc';
+				desc.innerHTML = things;
+				div.appendChild(desc);
+				document.getElementById('messages').insertBefore(div,document.getElementById('messages').firstChild);
+
+				www.World.remove(www.engine.world, country);
+				www.enemycount--;
+				if(www.enemycount <= 0){
+					www.general.gameWon();
+				}
 			}
+			else if(country.myobjtype === 'player'){
+				www.general.gameLost();
+			}				
 		},
 		
 		//FIXME this is pretty ugly
 		drawBoundary: function(){
-			var walloptions = { isStatic: true };
+			var walloptions = { 
+				isStatic: true,
+				render: {
+					fillStyle: 'black',
+					strokeStyle: 'black',
+					lineWidth: 0
+				}				
+			};
 			//top edge
 			var wall1 = {
 				x:www.engine.world.bounds.min.x + (www.worldw / 2),
@@ -436,7 +513,7 @@ var www = {
 		},
 			
 		//create player object
-		createPlayer: function(which,type,health){
+		createPlayer: function(which,type,health,theid){
 			var me = allcountries[which];
 			var x = www.engine.world.bounds.min.x + ((www.worldw / 100) * me.x);
 			var y = www.engine.world.bounds.min.y + ((www.worldh / 100) * me.y);
@@ -445,9 +522,9 @@ var www = {
 			var options = {
 				density: 0.0001,
 				friction: 0,
-				restitution: 0.8, //how much a collision will cause a bounce, 0 to 1
+				restitution: 0.6, //how much a collision will cause a bounce, 0 to 1
 				frictionAir: 0,
-				mass: 0.5,
+				mass: 1,
 				//inverseInertia: 1, //don't know what this property does
 				render: {
 					sprite: {
@@ -462,16 +539,16 @@ var www = {
 				}
 			};			
 			//most countries fit into a roughly round polygon, but some (e.g. russia) require a specific width and height, set as a rectangle
-			var thisobj = www.Bodies.polygon(x,y,7,w,options);
+			var thisobj = www.Bodies.polygon(x,y,4,w,options);
 			if(typeof(me.h) !== 'undefined'){
 				var h = (me.h / 100) * percscalex;
 				thisobj = www.Bodies.rectangle(x,y,w,h,options);
 			}
 			
+			thisobj.myid = theid;
 			thisobj.myxpos = thisobj.position.x;
 			thisobj.myypos = thisobj.position.y;
 			thisobj.myname = me.name;
-			thisobj.mytype = 'country';
 			thisobj.myobjtype = type;
 			thisobj.myhealth = health;
 			thisobj.mythings = me.unique;
@@ -485,7 +562,7 @@ var www = {
 			//console.log('Found',allcountries.length,'countries. There should be 196.');
 			for(var i = 0; i < allcountries.length; i++){
 				if(i !== www.chosen){
-					var enemy = www.general.createPlayer(i,'enemy',www.enemyhealth);
+					var enemy = www.general.createPlayer(i,'enemy',www.enemyhealth,i);
 					www.enemies.push(enemy);
 					//www.World.add(www.engine.world, [enemy]);
 					www.enemycount++;
@@ -494,7 +571,6 @@ var www = {
 		},
 	
 		//click to fire
-		//FIXME bug here - the larger the screen, the lower the speed of the bullet. On small screens bullet is so fast as to be invisible
 		clickDown: function(e){
 			var rect = www.canvas.getBoundingClientRect();
 			var x = e.clientX - rect.left;
@@ -503,33 +579,43 @@ var www = {
 				x = e.changedTouches[0].pageX - rect.left;
 				y = e.changedTouches[0].pageY - rect.top;
 			}
-			//adjust click position based on any translations to the world
-			x -= www.origx;
-			y -= www.origy;
-			
-			//console.log(www.mycountry);
-			var bullet = www.general.createBullet(www.mycountry.position.x,www.mycountry.position.y,www.mycountry.id);			
+			//figure out where we clicked in relation to the actual world
+			//assumes that the player is always in the centre of the canvas, which they should be
+			var worldx = (www.canvas.width / 2) - x;
+			var worldy = (www.canvas.height / 2) - y;
+			x = www.mycountry.position.x - worldx;
+			y = www.mycountry.position.y - worldy;
+
+			var bullet = www.general.createBullet(www.mycountry.position.x,www.mycountry.position.y,www.mycountry.myid,'red');			
 			www.general.fireBullet(bullet,x,y,www.mycountry);
 		},
 		
-		createBullet: function(posx,posy,origin){
+		createBullet: function(posx,posy,origin,bulletcolour){
 			var options = {
 				density: 0.001,
 				friction: 0.1,
 				restitution: 1,
 				frictionAir: 0,
 				mass: 0.05,
+				render: {
+					fillStyle: bulletcolour,
+					strokeStyle: bulletcolour,
+					lineWidth: 0
+				}
 			};
-			var bullet = www.Bodies.circle(posx,posy,www.canvas.width / 200, options);
-			bullet.mytype = 'bullet';
+			var bullet = www.Bodies.circle(posx,posy,www.canvas.width / 300, options);
+			bullet.myid = -1;
+			bullet.myobjtype = 'bullet';
+			bullet.myname = 'bullet';
 			bullet.myorigin = origin;
+			bullet.myhealth = 1;
+			bullet.mycreated = Date.now();
+			www.bullets.push(bullet);
 			www.World.add(www.engine.world, [bullet]);
 			return(bullet);
 		},
 		
 		fireBullet: function(bullet,x,y,origin){			
-			/* FIXME this works but the sizing bug happens here */
-			
 			var myvect = {
 				x: x - bullet.position.x,
 				y: y - bullet.position.y
@@ -543,16 +629,14 @@ var www = {
 						
 			//need something like 800 for small screens, more like 100 for large			
 			var scaleby = 500; //FIXME weirdly the vector still needs to be massively shrunk still
-			//console.log(scaleby);
 			myvect.x /= scaleby;
 			myvect.y /= scaleby;				
-			//console.log('Normalised:',myvect);			
 			www.Body.applyForce(bullet, bullet.position, myvect);
 			
-			//create recoil to move the country, opposite direction to bullet and half the power
+			//create recoil to move the country, opposite direction to bullet and reduced power
 			var recoil = {
-				x: -(myvect.x / 2),
-				y: -(myvect.y / 2)
+				x: -(myvect.x / 4),
+				y: -(myvect.y / 4)
 			};
 			www.Body.applyForce(origin, origin.position, recoil);
 		},
@@ -565,7 +649,6 @@ var www = {
 				sorted.push(d);
 			}
 			sorted.sort(www.general.sortStuff);
-			console.log(sorted);
 			for(var o = 0; o < sorted.length; o++){
 				var opt = document.createElement('option');
 				opt.value = sorted[o].value;
@@ -599,8 +682,8 @@ var www = {
 		gameLoop: function(){
 			for(var e = 0; e < www.enemies.length; e++){
 				if(www.enemies[e].myhealth > 0){
-					if(www.general.randomInt(0,1)){
-						var bullet = www.general.createBullet(www.enemies[e].position.x,www.enemies[e].position.y,www.enemies[e].id);			
+					if(!www.general.randomInt(0,www.firechance)){
+						var bullet = www.general.createBullet(www.enemies[e].position.x,www.enemies[e].position.y,www.enemies[e].myid,'black');			
 						var x = www.general.randomInt(0,www.canvas.width);
 						var y = www.general.randomInt(0,www.canvas.height);
 						www.general.fireBullet(bullet,x,y,www.enemies[e]);				

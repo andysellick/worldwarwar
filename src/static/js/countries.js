@@ -6,7 +6,6 @@ var diroceania = 'oceania/';
 var dirnamerica = 'namerica/';
 var dirsamerica = 'samerica/';
 
-
 //map images now from https://en.wikipedia.org/wiki/Wikipedia%3aBlank_maps#/media/File:BlankMap-World6.svg
 //previous map images from https://www.amcharts.com/svg-maps/
 //previous map images from https://github.com/djaiss/mapsicon
@@ -48,11 +47,7 @@ var allcountries = [
 		'x': 44, 
 		'y': 14.1,
 		'w': 9,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'France',
 		'dir': direurope,
@@ -113,11 +108,7 @@ var allcountries = [
 		'x': 47.85,
 		'y': 26.01,
 		'w': 0.8,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'The Netherlands',
 		'dir': direurope,
@@ -256,11 +247,7 @@ var allcountries = [
 		'x': 52.18, 
 		'y': 22.82,
 		'w': 3,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Hungary',
 		'dir': direurope,
@@ -320,11 +307,7 @@ var allcountries = [
 		'x': 52.135, 
 		'y': 25.95,
 		'w': 2,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Albania',
 		'dir': direurope,
@@ -334,9 +317,7 @@ var allcountries = [
 		'y': 26.78,
 		'w': 2,
 		'unique': [
-			'John Belushi',
-			'', 
-			'' //FIXME
+			'John Belushi'
 		]		
 	},
 	{	'name': 'Macedonia',
@@ -346,11 +327,7 @@ var allcountries = [
 		'x': 52.75, 
 		'y': 26.53,
 		'w': 3,
-		'unique': [
-			'',
-			'', 
-			'' //FIXME
-		]		
+		'unique': []		
 	},
 	{	'name': 'Greece',
 		'dir': direurope,
@@ -398,11 +375,7 @@ var allcountries = [
 		'x': 54.22, 
 		'y': 23.7,
 		'w': 3,
-		'unique': [
-			'',
-			'', //FIXME
-			'' 
-		]		
+		'unique': []		
 	},
 	{	'name': 'Ukraine',
 		'dir': direurope,
@@ -427,7 +400,6 @@ var allcountries = [
 		'unique': [
 			'minsk computers',
 			'draniki',
-			'' //FIXME
 		]		
 	},
 	{	'name': 'Lithuania',
@@ -437,11 +409,7 @@ var allcountries = [
 		'x': 52.99, 
 		'y': 19.5,
 		'w': 5,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Latvia',
 		'dir': direurope,
@@ -450,11 +418,7 @@ var allcountries = [
 		'x': 53.13, 
 		'y': 18.64,
 		'w': 3,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Estonia',
 		'dir': direurope,
@@ -464,8 +428,6 @@ var allcountries = [
 		'y': 17.78,
 		'w': 4,
 		'unique': [
-			'',
-			'', //FIXME
 			'Skype'
 		]		
 	},
@@ -491,11 +453,7 @@ var allcountries = [
 		'y': 23.21,
 		'w': 130,
 		'h': 40,
-		'unique': [
-			'',
-			'',
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Finland',
 		'dir': direurope,
@@ -558,11 +516,7 @@ var allcountries = [
 		'x': 55.7, 
 		'y': 30.1,
 		'w': 2,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Armenia',
 		'dir': direurope,
@@ -571,11 +525,7 @@ var allcountries = [
 		'x': 58.45, 
 		'y': 27.36,
 		'w': 4,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Azerbaijan',
 		'dir': dirasia,
@@ -584,11 +534,7 @@ var allcountries = [
 		'x': 59.09, 
 		'y': 27.31,
 		'w': 2,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Georgia',
 		'dir': direurope,
@@ -597,11 +543,7 @@ var allcountries = [
 		'x': 57.98, 
 		'y': 26.15,
 		'w': 2,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Syria',
 		'dir': dirasia,
@@ -612,8 +554,6 @@ var allcountries = [
 		'w': 8,
 		'unique': [
 			'Steve Jobs',
-			'', //FIXME
-			''
 		]		
 	},
 	{	'name': 'Lebanon',
@@ -625,8 +565,6 @@ var allcountries = [
 		'w': 2,
 		'unique': [
 			'Samir Sammoun',
-			'', //FIXME
-			''
 		]		
 	},
 	{	'name': 'Israel',
@@ -638,9 +576,8 @@ var allcountries = [
 		'w': 2,
 		'h': 12,
 		'unique': [
-			'',
-			'', //FIXME
-			''
+			'emergency bandages',
+			'the epilator'
 		]		
 	},
 	{	'name': 'Palestine',
@@ -651,11 +588,7 @@ var allcountries = [
 		'y': 31.7,
 		'w': 0.9,
 		'h': 5,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Jordan',
 		'dir': dirasia,
@@ -664,11 +597,7 @@ var allcountries = [
 		'x': 56.79, 
 		'y': 32.04,
 		'w': 5,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Iraq',
 		'dir': dirasia,
@@ -677,11 +606,7 @@ var allcountries = [
 		'x': 58.47, 
 		'y': 31.01,
 		'w': 8,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Saudi Arabia',
 		'dir': dirasia,
@@ -690,11 +615,7 @@ var allcountries = [
 		'x': 59.1, 
 		'y': 35.79,
 		'w': 22,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Kuwait',
 		'dir': dirasia,
@@ -703,11 +624,7 @@ var allcountries = [
 		'x': 59.46, 
 		'y': 33.1,
 		'w': 2,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Qatar',
 		'dir': dirasia,
@@ -716,11 +633,7 @@ var allcountries = [
 		'x': 60.49, 
 		'y': 35.25,
 		'w': 2,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'United Arab Emirates',
 		'dir': dirasia,
@@ -729,11 +642,7 @@ var allcountries = [
 		'x': 61.26, 
 		'y': 35.719,
 		'w': 7,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Oman',
 		'dir': dirasia,
@@ -742,11 +651,7 @@ var allcountries = [
 		'x': 61.87, 
 		'y': 37.23,
 		'w': 8,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Yemen',
 		'dir': dirasia,
@@ -755,11 +660,7 @@ var allcountries = [
 		'x': 60.09, 
 		'y': 40.38,
 		'w': 13,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},	
 	{	'name': 'Egypt',
 		'dir': dirafrica,
@@ -769,9 +670,9 @@ var allcountries = [
 		'y': 34.55,
 		'w': 18,
 		'unique': [
-			'',
-			'', //FIXME
-			''
+			'board games',
+			'bowling',
+			'paper'
 		]		
 	},		
 	{	'name': 'Libya',
@@ -781,11 +682,7 @@ var allcountries = [
 		'x': 51.89, 
 		'y': 34.71,
 		'w': 22,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},	
 	{	'name': 'Tunisia',
 		'dir': dirafrica,
@@ -794,11 +691,7 @@ var allcountries = [
 		'x': 49.83, 
 		'y': 30.75,
 		'w': 8,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},			
 	{	'name': 'Algeria',
 		'dir': dirafrica,
@@ -807,11 +700,7 @@ var allcountries = [
 		'x': 47.92, 
 		'y': 33.8,
 		'w': 24,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},			
 	{	'name': 'Morocco',
 		'dir': dirafrica,
@@ -820,11 +709,7 @@ var allcountries = [
 		'x': 45.64, 
 		'y': 31.83,
 		'w': 13,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},		
 	{	'name': 'Western Sahara',
 		'dir': dirafrica,
@@ -833,11 +718,7 @@ var allcountries = [
 		'x': 44.08, 
 		'y': 35.85,
 		'w': 7,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},	
 	{	'name': 'Mauritania',
 		'dir': dirafrica,
@@ -846,11 +727,7 @@ var allcountries = [
 		'x': 44.6, 
 		'y': 37.54,
 		'w': 10,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},		
 	{	'name': 'Mali',
 		'dir': dirafrica,
@@ -859,11 +736,7 @@ var allcountries = [
 		'x': 46.38, 
 		'y': 39.38,
 		'w': 15,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},		
 	{	'name': 'Senegal',
 		'dir': dirafrica,
@@ -872,11 +745,7 @@ var allcountries = [
 		'x': 43.57, 
 		'y': 41.02,
 		'w': 3,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'The Gambia',
 		'dir': dirafrica,
@@ -885,11 +754,7 @@ var allcountries = [
 		'x': 43.32, 
 		'y': 41.6,
 		'w': 2,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},	
 	{	'name': 'Guinea-Bissau',
 		'dir': dirafrica,
@@ -898,11 +763,7 @@ var allcountries = [
 		'x': 43.345, 
 		'y': 42.46,
 		'w': 2,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},	
 	{	'name': 'Guinea',
 		'dir': dirafrica,
@@ -911,11 +772,7 @@ var allcountries = [
 		'x': 44.37, 
 		'y': 43.45,
 		'w': 4,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},		
 	{	'name': 'Sierra Leone',
 		'dir': dirafrica,
@@ -924,11 +781,7 @@ var allcountries = [
 		'x': 44.22, 
 		'y': 44.235,
 		'w': 3,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},		
 	{	'name': 'Liberia',
 		'dir': dirafrica,
@@ -937,11 +790,7 @@ var allcountries = [
 		'x': 44.84, 
 		'y': 45.3,
 		'w': 4,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},		
 	{	'name': 'Cote d\'Ivoire',
 		'dir': dirafrica,
@@ -950,11 +799,7 @@ var allcountries = [
 		'x': 45.875, 
 		'y': 44.71,
 		'w': 10,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},			
 	{	'name': 'Burkina Faso',
 		'dir': dirafrica,
@@ -963,11 +808,7 @@ var allcountries = [
 		'x': 46.94, 
 		'y': 42.22,
 		'w': 10,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},	
 	{	'name': 'Ghana',
 		'dir': dirafrica,
@@ -976,11 +817,7 @@ var allcountries = [
 		'x': 47.06, 
 		'y': 44.52,
 		'w': 5,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},		
 	{	'name': 'Togo',
 		'dir': dirafrica,
@@ -989,11 +826,7 @@ var allcountries = [
 		'x': 47.54, 
 		'y': 44.16,
 		'w': 2,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},		
 	{	'name': 'Benin',
 		'dir': dirafrica,
@@ -1002,11 +835,7 @@ var allcountries = [
 		'x': 47.94, 
 		'y': 43.79,
 		'w': 4,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},		
 	{	'name': 'Niger',
 		'dir': dirafrica,
@@ -1015,11 +844,7 @@ var allcountries = [
 		'x': 49.52, 
 		'y': 39.38,
 		'w': 20,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},		
 	{	'name': 'Nigeria',
 		'dir': dirafrica,
@@ -1028,11 +853,7 @@ var allcountries = [
 		'x': 49.66, 
 		'y': 43.9,
 		'w': 10,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},		
 	{	'name': 'Chad',
 		'dir': dirafrica,
@@ -1041,11 +862,7 @@ var allcountries = [
 		'x': 52.29, 
 		'y': 40.5,
 		'w': 18,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},		
 	{	'name': 'Sudan',
 		'dir': dirafrica,
@@ -1054,11 +871,7 @@ var allcountries = [
 		'x': 55.32, 
 		'y': 40.1,
 		'w': 24,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},		
 	{	'name': 'Eritrea',
 		'dir': dirafrica,
@@ -1067,11 +880,7 @@ var allcountries = [
 		'x': 57.79, 
 		'y': 40.66,
 		'w': 6,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},		
 	{	'name': 'Djibouti',
 		'dir': dirafrica,
@@ -1080,11 +889,7 @@ var allcountries = [
 		'x': 58.52, 
 		'y': 42.46,
 		'w': 3,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},		
 	{	'name': 'Ethiopia',
 		'dir': dirafrica,
@@ -1093,11 +898,7 @@ var allcountries = [
 		'x': 58.075, 
 		'y': 43.89,
 		'w': 10,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},		
 	{	'name': 'Somalia',
 		'dir': dirafrica,
@@ -1106,11 +907,7 @@ var allcountries = [
 		'x': 59.555, 
 		'y': 46.03,
 		'w': 10,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},		
 	{	'name': 'South Sudan',
 		'dir': dirafrica,
@@ -1119,11 +916,7 @@ var allcountries = [
 		'x': 55.21, 
 		'y': 44.53,
 		'w': 14,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},	
 	
 	{	'name': 'Central Africa Republic',
@@ -1133,11 +926,7 @@ var allcountries = [
 		'x': 52.91, 
 		'y': 45.23,
 		'w': 12,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Cameroon',
 		'dir': dirafrica,
@@ -1147,11 +936,7 @@ var allcountries = [
 		'y': 44.82,
 		'w': 10,
 		'h': 40,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Equatorial Guinea',
 		'dir': dirafrica,
@@ -1160,11 +945,7 @@ var allcountries = [
 		'x': 49.92, 
 		'y': 47.47,
 		'w': 5,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Gabon',
 		'dir': dirafrica,
@@ -1173,11 +954,7 @@ var allcountries = [
 		'x': 50.412, 
 		'y': 49.16,
 		'w': 8,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Republic of the Congo',
 		'dir': dirafrica,
@@ -1186,11 +963,7 @@ var allcountries = [
 		'x': 51.28, 
 		'y': 49.1,
 		'w': 6,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Democratic Republic of the Congo',
 		'dir': dirafrica,
@@ -1199,11 +972,7 @@ var allcountries = [
 		'x': 53.18, 
 		'y': 50.9,
 		'w': 20,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Uganda',
 		'dir': dirafrica,
@@ -1212,11 +981,7 @@ var allcountries = [
 		'x': 55.875, 
 		'y': 48,
 		'w': 8,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Kenya',
 		'dir': dirafrica,
@@ -1225,11 +990,7 @@ var allcountries = [
 		'x': 57.38, 
 		'y': 48.77,
 		'w': 12,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Rwanda',
 		'dir': dirafrica,
@@ -1238,11 +999,7 @@ var allcountries = [
 		'x': 55.2, 
 		'y': 49.79,
 		'w': 2,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Burundi',
 		'dir': dirafrica,
@@ -1251,11 +1008,7 @@ var allcountries = [
 		'x': 55.22, 
 		'y': 50.57,
 		'w': 3,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Tanzania',
 		'dir': dirafrica,
@@ -1264,11 +1017,7 @@ var allcountries = [
 		'x': 56.6, 
 		'y': 52.14,
 		'w': 15,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Zambia',
 		'dir': dirafrica,
@@ -1277,11 +1026,7 @@ var allcountries = [
 		'x': 54.7, 
 		'y': 55.73,
 		'w': 14,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Angola',
 		'dir': dirafrica,
@@ -1290,11 +1035,7 @@ var allcountries = [
 		'x': 52.1, 
 		'y': 54.7,
 		'w': 18,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Namibia',
 		'dir': dirafrica,
@@ -1303,11 +1044,7 @@ var allcountries = [
 		'x': 52.24, 
 		'y': 60.94,
 		'w': 14,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Botswana',
 		'dir': dirafrica,
@@ -1316,11 +1053,7 @@ var allcountries = [
 		'x': 53.79, 
 		'y': 60.62,
 		'w': 12,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Zimbabwe',
 		'dir': dirafrica,
@@ -1329,11 +1062,7 @@ var allcountries = [
 		'x': 54.98, 
 		'y': 58.87,
 		'w': 10,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Malawi',
 		'dir': dirafrica,
@@ -1342,11 +1071,7 @@ var allcountries = [
 		'x': 56.33, 
 		'y': 55.79,
 		'w': 4,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Mozambique',
 		'dir': dirafrica,
@@ -1355,11 +1080,7 @@ var allcountries = [
 		'x': 56.69, 
 		'y': 58.69,
 		'w': 16,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Madagascar',
 		'dir': dirafrica,
@@ -1368,11 +1089,7 @@ var allcountries = [
 		'x': 59.6, 
 		'y': 58.69,
 		'w': 14,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'South Africa',
 		'dir': dirafrica,
@@ -1382,9 +1099,8 @@ var allcountries = [
 		'y': 63.89,
 		'w': 17,
 		'unique': [
-			'',
-			'', //FIXME
-			''
+			'the vuvuzela',
+			'Hertzog cookies'
 		]		
 	},
 	{	'name': 'Turkmenistan',
@@ -1394,11 +1110,7 @@ var allcountries = [
 		'x': 62.1, 
 		'y': 27.95,
 		'w': 12,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Iran',
 		'dir': dirasia,
@@ -1408,9 +1120,8 @@ var allcountries = [
 		'y': 31.43,
 		'w': 20,
 		'unique': [
-			'',
-			'', //FIXME
-			''
+			'gas lasers',
+			'polo'
 		]		
 	},
 	{	'name': 'Uzbekistan',
@@ -1420,11 +1131,7 @@ var allcountries = [
 		'x': 63.11, 
 		'y': 26.67,
 		'w': 8,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Kyrgyzstan',
 		'dir': dirasia,
@@ -1433,11 +1140,7 @@ var allcountries = [
 		'x': 65.65, 
 		'y': 26.73,
 		'w': 6,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Tajikistan',
 		'dir': dirasia,
@@ -1446,11 +1149,7 @@ var allcountries = [
 		'x': 64.99, 
 		'y': 27.97,
 		'w': 8,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Afghanistan',
 		'dir': dirasia,
@@ -1459,11 +1158,7 @@ var allcountries = [
 		'x': 64.32, 
 		'y': 30.62,
 		'w': 10,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Pakistan',
 		'dir': dirasia,
@@ -1472,11 +1167,7 @@ var allcountries = [
 		'x': 64.91, 
 		'y': 32.51,
 		'w': 10,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'India',
 		'dir': dirasia,
@@ -1486,9 +1177,9 @@ var allcountries = [
 		'y': 37.45,
 		'w': 24,
 		'unique': [
-			'',
-			'', //FIXME
-			''
+			'chess',
+			'shampoo',
+			'yoga'
 		]		
 	},
 	{	'name': 'Sri Lanka',
@@ -1498,11 +1189,7 @@ var allcountries = [
 		'x': 68.6, 
 		'y': 44.5,
 		'w': 5,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Nepal',
 		'dir': dirasia,
@@ -1511,11 +1198,7 @@ var allcountries = [
 		'x': 68.9, 
 		'y': 33.57,
 		'w': 5,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'China',
 		'dir': dirasia,
@@ -1526,9 +1209,9 @@ var allcountries = [
 		'w': 140,
 		'h': 50,
 		'unique': [
-			'',
-			'', //FIXME
-			''
+			'nail polish',
+			'the compass',
+			'gift wrapping'
 		]		
 	},
 	{	'name': 'Mongolia',
@@ -1539,11 +1222,7 @@ var allcountries = [
 		'y': 23.8,
 		'w': 100,
 		'h': 30,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Bhutan',
 		'dir': dirasia,
@@ -1552,11 +1231,7 @@ var allcountries = [
 		'x': 70.51, 
 		'y': 34.06,
 		'w': 6,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Bangladesh',
 		'dir': dirasia,
@@ -1565,11 +1240,7 @@ var allcountries = [
 		'x': 70.68, 
 		'y': 36.09,
 		'w': 8,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Myanmar',
 		'dir': dirasia,
@@ -1579,11 +1250,7 @@ var allcountries = [
 		'y': 38.42,
 		'w': 15,
 		'h': 60,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Thailand',
 		'dir': dirasia,
@@ -1593,11 +1260,7 @@ var allcountries = [
 		'y': 41.71,
 		'w': 10,
 		'h': 60,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Laos',
 		'dir': dirasia,
@@ -1607,11 +1270,7 @@ var allcountries = [
 		'y': 38.95,
 		'w': 8,
 		'h': 30,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Vietnam',
 		'dir': dirasia,
@@ -1622,9 +1281,7 @@ var allcountries = [
 		'w': 6,
 		'h': 25,
 		'unique': [
-			'',
-			'', //FIXME
-			''
+			'phong shading'
 		]		
 	},
 	{	'name': 'Cambodia',
@@ -1634,11 +1291,7 @@ var allcountries = [
 		'x': 74.86, 
 		'y': 42.07,
 		'w': 4,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Taiwan',
 		'dir': dirasia,
@@ -1647,11 +1300,7 @@ var allcountries = [
 		'x': 78.1, 
 		'y': 36.5,
 		'w': 4,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'North Korea',
 		'dir': dirasia,
@@ -1660,11 +1309,7 @@ var allcountries = [
 		'x': 78.38, 
 		'y': 27.25,
 		'w': 9,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'South Korea',
 		'dir': dirasia,
@@ -1674,9 +1319,7 @@ var allcountries = [
 		'y': 29.6,
 		'w': 9,
 		'unique': [
-			'',
-			'', //FIXME
-			''
+			'internet cafes'
 		]		
 	},
 	{	'name': 'Japan',
@@ -1687,9 +1330,9 @@ var allcountries = [
 		'y': 30.1,
 		'w': 18,
 		'unique': [
-			'',
-			'', //FIXME
-			''
+			'anime',
+			'emojis',
+			'flash memory'
 		]		
 	},
 	{	'name': 'Malaysia',
@@ -1700,11 +1343,7 @@ var allcountries = [
 		'y': 46.48,
 		'w': 70,
 		'h': 20,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Philippines',
 		'dir': dirasia,
@@ -1714,11 +1353,7 @@ var allcountries = [
 		'y': 42,
 		'w': 23,
 		'h': 58,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Indonesia',
 		'dir': dirasia,
@@ -1728,11 +1363,7 @@ var allcountries = [
 		'y': 50,
 		'w': 170,
 		'h': 40,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Papua New Guinea',
 		'dir': diroceania,
@@ -1742,11 +1373,7 @@ var allcountries = [
 		'y': 52.12,
 		'w': 60,
 		'h': 40,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Australia',
 		'dir': diroceania,
@@ -1756,9 +1383,9 @@ var allcountries = [
 		'y': 62.9,
 		'w': 60,
 		'unique': [
-			'',
-			'', //FIXME
-			''
+			'the electric drill',
+			'vegemite',
+			'wi-fi'
 		]		
 	},
 	{	'name': 'New Zealand',
@@ -1769,9 +1396,7 @@ var allcountries = [
 		'y': 71.5,
 		'w': 16,
 		'unique': [
-			'',
-			'', //FIXME
-			''
+			'instant coffee'
 		]		
 	},
 	{	'name': 'Greenland',
@@ -1781,11 +1406,7 @@ var allcountries = [
 		'x': 41, 
 		'y': 11.5,
 		'w': 40,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Canada',
 		'dir': dirnamerica,
@@ -1796,9 +1417,9 @@ var allcountries = [
 		'w': 210,
 		'h': 90,
 		'unique': [
-			'',
-			'', //FIXME
-			''
+			'ice hockey',
+			'IMAX',
+			'peanut butter'
 		]		
 	},
 	{	'name': 'United States (mainland)',
@@ -1810,9 +1431,9 @@ var allcountries = [
 		'w': 180,
 		'h': 60,
 		'unique': [
-			'',
-			'', //FIXME
-			''
+			'breakfast cereal',
+			'the microwave oven',
+			'the Internet'
 		]		
 	},
 	{	'name': 'United States (Alaska)',
@@ -1822,11 +1443,7 @@ var allcountries = [
 		'x': 15.39, 
 		'y': 15.47,
 		'w': 30,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'United States (Hawaii)',
 		'dir': dirnamerica,
@@ -1835,11 +1452,7 @@ var allcountries = [
 		'x': 4.5, 
 		'y': 38.5,
 		'w': 6,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Mexico',
 		'dir': dirnamerica,
@@ -1848,11 +1461,7 @@ var allcountries = [
 		'x': 20.05, 
 		'y': 35.73,
 		'w': 25,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Guatemala',
 		'dir': dirnamerica,
@@ -1861,11 +1470,7 @@ var allcountries = [
 		'x': 22.53, 
 		'y': 39.9,
 		'w': 7,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Honduras',
 		'dir': dirnamerica,
@@ -1874,11 +1479,7 @@ var allcountries = [
 		'x': 23.56, 
 		'y': 40.49,
 		'w': 5,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'El Salvador',
 		'dir': dirnamerica,
@@ -1887,11 +1488,7 @@ var allcountries = [
 		'x': 22.81, 
 		'y': 40.98,
 		'w': 3,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Belize',
 		'dir': dirnamerica,
@@ -1900,11 +1497,7 @@ var allcountries = [
 		'x': 23.02, 
 		'y': 39.15,
 		'w': 3,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Nicaragua',
 		'dir': dirnamerica,
@@ -1913,11 +1506,7 @@ var allcountries = [
 		'x': 23.75, 
 		'y': 41.48,
 		'w': 4,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Costa Rica',
 		'dir': dirnamerica,
@@ -1926,11 +1515,7 @@ var allcountries = [
 		'x': 23.94, 
 		'y': 43.22,
 		'w': 5,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Panama',
 		'dir': dirnamerica,
@@ -1939,11 +1524,7 @@ var allcountries = [
 		'x': 25.01, 
 		'y': 43.88,
 		'w': 5,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Cuba',
 		'dir': dirnamerica,
@@ -1953,11 +1534,7 @@ var allcountries = [
 		'y': 36.8,
 		'w': 30,
 		'h': 6,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'The Bahamas',
 		'dir': dirnamerica,
@@ -1966,11 +1543,7 @@ var allcountries = [
 		'x': 27, 
 		'y': 35.6,
 		'w': 8,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Jamaica',
 		'dir': dirnamerica,
@@ -1979,11 +1552,7 @@ var allcountries = [
 		'x': 26.5, 
 		'y': 38.5,
 		'w': 3,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Haiti',
 		'dir': dirnamerica,
@@ -1992,11 +1561,7 @@ var allcountries = [
 		'x': 27.6, 
 		'y': 38,
 		'w': 4,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Dominican Republic',
 		'dir': dirnamerica,
@@ -2005,11 +1570,7 @@ var allcountries = [
 		'x': 28.35, 
 		'y': 38.16,
 		'w': 6,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Puerto Rico',
 		'dir': dirnamerica,
@@ -2018,11 +1579,7 @@ var allcountries = [
 		'x': 29.3, 
 		'y': 38.3,
 		'w': 2,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Colombia',
 		'dir': dirsamerica,
@@ -2031,11 +1588,7 @@ var allcountries = [
 		'x': 26.875, 
 		'y': 46.18,
 		'w': 16,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Venezuela',
 		'dir': dirsamerica,
@@ -2044,11 +1597,7 @@ var allcountries = [
 		'x': 28.63, 
 		'y': 44.94,
 		'w': 14,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Guyana',
 		'dir': dirsamerica,
@@ -2058,11 +1607,7 @@ var allcountries = [
 		'y': 45.76,
 		'w': 10,
 		'h': 20,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Suriname',
 		'dir': dirsamerica,
@@ -2071,11 +1616,7 @@ var allcountries = [
 		'x': 31.325, 
 		'y': 46.25,
 		'w': 6,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'French Guiana',
 		'dir': dirsamerica,
@@ -2084,11 +1625,7 @@ var allcountries = [
 		'x': 32.07, 
 		'y': 46.25,
 		'w': 6,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Ecuador',
 		'dir': dirsamerica,
@@ -2097,11 +1634,7 @@ var allcountries = [
 		'x': 25.46, 
 		'y': 49.3,
 		'w': 8,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Peru',
 		'dir': dirsamerica,
@@ -2111,11 +1644,7 @@ var allcountries = [
 		'y': 53.25,
 		'w': 30,
 		'h': 55,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Brazil',
 		'dir': dirsamerica,
@@ -2125,11 +1654,7 @@ var allcountries = [
 		'y': 55.92,
 		'w': 40,
 		'h': 60,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Bolivia',
 		'dir': dirsamerica,
@@ -2138,11 +1663,7 @@ var allcountries = [
 		'x': 29.54, 
 		'y': 57.02,
 		'w': 16,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Paraguay',
 		'dir': dirsamerica,
@@ -2151,11 +1672,7 @@ var allcountries = [
 		'x': 31.095, 
 		'y': 60.8,
 		'w': 10,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Argentina',
 		'dir': dirsamerica,
@@ -2165,11 +1682,7 @@ var allcountries = [
 		'y': 68.665,
 		'w': 30,
 		'h': 120,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'Uruguay',
 		'dir': dirsamerica,
@@ -2179,9 +1692,8 @@ var allcountries = [
 		'y': 65.63,
 		'w': 9,
 		'unique': [
-			'',
-			'', //FIXME
-			''
+			'canasta',
+			'the chivito',
 		]		
 	},
 	{	'name': 'Chile',
@@ -2192,11 +1704,7 @@ var allcountries = [
 		'y': 67.75,
 		'w': 10,
 		'h': 120,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
 	{	'name': 'UK (Falkland Islands)',
 		'dir': dirsamerica,
@@ -2205,22 +1713,11 @@ var allcountries = [
 		'x': 33, 
 		'y': 76,
 		'w': 3,
-		'unique': [
-			'',
-			'', //FIXME
-			''
-		]		
+		'unique': []		
 	},
-
-	
-	
-	
-	
-	
-
-
 ];
 var temp = [
+
 	
 ];
 
