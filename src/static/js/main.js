@@ -30,7 +30,7 @@ var www = {
 	enemies: [],
 	chosen: 0, //the country chosen by the player
 	timer: 0,
-	scaleFactor: 4, //how big to draw everything. Game should normally be twice width/height of canvas, scale of 0.5 will fit everything in
+	scaleFactor: 0.5, //how big to draw everything. Game should normally be twice width/height of canvas, scale of 0.5 will fit everything in
 	debug: 1,
 	
 	general: {
@@ -104,7 +104,7 @@ var www = {
 			};					
 			www.mycountry = www.general.createPlayer(www.chosen,'player',www.playerhealth);			
 			www.general.createEnemies();		
-
+/*
 			//recentre the canvas onto the player
 			var translate = {
 				x: www.mycountry.position.x - (www.w / 2),
@@ -118,7 +118,7 @@ var www = {
 				};
 			}
 			www.Bounds.translate(www.render.bounds, translate);			
-	
+*/	
 			www.general.drawBoundary();
 			www.general.createMatterEvents();			
 			
@@ -155,7 +155,7 @@ var www = {
 		
 		//set size of canvas
 		setCanvasSize: function(){
-			console.log('setting canvas size');
+			//console.log('setting canvas size');
 			var targetw = www.parentel.offsetWidth;
 			var targeth = www.parentel.offsetHeight;
 			//account for padding within the parent element
@@ -482,7 +482,7 @@ var www = {
 		
 		//once the player has been chosen, create the rest of the countries
 		createEnemies: function(){
-			console.log('Found',allcountries.length,'countries. There should be 196.');
+			//console.log('Found',allcountries.length,'countries. There should be 196.');
 			for(var i = 0; i < allcountries.length; i++){
 				if(i !== www.chosen){
 					var enemy = www.general.createPlayer(i,'enemy',www.enemyhealth);

@@ -41,57 +41,7 @@ const gulp = require('gulp'),
 				'Explorer >= 11',
 				'Last 2 Edge Versions',
 				'Firefox >= 25'
-			]}),
-			// Get data from JSON for the File Generation
-			filevalues = require('./src/static/assets/_file_data.json');
-	
-// FILE GENERATOR ***********************************
-
-	// Get the template file to work with using fs module from _file_template.html
-	var filecontent = fs.readFileSync(paths.assets.src + '_file_template.html', 'utf8');	
-	//Results from the generateFile function sending the number of objects and the template contents
-	var filevariables = generateFile(filevalues.length, filecontent);
-	
-	// Creates the number of files, name of files and execute the generateFile function
-	function createFile(filename, filevariables) {
-		var src = require('stream').Readable({ objectMode: true })
-		src._read =  function() {
-			for(var f = 0; f < filevariables.length; f++){
-				this.push(new $.util.File({ cwd: '', base: '', path: filename.replace('_file_template', filevalues[f].fileName), contents: new 	Buffer(filevariables[f]) }));
-			}
-		  this.push(null);
-		}
-		return src;
-	}
-	
-	// Create the file content in the form of an array. In this case we take the string from an Array of objects 
-	function generateFile(numfiles, filecontent) {
-		var output = [];
-		// Iterate thought the Array
-		for(var i = 0; i < numfiles; i++){
-			var data = filevalues[i];
-			var thisfile = filecontent;
-			// Iterate thought the Objects in the array
-			for(var key in data){
-				// RegExp to replace {{ items }} with the objects values
-			  var regex = new RegExp('{{'+ key +'}}', 'g');
-			 	thisfile =  thisfile.replace(regex, data[key]);
-			}	
-			output.push(thisfile);			
-		}		
-		return output;	
-	}
-
-	// Clean directory
-	gulp.task('cleanFiles', () => $.del.sync(paths.assets.src + 'files/*'));
-	
-	// Invoke the task to generate files
-	gulp.task('generateFiles', ['cleanFiles'], () => {
-		return createFile('_file_template.html', filevariables)
-		.pipe(gulp.dest(paths.assets.src + 'files/'))
-	});
-
-// End FILE GENERATOR ********************************
+			]});
 
 // CSS - LESS 
 gulp.task('styles', () => {
@@ -114,7 +64,6 @@ gulp.task('styles', () => {
   	}))
   	.pipe($.rename({suffix: '.min'}))
   	.pipe($.cssnano())
-  	//.pipe($.sourcemaps.write('./_maps'))
   	.pipe(gulp.dest(paths.styles.dest))
   	.pipe(browserSync.stream({match: '*.css'}));
 });
@@ -138,9 +87,9 @@ gulp.task('scripts', () => {
     .pipe($.concat('main.js'))
     .pipe($.bytediff.start())
     .pipe($.rename({suffix: '.min'}))
-    //.pipe($.babel({presets: ['es2015']}))
+    .pipe($.babel({presets: ['es2015']}))
     //.pipe($.ngAnnotate())
-    //.pipe($.uglify())
+    .pipe($.uglify())
     .pipe($.bytediff.stop())
     .pipe(gulp.dest(paths.scripts.dest))
     .pipe(browserSync.stream());

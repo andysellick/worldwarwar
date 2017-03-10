@@ -11,9 +11,9 @@ var dirsamerica = 'samerica/';
 //previous map images from https://www.amcharts.com/svg-maps/
 //previous map images from https://github.com/djaiss/mapsicon
 var allcountries = [
-	{	'name': 'Britain',
+	{	'name': 'United Kingdom',
 		'dir': direurope,
-		'sprite': 'britain.svg',
+		'sprite': 'unitedkingdom.svg',
 		'xScale': 0.11, //apparently yScale is not needed
 		'yScale': 0.2,
 		//x and y pos are stored as percentages
@@ -633,9 +633,24 @@ var allcountries = [
 		'dir': dirasia,
 		'sprite': 'israel.svg',
 		'xScale': 0.11, 
-		'x': 56.2, 
+		'x': 56.19, 
 		'y': 31.98,
-		'w': 3,
+		'w': 2,
+		'h': 12,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Palestine',
+		'dir': dirasia,
+		'sprite': 'palestine.svg',
+		'xScale': 0.11, 
+		'x': 56.3, 
+		'y': 31.7,
+		'w': 0.9,
+		'h': 5,
 		'unique': [
 			'',
 			'', //FIXME
@@ -1476,6 +1491,19 @@ var allcountries = [
 			''
 		]		
 	},
+	{	'name': 'Sri Lanka',
+		'dir': dirasia,
+		'sprite': 'srilanka.svg',
+		'xScale': 0.11, 
+		'x': 68.6, 
+		'y': 44.5,
+		'w': 5,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
 	{	'name': 'Nepal',
 		'dir': dirasia,
 		'sprite': 'nepal.svg',
@@ -1672,6 +1700,20 @@ var allcountries = [
 		'y': 46.48,
 		'w': 70,
 		'h': 20,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Philippines',
+		'dir': dirasia,
+		'sprite': 'philippines.svg',
+		'xScale': 0.11, 
+		'x': 79.4, 
+		'y': 42,
+		'w': 23,
+		'h': 58,
 		'unique': [
 			'',
 			'', //FIXME
@@ -2008,7 +2050,169 @@ var allcountries = [
 			''
 		]		
 	},
+	{	'name': 'Guyana',
+		'dir': dirsamerica,
+		'sprite': 'guyana.svg',
+		'xScale': 0.11, 
+		'x': 30.52, 
+		'y': 45.76,
+		'w': 10,
+		'h': 20,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Suriname',
+		'dir': dirsamerica,
+		'sprite': 'suriname.svg',
+		'xScale': 0.11, 
+		'x': 31.325, 
+		'y': 46.25,
+		'w': 6,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'French Guiana',
+		'dir': dirsamerica,
+		'sprite': 'frenchguiana.svg',
+		'xScale': 0.11, 
+		'x': 32.07, 
+		'y': 46.25,
+		'w': 6,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Ecuador',
+		'dir': dirsamerica,
+		'sprite': 'ecuador.svg',
+		'xScale': 0.11, 
+		'x': 25.46, 
+		'y': 49.3,
+		'w': 8,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Peru',
+		'dir': dirsamerica,
+		'sprite': 'peru.svg',
+		'xScale': 0.11, 
+		'x': 26.335, 
+		'y': 53.25,
+		'w': 30,
+		'h': 55,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Brazil',
+		'dir': dirsamerica,
+		'sprite': 'brazil.svg',
+		'xScale': 0.11, 
+		'x': 31.735, 
+		'y': 55.92,
+		'w': 40,
+		'h': 60,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Bolivia',
+		'dir': dirsamerica,
+		'sprite': 'bolivia.svg',
+		'xScale': 0.11, 
+		'x': 29.54, 
+		'y': 57.02,
+		'w': 16,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Paraguay',
+		'dir': dirsamerica,
+		'sprite': 'paraguay.svg',
+		'xScale': 0.11, 
+		'x': 31.095, 
+		'y': 60.8,
+		'w': 10,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Argentina',
+		'dir': dirsamerica,
+		'sprite': 'argentina.svg',
+		'xScale': 0.11, 
+		'x': 30.37, 
+		'y': 68.665,
+		'w': 30,
+		'h': 120,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Uruguay',
+		'dir': dirsamerica,
+		'sprite': 'uruguay.svg',
+		'xScale': 0.11, 
+		'x': 32.2, 
+		'y': 65.63,
+		'w': 9,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'Chile',
+		'dir': dirsamerica,
+		'sprite': 'chile.svg',
+		'xScale': 0.11, 
+		'x': 28.87, 
+		'y': 67.75,
+		'w': 10,
+		'h': 120,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
+	{	'name': 'UK (Falkland Islands)',
+		'dir': dirsamerica,
+		'sprite': 'falklandislands.svg',
+		'xScale': 0.11, 
+		'x': 33, 
+		'y': 76,
+		'w': 3,
+		'unique': [
+			'',
+			'', //FIXME
+			''
+		]		
+	},
 
+	
 	
 	
 	
@@ -2038,6 +2242,46 @@ there are a LOT of countries
 potentially provocative - should Palestine be in here?
 fascinating learning experience - didn't even know benin existed, central african republic
 azerbaijan is hugging armenia
-had to break the US into chunks. Noone else was this unhelpful. Thanks, US.
-Too small to include (probably): Malta, Liechtenstein, Monaco, San Marino (is this a country inside Italy??), Vatican City, Lesotho (literally inside SA), Swaziland, Fiji, Kiribati, Marshall Islands, Micronesia, Nauru, Palau, Samoa, Solomon Islands, Tonga, Tuvalu, Vanatu, Barbados, Dominica, Antigua and Barbuda,
+had to break the US into 3 chunks. Noone else was this unhelpful. Thanks, US.
+so minus 2 countries from total
+also minus greenland, which belongs to denmark
+Too small to include (probably): (37 countries)
+Malta
+Kosovo (inside serbia)
+Liechtenstein
+Monaco
+San Marino (is this a country inside Italy??)
+Vatican City
+Bahrain
+Singapore
+Timor-Leste
+Brunei
+Maldives
+Cape Verde
+Comoros
+Mauritius
+Sau Tome and Principe
+Seychelles
+Lesotho (literally inside SA)
+Swaziland
+Fiji
+Kiribati
+Marshall Islands
+Micronesia
+Nauru
+Palau
+Samoa
+Solomon Islands
+Tonga
+Tuvalu
+Vanatu
+Barbados
+Dominica
+Antigua and Barbuda
+Grenada
+Saint Kitts and Nevis
+Saint Lucia
+Saint Vincent and the Grenadines
+Trinidad and Tobago
+
 */
