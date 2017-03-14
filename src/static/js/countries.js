@@ -119,8 +119,8 @@ var allcountries = [
 		'y': 21.045,
 		'w': 4,
 		'unique': [
-			'the electrocardiograph',
 			'the microscope',
+			'Fierljeppen',
 			'Python'
 		]		
 	},

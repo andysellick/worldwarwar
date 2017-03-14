@@ -4,7 +4,6 @@
 <!--[if lt IE 9]>
 <script src="static/bower_components/html5shiv/dist/html5shiv.min.js"></script>
 <![endif]-->
-
     <title>World War War</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1.0">
@@ -32,60 +31,73 @@
         document.getElementById("site").className = document.getElementById("site").className.replace(/nojs/i,'');
 
     </script>
-
 	<!-- FIXME insert google analytics here -->
-
 </head>
 
 <body>
-	<!-- PS. Satire!! -->
-	<div class="canvasparent" id="canvasparent">
-		<canvas id="canvas" class="canvas"></canvas>		
-		<div id="messages" class="messagewrapper"></div>
-	</div>
+	<div id="wwwpage">
+		<div class="canvasparent" id="canvasparent">
+			<canvas id="canvas" class="canvas"></canvas>		
+			<div id="messages" class="messagewrapper"></div>
+		</div>
+			
+		<div id="intro" class="popup">
+			<div class="popupinner">
+				<h1 class="title"></h1>
+				<p>Pick a country:</p>
+				<select id="choosecountry">
+				</select>
+				<div class="levelselect">
+					<div class="btnwrapper">
+						<span class="btn btn-block" id="startgame1">Sandbox</span>
+					</div>
+					<p>Destroy the world. Simple.</p>
+				</div>
+				<div class="levelselect">
+					<div class="btnwrapper">
+						<span class="btn btn-block" id="startgame2">Normal</span>
+						<div class="score" id="savedscore1">Best: 0</div>
+					</div>
+					<p>The other countries are fighting back!</p>
+				</div>
+				<div class="levelselect">
+					<div class="btnwrapper">
+						<span class="btn btn-block" id="startgame3">Extreme</span>
+						<div class="score" id="savedscore2">Best: 0</div>
+					</div>
+					<p>It's going to get messy, people.</p>
+				</div>
+			</div>
+		</div>
 		
-	<div id="intro" class="popup">
-		<div class="popupinner">
-			<h1 class="title"></h1>
-			<p>Pick a country:</p>
-			<select id="choosecountry">
-			</select>
-			<div class="levelselect">
-				<span class="btn" id="startgame1">Sandbox</span>
-				<p>Pick a country, destroy the world. Simple.</p>
-			</div>
-			<div class="levelselect">
-				<span class="btn" id="startgame2">Normal</span>
-				<p>Those other countries are fighting back! Destroy them.</p>
-				<div class="score" id="savedscore1">Best: 0</div>
-			</div>
-			<div class="levelselect">
-				<span class="btn" id="startgame3">Extreme</span>
-				<p>It's going to get messy, people.</p>
-				<div class="score" id="savedscore2">Best: 0</div>
+		<div id="gamewon" class="popup">
+			<div class="popupinner">
+				<h2 class="title">Alone at last</h2>
+				<p>Congratulations, your country is finally safe from the threat of strangers!</p>
+				<span class="btn" id="playagain">Play again</span>
 			</div>
 		</div>
-	</div>
-	
-	<div id="gamewon" class="popup">
-		<div class="popupinner">
-			<h2 class="title">Alone at last</h2>
-			<p>Congratulations, your country is finally safe from the threat of strangers!</p>
-			<span class="btn" id="playagain">Play again</span>
+		
+		<div id="gamelost" class="popup">
+			<div class="popupinner">
+				<h2 class="title">Game over</h2>
+				<span class="btn" id="playagain2">Play again</span>
+			</div>
 		</div>
-	</div>
-	
-	<div id="gamelost" class="popup">
-		<div class="popupinner">
-			<h2 class="title">Game over</h2>
-			<span class="btn" id="playagain2">Play again</span>
+		
+		<div id="hud" class="hud">
+			<div class="huditemwrap left">
+				<span id="score" class="number"></span>
+				Score
+			</div>
+			<div class="huditemwrap right">
+				<span id="count" class="number"></span>
+				Countries left 
+			</div>
+			<div id="health" class="healthbar"></div>
 		</div>
-	</div>
-	
-	<div class="hud">
-		Score: <span id="score"></span>
-		Enemies remaining: <span id="count"></span>
-		<span id="health" class="healthbar"></span>
+		
+		<div id="menu" class="menu"></div>
 	</div>
 	
     <!--<script src="static/bower_components/jquery/dist/jquery.min.js"></script>-->

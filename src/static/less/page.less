@@ -9,18 +9,23 @@
     body {
         font-family:Arial, Verdana, sans-serif;
         font-size: 100%;
+		background:#a3d4e6;
         color:@black;
 		.no-select;
     }
+	
+	@transpeed: 0.3s;
 		
-    .canvasparent {			
-		//padding:40px; //turns out this isn't necessary anymore
+    .canvasparent {		
+		.flex;
+		.align-items(center);
+		.justify-content(center);
     	height:100vh;		
 		.border-box;
-		background:silver;
+		overflow:hidden;
 		.canvas {
-			display:block;
-			margin:0 auto;
+			position:relative;
+			z-index:1;
 			max-width:100%;
 			max-height:100%;
 			//background:url('../img/world.png') no-repeat 50% 50% / contain !important;
@@ -31,9 +36,11 @@
 		position:fixed;
 		bottom:0;
 		right:0;
-		max-width:30%;
+		width:100%;
 		overflow-y:auto;
 		background:rgba(255,255,255,0.5);
+		.transform(translateY(100%));
+		.transition(all @transpeed);
 		.message {
 			display:none;
 			min-height:80px;
@@ -75,7 +82,9 @@
 		}
 		.popupinner {
 			padding:1em;
-			max-width:500px;
+			width:80%;
+			max-width:800px;
+			min-width:320px;
 			background:@white;
 			border-radius:3px;
 			text-align:center;
@@ -84,15 +93,57 @@
 				.fontcalculate(20);
 				font-weight:bold;
 			}
+			
+			.levelselect {
+				position:relative;
+				padding:0.5em 0;
+				.clearfix;
+				p {
+					padding:0;
+					text-align:center;
+				}
+				.btnwrapper {
+					float:left;
+					width:30%;
+					padding-right:2%;
+					text-align:center;
+				}
+				.score {
+					margin-top:0.5em;
+					.fontcalculate(10);
+				}
+			}
 		}
 	}
 	
 	.hud {
-		position:fixed;
+		position:absolute;
+		z-index:0;
 		top:0;
 		left:0;
-		padding:1em;
-		background:rgba(255,255,255,0.5);
+		width:100%;
+		.transform(translateY(-100%));
+		.transition(all @transpeed);
+		text-transform:uppercase;
+		.fontcalculate(10);
+		
+		.huditemwrap {
+			padding:5px;
+			text-align:center;
+			&.left {
+				float:left;
+			}
+			&.right {
+				float:right;
+			}
+			
+			.number {
+				display:block;
+				.fontcalculate(50);
+				line-height:1em;
+				text-shadow:0 1px 1px @white;
+			}
+		}
 		
 		.healthbar {
 			position:absolute;
@@ -101,6 +152,31 @@
 			height:0.5em;
 			background:green;
 			.transition( all 0.3s );
+		}
+	}
+	
+	.menu {
+		position:fixed;
+		z-index:101;
+		bottom:0;
+		right:0;
+		.transform(translateY(100%));
+		.transition(all @transpeed);
+		cursor:pointer;
+		&:after {
+			content:"Menu";
+		}
+	}
+	
+	.gameon {
+		.hud {
+			.transform(none);
+		}
+		.messagewrapper {
+			.transform(none);
+		}
+		.menu {
+			.transform(none);
 		}
 	}
 

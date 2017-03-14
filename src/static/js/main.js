@@ -67,24 +67,23 @@ var www = {
 			}
 		},
 		
+		//setup and start the game
 		initGame: function(chosenmode){
+			document.getElementById('wwwpage').className = 'gameon';
 			www.mode = chosenmode;
 			www.enemycount = 0;
 			//setup game attributes according to mode
-			if(www.mode === 1){
-				//just float around destroying the world, sandbox
+			if(www.mode === 1){ //just float around destroying the world, sandbox				
 				www.enemyhealth = 2;
 				www.enemiesfire = 0;
 			}
-			else if(www.mode === 2){
-				//reasonable level of violence
+			else if(www.mode === 2){ //reasonable level of violence				
 				www.playerhealth = 3;
 				www.enemyhealth = 2;
 				www.enemiesfire = 1;
 				www.firechance = 10;
 			}
-			else {
-				//extreme
+			else { //extreme				
 				www.playerhealth = 1;
 				www.enemyhealth = 1;
 				www.enemiesfire = 1;
@@ -106,7 +105,8 @@ var www = {
 				options: {
 					width: www.w,
 					height: www.h,
-					background:'#aa0000',
+					//background:'#aa0000',
+					background: 'transparent',
 					hasBounds: true,
 					//showBounds: true,
 					wireframes: false,
@@ -149,6 +149,7 @@ var www = {
 			if(www.debug){
 				//www.chosen = allcountries.length - 1;
 			}
+			www.general.drawBoundary(); //draw the boundary first, so countries overlap it
 			www.mycountry = www.general.createPlayer(www.chosen,'player',www.playerhealth,www.chosen);			
 			www.general.createEnemies();		
 
@@ -168,7 +169,6 @@ var www = {
 			*/
 			www.Bounds.translate(www.render.bounds, translate);			
 	
-			www.general.drawBoundary();
 			www.general.createMatterEvents();			
 			
 			www.Engine.run(www.engine);	// run the engine			
@@ -278,6 +278,15 @@ var www = {
 				www.general.initGame(3);
 				www.general.hideAllPopups();
 			},false);
+			
+			//menu button, i.e. quit
+			var menu = ((document.ontouchstart!==null)?'mousedown':'touchstart');
+			document.getElementById('menu').addEventListener(menu,function(e){
+				document.getElementById('wwwpage').className = '';
+				clearInterval(www.timer);
+				www.general.saveGame();
+				www.general.showPopup('intro');
+			},false);			
 			
 			//game over, restart			
 			var replay = ((document.ontouchstart!==null)?'mousedown':'touchstart');
@@ -424,7 +433,8 @@ var www = {
 						'We can live without',
 						'We don\'t need',
 						'Who needs',
-						'Take a hike,'
+						'Take a hike,',
+						'Begone,'
 					];
 					//if there's more than one item, construct a sentence with them
 					if(country.mythings.length > 1){
@@ -481,8 +491,8 @@ var www = {
 			var walloptions = { 
 				isStatic: true,
 				render: {
-					fillStyle: 'black',
-					strokeStyle: 'black',
+					fillStyle: 'rgba(120,200,230,0.2)',
+					strokeStyle: 'rgba(120,200,230,0.2)',
 					lineWidth: 0
 				}				
 			};
@@ -702,11 +712,13 @@ var www = {
 		},
 		
 		gameWon: function(){
+			document.getElementById('wwwpage').className = '';
 			clearInterval(www.timer);
 			www.general.saveGame();
 			www.general.showPopup('gamewon');			
 		},
 		gameLost: function(){
+			document.getElementById('wwwpage').className = '';
 			clearInterval(www.timer);
 			www.general.saveGame();
 			www.general.showPopup('gamelost');			
