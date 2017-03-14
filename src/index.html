@@ -40,18 +40,28 @@
 <body>
 	<!-- PS. Satire!! -->
 	<div class="canvasparent" id="canvasparent">
-		<canvas id="canvas" class="canvas"></canvas>
-		
+		<canvas id="canvas" class="canvas"></canvas>		
 		<div id="messages" class="messagewrapper"></div>
 	</div>
 		
 	<div id="intro" class="popup">
 		<div class="popupinner">
 			<h1 class="title"></h1>
-			<p></p>
+			<p>Pick a country:</p>
 			<select id="choosecountry">
 			</select>
-			<span class="btn" id="startgame">Start</span>
+			<div class="levelselect">
+				<span class="btn" id="startgame1">Sandbox</span>
+				<p>Pick a country, destroy the world. Simple.</p>
+			</div>
+			<div class="levelselect">
+				<span class="btn" id="startgame2">Normal</span>
+				<p>Those other countries are fighting back! Destroy them!</p>
+			</div>
+			<div class="levelselect">
+				<span class="btn" id="startgame3">Extreme</span>
+				<p>It's going to get messy, people.</p>
+			</div>
 		</div>
 	</div>
 	

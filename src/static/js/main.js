@@ -33,6 +33,7 @@ var www = {
 	enemiesfire: 1,
 	firechance: 1, //used to calculate the probability that a country will fire in any given loop of the game
 	playerhealth: 10,
+	playerhealthorig: 10,
 	playerscore: 0,
 	boundswidth: 100, //used to determine the thickness of the walls we build to limit the game
 	enemies: [],
@@ -59,26 +60,30 @@ var www = {
 			}
 		},
 		
-		initGame: function(){
+		initGame: function(chosenmode){
+			www.mode = chosenmode;
+			www.enemycount = 0;
 			//setup game attributes according to mode
 			if(www.mode === 1){
 				//just float around destroying the world, sandbox
-				www.enemyhealth = 1;
+				www.enemyhealth = 2;
 				www.enemiesfire = 0;
 			}
 			else if(www.mode === 2){
 				//reasonable level of violence
-				www.enemyhealth = 3;
+				www.playerhealth = 3;
+				www.enemyhealth = 2;
 				www.enemiesfire = 1;
-				www.firechance = 20;
+				www.firechance = 10;
 			}
 			else {
 				//extreme
-				www.playerhealth = 2;
+				www.playerhealth = 1;
 				www.enemyhealth = 1;
 				www.enemiesfire = 1;
-				www.firechance = 5;
+				www.firechance = 3;
 			}
+			www.playerhealthorig = www.playerhealth;
 			
 			www.enemies = [];
 			www.playerscore = 0;
@@ -226,12 +231,26 @@ var www = {
 		},
 */	
 		createEvents: function(){
-			//start the game by choosing a country
-			var beginning = ((document.ontouchstart!==null)?'mousedown':'touchstart');
-			document.getElementById('startgame').addEventListener(beginning,function(e){
+			//start the various game modes FIXME surely a more efficient way to do this
+			var beginning1 = ((document.ontouchstart!==null)?'mousedown':'touchstart');
+			document.getElementById('startgame1').addEventListener(beginning1,function(e){
 				var dd = document.getElementById('choosecountry');
 				www.chosen = parseInt(dd.options[dd.selectedIndex].value);
-				www.general.initGame();
+				www.general.initGame(1);
+				www.general.hideAllPopups();
+			},false);
+			var beginning2 = ((document.ontouchstart!==null)?'mousedown':'touchstart');
+			document.getElementById('startgame2').addEventListener(beginning2,function(e){
+				var dd = document.getElementById('choosecountry');
+				www.chosen = parseInt(dd.options[dd.selectedIndex].value);
+				www.general.initGame(2);
+				www.general.hideAllPopups();
+			},false);
+			var beginning3 = ((document.ontouchstart!==null)?'mousedown':'touchstart');
+			document.getElementById('startgame3').addEventListener(beginning3,function(e){
+				var dd = document.getElementById('choosecountry');
+				www.chosen = parseInt(dd.options[dd.selectedIndex].value);
+				www.general.initGame(3);
 				www.general.hideAllPopups();
 			},false);
 			
@@ -254,9 +273,6 @@ var www = {
 		},
 		
 		createMatterEvents: function(){		
-			www.Events.on(www.engine,'collisionEnd',function(e){
-			});
-		
 			//on object collision
 			www.Events.on(www.engine,'collisionStart',function(e){			
 				var obj1 = e.pairs[0].bodyA;
@@ -279,45 +295,13 @@ var www = {
 						e.pairs[0].bodyA.myhealth = Math.max(0, e.pairs[0].bodyA.myhealth - 1);
 						e.pairs[0].bodyB.myhealth = Math.max(0, e.pairs[0].bodyB.myhealth - 1);
 						if(e.pairs[0].bodyA.myhealth === 0){
-							www.general.killObject(e.pairs[0].bodyA,e.pairs[0].bodyB.myid);
+							www.general.killObject(e.pairs[0].bodyA,e.pairs[0].bodyB.myorigin);
 						}
 						if(e.pairs[0].bodyB.myhealth === 0){
-							www.general.killObject(e.pairs[0].bodyB,e.pairs[0].bodyA.myid);
+							www.general.killObject(e.pairs[0].bodyB,e.pairs[0].bodyA.myorigin);
 						}
 					}
 				}
-/*				
-				var collided = [e.pairs[0].bodyA,e.pairs[0].bodyB];
-				var bullets = [];
-				var countries = [];
-
-				//first sort the two colliding objects
-				for(var x = 0; x < collided.length; x++){
-					if(collided[x].mytype === 'bullet'){
-						bullets.push(collided[x]);
-					}
-					else if(collided[x].mytype === 'country'){
-						countries.push(collided[x]);
-					}
-				}
-				//one bullet, one country
-				if(bullets.length === 1 && countries.length === 1){
-					
-					//if the bullet did not originate from this country, inflict damage
-					if(bullets[0].myorigin !== countries[0].id){
-						www.general.inflictDamage(countries[0],bullets[0].myorigin);
-						www.World.remove(www.engine.world, bullets[0]);
-					}
-					//otherwise, this bullet just came from this country, so disable the collision
-					else {
-						e.pairs[0].isActive = false;
-					}
-				}				
-				//this is a bullet has hit a wall, just remove the bullet
-				else if(bullets.length === 1){
-					www.World.remove(www.engine.world, bullets[0]);					
-				}
-*/
 			});	
 			
 			/* https://github.com/liabru/matter-js/blob/master/examples/views.js */
@@ -378,7 +362,7 @@ var www = {
 				//now update the HUD
 				document.getElementById('score').innerHTML = www.playerscore;
 				document.getElementById('count').innerHTML = www.enemycount;
-				document.getElementById('health').style.width = www.mycountry.myhealth * 10 + '%';
+				document.getElementById('health').style.width = (www.mycountry.myhealth / www.playerhealthorig) * 100 + '%';
 				
 			});
 			
@@ -398,7 +382,7 @@ var www = {
 		//reduce health and 'kill' a country
 		killObject: function(country,origin){
 			//console.log('killObject',country.myname);
-			//console.log(country,origin);
+			//console.log(country,origin,www.mycountry.myid);
 			if(country.myobjtype === 'enemy'){
 				if(origin === www.mycountry.myid){
 					console.log('Score!');
@@ -438,7 +422,7 @@ var www = {
 						'Your country is less good than some arbitrary standard!',
 						'In your collective faces!',
 						'We disliked you because you were different from us!',
-						'See you in Helsinki!'
+						'See you in Helsinki!',
 					];
 					things = insults[www.general.randomInt(0,insults.length - 1)];
 				}
