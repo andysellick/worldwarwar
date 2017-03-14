@@ -28,10 +28,9 @@ var allcountries = [
 	{	'name': 'Ireland',
 		'dir': direurope,
 		'sprite': 'ireland.svg',
-		'xScale': 0.11,
-		'yScale': 0.1,
-		'x': 45.81, 
-		'y': 20.14,
+		'xScale': 0.13,
+		'x': 45.8, 
+		'y': 20.22,
 		'w': 8,
 		'unique': [
 			'Guinness',
@@ -66,7 +65,7 @@ var allcountries = [
 		'dir': direurope,
 		'sprite': 'belgium.svg',
 		'xScale': 0.11, 
-		'x': 48.64, 
+		'x': 48.7, 
 		'y': 21.87,
 		'w': 4,
 		'unique': [
@@ -92,7 +91,7 @@ var allcountries = [
 		'dir': direurope,
 		'sprite': 'portugal.svg',
 		'xScale': 0.11, 
-		'x': 45.55, 
+		'x': 45.61, 
 		'y': 27.575,
 		'w': 5,
 		'unique': [
@@ -101,20 +100,22 @@ var allcountries = [
 			'the carrack'
 		]		
 	},
+	/*
 	{	'name': 'Andorra',
 		'dir': direurope,
 		'sprite': 'andorra.svg',
 		'xScale': 0.11, 
-		'x': 47.85,
+		'x': 47.89,
 		'y': 26.01,
 		'w': 0.8,
 		'unique': []		
 	},
+	*/
 	{	'name': 'The Netherlands',
 		'dir': direurope,
 		'sprite': 'netherlands.svg',
 		'xScale': 0.11, 
-		'x': 48.84, 
+		'x': 48.89, 
 		'y': 21.045,
 		'w': 4,
 		'unique': [
@@ -127,7 +128,7 @@ var allcountries = [
 		'dir': direurope,
 		'sprite': 'luxembourg.svg',
 		'xScale': 0.11, 
-		'x': 48.99, 
+		'x': 49.07, 
 		'y': 22.321,
 		'w': 1,
 		'unique': [
@@ -153,7 +154,7 @@ var allcountries = [
 		'dir': direurope,
 		'sprite': 'switzerland.svg',
 		'xScale': 0.11, 
-		'x': 49.495, 
+		'x': 49.54, 
 		'y': 23.78,
 		'w': 4,
 		'unique': [
@@ -179,7 +180,7 @@ var allcountries = [
 		'dir': direurope,
 		'sprite': 'austria.svg',
 		'xScale': 0.11, 
-		'x': 50.72, 
+		'x': 50.73, 
 		'y': 23.31,
 		'w': 5,
 		'unique': [
@@ -205,7 +206,7 @@ var allcountries = [
 		'dir': direurope,
 		'sprite': 'czechrepublic.svg',
 		'xScale': 0.11, 
-		'x': 51.2, 
+		'x': 51.21, 
 		'y': 22.23,
 		'w': 4,
 		'unique': [
@@ -218,7 +219,7 @@ var allcountries = [
 		'dir': direurope,
 		'sprite': 'poland.svg',
 		'xScale': 0.11, 
-		'x': 52.03, 
+		'x': 52.02, 
 		'y': 21.15,
 		'w': 10,
 		'unique': [
@@ -231,7 +232,7 @@ var allcountries = [
 		'dir': direurope,
 		'sprite': 'slovenia.svg',
 		'xScale': 0.11, 
-		'x': 51.09, 
+		'x': 51.11, 
 		'y': 24.12,
 		'w': 3,
 		'unique': [
@@ -244,7 +245,7 @@ var allcountries = [
 		'dir': direurope,
 		'sprite': 'slovakia.svg',
 		'xScale': 0.11, 
-		'x': 52.18, 
+		'x': 52.19, 
 		'y': 22.82,
 		'w': 3,
 		'unique': []		
@@ -333,7 +334,7 @@ var allcountries = [
 		'dir': direurope,
 		'sprite': 'greece.svg',
 		'xScale': 0.11, 
-		'x': 53.395, 
+		'x': 53.35, 
 		'y': 28.28,
 		'w': 12,
 		'unique': [
@@ -346,7 +347,7 @@ var allcountries = [
 		'dir': direurope,
 		'sprite': 'bulgaria.svg',
 		'xScale': 0.11, 
-		'x': 53.64, 
+		'x': 53.62, 
 		'y': 25.935,
 		'w': 6,
 		'unique': [
@@ -359,7 +360,7 @@ var allcountries = [
 		'dir': direurope,
 		'sprite': 'romania.svg',
 		'xScale': 0.11, 
-		'x': 53.5, 
+		'x': 53.47, 
 		'y': 24.24,
 		'w': 9,
 		'unique': [
@@ -381,7 +382,7 @@ var allcountries = [
 		'dir': direurope,
 		'sprite': 'ukraine.svg',
 		'xScale': 0.11, 
-		'x': 54.9, 
+		'x': 54.83, 
 		'y': 22.98,
 		'w': 10,
 		'unique': [
@@ -394,7 +395,7 @@ var allcountries = [
 		'dir': direurope,
 		'sprite': 'belarus.svg',
 		'xScale': 0.11, 
-		'x': 53.99, 
+		'x': 53.97, 
 		'y': 20.24,
 		'w': 8,
 		'unique': [
@@ -424,8 +425,8 @@ var allcountries = [
 		'dir': direurope,
 		'sprite': 'estonia.svg',
 		'xScale': 0.11, 
-		'x': 53.13, 
-		'y': 17.78,
+		'x': 53.15, 
+		'y': 17.79,
 		'w': 4,
 		'unique': [
 			'Skype'
@@ -435,8 +436,8 @@ var allcountries = [
 		'dir': direurope,
 		'sprite': 'russia.svg',
 		'xScale': 0.11, 
-		'x': 69.6, 
-		'y': 17.23,
+		'x': 69.63, 
+		'y': 17.22,
 		'w': 450,
 		'h': 60,
 		'unique': [
@@ -459,8 +460,8 @@ var allcountries = [
 		'dir': direurope,
 		'sprite': 'finland.svg',
 		'xScale': 0.11, 
-		'x': 53.18, 
-		'y': 14.79,
+		'x': 53.15, 
+		'y': 14.8,
 		'w': 10,
 		'unique': [
 			'ice skates',
@@ -472,7 +473,7 @@ var allcountries = [
 		'dir': direurope,
 		'sprite': 'sweden.svg',
 		'xScale': 0.11, 
-		'x': 51.5, 
+		'x': 51.47, 
 		'y': 16.12,
 		'w': 8,
 		'unique': [
@@ -485,7 +486,7 @@ var allcountries = [
 		'dir': direurope,
 		'sprite': 'norway.svg',
 		'xScale': 0.11, 
-		'x': 51.36, 
+		'x': 51.4, 
 		'y': 14.99,
 		'w': 30,
 		'h': 2,
@@ -522,7 +523,7 @@ var allcountries = [
 		'dir': direurope,
 		'sprite': 'armenia.svg',
 		'xScale': 0.11, 
-		'x': 58.45, 
+		'x': 58.42, 
 		'y': 27.36,
 		'w': 4,
 		'unique': []		
@@ -531,7 +532,7 @@ var allcountries = [
 		'dir': dirasia,
 		'sprite': 'azerbaijan.svg',
 		'xScale': 0.11, 
-		'x': 59.09, 
+		'x': 59.05, 
 		'y': 27.31,
 		'w': 2,
 		'unique': []		
@@ -540,7 +541,7 @@ var allcountries = [
 		'dir': direurope,
 		'sprite': 'georgia.svg',
 		'xScale': 0.11, 
-		'x': 57.98, 
+		'x': 57.93, 
 		'y': 26.15,
 		'w': 2,
 		'unique': []		
@@ -549,7 +550,7 @@ var allcountries = [
 		'dir': dirasia,
 		'sprite': 'syria.svg',
 		'xScale': 0.11, 
-		'x': 57.15, 
+		'x': 57.11, 
 		'y': 30.15,
 		'w': 8,
 		'unique': [
@@ -594,7 +595,7 @@ var allcountries = [
 		'dir': dirasia,
 		'sprite': 'jordan.svg',
 		'xScale': 0.11, 
-		'x': 56.79, 
+		'x': 56.76, 
 		'y': 32.04,
 		'w': 5,
 		'unique': []		
@@ -603,7 +604,7 @@ var allcountries = [
 		'dir': dirasia,
 		'sprite': 'iraq.svg',
 		'xScale': 0.11, 
-		'x': 58.47, 
+		'x': 58.4, 
 		'y': 31.01,
 		'w': 8,
 		'unique': []		
@@ -612,7 +613,7 @@ var allcountries = [
 		'dir': dirasia,
 		'sprite': 'saudiarabia.svg',
 		'xScale': 0.11, 
-		'x': 59.1, 
+		'x': 58.95, 
 		'y': 35.79,
 		'w': 22,
 		'unique': []		
@@ -639,7 +640,7 @@ var allcountries = [
 		'dir': dirasia,
 		'sprite': 'uae.svg',
 		'xScale': 0.11, 
-		'x': 61.26, 
+		'x': 61.22, 
 		'y': 35.719,
 		'w': 7,
 		'unique': []		
@@ -648,7 +649,7 @@ var allcountries = [
 		'dir': dirasia,
 		'sprite': 'oman.svg',
 		'xScale': 0.11, 
-		'x': 61.87, 
+		'x': 61.81, 
 		'y': 37.23,
 		'w': 8,
 		'unique': []		
@@ -657,7 +658,7 @@ var allcountries = [
 		'dir': dirasia,
 		'sprite': 'yemen.svg',
 		'xScale': 0.11, 
-		'x': 60.09, 
+		'x': 60.01, 
 		'y': 40.38,
 		'w': 13,
 		'unique': []		
@@ -666,7 +667,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'egypt.svg',
 		'xScale': 0.11, 
-		'x': 55.19, 
+		'x': 55.11, 
 		'y': 34.55,
 		'w': 18,
 		'unique': [
@@ -679,7 +680,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'libya.svg',
 		'xScale': 0.11, 
-		'x': 51.89, 
+		'x': 51.78, 
 		'y': 34.71,
 		'w': 22,
 		'unique': []		
@@ -688,7 +689,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'tunisia.svg',
 		'xScale': 0.11, 
-		'x': 49.83, 
+		'x': 49.8, 
 		'y': 30.75,
 		'w': 8,
 		'unique': []		
@@ -697,7 +698,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'algeria.svg',
 		'xScale': 0.11, 
-		'x': 47.92, 
+		'x': 47.78, 
 		'y': 33.8,
 		'w': 24,
 		'unique': []		
@@ -706,7 +707,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'morocco.svg',
 		'xScale': 0.11, 
-		'x': 45.64, 
+		'x': 45.56, 
 		'y': 31.83,
 		'w': 13,
 		'unique': []		
@@ -715,7 +716,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'westernsahara.svg',
 		'xScale': 0.11, 
-		'x': 44.08, 
+		'x': 44.02, 
 		'y': 35.85,
 		'w': 7,
 		'unique': []		
@@ -724,7 +725,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'mauritania.svg',
 		'xScale': 0.11, 
-		'x': 44.6, 
+		'x': 44.51, 
 		'y': 37.54,
 		'w': 10,
 		'unique': []		
@@ -733,7 +734,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'mali.svg',
 		'xScale': 0.11, 
-		'x': 46.38, 
+		'x': 46.265, 
 		'y': 39.38,
 		'w': 15,
 		'unique': []		
@@ -742,7 +743,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'senegal.svg',
 		'xScale': 0.11, 
-		'x': 43.57, 
+		'x': 43.52, 
 		'y': 41.02,
 		'w': 3,
 		'unique': []		
@@ -751,7 +752,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'gambia.svg',
 		'xScale': 0.11, 
-		'x': 43.32, 
+		'x': 43.29, 
 		'y': 41.6,
 		'w': 2,
 		'unique': []		
@@ -760,7 +761,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'guineabissau.svg',
 		'xScale': 0.11, 
-		'x': 43.345, 
+		'x': 43.32, 
 		'y': 42.46,
 		'w': 2,
 		'unique': []		
@@ -769,7 +770,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'guinea.svg',
 		'xScale': 0.11, 
-		'x': 44.37, 
+		'x': 44.32, 
 		'y': 43.45,
 		'w': 4,
 		'unique': []		
@@ -778,7 +779,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'sierraleone.svg',
 		'xScale': 0.11, 
-		'x': 44.22, 
+		'x': 44.2, 
 		'y': 44.235,
 		'w': 3,
 		'unique': []		
@@ -787,7 +788,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'liberia.svg',
 		'xScale': 0.11, 
-		'x': 44.84, 
+		'x': 44.82, 
 		'y': 45.3,
 		'w': 4,
 		'unique': []		
@@ -796,7 +797,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'cotedivoire.svg',
 		'xScale': 0.11, 
-		'x': 45.875, 
+		'x': 45.83, 
 		'y': 44.71,
 		'w': 10,
 		'unique': []		
@@ -805,7 +806,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'burkinafaso.svg',
 		'xScale': 0.11, 
-		'x': 46.94, 
+		'x': 46.88, 
 		'y': 42.22,
 		'w': 10,
 		'unique': []		
@@ -814,7 +815,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'ghana.svg',
 		'xScale': 0.11, 
-		'x': 47.06, 
+		'x': 47.02, 
 		'y': 44.52,
 		'w': 5,
 		'unique': []		
@@ -823,7 +824,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'togo.svg',
 		'xScale': 0.11, 
-		'x': 47.54, 
+		'x': 47.52, 
 		'y': 44.16,
 		'w': 2,
 		'unique': []		
@@ -832,7 +833,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'benin.svg',
 		'xScale': 0.11, 
-		'x': 47.94, 
+		'x': 47.92, 
 		'y': 43.79,
 		'w': 4,
 		'unique': []		
@@ -841,7 +842,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'niger.svg',
 		'xScale': 0.11, 
-		'x': 49.52, 
+		'x': 49.41, 
 		'y': 39.38,
 		'w': 20,
 		'unique': []		
@@ -850,7 +851,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'nigeria.svg',
 		'xScale': 0.11, 
-		'x': 49.66, 
+		'x': 49.58, 
 		'y': 43.9,
 		'w': 10,
 		'unique': []		
@@ -859,7 +860,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'chad.svg',
 		'xScale': 0.11, 
-		'x': 52.29, 
+		'x': 52.2, 
 		'y': 40.5,
 		'w': 18,
 		'unique': []		
@@ -868,7 +869,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'sudan.svg',
 		'xScale': 0.11, 
-		'x': 55.32, 
+		'x': 55.19, 
 		'y': 40.1,
 		'w': 24,
 		'unique': []		
@@ -877,7 +878,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'eritrea.svg',
 		'xScale': 0.11, 
-		'x': 57.79, 
+		'x': 57.72, 
 		'y': 40.66,
 		'w': 6,
 		'unique': []		
@@ -886,7 +887,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'djibouti.svg',
 		'xScale': 0.11, 
-		'x': 58.52, 
+		'x': 58.48, 
 		'y': 42.46,
 		'w': 3,
 		'unique': []		
@@ -895,7 +896,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'ethiopia.svg',
 		'xScale': 0.11, 
-		'x': 58.075, 
+		'x': 57.94, 
 		'y': 43.89,
 		'w': 10,
 		'unique': []		
@@ -904,7 +905,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'somalia.svg',
 		'xScale': 0.11, 
-		'x': 59.555, 
+		'x': 59.46, 
 		'y': 46.03,
 		'w': 10,
 		'unique': []		
@@ -913,7 +914,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'southsudan.svg',
 		'xScale': 0.11, 
-		'x': 55.21, 
+		'x': 55.11, 
 		'y': 44.53,
 		'w': 14,
 		'unique': []		
@@ -923,7 +924,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'car.svg',
 		'xScale': 0.11, 
-		'x': 52.91, 
+		'x': 52.81, 
 		'y': 45.23,
 		'w': 12,
 		'unique': []		
@@ -942,7 +943,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'equatorialguinea.svg',
 		'xScale': 0.11, 
-		'x': 49.92, 
+		'x': 49.9, 
 		'y': 47.47,
 		'w': 5,
 		'unique': []		
@@ -951,8 +952,8 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'gabon.svg',
 		'xScale': 0.11, 
-		'x': 50.412, 
-		'y': 49.16,
+		'x': 50.37, 
+		'y': 49.165,
 		'w': 8,
 		'unique': []		
 	},
@@ -960,7 +961,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'republicofthecongo.svg',
 		'xScale': 0.11, 
-		'x': 51.28, 
+		'x': 51.22, 
 		'y': 49.1,
 		'w': 6,
 		'unique': []		
@@ -969,7 +970,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'democraticrepublicofthecongo.svg',
 		'xScale': 0.11, 
-		'x': 53.18, 
+		'x': 53.03, 
 		'y': 50.9,
 		'w': 20,
 		'unique': []		
@@ -978,7 +979,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'uganda.svg',
 		'xScale': 0.11, 
-		'x': 55.875, 
+		'x': 55.82, 
 		'y': 48,
 		'w': 8,
 		'unique': []		
@@ -987,7 +988,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'kenya.svg',
 		'xScale': 0.11, 
-		'x': 57.38, 
+		'x': 57.3, 
 		'y': 48.77,
 		'w': 12,
 		'unique': []		
@@ -996,7 +997,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'rwanda.svg',
 		'xScale': 0.11, 
-		'x': 55.2, 
+		'x': 55.17, 
 		'y': 49.79,
 		'w': 2,
 		'unique': []		
@@ -1005,8 +1006,8 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'burundi.svg',
 		'xScale': 0.11, 
-		'x': 55.22, 
-		'y': 50.57,
+		'x': 55.18, 
+		'y': 50.56,
 		'w': 3,
 		'unique': []		
 	},
@@ -1014,7 +1015,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'tanzania.svg',
 		'xScale': 0.11, 
-		'x': 56.6, 
+		'x': 56.5, 
 		'y': 52.14,
 		'w': 15,
 		'unique': []		
@@ -1023,7 +1024,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'zambia.svg',
 		'xScale': 0.11, 
-		'x': 54.7, 
+		'x': 54.6, 
 		'y': 55.73,
 		'w': 14,
 		'unique': []		
@@ -1032,7 +1033,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'angola.svg',
 		'xScale': 0.11, 
-		'x': 52.1, 
+		'x': 52, 
 		'y': 54.7,
 		'w': 18,
 		'unique': []		
@@ -1041,7 +1042,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'namibia.svg',
 		'xScale': 0.11, 
-		'x': 52.24, 
+		'x': 52.14, 
 		'y': 60.94,
 		'w': 14,
 		'unique': []		
@@ -1050,7 +1051,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'botswana.svg',
 		'xScale': 0.11, 
-		'x': 53.79, 
+		'x': 53.72, 
 		'y': 60.62,
 		'w': 12,
 		'unique': []		
@@ -1059,7 +1060,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'zimbabwe.svg',
 		'xScale': 0.11, 
-		'x': 54.98, 
+		'x': 54.92, 
 		'y': 58.87,
 		'w': 10,
 		'unique': []		
@@ -1068,7 +1069,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'malawi.svg',
 		'xScale': 0.11, 
-		'x': 56.33, 
+		'x': 56.29, 
 		'y': 55.79,
 		'w': 4,
 		'unique': []		
@@ -1077,7 +1078,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'mozambique.svg',
 		'xScale': 0.11, 
-		'x': 56.69, 
+		'x': 56.61, 
 		'y': 58.69,
 		'w': 16,
 		'unique': []		
@@ -1095,7 +1096,7 @@ var allcountries = [
 		'dir': dirafrica,
 		'sprite': 'southafrica.svg',
 		'xScale': 0.11, 
-		'x': 53.8, 
+		'x': 53.69, 
 		'y': 63.89,
 		'w': 17,
 		'unique': [
@@ -1107,8 +1108,8 @@ var allcountries = [
 		'dir': dirasia,
 		'sprite': 'turkmenistan.svg',
 		'xScale': 0.11, 
-		'x': 62.1, 
-		'y': 27.95,
+		'x': 62.0, 
+		'y': 27.96,
 		'w': 12,
 		'unique': []		
 	},
@@ -1116,7 +1117,7 @@ var allcountries = [
 		'dir': dirasia,
 		'sprite': 'iran.svg',
 		'xScale': 0.11, 
-		'x': 61.02, 
+		'x': 60.88, 
 		'y': 31.43,
 		'w': 20,
 		'unique': [
@@ -1128,8 +1129,8 @@ var allcountries = [
 		'dir': dirasia,
 		'sprite': 'uzbekistan.svg',
 		'xScale': 0.11, 
-		'x': 63.11, 
-		'y': 26.67,
+		'x': 63, 
+		'y': 26.69,
 		'w': 8,
 		'unique': []		
 	},
@@ -1137,7 +1138,7 @@ var allcountries = [
 		'dir': dirasia,
 		'sprite': 'kyrgyzstan.svg',
 		'xScale': 0.11, 
-		'x': 65.65, 
+		'x': 65.6, 
 		'y': 26.73,
 		'w': 6,
 		'unique': []		
@@ -1146,7 +1147,7 @@ var allcountries = [
 		'dir': dirasia,
 		'sprite': 'tajikistan.svg',
 		'xScale': 0.11, 
-		'x': 64.99, 
+		'x': 64.95, 
 		'y': 27.97,
 		'w': 8,
 		'unique': []		
@@ -1155,7 +1156,7 @@ var allcountries = [
 		'dir': dirasia,
 		'sprite': 'afghanistan.svg',
 		'xScale': 0.11, 
-		'x': 64.32, 
+		'x': 64.23, 
 		'y': 30.62,
 		'w': 10,
 		'unique': []		
@@ -1164,7 +1165,7 @@ var allcountries = [
 		'dir': dirasia,
 		'sprite': 'pakistan.svg',
 		'xScale': 0.11, 
-		'x': 64.91, 
+		'x': 64.8, 
 		'y': 32.51,
 		'w': 10,
 		'unique': []		
@@ -1173,7 +1174,7 @@ var allcountries = [
 		'dir': dirasia,
 		'sprite': 'india.svg',
 		'xScale': 0.11, 
-		'x': 68.76, 
+		'x': 68.57, 
 		'y': 37.45,
 		'w': 24,
 		'unique': [
@@ -1195,7 +1196,7 @@ var allcountries = [
 		'dir': dirasia,
 		'sprite': 'nepal.svg',
 		'xScale': 0.11, 
-		'x': 68.9, 
+		'x': 68.85, 
 		'y': 33.57,
 		'w': 5,
 		'unique': []		
@@ -1204,8 +1205,8 @@ var allcountries = [
 		'dir': dirasia,
 		'sprite': 'china.svg',
 		'xScale': 0.11, 
-		'x': 72.25, 
-		'y': 29.66,
+		'x': 72.255, 
+		'y': 29.655,
 		'w': 140,
 		'h': 50,
 		'unique': [
@@ -1219,7 +1220,7 @@ var allcountries = [
 		'sprite': 'mongolia.svg',
 		'xScale': 0.11, 
 		'x': 71.75, 
-		'y': 23.8,
+		'y': 23.77,
 		'w': 100,
 		'h': 30,
 		'unique': []		
@@ -1237,7 +1238,7 @@ var allcountries = [
 		'dir': dirasia,
 		'sprite': 'bangladesh.svg',
 		'xScale': 0.11, 
-		'x': 70.68, 
+		'x': 70.65, 
 		'y': 36.09,
 		'w': 8,
 		'unique': []		
@@ -1288,7 +1289,7 @@ var allcountries = [
 		'dir': dirasia,
 		'sprite': 'cambodia.svg',
 		'xScale': 0.11, 
-		'x': 74.86, 
+		'x': 74.82, 
 		'y': 42.07,
 		'w': 4,
 		'unique': []		
@@ -1306,8 +1307,8 @@ var allcountries = [
 		'dir': dirasia,
 		'sprite': 'northkorea.svg',
 		'xScale': 0.11, 
-		'x': 78.38, 
-		'y': 27.25,
+		'x': 78.34, 
+		'y': 27.23,
 		'w': 9,
 		'unique': []		
 	},
@@ -1315,8 +1316,8 @@ var allcountries = [
 		'dir': dirasia,
 		'sprite': 'southkorea.svg',
 		'xScale': 0.11, 
-		'x': 79.11, 
-		'y': 29.6,
+		'x': 79.08, 
+		'y': 29.55,
 		'w': 9,
 		'unique': [
 			'internet cafes'
@@ -1440,7 +1441,7 @@ var allcountries = [
 		'dir': dirnamerica,
 		'sprite': 'us_alaska.svg',
 		'xScale': 0.11, 
-		'x': 15.39, 
+		'x': 15.15, 
 		'y': 15.47,
 		'w': 30,
 		'unique': []		
@@ -1458,7 +1459,7 @@ var allcountries = [
 		'dir': dirnamerica,
 		'sprite': 'mexico.svg',
 		'xScale': 0.11, 
-		'x': 20.05, 
+		'x': 19.86, 
 		'y': 35.73,
 		'w': 25,
 		'unique': []		
@@ -1467,7 +1468,7 @@ var allcountries = [
 		'dir': dirnamerica,
 		'sprite': 'guatemala.svg',
 		'xScale': 0.11, 
-		'x': 22.53, 
+		'x': 22.5, 
 		'y': 39.9,
 		'w': 7,
 		'unique': []		
@@ -1476,7 +1477,7 @@ var allcountries = [
 		'dir': dirnamerica,
 		'sprite': 'honduras.svg',
 		'xScale': 0.11, 
-		'x': 23.56, 
+		'x': 23.52, 
 		'y': 40.49,
 		'w': 5,
 		'unique': []		
@@ -1485,7 +1486,7 @@ var allcountries = [
 		'dir': dirnamerica,
 		'sprite': 'elsalvador.svg',
 		'xScale': 0.11, 
-		'x': 22.81, 
+		'x': 22.79, 
 		'y': 40.98,
 		'w': 3,
 		'unique': []		
@@ -1494,7 +1495,7 @@ var allcountries = [
 		'dir': dirnamerica,
 		'sprite': 'belize.svg',
 		'xScale': 0.11, 
-		'x': 23.02, 
+		'x': 23, 
 		'y': 39.15,
 		'w': 3,
 		'unique': []		
@@ -1503,7 +1504,7 @@ var allcountries = [
 		'dir': dirnamerica,
 		'sprite': 'nicaragua.svg',
 		'xScale': 0.11, 
-		'x': 23.75, 
+		'x': 23.73, 
 		'y': 41.48,
 		'w': 4,
 		'unique': []		
@@ -1513,7 +1514,7 @@ var allcountries = [
 		'sprite': 'costarica.svg',
 		'xScale': 0.11, 
 		'x': 23.94, 
-		'y': 43.22,
+		'y': 43.23,
 		'w': 5,
 		'unique': []		
 	},
@@ -1521,7 +1522,7 @@ var allcountries = [
 		'dir': dirnamerica,
 		'sprite': 'panama.svg',
 		'xScale': 0.11, 
-		'x': 25.01, 
+		'x': 24.99, 
 		'y': 43.88,
 		'w': 5,
 		'unique': []		
@@ -1585,7 +1586,7 @@ var allcountries = [
 		'dir': dirsamerica,
 		'sprite': 'colombia.svg',
 		'xScale': 0.11, 
-		'x': 26.875, 
+		'x': 26.81, 
 		'y': 46.18,
 		'w': 16,
 		'unique': []		
@@ -1594,7 +1595,7 @@ var allcountries = [
 		'dir': dirsamerica,
 		'sprite': 'venezuela.svg',
 		'xScale': 0.11, 
-		'x': 28.63, 
+		'x': 28.56, 
 		'y': 44.94,
 		'w': 14,
 		'unique': []		
@@ -1603,7 +1604,7 @@ var allcountries = [
 		'dir': dirsamerica,
 		'sprite': 'guyana.svg',
 		'xScale': 0.11, 
-		'x': 30.52, 
+		'x': 30.53, 
 		'y': 45.76,
 		'w': 10,
 		'h': 20,
@@ -1613,7 +1614,7 @@ var allcountries = [
 		'dir': dirsamerica,
 		'sprite': 'suriname.svg',
 		'xScale': 0.11, 
-		'x': 31.325, 
+		'x': 31.31, 
 		'y': 46.25,
 		'w': 6,
 		'unique': []		
@@ -1640,7 +1641,7 @@ var allcountries = [
 		'dir': dirsamerica,
 		'sprite': 'peru.svg',
 		'xScale': 0.11, 
-		'x': 26.335, 
+		'x': 26.37, 
 		'y': 53.25,
 		'w': 30,
 		'h': 55,
@@ -1650,7 +1651,7 @@ var allcountries = [
 		'dir': dirsamerica,
 		'sprite': 'brazil.svg',
 		'xScale': 0.11, 
-		'x': 31.735, 
+		'x': 31.75, 
 		'y': 55.92,
 		'w': 40,
 		'h': 60,
@@ -1660,7 +1661,7 @@ var allcountries = [
 		'dir': dirsamerica,
 		'sprite': 'bolivia.svg',
 		'xScale': 0.11, 
-		'x': 29.54, 
+		'x': 29.48, 
 		'y': 57.02,
 		'w': 16,
 		'unique': []		
@@ -1669,7 +1670,7 @@ var allcountries = [
 		'dir': dirsamerica,
 		'sprite': 'paraguay.svg',
 		'xScale': 0.11, 
-		'x': 31.095, 
+		'x': 31.06, 
 		'y': 60.8,
 		'w': 10,
 		'unique': []		
@@ -1678,8 +1679,8 @@ var allcountries = [
 		'dir': dirsamerica,
 		'sprite': 'argentina.svg',
 		'xScale': 0.11, 
-		'x': 30.37, 
-		'y': 68.665,
+		'x': 30.39, 
+		'y': 68.65,
 		'w': 30,
 		'h': 120,
 		'unique': []		
@@ -1688,7 +1689,7 @@ var allcountries = [
 		'dir': dirsamerica,
 		'sprite': 'uruguay.svg',
 		'xScale': 0.11, 
-		'x': 32.2, 
+		'x': 32.18, 
 		'y': 65.63,
 		'w': 9,
 		'unique': [
@@ -1700,13 +1701,13 @@ var allcountries = [
 		'dir': dirsamerica,
 		'sprite': 'chile.svg',
 		'xScale': 0.11, 
-		'x': 28.87, 
+		'x': 28.9, 
 		'y': 67.75,
 		'w': 10,
 		'h': 120,
 		'unique': []		
 	},
-	{	'name': 'UK (Falkland Islands)',
+	{	'name': 'United Kingdom (Falkland Islands)',
 		'dir': dirsamerica,
 		'sprite': 'falklandislands.svg',
 		'xScale': 0.11, 
@@ -1743,6 +1744,7 @@ had to break the US into 3 chunks. Noone else was this unhelpful. Thanks, US.
 so minus 2 countries from total
 also minus greenland, which belongs to denmark
 Too small to include (probably): (37 countries)
+Andorra
 Malta
 Kosovo (inside serbia)
 Liechtenstein

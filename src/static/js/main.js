@@ -44,6 +44,7 @@ var www = {
 	scaleFactor: 1, //how big to draw everything. Game should normally be twice width/height of canvas, scale of 0.5 will fit everything in
 	debug: 0,
 	mode: 3,
+	bestscores: [0,0],
 	
 	general: {
 		init: function(){
@@ -57,6 +58,12 @@ var www = {
 						
 			if(www.debug){
 				www.general.initGame();
+			}
+			var saved = localStorage.getItem('worldwarwar');
+			if(saved !== null && saved.length > 0){
+				www.bestscores = JSON.parse(saved);	
+				console.log(www.bestscores);
+				www.general.updateScores();
 			}
 		},
 		
@@ -140,7 +147,7 @@ var www = {
 				y: 1
 			};		
 			if(www.debug){
-				www.chosen = allcountries.length - 1;
+				//www.chosen = allcountries.length - 1;
 			}
 			www.mycountry = www.general.createPlayer(www.chosen,'player',www.playerhealth,www.chosen);			
 			www.general.createEnemies();		
@@ -169,6 +176,24 @@ var www = {
 			
 			if(!www.debug && www.enemiesfire){
 				www.timer = setInterval(www.general.gameLoop,500);
+			}
+		},
+		
+		//actually just save your highscores
+		saveGame: function(){
+			www.general.updateScores();
+			var tosave = JSON.stringify(www.bestscores);
+			localStorage.setItem('worldwarwar', tosave);
+		},
+		
+		updateScores: function(){
+			document.getElementById('savedscore1').innerHTML = 'Best: ' + www.bestscores[0];
+			document.getElementById('savedscore2').innerHTML = 'Best: ' + www.bestscores[1];
+			if(www.mode === 2){
+				www.bestscores[0] = www.playerscore;
+			}
+			else if(www.mode === 3){
+				www.bestscores[1] = www.playerscore;
 			}
 		},
 		
@@ -678,10 +703,12 @@ var www = {
 		
 		gameWon: function(){
 			clearInterval(www.timer);
+			www.general.saveGame();
 			www.general.showPopup('gamewon');			
 		},
 		gameLost: function(){
 			clearInterval(www.timer);
+			www.general.saveGame();
 			www.general.showPopup('gamelost');			
 		},
 
