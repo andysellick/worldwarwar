@@ -120,7 +120,8 @@ var www = {
 				}
 			});
 			
-			// add mouse control
+			/*
+			// add mouse control FIXME this now conflicts with the limits imposed on viewport repositioning
 			www.mouse = www.Mouse.create(www.render.canvas);
 			www.mouseConstraint = www.MouseConstraint.create(www.engine, {
 				mouse: www.mouse,
@@ -137,7 +138,9 @@ var www = {
 			www.viewportCentre = {
 				x: www.render.options.width * 0.5,
 				y: www.render.options.height * 0.5
-			};		
+			};
+			*/			
+			
 			www.general.setWorldSize();
 			
 			// keep track of current bounds scale (view zoom)
@@ -152,6 +155,8 @@ var www = {
 			www.general.drawBoundary(); //draw the boundary first, so countries overlap it
 			www.mycountry = www.general.createPlayer(www.chosen,'player',www.playerhealth,www.chosen);			
 			www.general.createEnemies();		
+			
+			console.log(www.mycountry.position.x,www.w,www.mycountry.position.x - (www.w / 2));
 
 			//recentre the canvas onto the player
 			var translate = {
@@ -255,7 +260,7 @@ var www = {
 			}
 		},
 */	
-		createEvents: function(){
+		createEvents: function(){			
 			//start the various game modes FIXME surely a more efficient way to do this
 			var beginning1 = ((document.ontouchstart!==null)?'mousedown':'touchstart');
 			document.getElementById('startgame1').addEventListener(beginning1,function(e){
@@ -342,13 +347,14 @@ var www = {
 			// use the engine tick event to control our view
 			www.Events.on(www.engine, 'beforeTick', function(e) {
 				var translate;
-				// mouse wheel controls zoom
+				/*
+				// mouse wheel controls zoom FIXME removing this functionality as it conflicts with limits imposed on viewpoint translation
 				var scaleFactor = www.mouse.wheelDelta * -0.1;
 				if (scaleFactor !== 0) {
 					if ((scaleFactor < 0 && www.boundsScale.x >= 0.6) || (scaleFactor > 0 && www.boundsScale.x <= 1.4)) { //these two numbers control the min and max zoom levels
 						www.boundsScaleTarget += scaleFactor;
 					}
-				}	
+				}
 
 				// if scale has changed
 				if (Math.abs(www.boundsScale.x - www.boundsScaleTarget) > 0.01) {
@@ -373,6 +379,7 @@ var www = {
 					www.Mouse.setScale(www.mouse, www.boundsScale);
 					www.Mouse.setOffset(www.mouse, www.render.bounds.min);
 				}				
+				*/
 				
 				//reposition the screen to keep the player centered
 				var diffx = www.mycountry.myxpos - www.mycountry.position.x;
@@ -382,7 +389,13 @@ var www = {
 				www.origx += diffx;
 				www.origy += diffy;
 				
-				www.Bounds.translate(www.render.bounds,{x:-diffx,y:-diffy});
+				var moveto = www.general.checkBounds(diffx,diffy);
+				var moveto0 = moveto[0];
+				var moveto1 = moveto[1];
+				//console.log(diffx,diffy,moveto);
+				
+				//www.Bounds.translate(www.render.bounds,{x:-diffx,y:-diffy});
+				www.Bounds.translate(www.render.bounds,{x:moveto0,y:moveto1});
 				
 				//check to see if we should remove any bullets
 				var now = Date.now();
@@ -396,8 +409,7 @@ var www = {
 				//now update the HUD
 				document.getElementById('score').innerHTML = www.playerscore;
 				document.getElementById('count').innerHTML = www.enemycount;
-				document.getElementById('health').style.width = (www.mycountry.myhealth / www.playerhealthorig) * 100 + '%';
-				
+				document.getElementById('health').style.width = (www.mycountry.myhealth / www.playerhealthorig) * 100 + '%';				
 			});
 			
 			/*
@@ -413,13 +425,27 @@ var www = {
 			*/
 		},
 		
+		checkBounds: function(posx,posy){
+			//console.log('Translating by',-diffx,-diffy);
+			//console.log(www.mycountry.myxpos);		
+			//console.log('wat',www.engine.world.bounds.min.x,www.engine.world.bounds.max.x,www.mycountry.myxpos);
+
+			if(www.mycountry.myxpos < www.engine.world.bounds.min.x + (www.boundswidth / 2) + (www.canvas.width / 2) || www.mycountry.myxpos > www.engine.world.bounds.max.x - (www.boundswidth / 2) - (www.canvas.width / 2)){
+				posx = 0;
+			}
+			if(www.mycountry.myypos < www.engine.world.bounds.min.y + (www.boundswidth / 2) + (www.canvas.height / 2)|| www.mycountry.myypos > www.engine.world.bounds.max.y - (www.boundswidth / 2) - (www.canvas.height / 2)){
+				posy = 0;
+			}
+			
+			return([-posx,-posy]);
+		},
+		
 		//reduce health and 'kill' a country
 		killObject: function(country,origin){
 			//console.log('killObject',country.myname);
 			//console.log(country,origin,www.mycountry.myid);
 			if(country.myobjtype === 'enemy'){
 				if(origin === www.mycountry.myid){
-					console.log('Score!');
 					www.playerscore++;
 				}					
 				

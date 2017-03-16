@@ -29,21 +29,20 @@
 			max-width:100%;
 			max-height:100%;
 			//background:url('../img/world.png') no-repeat 50% 50% / contain !important;
+			box-shadow:0 0 5px rgba(0,0,0,0.2);
 		}
     }
 	.messagewrapper {
 		z-index:100;
 		position:fixed;
 		bottom:0;
-		right:0;
-		width:100%;
+		left:0;
 		overflow-y:auto;
 		background:rgba(255,255,255,0.5);
 		.transform(translateY(100%));
 		.transition(all @transpeed);
 		.message {
 			display:none;
-			min-height:80px;
 			padding:0.5em;
 			
 			&:first-child {
@@ -52,6 +51,7 @@
 			
 			.title {
 				padding:0 0 0.5em 0;
+				margin-right:5em;
 				.fontcalculate(12);
 				font-weight:bold;
 			}
