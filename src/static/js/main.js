@@ -45,6 +45,7 @@ var www = {
 	debug: 0,
 	mode: 3,
 	bestscores: [0,0],
+	enableZoom: 0, //FIXME this is mainly for debug, potentially remove for production
 	
 	general: {
 		init: function(){
@@ -120,45 +121,48 @@ var www = {
 				}
 			});
 			
-			/*
-			// add mouse control FIXME this now conflicts with the limits imposed on viewport repositioning
-			www.mouse = www.Mouse.create(www.render.canvas);
-			www.mouseConstraint = www.MouseConstraint.create(www.engine, {
-				mouse: www.mouse,
-				constraint: {
-					stiffness: 0.2,
-					render: {
-						visible: false
+			if(www.enableZoom){
+				// add mouse control FIXME this now conflicts with the limits imposed on viewport repositioning
+				www.mouse = www.Mouse.create(www.render.canvas);
+				www.mouseConstraint = www.MouseConstraint.create(www.engine, {
+					mouse: www.mouse,
+					constraint: {
+						stiffness: 0.2,
+						render: {
+							visible: false
+						}
 					}
-				}
-			});						
-			www.World.add(www.engine.world, www.mouseConstraint);
-			www.render.mouse = www.mouse; // keep the mouse in sync with rendering
-			// get the centre of the viewport
-			www.viewportCentre = {
-				x: www.render.options.width * 0.5,
-				y: www.render.options.height * 0.5
-			};
-			*/			
-			
+				});						
+				www.World.add(www.engine.world, www.mouseConstraint);
+				www.render.mouse = www.mouse; // keep the mouse in sync with rendering
+				// get the centre of the viewport
+				www.viewportCentre = {
+					x: www.render.options.width * 0.5,
+					y: www.render.options.height * 0.5
+				};
+				
+				// keep track of current bounds scale (view zoom)
+				www.boundsScaleTarget = 1;
+				www.boundsScale = {
+					x: 1,
+					y: 1
+				};		
+			}
+						
 			www.general.setWorldSize();
 			
-			// keep track of current bounds scale (view zoom)
-			www.boundsScaleTarget = 1;
-			www.boundsScale = {
-				x: 1,
-				y: 1
-			};		
 			if(www.debug){
 				//www.chosen = allcountries.length - 1;
 			}
+			
 			www.general.drawBoundary(); //draw the boundary first, so countries overlap it
 			www.mycountry = www.general.createPlayer(www.chosen,'player',www.playerhealth,www.chosen);			
 			www.general.createEnemies();		
 			
-			console.log(www.mycountry.position.x,www.w,www.mycountry.position.x - (www.w / 2));
+			//console.log(www.mycountry.position.x,www.w,www.mycountry.position.x - (www.w / 2));
 
 			//recentre the canvas onto the player
+			//FIXME now needs to account for limits
 			var translate = {
 				x: www.mycountry.position.x - (www.w / 2),
 				y: www.mycountry.position.y - (www.h / 2)
@@ -172,7 +176,7 @@ var www = {
 				};
 			}
 			*/
-			www.Bounds.translate(www.render.bounds, translate);			
+			//www.Bounds.translate(www.render.bounds, translate); //FIXME - temporarily disabling this
 	
 			www.general.createMatterEvents();			
 			
@@ -204,9 +208,34 @@ var www = {
 		
 		//set up world size and boundaries
 		setWorldSize: function(){
+			var targetw = www.w;
+			var targeth = www.h;
+			var sizes = www.general.calculateAspectRatio(www.idealw,www.idealh,targetw,targeth);
+			www.worldw = sizes[0];
+			www.worldh = sizes[1];
+			console.log('Sizes',sizes);
+
+			if(www.worldh < www.h){
+				//FIXME this works but need to recentre the canvas, effectively
+				//argh no it doesn't
+				var scaleh = (www.worldh / www.h) * 100;
+				console.log('scaleh',scaleh);
+				www.worldh = www.h;
+				www.worldw = (www.worldw / scaleh) * 100;
+			}
+			else {
+				var scalew = (www.worldw / www.w) * 100;
+				console.log('scalew',scalew);
+				www.worldw = www.w;
+				www.worldh = (www.worldh / scalew) * 100;
+			}
+			
+			console.log('Widths',www.w,www.worldw);
+			console.log('Height',www.h,www.worldh);
+			
 			//make the world bounds twice as big as the canvas (render bounds)
-			www.worldw = (www.w * www.scaleFactor) * 2;
-			www.worldh = (www.h * www.scaleFactor) * 2;
+			//www.worldw = (www.w * www.scaleFactor) * 2;
+			//www.worldh = (www.h * www.scaleFactor) * 2;
 			var minx = (www.w - www.worldw) / 2;
 			var miny = (www.h - www.worldh) / 2;
 			var maxx = minx + www.worldw;
@@ -220,6 +249,11 @@ var www = {
 			www.engine.world.bounds.max.y = maxy; //900;
 			//console.log('World bounds are',www.engine.world.bounds);
 		},
+
+        //returns the percentage amount that object is of wrapper
+        calculatePercentage: function(object,wrapper){
+			return((100 / wrapper) * object);
+		},
 		
 		randomInt: function(min,max){
 			return Math.floor(Math.random()*(max-min+1)+min);
@@ -230,14 +264,21 @@ var www = {
 			//console.log('setting canvas size');
 			var targetw = www.parentel.offsetWidth;
 			var targeth = www.parentel.offsetHeight;
+			
+			//new approach - make canvas as big as possible, but set world size within it according to fixed aspect ratio (elsewhere)
+			www.w = www.canvas.width = targetw;
+			www.h = www.canvas.height = targeth;		
+			
+			//old approach - set canvas size according to fixed aspect ratio
+			/*
 			//account for padding within the parent element
 			var computedStyle = getComputedStyle(www.parentel);
 			targetw -= parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight);
 			targeth -= parseFloat(computedStyle.paddingTop) + parseFloat(computedStyle.paddingBottom);
-			var sizes = www.general.calculateAspectRatio(www.idealw,www.idealh,targetw,targeth);
-			
+			var sizes = www.general.calculateAspectRatio(www.idealw,www.idealh,targetw,targeth);			
 			www.w = www.canvas.width = sizes[0];
 			www.h = www.canvas.height = sizes[1];
+			*/
 		},
 		
 		//given a width and height representing an aspect ratio, and the size of the containing thing, return the largest w and h matching that aspect ratio
@@ -347,39 +388,40 @@ var www = {
 			// use the engine tick event to control our view
 			www.Events.on(www.engine, 'beforeTick', function(e) {
 				var translate;
-				/*
-				// mouse wheel controls zoom FIXME removing this functionality as it conflicts with limits imposed on viewpoint translation
-				var scaleFactor = www.mouse.wheelDelta * -0.1;
-				if (scaleFactor !== 0) {
-					if ((scaleFactor < 0 && www.boundsScale.x >= 0.6) || (scaleFactor > 0 && www.boundsScale.x <= 1.4)) { //these two numbers control the min and max zoom levels
-						www.boundsScaleTarget += scaleFactor;
+				
+				if(www.enableZoom){
+					// mouse wheel controls zoom FIXME removing this functionality as it conflicts with limits imposed on viewpoint translation
+					var scaleFactor = www.mouse.wheelDelta * -0.1;
+					if (scaleFactor !== 0) {
+						if ((scaleFactor < 0 && www.boundsScale.x >= 0.6) || (scaleFactor > 0 && www.boundsScale.x <= 1.4)) { //these two numbers control the min and max zoom levels
+							www.boundsScaleTarget += scaleFactor;
+						}
 					}
-				}
 
-				// if scale has changed
-				if (Math.abs(www.boundsScale.x - www.boundsScaleTarget) > 0.01) {
-					// smoothly tween scale factor
-					scaleFactor = (www.boundsScaleTarget - www.boundsScale.x) * 0.2;
-					www.boundsScale.x += scaleFactor;
-					www.boundsScale.y += scaleFactor;
+					// if scale has changed
+					if (Math.abs(www.boundsScale.x - www.boundsScaleTarget) > 0.01) {
+						// smoothly tween scale factor
+						scaleFactor = (www.boundsScaleTarget - www.boundsScale.x) * 0.2;
+						www.boundsScale.x += scaleFactor;
+						www.boundsScale.y += scaleFactor;
 
-					// scale the render bounds
-					www.render.bounds.max.x = www.render.bounds.min.x + www.render.options.width * www.boundsScale.x;
-					www.render.bounds.max.y = www.render.bounds.min.y + www.render.options.height * www.boundsScale.y;
+						// scale the render bounds
+						www.render.bounds.max.x = www.render.bounds.min.x + www.render.options.width * www.boundsScale.x;
+						www.render.bounds.max.y = www.render.bounds.min.y + www.render.options.height * www.boundsScale.y;
 
-					// translate so zoom is from centre of view
-					translate = {
-						x: www.render.options.width * scaleFactor * -0.5,
-						y: www.render.options.height * scaleFactor * -0.5
-					};
+						// translate so zoom is from centre of view
+						translate = {
+							x: www.render.options.width * scaleFactor * -0.5,
+							y: www.render.options.height * scaleFactor * -0.5
+						};
 
-					www.Bounds.translate(www.render.bounds, translate);
+						www.Bounds.translate(www.render.bounds, translate);
 
-					// update mouse
-					www.Mouse.setScale(www.mouse, www.boundsScale);
-					www.Mouse.setOffset(www.mouse, www.render.bounds.min);
+						// update mouse
+						www.Mouse.setScale(www.mouse, www.boundsScale);
+						www.Mouse.setOffset(www.mouse, www.render.bounds.min);
+					}				
 				}				
-				*/
 				
 				//reposition the screen to keep the player centered
 				var diffx = www.mycountry.myxpos - www.mycountry.position.x;
@@ -517,38 +559,38 @@ var www = {
 			var walloptions = { 
 				isStatic: true,
 				render: {
-					fillStyle: 'rgba(120,200,230,0.2)',
-					strokeStyle: 'rgba(120,200,230,0.2)',
+					fillStyle: 'rgba(120,200,230,0.5)',
+					strokeStyle: 'rgba(120,200,230,0.5)',
 					lineWidth: 0
 				}				
 			};
 			//top edge
 			var wall1 = {
 				x:www.engine.world.bounds.min.x + (www.worldw / 2),
-				y:www.engine.world.bounds.min.y, 
-				w:www.worldw,
+				y:www.engine.world.bounds.min.y - (www.boundswidth / 2), 
+				w:www.worldw * 2,
 				h:www.boundswidth
 			};
 			//right edge
 			var wall2 = {
-				x:www.engine.world.bounds.max.x,
+				x:www.engine.world.bounds.max.x + (www.boundswidth / 2),
 				y:www.engine.world.bounds.min.y + (www.worldh / 2),
 				w:www.boundswidth,
-				h:www.worldh
+				h:www.worldh * 2
 			};		
 			//bottom edge
 			var wall3 = {
 				x:www.engine.world.bounds.min.x + (www.worldw / 2),
-				y:www.engine.world.bounds.max.y,
-				w:www.worldw,
+				y:www.engine.world.bounds.max.y + (www.boundswidth / 2),
+				w:www.worldw * 2,
 				h:www.boundswidth
 			};			
 			//left edge
 			var wall4 = {
-				x:www.engine.world.bounds.min.x,
+				x:www.engine.world.bounds.min.x - (www.boundswidth / 2),
 				y:www.engine.world.bounds.min.y + (www.worldh / 2),
 				w:www.boundswidth,
-				h:www.worldh
+				h:www.worldh * 2
 			};			
 			var topwall = www.Bodies.rectangle(wall1.x,wall1.y,wall1.w,wall1.h,walloptions);				
 			var rightwall = www.Bodies.rectangle(wall2.x,wall2.y,wall2.w,wall2.h,walloptions);
