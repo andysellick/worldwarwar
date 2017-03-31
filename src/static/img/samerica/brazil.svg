@@ -9,9 +9,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="397.14166mm"
-   height="448.54016mm"
-   viewBox="0 0 397.14166 448.54016"
+   width="500mm"
+   height="500mm"
+   viewBox="0 0 500 500"
    version="1.1"
    id="svg10841"
    inkscape:version="0.92.0 r15299"
@@ -26,7 +26,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.35"
-     inkscape:cx="750.50388"
+     inkscape:cx="286.21817"
      inkscape:cy="847.63508"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
@@ -36,9 +36,9 @@
      fit-margin-right="0"
      fit-margin-bottom="0"
      inkscape:window-width="1920"
-     inkscape:window-height="1057"
-     inkscape:window-x="-8"
-     inkscape:window-y="-5"
+     inkscape:window-height="1017"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata10838">
@@ -56,7 +56,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(215.57975,75.436704)">
+     transform="translate(215.57975,126.89654)">
     <g
        id="br"
        class="landxx coastxx br"

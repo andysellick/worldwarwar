@@ -18,7 +18,8 @@ var allcountries = [
 		//x and y pos are stored as percentages
 		'x': 47, 
 		'y': 19.5,
-		'w': 11,
+		'w': 14,
+		'h': 35,
 		'unique': [
 			'Shakespeare',
 			'the Beatles',
@@ -31,7 +32,7 @@ var allcountries = [
 		'xScale': 0.13,
 		'x': 45.8, 
 		'y': 20.22,
-		'w': 8,
+		'w': 10,
 		'unique': [
 			'Guinness',
 			'Sudocrem',
@@ -44,8 +45,9 @@ var allcountries = [
 		'xScale': 0.11,
 		'yScale': 0.1,
 		'x': 44, 
-		'y': 14.1,
-		'w': 9,
+		'y': 15.1,
+		'w': 30,
+		'h': 10,
 		'unique': []		
 	},
 	{	'name': 'France',
@@ -54,7 +56,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 48.2, 
 		'y': 24.1,
-		'w': 15,
+		'w': 19,
 		'unique': [
 			'the Rabies vaccine',
 			'champagne',
@@ -67,7 +69,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 48.7, 
 		'y': 21.87,
-		'w': 4,
+		'w': 14,
+		'h': 5,
 		'unique': [
 			'roller skates',
 			'saxophones',
@@ -80,7 +83,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 46.96, 
 		'y': 27.425,
-		'w': 15,
+		'w': 20,
 		'unique': [
 			'laryngoscopy',
 			'paella',
@@ -94,30 +97,20 @@ var allcountries = [
 		'x': 45.61, 
 		'y': 27.575,
 		'w': 5,
+		'h': 25,
 		'unique': [
 			'eslicarbazepine acetate',
 			'cerebral angiography',
 			'the carrack'
 		]		
 	},
-	/*
-	{	'name': 'Andorra',
-		'dir': direurope,
-		'sprite': 'andorra.svg',
-		'xScale': 0.11, 
-		'x': 47.89,
-		'y': 26.01,
-		'w': 0.8,
-		'unique': []		
-	},
-	*/
 	{	'name': 'The Netherlands',
 		'dir': direurope,
 		'sprite': 'netherlands.svg',
 		'xScale': 0.11, 
 		'x': 48.89, 
 		'y': 21.045,
-		'w': 4,
+		'w': 5,
 		'unique': [
 			'the microscope',
 			'Fierljeppen',
@@ -130,7 +123,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 49.07, 
 		'y': 22.321,
-		'w': 1,
+		'w': 2,
 		'unique': [
 			'bouneschlupp',
 			'Andy Schleck',
@@ -143,7 +136,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 50.05, 
 		'y': 21.56,
-		'w': 14,
+		'w': 20,
+		'h': 25,
 		'unique': [
 			'aspirin',
 			'the integrated circuit',
@@ -156,7 +150,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 49.54, 
 		'y': 23.78,
-		'w': 4,
+		'w': 10,
+		'h': 5,
 		'unique': [
 			'bobsleigh',
 			'muesli',
@@ -169,7 +164,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 50.59, 
 		'y': 26.37,
-		'w': 10,
+		'w': 15,
+		'h': 25,
 		'unique': [
 			'pizza',
 			'espresso',
@@ -182,7 +178,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 50.73, 
 		'y': 23.31,
-		'w': 5,
+		'w': 25,
+		'h': 5,
 		'unique': [
 			'digital clocks',
 			'the Altekruse Puzzle',
@@ -195,20 +192,21 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 50, 
 		'y': 19,
-		'w': 7,
+		'w': 9,
 		'unique': [
 			'Gaboxadol',
 			'Google Maps',
 			'Lego'
 		]		
 	},
-	{	'name': 'The Czech Republic',
+	{	'name': 'Czechia',
 		'dir': direurope,
 		'sprite': 'czechrepublic.svg',
 		'xScale': 0.11, 
 		'x': 51.21, 
 		'y': 22.23,
-		'w': 4,
+		'w': 16,
+		'h': 5,
 		'unique': [
 			'Jan Hammer',
 			'Gregor Mendel',
@@ -221,7 +219,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 52.02, 
 		'y': 21.15,
-		'w': 10,
+		'w': 30,
+		'h': 14,
 		'unique': [
 			'Copernicus',
 			'vodka',
@@ -234,7 +233,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 51.11, 
 		'y': 24.12,
-		'w': 3,
+		'w': 10,
+		'h': 5,
 		'unique': [
 			'plastic ice skates',
 			'the Skocjan caves',
@@ -247,7 +247,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 52.19, 
 		'y': 22.82,
-		'w': 3,
+		'w': 20,
+		'h': 4,
 		'unique': []		
 	},
 	{	'name': 'Hungary',
@@ -256,7 +257,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 52.15, 
 		'y': 23.6,
-		'w': 4,
+		'w': 20,
+		'h': 7,
 		'unique': [
 			'the biro',
 			'electric motors',
@@ -270,6 +272,7 @@ var allcountries = [
 		'x': 51.457, 
 		'y': 25,
 		'w': 3,
+		'h': 10,
 		'unique': [
 			'the necktie',
 			'dalmatians',
@@ -282,7 +285,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 51.75, 
 		'y': 25.32,
-		'w': 2,
+		'w': 5,
+		'h': 12,
 		'unique': [
 			'Ivo Andric',
 			'Mesa Selimovic'
@@ -295,6 +299,7 @@ var allcountries = [
 		'x': 52.52, 
 		'y': 25.25,
 		'w': 6,
+		'h': 14,
 		'unique': [
 			'alternating current',
 			'radio',
@@ -307,7 +312,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 52.135, 
 		'y': 25.95,
-		'w': 2,
+		'w': 3,
 		'unique': []		
 	},
 	{	'name': 'Albania',
@@ -316,7 +321,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 52.38, 
 		'y': 26.78,
-		'w': 2,
+		'w': 4,
+		'h': 10,
 		'unique': [
 			'John Belushi'
 		]		
@@ -327,7 +333,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 52.75, 
 		'y': 26.53,
-		'w': 3,
+		'w': 7,
+		'h': 6,
 		'unique': []		
 	},
 	{	'name': 'Greece',
@@ -336,7 +343,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 53.35, 
 		'y': 28.28,
-		'w': 12,
+		'w': 15,
 		'unique': [
 			'democracy',
 			'Euclidean geometry', 
@@ -349,7 +356,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 53.62, 
 		'y': 25.935,
-		'w': 6,
+		'w': 20,
+		'h': 10,
 		'unique': [
 			'cyrillic script',
 			'mavrud', 
@@ -362,7 +370,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 53.47, 
 		'y': 24.24,
-		'w': 9,
+		'w': 12,
 		'unique': [
 			'the Teclu burner',
 			'George Enescu', 
@@ -375,7 +383,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 54.22, 
 		'y': 23.7,
-		'w': 3,
+		'w': 4,
+		'h': 8,
 		'unique': []		
 	},
 	{	'name': 'Ukraine',
@@ -384,7 +393,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 54.83, 
 		'y': 22.98,
-		'w': 10,
+		'w': 60,
+		'h': 5,
 		'unique': [
 			'postal codes',
 			'Battleship Potemkin', 
@@ -397,7 +407,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 53.97, 
 		'y': 20.24,
-		'w': 8,
+		'w': 12,
 		'unique': [
 			'minsk computers',
 			'draniki',
@@ -409,7 +419,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 52.99, 
 		'y': 19.5,
-		'w': 5,
+		'w': 13,
+		'h': 10,
 		'unique': []		
 	},
 	{	'name': 'Latvia',
@@ -418,7 +429,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 53.13, 
 		'y': 18.64,
-		'w': 3,
+		'w': 20,
+		'h': 5,
 		'unique': []		
 	},
 	{	'name': 'Estonia',
@@ -427,7 +439,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 53.15, 
 		'y': 17.79,
-		'w': 4,
+		'w': 20,
+		'h': 6,
 		'unique': [
 			'Skype'
 		]		
@@ -450,7 +463,7 @@ var allcountries = [
 		'dir': direurope,
 		'sprite': 'kazakhstan.svg',
 		'xScale': 0.11, 
-		'x': 63.06, 
+		'x': 63.08, 
 		'y': 23.21,
 		'w': 130,
 		'h': 40,
@@ -462,7 +475,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 53.15, 
 		'y': 14.8,
-		'w': 10,
+		'w': 20,
+		'h': 40,
 		'unique': [
 			'ice skates',
 			'the heart rate monitor',
@@ -475,7 +489,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 51.47, 
 		'y': 16.12,
-		'w': 8,
+		'w': 25,
+		'h': 28,
 		'unique': [
 			'Bluetooth',
 			'celsius',
@@ -487,9 +502,9 @@ var allcountries = [
 		'sprite': 'norway.svg',
 		'xScale': 0.11, 
 		'x': 51.4, 
-		'y': 14.99,
-		'w': 30,
-		'h': 2,
+		'y': 13.7,
+		'w': 35,
+		'h': 15,
 		'unique': [
 			'aerosol spray',
 			'the cheese slicer',
@@ -525,7 +540,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 58.42, 
 		'y': 27.36,
-		'w': 4,
+		'w': 5,
 		'unique': []		
 	},
 	{	'name': 'Azerbaijan',
@@ -534,7 +549,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 59.05, 
 		'y': 27.31,
-		'w': 2,
+		'w': 7,
 		'unique': []		
 	},
 	{	'name': 'Georgia',
@@ -543,7 +558,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 57.93, 
 		'y': 26.15,
-		'w': 2,
+		'w': 20,
+		'h': 5,
 		'unique': []		
 	},
 	{	'name': 'Syria',
@@ -552,7 +568,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 57.11, 
 		'y': 30.15,
-		'w': 8,
+		'w': 10,
 		'unique': [
 			'Steve Jobs',
 		]		
@@ -597,7 +613,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 56.76, 
 		'y': 32.04,
-		'w': 5,
+		'w': 9,
 		'unique': []		
 	},
 	{	'name': 'Iraq',
@@ -606,7 +622,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 58.4, 
 		'y': 31.01,
-		'w': 8,
+		'w': 15,
 		'unique': []		
 	},
 	{	'name': 'Saudi Arabia',
@@ -615,7 +631,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 58.95, 
 		'y': 35.79,
-		'w': 22,
+		'w': 27,
 		'unique': []		
 	},
 	{	'name': 'Kuwait',
@@ -624,7 +640,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 59.46, 
 		'y': 33.1,
-		'w': 2,
+		'w': 4,
 		'unique': []		
 	},
 	{	'name': 'Qatar',
@@ -633,7 +649,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 60.49, 
 		'y': 35.25,
-		'w': 2,
+		'w': 5,
 		'unique': []		
 	},
 	{	'name': 'United Arab Emirates',
@@ -652,6 +668,7 @@ var allcountries = [
 		'x': 61.81, 
 		'y': 37.23,
 		'w': 8,
+		'h': 30,
 		'unique': []		
 	},
 	{	'name': 'Yemen',
@@ -660,7 +677,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 60.01, 
 		'y': 40.38,
-		'w': 13,
+		'w': 35,
+		'h': 20,
 		'unique': []		
 	},	
 	{	'name': 'Egypt',
@@ -669,7 +687,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 55.11, 
 		'y': 34.55,
-		'w': 18,
+		'w': 24,
 		'unique': [
 			'board games',
 			'bowling',
@@ -682,7 +700,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 51.78, 
 		'y': 34.71,
-		'w': 22,
+		'w': 32,
 		'unique': []		
 	},	
 	{	'name': 'Tunisia',
@@ -691,7 +709,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 49.8, 
 		'y': 30.75,
-		'w': 8,
+		'w': 15,
+		'h': 30,
 		'unique': []		
 	},			
 	{	'name': 'Algeria',
@@ -700,7 +719,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 47.78, 
 		'y': 33.8,
-		'w': 24,
+		'w': 40,
+		'h': 60,
 		'unique': []		
 	},			
 	{	'name': 'Morocco',
@@ -709,16 +729,17 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 45.56, 
 		'y': 31.83,
-		'w': 13,
+		'w': 16,
 		'unique': []		
 	},		
 	{	'name': 'Western Sahara',
 		'dir': dirafrica,
 		'sprite': 'westernsahara.svg',
 		'xScale': 0.11, 
-		'x': 44.02, 
+		'x': 43.6, 
 		'y': 35.85,
-		'w': 7,
+		'w': 10,
+		'h': 25,
 		'unique': []		
 	},	
 	{	'name': 'Mauritania',
@@ -727,7 +748,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 44.51, 
 		'y': 37.54,
-		'w': 10,
+		'w': 14,
+		'h': 50,
 		'unique': []		
 	},		
 	{	'name': 'Mali',
@@ -736,7 +758,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 46.265, 
 		'y': 39.38,
-		'w': 15,
+		'w': 20,
 		'unique': []		
 	},		
 	{	'name': 'Senegal',
@@ -745,7 +767,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 43.52, 
 		'y': 41.02,
-		'w': 3,
+		'w': 20,
+		'h': 5,
 		'unique': []		
 	},
 	{	'name': 'The Gambia',
@@ -754,7 +777,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 43.29, 
 		'y': 41.6,
-		'w': 2,
+		'w': 10,
+		'h': 4,
 		'unique': []		
 	},	
 	{	'name': 'Guinea-Bissau',
@@ -763,7 +787,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 43.32, 
 		'y': 42.46,
-		'w': 2,
+		'w': 5,
 		'unique': []		
 	},	
 	{	'name': 'Guinea',
@@ -772,7 +796,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 44.32, 
 		'y': 43.45,
-		'w': 4,
+		'w': 25,
+		'h': 5,
 		'unique': []		
 	},		
 	{	'name': 'Sierra Leone',
@@ -781,7 +806,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 44.2, 
 		'y': 44.235,
-		'w': 3,
+		'w': 5,
 		'unique': []		
 	},		
 	{	'name': 'Liberia',
@@ -790,7 +815,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 44.82, 
 		'y': 45.3,
-		'w': 4,
+		'w': 8,
 		'unique': []		
 	},		
 	{	'name': 'Cote d\'Ivoire',
@@ -799,7 +824,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 45.83, 
 		'y': 44.71,
-		'w': 10,
+		'w': 12,
 		'unique': []		
 	},			
 	{	'name': 'Burkina Faso',
@@ -808,7 +833,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 46.88, 
 		'y': 42.22,
-		'w': 10,
+		'w': 25,
+		'h': 12,
 		'unique': []		
 	},	
 	{	'name': 'Ghana',
@@ -817,7 +843,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 47.02, 
 		'y': 44.52,
-		'w': 5,
+		'w': 10,
+		'h': 20,
 		'unique': []		
 	},		
 	{	'name': 'Togo',
@@ -826,7 +853,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 47.52, 
 		'y': 44.16,
-		'w': 2,
+		'w': 5,
+		'h': 20,
 		'unique': []		
 	},		
 	{	'name': 'Benin',
@@ -835,7 +863,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 47.92, 
 		'y': 43.79,
-		'w': 4,
+		'w': 5,
+		'h': 20,
 		'unique': []		
 	},		
 	{	'name': 'Niger',
@@ -844,7 +873,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 49.41, 
 		'y': 39.38,
-		'w': 20,
+		'w': 40,
+		'h': 30,
 		'unique': []		
 	},		
 	{	'name': 'Nigeria',
@@ -853,7 +883,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 49.58, 
 		'y': 43.9,
-		'w': 10,
+		'w': 15,
+		'h': 35,
 		'unique': []		
 	},		
 	{	'name': 'Chad',
@@ -862,7 +893,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 52.2, 
 		'y': 40.5,
-		'w': 18,
+		'w': 30,
+		'h': 45,
 		'unique': []		
 	},		
 	{	'name': 'Sudan',
@@ -871,7 +903,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 55.19, 
 		'y': 40.1,
-		'w': 24,
+		'w': 30,
 		'unique': []		
 	},		
 	{	'name': 'Eritrea',
@@ -880,7 +912,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 57.72, 
 		'y': 40.66,
-		'w': 6,
+		'w': 20,
+		'h': 20,
 		'unique': []		
 	},		
 	{	'name': 'Djibouti',
@@ -889,7 +922,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 58.48, 
 		'y': 42.46,
-		'w': 3,
+		'w': 5,
 		'unique': []		
 	},		
 	{	'name': 'Ethiopia',
@@ -898,7 +931,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 57.94, 
 		'y': 43.89,
-		'w': 10,
+		'w': 50,
+		'h': 15,
 		'unique': []		
 	},		
 	{	'name': 'Somalia',
@@ -907,7 +941,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 59.46, 
 		'y': 46.03,
-		'w': 10,
+		'w': 14,
 		'unique': []		
 	},		
 	{	'name': 'South Sudan',
@@ -916,7 +950,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 55.11, 
 		'y': 44.53,
-		'w': 14,
+		'w': 18,
 		'unique': []		
 	},	
 	
@@ -926,7 +960,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 52.81, 
 		'y': 45.23,
-		'w': 12,
+		'w': 40,
+		'h': 20,
 		'unique': []		
 	},
 	{	'name': 'Cameroon',
@@ -945,7 +980,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 49.9, 
 		'y': 47.47,
-		'w': 5,
+		'w': 7,
 		'unique': []		
 	},
 	{	'name': 'Gabon',
@@ -954,7 +989,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 50.37, 
 		'y': 49.165,
-		'w': 8,
+		'w': 10,
 		'unique': []		
 	},
 	{	'name': 'Republic of the Congo',
@@ -963,7 +998,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 51.22, 
 		'y': 49.1,
-		'w': 6,
+		'w': 10,
+		'h': 30,
 		'unique': []		
 	},
 	{	'name': 'Democratic Republic of the Congo',
@@ -972,7 +1008,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 53.03, 
 		'y': 50.9,
-		'w': 20,
+		'w': 45,
+		'h': 30,
 		'unique': []		
 	},
 	{	'name': 'Uganda',
@@ -981,7 +1018,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 55.82, 
 		'y': 48,
-		'w': 8,
+		'w': 12,
 		'unique': []		
 	},
 	{	'name': 'Kenya',
@@ -990,7 +1027,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 57.3, 
 		'y': 48.77,
-		'w': 12,
+		'w': 18,
 		'unique': []		
 	},
 	{	'name': 'Rwanda',
@@ -999,7 +1036,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 55.17, 
 		'y': 49.79,
-		'w': 2,
+		'w': 4,
 		'unique': []		
 	},
 	{	'name': 'Burundi',
@@ -1008,7 +1045,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 55.18, 
 		'y': 50.56,
-		'w': 3,
+		'w': 5,
 		'unique': []		
 	},
 	{	'name': 'Tanzania',
@@ -1017,7 +1054,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 56.5, 
 		'y': 52.14,
-		'w': 15,
+		'w': 20,
 		'unique': []		
 	},
 	{	'name': 'Zambia',
@@ -1026,7 +1063,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 54.6, 
 		'y': 55.73,
-		'w': 14,
+		'w': 40,
+		'h': 20,
 		'unique': []		
 	},
 	{	'name': 'Angola',
@@ -1035,7 +1073,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 52, 
 		'y': 54.7,
-		'w': 18,
+		'w': 22,
 		'unique': []		
 	},
 	{	'name': 'Namibia',
@@ -1044,7 +1082,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 52.14, 
 		'y': 60.94,
-		'w': 14,
+		'w': 20,
+		'h': 25,
 		'unique': []		
 	},
 	{	'name': 'Botswana',
@@ -1053,7 +1092,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 53.72, 
 		'y': 60.62,
-		'w': 12,
+		'w': 13,
+		'h': 25,
 		'unique': []		
 	},
 	{	'name': 'Zimbabwe',
@@ -1062,7 +1102,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 54.92, 
 		'y': 58.87,
-		'w': 10,
+		'w': 15,
 		'unique': []		
 	},
 	{	'name': 'Malawi',
@@ -1071,7 +1111,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 56.29, 
 		'y': 55.79,
-		'w': 4,
+		'w': 10,
+		'h': 20,
 		'unique': []		
 	},
 	{	'name': 'Mozambique',
@@ -1080,7 +1121,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 56.61, 
 		'y': 58.69,
-		'w': 16,
+		'w': 18,
 		'unique': []		
 	},
 	{	'name': 'Madagascar',
@@ -1089,7 +1130,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 59.6, 
 		'y': 58.69,
-		'w': 14,
+		'w': 20,
+		'h': 50,
 		'unique': []		
 	},
 	{	'name': 'South Africa',
@@ -1098,7 +1140,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 53.69, 
 		'y': 63.89,
-		'w': 17,
+		'w': 60,
+		'h': 25,
 		'unique': [
 			'the vuvuzela',
 			'Hertzog cookies'
@@ -1110,7 +1153,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 62.0, 
 		'y': 27.96,
-		'w': 12,
+		'w': 40,
+		'h': 10,
 		'unique': []		
 	},
 	{	'name': 'Iran',
@@ -1119,7 +1163,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 60.88, 
 		'y': 31.43,
-		'w': 20,
+		'w': 40,
+		'h': 35,
 		'unique': [
 			'gas lasers',
 			'polo'
@@ -1131,7 +1176,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 63, 
 		'y': 26.69,
-		'w': 8,
+		'w': 50,
+		'h': 10,
 		'unique': []		
 	},
 	{	'name': 'Kyrgyzstan',
@@ -1140,7 +1186,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 65.6, 
 		'y': 26.73,
-		'w': 6,
+		'w': 20,
+		'h': 10,
 		'unique': []		
 	},
 	{	'name': 'Tajikistan',
@@ -1149,7 +1196,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 64.95, 
 		'y': 27.97,
-		'w': 8,
+		'w': 20,
+		'h': 10,
 		'unique': []		
 	},
 	{	'name': 'Afghanistan',
@@ -1158,7 +1206,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 64.23, 
 		'y': 30.62,
-		'w': 10,
+		'w': 35,
+		'h': 15,
 		'unique': []		
 	},
 	{	'name': 'Pakistan',
@@ -1167,7 +1216,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 64.8, 
 		'y': 32.51,
-		'w': 10,
+		'w': 40,
+		'h': 15,
 		'unique': []		
 	},
 	{	'name': 'India',
@@ -1176,7 +1226,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 68.57, 
 		'y': 37.45,
-		'w': 24,
+		'w': 50,
+		'h': 60,
 		'unique': [
 			'chess',
 			'shampoo',
@@ -1198,7 +1249,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 68.85, 
 		'y': 33.57,
-		'w': 5,
+		'w': 25,
+		'h': 5,
 		'unique': []		
 	},
 	{	'name': 'China',
@@ -1207,8 +1259,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 72.255, 
 		'y': 29.655,
-		'w': 140,
-		'h': 50,
+		'w': 160,
+		'h': 60,
 		'unique': [
 			'nail polish',
 			'the compass',
@@ -1221,8 +1273,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 71.75, 
 		'y': 23.77,
-		'w': 100,
-		'h': 30,
+		'w': 120,
+		'h': 40,
 		'unique': []		
 	},
 	{	'name': 'Bhutan',
@@ -1291,16 +1343,18 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 74.82, 
 		'y': 42.07,
-		'w': 4,
+		'w': 15,
+		'h': 7,
 		'unique': []		
 	},
 	{	'name': 'Taiwan',
 		'dir': dirasia,
 		'sprite': 'taiwan.svg',
 		'xScale': 0.11, 
-		'x': 78.1, 
-		'y': 36.5,
-		'w': 4,
+		'x': 78.5, 
+		'y': 36.4,
+		'w': 8,
+		'h': 17,
 		'unique': []		
 	},
 	{	'name': 'North Korea',
@@ -1309,7 +1363,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 78.34, 
 		'y': 27.23,
-		'w': 9,
+		'w': 14,
 		'unique': []		
 	},
 	{	'name': 'South Korea',
@@ -1318,7 +1372,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 79.08, 
 		'y': 29.55,
-		'w': 9,
+		'w': 14,
 		'unique': [
 			'internet cafes'
 		]		
@@ -1327,9 +1381,10 @@ var allcountries = [
 		'dir': dirasia,
 		'sprite': 'japan.svg',
 		'xScale': 0.11, 
-		'x': 80.9, 
-		'y': 30.1,
-		'w': 18,
+		'x': 81.1, 
+		'y': 28.7,
+		'w': 30,
+		'h': 60,
 		'unique': [
 			'anime',
 			'emojis',
@@ -1352,7 +1407,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 79.4, 
 		'y': 42,
-		'w': 23,
+		'w': 25,
 		'h': 58,
 		'unique': []		
 	},
@@ -1382,7 +1437,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 81.7, 
 		'y': 62.9,
-		'w': 60,
+		'w': 140,
+		'h': 110,
 		'unique': [
 			'the electric drill',
 			'vegemite',
@@ -1393,9 +1449,10 @@ var allcountries = [
 		'dir': diroceania,
 		'sprite': 'newzealand.svg',
 		'xScale': 0.11, 
-		'x': 89, 
+		'x': 90, 
 		'y': 71.5,
-		'w': 16,
+		'w': 60,
+		'h': 50,
 		'unique': [
 			'instant coffee'
 		]		
@@ -1406,7 +1463,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 41, 
 		'y': 11.5,
-		'w': 40,
+		'w': 100,
+		'h': 45,
 		'unique': []		
 	},
 	{	'name': 'Canada',
@@ -1415,8 +1473,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 27.1, 
 		'y': 16.5,
-		'w': 210,
-		'h': 90,
+		'w': 230,
+		'h': 100,
 		'unique': [
 			'ice hockey',
 			'IMAX',
@@ -1429,8 +1487,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 23.25, 
 		'y': 28.51,
-		'w': 180,
-		'h': 60,
+		'w': 190,
+		'h': 70,
 		'unique': [
 			'breakfast cereal',
 			'the microwave oven',
@@ -1443,7 +1501,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 15.15, 
 		'y': 15.47,
-		'w': 30,
+		'w': 100,
+		'h': 40,
 		'unique': []		
 	},
 	{	'name': 'United States (Hawaii)',
@@ -1452,7 +1511,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 4.5, 
 		'y': 38.5,
-		'w': 6,
+		'w': 10,
 		'unique': []		
 	},
 	{	'name': 'Mexico',
@@ -1461,7 +1520,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 19.86, 
 		'y': 35.73,
-		'w': 25,
+		'w': 80,
+		'h': 50,
 		'unique': []		
 	},
 	{	'name': 'Guatemala',
@@ -1479,7 +1539,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 23.52, 
 		'y': 40.49,
-		'w': 5,
+		'w': 15,
+		'h': 6,
 		'unique': []		
 	},
 	{	'name': 'El Salvador',
@@ -1488,7 +1549,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 22.79, 
 		'y': 40.98,
-		'w': 3,
+		'w': 5,
 		'unique': []		
 	},
 	{	'name': 'Belize',
@@ -1498,6 +1559,7 @@ var allcountries = [
 		'x': 23, 
 		'y': 39.15,
 		'w': 3,
+		'h': 10,
 		'unique': []		
 	},
 	{	'name': 'Nicaragua',
@@ -1506,7 +1568,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 23.73, 
 		'y': 41.48,
-		'w': 4,
+		'w': 6,
 		'unique': []		
 	},
 	{	'name': 'Costa Rica',
@@ -1515,7 +1577,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 23.94, 
 		'y': 43.23,
-		'w': 5,
+		'w': 7,
 		'unique': []		
 	},
 	{	'name': 'Panama',
@@ -1524,7 +1586,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 24.99, 
 		'y': 43.88,
-		'w': 5,
+		'w': 20,
+		'h': 10,
 		'unique': []		
 	},
 	{	'name': 'Cuba',
@@ -1588,7 +1651,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 26.81, 
 		'y': 46.18,
-		'w': 16,
+		'w': 20,
+		'h': 60,
 		'unique': []		
 	},
 	{	'name': 'Venezuela',
@@ -1597,7 +1661,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 28.56, 
 		'y': 44.94,
-		'w': 14,
+		'w': 20,
+		'h': 40,
 		'unique': []		
 	},
 	{	'name': 'Guyana',
@@ -1616,7 +1681,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 31.31, 
 		'y': 46.25,
-		'w': 6,
+		'w': 10,
+		'h': 15,
 		'unique': []		
 	},
 	{	'name': 'French Guiana',
@@ -1626,6 +1692,7 @@ var allcountries = [
 		'x': 32.07, 
 		'y': 46.25,
 		'w': 6,
+		'h': 15,
 		'unique': []		
 	},
 	{	'name': 'Ecuador',
@@ -1634,7 +1701,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 25.46, 
 		'y': 49.3,
-		'w': 8,
+		'w': 10,
 		'unique': []		
 	},
 	{	'name': 'Peru',
@@ -1643,7 +1710,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 26.37, 
 		'y': 53.25,
-		'w': 30,
+		'w': 40,
 		'h': 55,
 		'unique': []		
 	},
@@ -1651,10 +1718,10 @@ var allcountries = [
 		'dir': dirsamerica,
 		'sprite': 'brazil.svg',
 		'xScale': 0.11, 
-		'x': 31.75, 
-		'y': 55.92,
-		'w': 40,
-		'h': 60,
+		'x': 33.1, 
+		'y': 54.72,
+		'w': 70,
+		'h': 90,
 		'unique': []		
 	},
 	{	'name': 'Bolivia',
@@ -1663,7 +1730,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 29.48, 
 		'y': 57.02,
-		'w': 16,
+		'w': 40,
+		'h': 50,
 		'unique': []		
 	},
 	{	'name': 'Paraguay',
@@ -1672,7 +1740,8 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 31.06, 
 		'y': 60.8,
-		'w': 10,
+		'w': 30,
+		'h': 15,
 		'unique': []		
 	},
 	{	'name': 'Argentina',
@@ -1691,7 +1760,7 @@ var allcountries = [
 		'xScale': 0.11, 
 		'x': 32.18, 
 		'y': 65.63,
-		'w': 9,
+		'w': 13,
 		'unique': [
 			'canasta',
 			'the chivito',
@@ -1712,8 +1781,8 @@ var allcountries = [
 		'sprite': 'falklandislands.svg',
 		'xScale': 0.11, 
 		'x': 33, 
-		'y': 76,
-		'w': 3,
+		'y': 76, 
+		'w': 5,
 		'unique': []		
 	},
 ];
@@ -1729,58 +1798,6 @@ var temp = [
 //500, 300
 
 /*
-ended up restarting with country positioning and three different sets of images 3 times...
-gave up on inventions towards the end of europe
-textures aren't drawn until shapes on screen, but shapes usually are overlapped by textures
-macedonia is a really awkward shape
-russia appears to own a chunk of land on the coast between Poland and Lithuania
-norway is also a really awkward shape
-western sahara isn't a place? Confusing
-there are a LOT of countries
-potentially provocative - should Palestine be in here?
-fascinating learning experience - didn't even know benin existed, central african republic
-azerbaijan is hugging armenia
-had to break the US into 3 chunks. Noone else was this unhelpful. Thanks, US.
-so minus 2 countries from total
-also minus greenland, which belongs to denmark
-Too small to include (probably): (37 countries)
-Andorra
-Malta
-Kosovo (inside serbia)
-Liechtenstein
-Monaco
-San Marino (is this a country inside Italy??)
-Vatican City
-Bahrain
-Singapore
-Timor-Leste
-Brunei
-Maldives
-Cape Verde
-Comoros
-Mauritius
-Sau Tome and Principe
-Seychelles
-Lesotho (literally inside SA)
-Swaziland
-Fiji
-Kiribati
-Marshall Islands
-Micronesia
-Nauru
-Palau
-Samoa
-Solomon Islands
-Tonga
-Tuvalu
-Vanatu
-Barbados
-Dominica
-Antigua and Barbuda
-Grenada
-Saint Kitts and Nevis
-Saint Lucia
-Saint Vincent and the Grenadines
-Trinidad and Tobago
+
 
 */

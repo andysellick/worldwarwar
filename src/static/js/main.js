@@ -41,10 +41,13 @@ var www = {
 	bulletlife: 800, //how many milliseconds a bullet should exist for
 	chosen: 0, //the country chosen by the player
 	timer: 0,
-	scaleFactor: 2, //how big to draw everything. 
+	scaleFactor: 2,//1.5, //how big to draw everything. 
 	debug: 0,
 	mode: 3,
-	bestscores: [0,0],
+	bestscores: [
+		{'country':'','score':0},
+		{'country':'','score':0}
+	],
 	enableZoom: 0, //FIXME this is mainly for debug, potentially remove for production
 	translated: {x:0,y:0}, //keep a track of any view translations for locating click events
 	
@@ -64,7 +67,7 @@ var www = {
 			var saved = localStorage.getItem('worldwarwar');
 			if(saved !== null && saved.length > 0){
 				www.bestscores = JSON.parse(saved);	
-				console.log(www.bestscores);
+				//console.log('Saved scores',www.bestscores);
 				www.general.updateScores();
 			}
 		},
@@ -74,20 +77,21 @@ var www = {
 			document.getElementById('wwwpage').className = 'gameon';
 			www.mode = chosenmode;
 			www.enemycount = 0;
+			www.translated = {x:0,y:0};
 			//setup game attributes according to mode
 			if(www.mode === 1){ //just float around destroying the world, sandbox				
 				www.enemyhealth = 2;
 				www.enemiesfire = 0;
 			}
 			else if(www.mode === 2){ //reasonable level of violence				
-				www.playerhealth = 3;
-				www.enemyhealth = 2;
+				www.playerhealth = 10;
+				www.enemyhealth = 5;
 				www.enemiesfire = 1;
 				www.firechance = 10;
 			}
 			else { //extreme				
-				www.playerhealth = 1;
-				www.enemyhealth = 1;
+				www.playerhealth = 5;
+				www.enemyhealth = 5;
 				www.enemiesfire = 1;
 				www.firechance = 3;
 			}
@@ -107,7 +111,6 @@ var www = {
 				options: {
 					width: www.canvasw,
 					height: www.canvash,
-					//background:'#aa0000',
 					background: 'transparent',
 					hasBounds: true,
 					//showBounds: true,
@@ -149,11 +152,10 @@ var www = {
 					y: 1
 				};		
 			}
-						
 			www.general.setWorldSize();
 			
 			if(www.debug){
-				//www.chosen = allcountries.length - 1;
+				www.chosen = allcountries.length - 1;
 			}
 			
 			www.general.drawBoundary(); //draw the boundary first, so countries overlap it
@@ -173,21 +175,18 @@ var www = {
 					y: www.enemies[www.enemies.length - 1].position.y - (www.canvash / 2)
 				};
 			}
-			*/			
-			
-			//FIXME this isn't working for countries on the edge e.g. hawaii
+			*/					
 			var arbitrarybound = www.boundswidth / 2;
-			
+			//console.log('Original view translation',translate);
 			translate.x = Math.min(translate.x, www.engine.world.bounds.max.x - (www.canvasw - arbitrarybound));
-			translate.x = Math.max(translate.x, (www.worldw / 2) - (www.engine.world.bounds.min.x + www.canvasw + arbitrarybound));
-			translate.y = Math.min(translate.y, www.engine.world.bounds.max.y - (www.canvash + arbitrarybound));
-			translate.y = Math.max(translate.y, -((www.worldh / 2) - (www.engine.world.bounds.min.y + www.canvash - arbitrarybound)));
+			translate.x = Math.max(translate.x,-(translate.x - (translate.x - (www.canvasw / 2) - arbitrarybound)));
 			
-			www.translated.x += translate.x;
-			www.translated.y += translate.y;
+			translate.y = Math.min(translate.y, www.engine.world.bounds.max.y - (www.canvash - arbitrarybound));
+			translate.y = Math.max(translate.y,-((www.worldh / 2) - (www.canvash / 2) + arbitrarybound));
 			
-			//console.log('mycountry pos',www.mycountry.position.x,www.mycountry.position.y);
-			//console.log('Initial view position',translate);
+			www.translated.x += translate.x; //keep track of all view translations
+			www.translated.y += translate.y;			
+			//console.log('Initial view translation',translate);
 			www.Bounds.translate(www.render.bounds, translate); 
 	
 			www.general.createMatterEvents();			
@@ -208,60 +207,56 @@ var www = {
 		},
 		
 		updateScores: function(){
-			document.getElementById('savedscore1').innerHTML = 'Best: ' + www.bestscores[0];
-			document.getElementById('savedscore2').innerHTML = 'Best: ' + www.bestscores[1];
-			if(www.mode === 2){
-				www.bestscores[0] = www.playerscore;
+			if(www.mode === 2 && www.playerscore > www.bestscores[0].score){
+				www.bestscores[0].score = www.playerscore;
+				www.bestscores[0].country = www.mycountry.myname;
 			}
-			else if(www.mode === 3){
-				www.bestscores[1] = www.playerscore;
+			else if(www.mode === 3 && www.playerscore > www.bestscores[1].score){
+				www.bestscores[1].score = www.playerscore;
+				www.bestscores[1].country = www.mycountry.myname;
 			}
+			document.getElementById('savedscore1').innerHTML = 'Best: ' + www.bestscores[0].score + ' ' + www.bestscores[0].country;
+			document.getElementById('savedscore2').innerHTML = 'Best: ' + www.bestscores[1].score + ' ' + www.bestscores[1].country;
+			var allels = document.getElementsByClassName('js-scoregeneral');
+			[].slice.call(allels).forEach(function(div){
+				div.innerHTML = www.playerscore;
+			});
 		},
 		
 		//set up world size and boundaries
 		//FIXME this still isn't working for portrait
 		setWorldSize: function(){		
-			var targetw = www.canvasw;
-			var targeth = www.canvash;
-			var sizes = www.general.calculateAspectRatio(www.idealw,www.idealh,targetw,targeth);
-			www.worldw = sizes[0] * www.scaleFactor;
-			www.worldh = sizes[1] * www.scaleFactor;
-			//console.log('Sizes',sizes);
-/*
-			if(www.worldh < www.canvash){
-				//FIXME this works but need to recentre the canvas, effectively
-				//argh no it doesn't
-				var scaleh = (www.worldh / www.canvash) * 100;
-				console.log('scaleh',scaleh);
-				www.worldh = www.canvash;
-				www.worldw = (www.worldw / scaleh) * 100;
-			}
-			else {
-				var scalew = (www.worldw / www.canvasw) * 100;
-				console.log('scalew',scalew);
+			var sizes = www.general.calculateAspectRatio(www.idealw,www.idealh,www.canvasw,www.canvash);
+			www.worldw = sizes[0];
+			www.worldh = sizes[1];
+			
+			if(www.worldw < www.canvasw){ //world too short
 				www.worldw = www.canvasw;
+				var scalew = (sizes[0] / www.worldw) * 100;
 				www.worldh = (www.worldh / scalew) * 100;
 			}
-*/			
-			console.log('Canvas width',www.canvasw,'World width',www.worldw);
-			console.log('Canvas height',www.canvash,'World height',www.worldh);
+			else if(www.worldh < www.canvash){ //world too narrow
+				www.worldh = www.canvash;
+				var scaleh = (sizes[1] / www.worldh) * 100;
+				www.worldw = (www.worldw / scaleh) * 100;
+			}		
+			www.worldw *= www.scaleFactor;
+			www.worldh *= www.scaleFactor;
+	
+			//console.log('Canvas width',www.canvasw,'World width',www.worldw);
+			//console.log('Canvas height',www.canvash,'World height',www.worldh);
 					
 			//make the world bounds twice as big as the canvas (render bounds)
-			//www.worldw = (www.canvasw * www.scaleFactor) * 2;
-			//www.worldh = (www.canvash * www.scaleFactor) * 2;
 			var minx = (www.canvasw - www.worldw) / 2;
 			var miny = (www.canvash - www.worldh) / 2;
 			var maxx = minx + www.worldw;
-			var maxy = miny + www.worldh;
-			
-			console.log('World size',www.worldw,www.worldh,'Bounds',minx,miny,maxx,maxy);
+			var maxy = miny + www.worldh;			
+			//console.log('World size',www.worldw,www.worldh,'Bounds',minx,miny,maxx,maxy);
 		
 			www.engine.world.bounds.min.x = minx; //-300;
 			www.engine.world.bounds.min.y = miny; //-300;
 			www.engine.world.bounds.max.x = maxx; //1100;
 			www.engine.world.bounds.max.y = maxy; //900;
-			//console.log('World bounds are',www.engine.world.bounds);
-			
 		},
 
         //returns the percentage amount that object is of wrapper
@@ -275,13 +270,9 @@ var www = {
 		
 		//set size of canvas
 		setCanvasSize: function(){
-			//console.log('setting canvas size');
-			var targetw = www.parentel.offsetWidth;
-			var targeth = www.parentel.offsetHeight;
-			
 			//new approach - make canvas as big as possible, but set world size within it according to fixed aspect ratio (elsewhere)
-			www.canvasw = www.canvas.width = targetw;
-			www.canvash = www.canvas.height = targeth;		
+			www.canvasw = www.canvas.width = www.parentel.offsetWidth;
+			www.canvash = www.canvas.height = www.parentel.offsetHeight;		
 			
 			//old approach - set canvas size according to fixed aspect ratio
 			/*
@@ -369,32 +360,34 @@ var www = {
 		createMatterEvents: function(){		
 			//on object collision
 			www.Events.on(www.engine,'collisionStart',function(e){			
-				var obj1 = e.pairs[0].bodyA;
-				var obj2 = e.pairs[0].bodyB;
-								
-				//don't care about country/country collisions, or country/wall
-				if(obj1.myobjtype === 'bullet' || obj2.myobjtype === 'bullet'){
-					/*
-					if(obj1.myobjtype === 'player' || obj2.myobjtype === 'player'){
-						console.log('you got hit');
-					}
-					*/
-					//console.log('Collision!',obj1.myorigin,obj1.myid,obj1.myname);
-					//console.log('Collision!',obj2.myorigin,obj2.myid,obj2.myname);
-					//console.log();
-										
-					//this bullet just came from this country, so disable the collision
-					if(obj1.myorigin === obj2.myid || obj2.myorigin === obj1.myid){
-						e.pairs[0].isActive = false;
-					}
-					else {
-						e.pairs[0].bodyA.myhealth = Math.max(0, e.pairs[0].bodyA.myhealth - 1);
-						e.pairs[0].bodyB.myhealth = Math.max(0, e.pairs[0].bodyB.myhealth - 1);
-						if(e.pairs[0].bodyA.myhealth === 0){
-							www.general.killObject(e.pairs[0].bodyA,e.pairs[0].bodyB.myorigin);
+				//console.log(e.pairs);
+				for(var obj = 0; obj < e.pairs.length; obj++){				
+					var obj1 = e.pairs[obj].bodyA;
+					var obj2 = e.pairs[obj].bodyB;
+									
+					//don't care about country/country collisions, or country/wall
+					if(obj1.myobjtype === 'bullet' || obj2.myobjtype === 'bullet'){
+						/*
+						if(obj1.myobjtype === 'player' || obj2.myobjtype === 'player'){
+							console.log('you got hit');
 						}
-						if(e.pairs[0].bodyB.myhealth === 0){
-							www.general.killObject(e.pairs[0].bodyB,e.pairs[0].bodyA.myorigin);
+						*/
+						//console.log('Collision!',obj1.myorigin,obj1.myid,obj1.myname);
+						//console.log('Collision!',obj2.myorigin,obj2.myid,obj2.myname);
+											
+						//this bullet just came from this country, so disable the collision
+						if(obj1.myorigin === obj2.myid || obj2.myorigin === obj1.myid){
+							e.pairs[obj].isActive = false;
+						}
+						else {
+							e.pairs[obj].bodyA.myhealth = Math.max(0, e.pairs[obj].bodyA.myhealth - 1);
+							e.pairs[obj].bodyB.myhealth = Math.max(0, e.pairs[obj].bodyB.myhealth - 1);
+							if(e.pairs[obj].bodyA.myhealth === 0){
+								www.general.killObject(e.pairs[obj].bodyA,e.pairs[obj].bodyB.myorigin);
+							}
+							if(e.pairs[obj].bodyB.myhealth === 0){
+								www.general.killObject(e.pairs[obj].bodyB,e.pairs[obj].bodyA.myorigin);
+							}
 						}
 					}
 				}
@@ -402,7 +395,7 @@ var www = {
 			
 			/* https://github.com/liabru/matter-js/blob/master/examples/views.js */
 			// use the engine tick event to control our view
-			www.Events.on(www.engine, 'beforeTick', function(e) {
+			www.Events.on(www.engine, 'afterTick', function(e) {
 				/*
 				if(www.enableZoom){
 					var translate;
@@ -536,6 +529,8 @@ var www = {
 						'In your collective faces!',
 						'We disliked you because you were different from us!',
 						'See you in Helsinki!',
+						'Bet you wished you\'d spent more on your defence budget, losers!',
+						'So much for wherever that is',
 					];
 					things = insults[www.general.randomInt(0,insults.length - 1)];
 				}
@@ -569,8 +564,8 @@ var www = {
 			var walloptions = { 
 				isStatic: true,
 				render: {
-					fillStyle: 'rgba(120,200,230,0.2)',
-					strokeStyle: 'rgba(120,200,230,0.2)',
+					fillStyle: 'rgba(120,200,230,0)',
+					strokeStyle: 'rgba(120,200,230,0)',
 					lineWidth: 0
 				}				
 			};
@@ -621,17 +616,16 @@ var www = {
 				friction: 0,
 				restitution: 0.6, //how much a collision will cause a bounce, 0 to 1
 				frictionAir: 0,
-				mass: 1,
+				mass: Math.max(me.w,me.h) / 10, //countries now move slower if they're bigger
 				//inverseInertia: 1, //don't know what this property does
 				render: {
 					sprite: {
 						texture: spritepath + me.dir + me.sprite,
-						//xScale: ((www.scaleFactor * me.xScale) / 100) * percscalex,
-						xScale: ((me.xScale) / 100) * percscalex,
+						xScale: ((me.xScale) / 100) * percscalex, //FIXME this was necessary until I found a good map, now it doesn't really do anything. But it works
 						yScale: ((me.xScale) / 100) * percscalex,
-						strokeStyle: 'red',
-						lineWidth: 3,
-						fillStyle: 'green',
+						//strokeStyle: 'red',
+						//lineWidth: 3,
+						//fillStyle: 'green',
 					}
 				}
 			};			
@@ -677,20 +671,9 @@ var www = {
 				y = e.changedTouches[0].pageY - rect.top;
 			}
 			//figure out where we clicked in relation to the actual world
-			console.log(x,y,www.translated);
-			
 			x += www.translated.x;
 			y += www.translated.y;
 			
-			//assumes that the player is always in the centre of the canvas, which they should be
-			//FIXME agh wait no they're not! This doesn't work properly
-			/*
-			var worldx = (www.canvas.width / 2) - x;
-			var worldy = (www.canvas.height / 2) - y;
-			x = www.mycountry.position.x - worldx;
-			y = www.mycountry.position.y - worldy;
-			*/
-
 			var bullet = www.general.createBullet(www.mycountry.position.x,www.mycountry.position.y,www.mycountry.myid,'red');			
 			www.general.fireBullet(bullet,x,y,www.mycountry);
 		},
@@ -740,8 +723,8 @@ var www = {
 			
 			//create recoil to move the country, opposite direction to bullet and reduced power
 			var recoil = {
-				x: -(myvect.x / 4),
-				y: -(myvect.y / 4)
+				x: -(myvect.x),
+				y: -(myvect.y)
 			};
 			www.Body.applyForce(origin, origin.position, recoil);
 		},
