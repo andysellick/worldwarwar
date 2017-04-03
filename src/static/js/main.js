@@ -41,7 +41,7 @@ var www = {
 	bulletlife: 800, //how many milliseconds a bullet should exist for
 	chosen: 0, //the country chosen by the player
 	timer: 0,
-	scaleFactor: 2,//1.5, //how big to draw everything. 
+	scaleFactor: 1.5,//1.5, //how big to draw everything. 
 	debug: 0,
 	mode: 3,
 	bestscores: [
@@ -206,6 +206,7 @@ var www = {
 			localStorage.setItem('worldwarwar', tosave);
 		},
 		
+		//modify some elements to insert the player scores
 		updateScores: function(){
 			if(www.mode === 2 && www.playerscore > www.bestscores[0].score){
 				www.bestscores[0].score = www.playerscore;
@@ -224,7 +225,6 @@ var www = {
 		},
 		
 		//set up world size and boundaries
-		//FIXME this still isn't working for portrait
 		setWorldSize: function(){		
 			var sizes = www.general.calculateAspectRatio(www.idealw,www.idealh,www.canvasw,www.canvash);
 			www.worldw = sizes[0];
@@ -357,7 +357,7 @@ var www = {
 			},false);			
 		},
 		
-		createMatterEvents: function(){		
+		createMatterEvents: function(){				
 			//on object collision
 			www.Events.on(www.engine,'collisionStart',function(e){			
 				//console.log(e.pairs);
@@ -559,7 +559,8 @@ var www = {
 			}				
 		},
 		
-		//FIXME this is pretty ugly
+		//draw some shapes to create a boundary for the game
+		//there's probably a matterjs specific way of doing this but I haven't found it yet
 		drawBoundary: function(){
 			var walloptions = { 
 				isStatic: true,
@@ -621,14 +622,12 @@ var www = {
 				render: {
 					sprite: {
 						texture: spritepath + me.dir + me.sprite,
-						xScale: ((me.xScale) / 100) * percscalex, //FIXME this was necessary until I found a good map, now it doesn't really do anything. But it works
-						yScale: ((me.xScale) / 100) * percscalex,
-						//strokeStyle: 'red',
-						//lineWidth: 3,
-						//fillStyle: 'green',
+						xScale: ((0.11) / 100) * percscalex, //this is a slightly weird way of doing this, partly based on legacy code (countries originally had different scale factors)
+						yScale: ((0.11) / 100) * percscalex,
 					}
 				}
-			};			
+			};	
+			
 			//most countries fit into a roughly round polygon, but some (e.g. russia) require a specific width and height, set as a rectangle
 			var thisobj = www.Bodies.polygon(x,y,4,w,options);
 			if(typeof(me.h) !== 'undefined'){
@@ -691,7 +690,7 @@ var www = {
 					lineWidth: 0
 				}
 			};
-			var bullet = www.Bodies.circle(posx,posy,www.canvas.width / 300, options);
+			var bullet = www.Bodies.circle(posx,posy,Math.min(www.canvasw,www.canvash) / 200, options);
 			bullet.myid = -1;
 			bullet.myobjtype = 'bullet';
 			bullet.myname = 'bullet';
