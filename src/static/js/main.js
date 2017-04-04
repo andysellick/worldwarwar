@@ -475,6 +475,7 @@ var www = {
 		},
 		
 		//check to see if an x,y movement falls outside of the boundaries in which we should scroll. If they do, return 0, otherwise return the original values
+		//FIXME this still isn't working for hawaii at a large screen size
 		checkBounds: function(posx,posy){
 			if(www.mycountry.myxpos < www.engine.world.bounds.min.x - (www.boundswidth / 2) + (www.canvas.width / 2) || www.mycountry.myxpos > www.engine.world.bounds.max.x + (www.boundswidth / 2) - (www.canvas.width / 2)){
 				posx = 0;
@@ -690,7 +691,7 @@ var www = {
 					lineWidth: 0
 				}
 			};
-			var bullet = www.Bodies.circle(posx,posy,Math.min(www.canvasw,www.canvash) / 200, options);
+			var bullet = www.Bodies.circle(posx,posy,www.worldw / 200, options);
 			bullet.myid = -1;
 			bullet.myobjtype = 'bullet';
 			bullet.myname = 'bullet';
