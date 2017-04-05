@@ -179,7 +179,8 @@ var www = {
 			var arbitrarybound = www.boundswidth / 2;
 			//console.log('Original view translation',translate);
 			translate.x = Math.min(translate.x, www.engine.world.bounds.max.x - (www.canvasw - arbitrarybound));
-			translate.x = Math.max(translate.x,-(translate.x - (translate.x - (www.canvasw / 2) - arbitrarybound)));
+			//translate.x = Math.max(translate.x,-(translate.x - (translate.x - (www.canvasw / 2) - arbitrarybound)));
+			translate.x = Math.max(translate.x, -((www.worldw / 2) - (www.canvasw / 2) + arbitrarybound));
 			
 			translate.y = Math.min(translate.y, www.engine.world.bounds.max.y - (www.canvash - arbitrarybound));
 			translate.y = Math.max(translate.y,-((www.worldh / 2) - (www.canvash / 2) + arbitrarybound));
@@ -567,20 +568,20 @@ var www = {
 				isStatic: true,
 				render: {
 					fillStyle: 'rgba(120,200,230,0)',
-					strokeStyle: 'rgba(120,200,230,0)',
+					strokeStyle: 'rgba(120,200,230,0.5)',
 					lineWidth: 0
 				}				
 			};
 			//top edge
 			var wall1 = {
 				x:www.engine.world.bounds.min.x + (www.worldw / 2),
-				y:www.engine.world.bounds.min.y - (www.boundswidth / 2), 
+				y:www.engine.world.bounds.min.y - (www.boundswidth / 2) + 1, 
 				w:www.worldw * 2,
 				h:www.boundswidth
 			};
 			//right edge
 			var wall2 = {
-				x:www.engine.world.bounds.max.x + (www.boundswidth / 2),
+				x:www.engine.world.bounds.max.x + (www.boundswidth / 2) - 1,
 				y:www.engine.world.bounds.min.y + (www.worldh / 2),
 				w:www.boundswidth,
 				h:www.worldh * 2
@@ -588,13 +589,13 @@ var www = {
 			//bottom edge
 			var wall3 = {
 				x:www.engine.world.bounds.min.x + (www.worldw / 2),
-				y:www.engine.world.bounds.max.y + (www.boundswidth / 2),
+				y:www.engine.world.bounds.max.y + (www.boundswidth / 2) - 1, //was outside the boundary so not 'solid', this tiny adjustment fixes it. Rounding error, I guess?
 				w:www.worldw * 2,
 				h:www.boundswidth
 			};			
 			//left edge
 			var wall4 = {
-				x:www.engine.world.bounds.min.x - (www.boundswidth / 2),
+				x:www.engine.world.bounds.min.x - (www.boundswidth / 2) + 1,
 				y:www.engine.world.bounds.min.y + (www.worldh / 2),
 				w:www.boundswidth,
 				h:www.worldh * 2
@@ -613,17 +614,21 @@ var www = {
 			var y = www.engine.world.bounds.min.y + ((www.worldh / 100) * me.y);
 			var percscalex = (www.worldw / www.idealw) * 100;
 			var w = (me.w / 100) * percscalex;
+			var mass = me.w / 10; //countries now move slower if they're bigger
+			if(typeof(me.h) !== 'undefined'){
+				mass = Math.max(me.w,me.h) / 10;
+			}
 			var options = {
 				density: 0.0001,
 				friction: 0,
 				restitution: 0.6, //how much a collision will cause a bounce, 0 to 1
 				frictionAir: 0,
-				mass: Math.max(me.w,me.h) / 10, //countries now move slower if they're bigger
+				mass: mass, 
 				//inverseInertia: 1, //don't know what this property does
 				render: {
 					sprite: {
 						texture: spritepath + me.dir + me.sprite,
-						xScale: ((0.11) / 100) * percscalex, //this is a slightly weird way of doing this, partly based on legacy code (countries originally had different scale factors)
+						xScale: ((0.11) / 100) * percscalex, //slightly bad, partly based on legacy code (countries used to have different scale factors)
 						yScale: ((0.11) / 100) * percscalex,
 					}
 				}
