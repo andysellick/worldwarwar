@@ -25,11 +25,10 @@
 	<meta name="twitter:image" content="http://fixme.jpg" />
     <link rel="shortcut icon" href="/static/favicon.ico">
 
-    <link rel="stylesheet" type="text/css" href="static/css/styles.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/styles.min.css"/>
     <script>
         /* we want to remove the nojs class as soon as possible on page load */
         document.getElementById("site").className = document.getElementById("site").className.replace(/nojs/i,'');
-
     </script>
 	<!-- FIXME insert google analytics here -->
 </head>
@@ -99,14 +98,18 @@
 		</div>
 		
 		<div id="menu" class="menu"></div>
+		
+		<div id="loadingwrap" class="loadingwrap">
+			<div id="loadingbar" class="loadingbar"></div>
+		</div>
 	</div>
 	
     <!--<script src="static/bower_components/jquery/dist/jquery.min.js"></script>-->
     <!--[if lt IE 9 ]>
     <script>(function() {$('body').addClass('iex');})();</script>
     <![endif]-->
-    <script src="static/bower_components/Matter/build/matter.min.js"></script>
-    <script src="static/js/main.min.js"></script>
+    <script src="/static/bower_components/Matter/build/matter.min.js"></script>
+    <script src="/static/js/main.min.js"></script>
 
 </body>
 </html>

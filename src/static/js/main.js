@@ -5,6 +5,74 @@ if (!Date.now) {
     Date.now = function() { return new Date().getTime(); };
 }
 
+/* preload images */
+/* we're not actually using these specific objects once created, but the browser should indirectly cache them, apparently */
+var loaders = [];
+var imgpath = 'static/img/';
+var imageloadprogress = 0;
+var imageloadtotal = 0;
+
+var allimages = [
+	{
+		'name': 'africa',
+		'images': ['algeria.svg','cameroon.svg','egypt.svg','ghana.svg','madagascar.svg','namibia.svg','sierraleone.svg','togo.svg','angola.svg','car.svg','equatorialguinea.svg','guinea.svg','malawi.svg','niger.svg','somalia.svg','tunisia.svg','benin.svg','chad.svg','eritrea.svg','guineabissau.svg','mali.svg','nigeria.svg','southafrica.svg','uganda.svg','botswana.svg','cotedivoire.svg','ethiopia.svg','kenya.svg','mauritania.svg','republicofthecongo.svg','southsudan.svg','westernsahara.svg','burkinafaso.svg','democraticrepublicofthecongo.svg','gabon.svg','liberia.svg','morocco.svg','rwanda.svg','sudan.svg','zambia.svg','burundi.svg','djibouti.svg','gambia.svg','libya.svg','mozambique.svg','senegal.svg','tanzania.svg','zimbabwe.svg'],
+		'dir': 'africa'
+	},
+	{
+		'name': 'asia',
+		'images': ['afghanistan.svg','cambodia.svg','iran.svg','jordan.svg','lebanon.svg','nepal.svg','palestine.svg','southkorea.svg','tajikistan.svg','uzbekistan.svg','azerbaijan.svg','china.svg','iraq.svg','kuwait.svg','malaysia.svg','northkorea.svg','philippines.svg','srilanka.svg','thailand.svg','vietnam.svg','bangladesh.svg','india.svg','israel.svg','kyrgyzstan.svg','mongolia.svg','oman.svg','qatar.svg','syria.svg','turkmenistan.svg','yemen.svg','bhutan.svg','indonesia.svg','japan.svg','laos.svg','myanmar.svg','pakistan.svg','saudiarabia.svg','taiwan.svg','uae.svg'],
+		'dir': 'asia'
+	},
+	{
+		'name': 'europe',
+		'images': ['albania.svg','belgium.svg','cyprus.svg','finland.svg','greece.svg','ireland.svg','lithuania.svg','montenegro.svg','portugal.svg','slovakia.svg','switzerland.svg','armenia.svg','bosniaandherz.svg','czechrepublic.svg','france.svg','greenland.svg','italy.svg','luxembourg.svg','netherlands.svg','romania.svg','slovenia.svg','turkey.svg','austria.svg','bulgaria.svg','denmark.svg','georgia.svg','hungary.svg','kazakhstan.svg','macedonia.svg','norway.svg','russia.svg','spain.svg','ukraine.svg','belarus.svg','croatia.svg','estonia.svg','germany.svg','iceland.svg','latvia.svg','moldova.svg','poland.svg','serbia.svg','sweden.svg','unitedkingdom.svg'],
+		'dir': 'europe'
+	},
+	{
+		'name': 'namerica',
+		'images': ['bahamas.svg','canada.svg','cuba.svg','elsalvador.svg','haiti.svg','jamaica.svg','nicaragua.svg','puertorico.svg','us_hawaii.svg','belize.svg','costarica.svg','dominicanrepublic.svg','guatemala.svg','honduras.svg','mexico.svg','panama.svg','us_alaska.svg','us_main.svg'],
+		'dir': 'namerica'
+	},
+	{
+		'name': 'namerica',
+		'images': ['bahamas.svg','canada.svg','cuba.svg','elsalvador.svg','haiti.svg','jamaica.svg','nicaragua.svg','puertorico.svg','us_hawaii.svg','belize.svg','costarica.svg','dominicanrepublic.svg','guatemala.svg','honduras.svg','mexico.svg','panama.svg','us_alaska.svg','us_main.svg'],
+		'dir': 'namerica'
+	},
+	{
+		'name': 'oceania',
+		'images': ['australia.svg','newzealand.svg','papuanewguinea.svg'],
+		'dir': 'oceania'
+	},
+	{
+		'name': 'samerica',
+		'images': ['argentina.svg','brazil.svg','colombia.svg','falklandislands.svg','guyana.svg','peru.svg','uruguay.svg','bolivia.svg','chile.svg','ecuador.svg','frenchguiana.svg','paraguay.svg','suriname.svg','venezuela.svg'],
+		'dir': 'samerica'
+	},
+];
+function loadFile(src,array,num){
+	var deferred = new Deferred();
+	var sprite = new Image();
+	sprite.onload = function() {
+		array[num] = sprite;
+		deferred.resolve();
+		imageloadprogress++;
+		document.getElementById('loadingbar').style.width = (imageloadprogress / imageloadtotal) * 100 + '%';
+	};
+	sprite.src = src;
+    return deferred.promise();
+}
+//loop through and call all the preload images
+function callAllPreloads(array,dir){
+    for(var z = 0; z < array.length; z++){
+        loaders.push(loadFile(dir + array[z], array, z));
+    }
+}
+for(var im = 0; im < allimages.length; im++){
+	imageloadtotal += allimages[im].images.length;
+	callAllPreloads(allimages[im].images, imgpath + allimages[im].dir + '/');
+}
+
+//main code
 (function( window, undefined ) {
 var www = {
 	parentel: document.getElementById('canvasparent'),
@@ -217,8 +285,8 @@ var www = {
 				www.bestscores[1].score = www.playerscore;
 				www.bestscores[1].country = www.mycountry.myname;
 			}
-			document.getElementById('savedscore1').innerHTML = 'Best: ' + www.bestscores[0].score + ' ' + www.bestscores[0].country;
-			document.getElementById('savedscore2').innerHTML = 'Best: ' + www.bestscores[1].score + ' ' + www.bestscores[1].country;
+			document.getElementById('savedscore1').innerHTML = 'Hi-score: ' + www.bestscores[0].score + ' ' + www.bestscores[0].country;
+			document.getElementById('savedscore2').innerHTML = 'Hi-score: ' + www.bestscores[1].score + ' ' + www.bestscores[1].country;
 			var allels = document.getElementsByClassName('js-scoregeneral');
 			[].slice.call(allels).forEach(function(div){
 				div.innerHTML = www.playerscore;
@@ -296,7 +364,7 @@ var www = {
 			var h = (w / idealw) * idealh;
 			return([w,h]);
 		},	
-/*	
+	
 		//jquery's addClass without jquery
 		addClass: function(el,className){
 			if(el.classList){
@@ -306,7 +374,7 @@ var www = {
 				el.className += ' ' + className;
 			}
 		},
-*/	
+	
 		createEvents: function(){			
 			//start the various game modes FIXME surely a more efficient way to do this
 			var beginning1 = ((document.ontouchstart!==null)?'mousedown':'touchstart');
@@ -696,7 +764,7 @@ var www = {
 					lineWidth: 0
 				}
 			};
-			var bullet = www.Bodies.circle(posx,posy,www.worldw / 200, options);
+			var bullet = www.Bodies.circle(posx,posy,www.worldw / 400, options);
 			bullet.myid = -1;
 			bullet.myobjtype = 'bullet';
 			bullet.myname = 'bullet';
@@ -804,7 +872,12 @@ window.www = www;
 })(window);
 
 window.onload = function(){
-	www.general.init();
+	Deferred.when(loaders).then(
+		function(){
+			www.general.init();
+			www.general.addClass(document.getElementById('loadingwrap'),'fadeout');
+		}
+	);	
 	/*
 	var resize;
 	window.addEventListener('resize', function(event){
