@@ -12,6 +12,7 @@
 		background:#5EB1D2;
         color:@black;
 		.no-select;
+		.font-pixel;
     }
 	
 	@transpeed: 0.3s;
@@ -35,10 +36,10 @@
 		z-index:100;
 		position:fixed;
 		bottom:0;
-		left:0;
+		left:50%;
 		overflow-y:auto;
 		background:rgba(255,255,255,0.5);
-		.transform(translateY(100%));
+		.transform(translateY(100%) translateX(-50%));
 		.transition(all @transpeed);
 		.message {
 			display:none;
@@ -49,14 +50,13 @@
 			}
 			
 			.title {
-				padding:0 0 0.5em 0;
-				margin-right:5em;
-				.fontcalculate(12);
+				padding:0;
+				.fontcalculate(20);
 				font-weight:bold;
 			}
 			.desc {
 				padding:0;
-				.fontcalculate(10);
+				.fontcalculate(12);
 			}
 		}
 	}
@@ -80,17 +80,42 @@
 			.transparency(1);
 		}
 		.popupinner {
+			position:relative;
 			padding:1em;
+			padding-top:0;
 			width:80%;
-			max-width:450px;
+			max-width:460px;
 			min-width:320px;
-			background:@white;
-			border-radius:3px;
+			background:@red;
+			border:solid 0.5em @redDark;
 			text-align:center;
+			color:@white;
+			text-shadow:0 0.15em 0 @redDark;
 			
 			.title {
-				.fontcalculate(20);
+				margin:0 -20%;
+				.transform(translateY(-50%));
+				.fontcalculate(60);
 				font-weight:bold;
+				text-shadow:0 0.1em 0 @redDark,
+							0.1em 0 0 @redDark,
+							0 -0.1em 0 @redDark,
+							-0.1em 0 0 @redDark;
+				color:@white;
+			}
+			
+			.label {
+				display:block;
+				margin-top:-2em;
+				margin-bottom:1em;
+			}
+			
+			select {
+				padding:0.3em;
+				max-width:50%;
+				margin-left:1em;
+				.font-pixel;
+				border:solid 0.3em @redDark;
 			}
 			
 			.levelselect {
@@ -112,6 +137,11 @@
 					.fontcalculate(10);
 				}
 			}
+			
+			.endgame {
+				margin-top:-3em;
+				.fontcalculate(18);
+			}
 		}
 	}
 	
@@ -125,6 +155,8 @@
 		.transition(all @transpeed);
 		text-transform:uppercase;
 		font-size:2.6vmin;
+		color:@white;
+		text-shadow:0 0.2em 0 @black;
 		
 		.huditemwrap {
 			padding:5px;
@@ -140,7 +172,6 @@
 				display:block;
 				font-size:10vmin;
 				line-height:1em;
-				text-shadow:0 1px 1px @white;
 			}
 		}
 		
@@ -174,7 +205,7 @@
 			.transform(none);
 		}
 		.messagewrapper {
-			.transform(none);
+			.transform(translateX(-50%));
 		}
 		.menu {
 			.transform(none);
@@ -197,7 +228,6 @@
 			top:50%;
 			left:50%;
 			.transform(translateY(-50%) translateX(-50%));
-			.font-pixel;
 			.fontcalculate(30);
 		}
 		&.fadeout {
@@ -219,7 +249,6 @@
 				top:50%;
 				left:50%;
 				.transform(translateY(-50%) translateX(-50%));
-				.font-pixel;
 				color:@white;
 				.fontcalculate(30);
 				text-shadow:0 0.1em 0 @redDark;

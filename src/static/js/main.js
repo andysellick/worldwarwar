@@ -636,7 +636,7 @@ var www = {
 				isStatic: true,
 				render: {
 					fillStyle: 'rgba(120,200,230,0)',
-					strokeStyle: 'rgba(120,200,230,0.5)',
+					strokeStyle: 'rgba(120,200,230,0)',
 					lineWidth: 0
 				}				
 			};
