@@ -263,6 +263,7 @@ var www = {
 			www.Engine.run(www.engine);	// run the engine			
 			www.Render.run(www.render); // run the renderer
 			
+			www.general.removeClass(document.getElementById('cancelbtn'),'hidden');
 			if(!www.debug && www.enemiesfire){
 				www.timer = setInterval(www.general.gameLoop,500);
 			}
@@ -273,6 +274,20 @@ var www = {
 			www.general.updateScores();
 			var tosave = JSON.stringify(www.bestscores);
 			localStorage.setItem('worldwarwar', tosave);
+		},
+
+		//pause matter js
+		pauseGame: function(){
+			document.getElementById('wwwpage').className = '';
+			www.Render.stop(www.render);
+		},
+		
+		resumeGame: function(){
+			document.getElementById('wwwpage').className = 'gameon';
+			www.Render.run(www.render);
+			if(!www.debug && www.enemiesfire){
+				www.timer = setInterval(www.general.gameLoop,500);
+			}
 		},
 		
 		//modify some elements to insert the player scores
@@ -374,6 +389,10 @@ var www = {
 				el.className += ' ' + className;
 			}
 		},
+		
+		removeClass: function(el,className){
+			el.className = el.className.replace(className,'');
+		},
 	
 		createEvents: function(){			
 			//start the various game modes FIXME surely a more efficient way to do this
@@ -399,13 +418,20 @@ var www = {
 				www.general.hideAllPopups();
 			},false);
 			
-			//menu button, i.e. quit
+			//menu button, i.e. quit/pause
 			var menu = ((document.ontouchstart!==null)?'mousedown':'touchstart');
 			document.getElementById('menu').addEventListener(menu,function(e){
-				document.getElementById('wwwpage').className = '';
+				www.general.pauseGame();
 				clearInterval(www.timer);
 				www.general.saveGame();
 				www.general.showPopup('intro');
+			},false);			
+			
+			//cancel menu button i.e. resume
+			var cancelbtn = ((document.ontouchstart!==null)?'mousedown':'touchstart');
+			document.getElementById('cancelbtn').addEventListener(cancelbtn,function(e){
+				www.general.hideAllPopups();
+				www.general.resumeGame();
 			},false);			
 			
 			//game over, restart			
@@ -425,7 +451,7 @@ var www = {
 				www.general.clickDown(e);
 			},false);			
 		},
-		
+			
 		createMatterEvents: function(){				
 			//on object collision
 			www.Events.on(www.engine,'collisionStart',function(e){			
@@ -857,13 +883,15 @@ var www = {
 			document.getElementById('wwwpage').className = '';
 			clearInterval(www.timer);
 			www.general.saveGame();
-			www.general.showPopup('gamewon');			
+			www.general.showPopup('gamewon');
+			www.general.addClass(document.getElementById('cancelbtn'),'hidden');
 		},
 		gameLost: function(){
 			document.getElementById('wwwpage').className = '';
 			clearInterval(www.timer);
 			www.general.saveGame();
 			www.general.showPopup('gamelost');			
+			www.general.addClass(document.getElementById('cancelbtn'),'hidden');
 		},
 
 	}
