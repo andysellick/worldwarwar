@@ -278,16 +278,28 @@ var www = {
 
 		//pause matter js
 		pauseGame: function(){
+			console.log('pause game');
 			document.getElementById('wwwpage').className = '';
+			clearInterval(www.timer);
 			www.Render.stop(www.render);
 		},
 		
 		resumeGame: function(){
+			console.log('resume game');
 			document.getElementById('wwwpage').className = 'gameon';
 			www.Render.run(www.render);
 			if(!www.debug && www.enemiesfire){
 				www.timer = setInterval(www.general.gameLoop,500);
 			}
+		},
+		
+		endGame: function(){
+			console.log('end game');
+			document.getElementById('wwwpage').className = '';
+			www.Render.stop(www.render);
+			clearInterval(www.timer);
+			www.general.saveGame();
+			www.general.addClass(document.getElementById('cancelbtn'),'hidden');
 		},
 		
 		//modify some elements to insert the player scores
@@ -880,18 +892,13 @@ var www = {
 		},
 		
 		gameWon: function(){
-			document.getElementById('wwwpage').className = '';
-			clearInterval(www.timer);
-			www.general.saveGame();
+			www.general.endGame();
 			www.general.showPopup('gamewon');
-			www.general.addClass(document.getElementById('cancelbtn'),'hidden');
 		},
+		//FIXME bug here, render doesn't pause, etc.
 		gameLost: function(){
-			document.getElementById('wwwpage').className = '';
-			clearInterval(www.timer);
-			www.general.saveGame();
+			www.general.endGame();
 			www.general.showPopup('gamelost');			
-			www.general.addClass(document.getElementById('cancelbtn'),'hidden');
 		},
 
 	}
