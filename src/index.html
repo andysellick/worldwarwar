@@ -26,11 +26,6 @@
     <link rel="shortcut icon" href="/static/favicon.ico">
 
     <link rel="stylesheet" type="text/css" href="/static/css/styles.min.css"/>
-    <script>
-        /* we want to remove the nojs class as soon as possible on page load */
-        document.getElementById("site").className = document.getElementById("site").className.replace(/nojs/i,'');
-    </script>
-	<!-- FIXME insert google analytics here -->
 </head>
 
 <body>
@@ -47,25 +42,27 @@
 					Pick a country:
 					<select id="choosecountry"></select>
 				</label>
-				<div class="levelselect">
-					<div class="btnwrapper">
-						<span class="btn btn-block" id="startgame1">Sandbox</span>
+				<div class="levelselectwrap">
+					<div class="levelselect">
+						<div class="btnwrapper">
+							<span class="btn btn-block" id="startgame1">Sandbox</span>
+						</div>
+						<p>Destroy the world. Simple.</p>
 					</div>
-					<p>Destroy the world. Simple.</p>
-				</div>
-				<div class="levelselect">
-					<div class="btnwrapper">
-						<span class="btn btn-block" id="startgame2">Normal</span>
-						<div class="score" id="savedscore1">Best: 0</div>
+					<div class="levelselect">
+						<div class="btnwrapper">
+							<span class="btn btn-block" id="startgame2">Normal</span>
+							<div class="score" id="savedscore1">Best: 0</div>
+						</div>
+						<p>The other countries are fighting back!</p>
 					</div>
-					<p>The other countries are fighting back!</p>
-				</div>
-				<div class="levelselect">
-					<div class="btnwrapper">
-						<span class="btn btn-block" id="startgame3">Extreme</span>
-						<div class="score" id="savedscore2">Best: 0</div>
+					<div class="levelselect">
+						<div class="btnwrapper">
+							<span class="btn btn-block" id="startgame3">Extreme</span>
+							<div class="score" id="savedscore2">Best: 0</div>
+						</div>
+						<p>It's going to get messy, people.</p>
 					</div>
-					<p>It's going to get messy, people.</p>
 				</div>
 				
 				<span class="btn cancelbtn hidden" id="cancelbtn">Cancel</span>
@@ -75,7 +72,8 @@
 		<div id="gamewon" class="popup">
 			<div class="popupinner">
 				<h2 class="title">Alone at last</h2>
-				<p class="endgame">Congratulations, your country is finally safe from the threat of strangers! You scored: <span class="js-scoregeneral"></span></p>
+				<p>Congratulations, your country is finally safe from the threat of strangers!</p>
+				<p>You scored: <span class="js-scoregeneral"></span></p>
 				<span class="btn" id="playagain">Play again</span>
 			</div>
 		</div>
@@ -83,7 +81,8 @@
 		<div id="gamelost" class="popup">
 			<div class="popupinner">
 				<h2 class="title">Game over</h2>
-				<p class="endgame">You scored: <span class="js-scoregeneral"></span></p>
+				<p>Clearly you need to work on your defence budget.</p>
+				<p>You scored: <span class="js-scoregeneral"></span></p>
 				<span class="btn" id="playagain2">Play again</span>
 			</div>
 		</div>

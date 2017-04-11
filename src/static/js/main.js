@@ -279,14 +279,14 @@ var www = {
 
 		//pause matter js
 		pauseGame: function(){
-			console.log('pause game');
+			//console.log('pause game');
 			document.getElementById('wwwpage').className = '';
 			clearInterval(www.timer);
 			www.Render.stop(www.render);
 		},
 		
 		resumeGame: function(){
-			console.log('resume game');
+			//console.log('resume game');
 			document.getElementById('wwwpage').className = 'gameon';
 			www.Render.run(www.render);
 			if(www.enemiesfire){
@@ -295,7 +295,7 @@ var www = {
 		},
 		
 		endGame: function(){
-			console.log('end game');
+			//console.log('end game');
 			document.getElementById('wwwpage').className = '';
 			www.Render.stop(www.render);
 			clearInterval(www.timer);

@@ -98,7 +98,7 @@
 				position:absolute;
 				top:-0.3em;
 				left:50%;
-				width:120%;
+				width:130%;
 				.transform(translateY(-50%) translateX(-50%));
 				.fontcalculate(60);
 				font-weight:bold;
@@ -118,7 +118,7 @@
 			select {
 				padding:0.3em;
 				max-width:50%;
-				margin-left:1em;
+				margin-left:1%;
 				.font-pixel;
 				border:solid 0.3em @redDark;
 			}
@@ -141,10 +141,6 @@
 					margin-top:0.5em;
 					.fontcalculate(10);
 				}
-			}
-			
-			.endgame {
-				.fontcalculate(18);
 			}
 		}
 	}
@@ -263,6 +259,45 @@
 	}
 
 @media @tabletWidth{
+	.popup {
+		.popupinner {
+			width:100%;
+			.title {
+				font-size:10vmin;
+			}
+			.levelselectwrap {
+				.flex;
+				.flex-wrap();
+				.flex-direction(row);
+				.justify-content(center);
+				.align-items(flex-start);
+				margin:0 -0.5em;
+				.levelselect {
+					width:50%;
+					&:first-child {
+						width:100%;
+					}
+				}
+				p {
+					display:none;
+				}
+				.btnwrapper {
+					padding:0 0.5em;
+					float:none;
+					width:auto;
+				}
+				.score {
+					.fontcalculate(12);
+				}
+			}
+		}
+	}	
+	.messagewrapper {
+		width:100%;
+		.message {
+			padding:0 1em 0.5em 1em;
+		}
+	}
 }
 
 @media @mobileWidth{
