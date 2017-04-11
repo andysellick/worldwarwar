@@ -107,10 +107,9 @@ var www = {
 	enemies: [],
 	bullets: [],
 	bulletlife: 800, //how many milliseconds a bullet should exist for
-	chosen: 0, //the country chosen by the player
+	chosen: -1, //the country chosen by the player
 	timer: 0,
 	scaleFactor: 1.5,//1.5, //how big to draw everything. 
-	debug: 0,
 	mode: 3,
 	bestscores: [
 		{'country':'','score':0},
@@ -120,54 +119,27 @@ var www = {
 	translated: {x:0,y:0}, //keep a track of any view translations for locating click events
 	
 	general: {
-		init: function(){
+		//only call this once, during page load
+		preGameInit: function(){
 			www.general.initCountrySelect();
-			if(!www.debug){
-				www.general.showPopup('intro');
-			}
 			www.ctx = www.canvas.getContext('2d');
 			www.general.setCanvasSize();
 			www.general.createEvents();
-						
-			if(www.debug){
-				www.general.initGame();
-			}
+		},
+
+		//only call this once, when game has finished loading, world should be visible, so overlay with menu etc.
+		init: function(){
+			www.general.showPopup('intro');
+			//load saved data if found
 			var saved = localStorage.getItem('worldwarwar');
 			if(saved !== null && saved.length > 0){
 				www.bestscores = JSON.parse(saved);	
-				//console.log('Saved scores',www.bestscores);
 				www.general.updateScores();
 			}
 		},
-		
-		//setup and start the game
-		initGame: function(chosenmode){
-			document.getElementById('wwwpage').className = 'gameon';
-			www.mode = chosenmode;
-			www.enemycount = 0;
-			www.translated = {x:0,y:0};
-			//setup game attributes according to mode
-			if(www.mode === 1){ //just float around destroying the world, sandbox				
-				www.enemyhealth = 2;
-				www.enemiesfire = 0;
-			}
-			else if(www.mode === 2){ //reasonable level of violence				
-				www.playerhealth = 10;
-				www.enemyhealth = 5;
-				www.enemiesfire = 1;
-				www.firechance = 10;
-			}
-			else { //extreme				
-				www.playerhealth = 5;
-				www.enemyhealth = 5;
-				www.enemiesfire = 1;
-				www.firechance = 3;
-			}
-			www.playerhealthorig = www.playerhealth;
-			
-			www.enemies = [];
-			www.playerscore = 0;
-			document.getElementById('messages').innerHTML = '';			
+				
+		//setup and configure the matter engine
+		setupMatter: function(){
 			www.engine = www.Engine.create(); // create an engine
 			www.engine.world.gravity.y = 0; //turn off gravity
 			www.engine.world.gravity.x = 0; //turn off gravity - needed for x?
@@ -192,7 +164,7 @@ var www = {
 					//showShadows: true
 				}
 			});
-			
+			/*
 			if(www.enableZoom){
 				// add mouse control FIXME this now conflicts with the limits imposed on viewport repositioning
 				www.mouse = www.Mouse.create(www.render.canvas);
@@ -220,51 +192,71 @@ var www = {
 					y: 1
 				};		
 			}
+			*/
 			www.general.setWorldSize();
-			
-			if(www.debug){
-				www.chosen = allcountries.length - 1;
-			}
-			
-			www.general.drawBoundary(); //draw the boundary first, so countries overlap it
-			www.mycountry = www.general.createPlayer(www.chosen,'player',www.playerhealth,www.chosen);			
+			www.general.drawBoundary(); //draw the boundary first, so countries overlap it			
 			www.general.createEnemies();		
+		},
+		
+		runMatter: function(){
+			www.Engine.run(www.engine);	// run the engine			
+			www.Render.run(www.render); // run the renderer
+		},
+		
+		//setup and start the game
+		initGame: function(chosenmode){
+			document.getElementById('wwwpage').className = 'gameon';
+			www.mode = chosenmode;
+			//setup game attributes according to mode
+			if(www.mode === 1){ //just float around destroying the world, sandbox				
+				www.enemyhealth = 2;
+				www.enemiesfire = 0;
+			}
+			else if(www.mode === 2){ //reasonable level of violence				
+				www.playerhealth = 10;
+				www.enemyhealth = 5;
+				www.enemiesfire = 1;
+				www.firechance = 10;
+			}
+			else { //extreme				
+				www.playerhealth = 5;
+				www.enemyhealth = 5;
+				www.enemiesfire = 1;
+				www.firechance = 3;
+			}
+			//reset some things
+			www.playerhealthorig = www.playerhealth;
+			www.enemycount = 0;
+			www.translated = {x:0,y:0};		
+			www.enemies = [];
+			www.playerscore = 0;
+			document.getElementById('messages').innerHTML = '';			
+			www.general.setupMatter();
+
+			www.mycountry = www.general.createPlayer(www.chosen,'player',www.playerhealth,www.chosen);			
 			
 			//recentre the canvas onto the player, this calculates how much we need to translate the viewport by
 			var translate = {
 				x: www.mycountry.position.x - (www.canvasw / 2),
 				y: www.mycountry.position.y - (www.canvash / 2)
 			};			
-			//focus on the last country added
-			/*
-			if(www.debug){
-				translate = {
-					x: www.enemies[www.enemies.length - 1].position.x - (www.canvasw / 2),
-					y: www.enemies[www.enemies.length - 1].position.y - (www.canvash / 2)
-				};
-			}
-			*/					
 			var arbitrarybound = www.boundswidth / 2;
 			//console.log('Original view translation',translate);
 			translate.x = Math.min(translate.x, www.engine.world.bounds.max.x - (www.canvasw - arbitrarybound));
-			//translate.x = Math.max(translate.x,-(translate.x - (translate.x - (www.canvasw / 2) - arbitrarybound)));
-			translate.x = Math.max(translate.x, -((www.worldw / 2) - (www.canvasw / 2) + arbitrarybound));
-			
+			translate.x = Math.max(translate.x, -((www.worldw / 2) - (www.canvasw / 2) + arbitrarybound));			
 			translate.y = Math.min(translate.y, www.engine.world.bounds.max.y - (www.canvash - arbitrarybound));
 			translate.y = Math.max(translate.y,-((www.worldh / 2) - (www.canvash / 2) + arbitrarybound));
 			
 			www.translated.x += translate.x; //keep track of all view translations
 			www.translated.y += translate.y;			
-			//console.log('Initial view translation',translate);
 			www.Bounds.translate(www.render.bounds, translate); 
 	
-			www.general.createMatterEvents();			
-			
+			www.general.createMatterEvents();						
 			www.Engine.run(www.engine);	// run the engine			
 			www.Render.run(www.render); // run the renderer
 			
 			www.general.removeClass(document.getElementById('cancelbtn'),'hidden');
-			if(!www.debug && www.enemiesfire){
+			if(www.enemiesfire){
 				www.timer = setInterval(www.general.gameLoop,500);
 			}
 		},
@@ -288,7 +280,7 @@ var www = {
 			console.log('resume game');
 			document.getElementById('wwwpage').className = 'gameon';
 			www.Render.run(www.render);
-			if(!www.debug && www.enemiesfire){
+			if(www.enemiesfire){
 				www.timer = setInterval(www.general.gameLoop,500);
 			}
 		},
@@ -354,15 +346,6 @@ var www = {
 			www.engine.world.bounds.max.x = maxx; //1100;
 			www.engine.world.bounds.max.y = maxy; //900;
 		},
-
-        //returns the percentage amount that object is of wrapper
-        calculatePercentage: function(object,wrapper){
-			return((100 / wrapper) * object);
-		},
-		
-		randomInt: function(min,max){
-			return Math.floor(Math.random()*(max-min+1)+min);
-		},
 		
 		//set size of canvas
 		setCanvasSize: function(){
@@ -382,30 +365,6 @@ var www = {
 			*/
 		},
 		
-		//given a width and height representing an aspect ratio, and the size of the containing thing, return the largest w and h matching that aspect ratio
-		calculateAspectRatio: function(idealw,idealh,parentw,parenth){
-			var aspect = Math.floor((parenth / idealh) * idealw);
-			var cwidth = Math.min(idealw, parentw);
-			var cheight = Math.min(idealh, parenth);
-			var w = Math.min(parentw,aspect);
-			var h = (w / idealw) * idealh;
-			return([w,h]);
-		},	
-	
-		//jquery's addClass without jquery
-		addClass: function(el,className){
-			if(el.classList){
-				el.classList.add(className);
-			}
-			else {
-				el.className += ' ' + className;
-			}
-		},
-		
-		removeClass: function(el,className){
-			el.className = el.className.replace(className,'');
-		},
-	
 		createEvents: function(){			
 			//start the various game modes FIXME surely a more efficient way to do this
 			var beginning1 = ((document.ontouchstart!==null)?'mousedown':'touchstart');
@@ -464,7 +423,7 @@ var www = {
 			},false);			
 		},
 			
-		createMatterEvents: function(){				
+		createMatterEvents: function(){		
 			//on object collision
 			www.Events.on(www.engine,'collisionStart',function(e){			
 				//console.log(e.pairs);
@@ -901,12 +860,48 @@ var www = {
 			www.general.showPopup('gamelost');			
 		},
 
+		//given a width and height representing an aspect ratio, and the size of the containing thing, return the largest w and h matching that aspect ratio
+		calculateAspectRatio: function(idealw,idealh,parentw,parenth){
+			var aspect = Math.floor((parenth / idealh) * idealw);
+			var cwidth = Math.min(idealw, parentw);
+			var cheight = Math.min(idealh, parenth);
+			var w = Math.min(parentw,aspect);
+			var h = (w / idealw) * idealh;
+			return([w,h]);
+		},	
+
+        //returns the percentage amount that object is of wrapper
+        calculatePercentage: function(object,wrapper){
+			return((100 / wrapper) * object);
+		},
+		
+		randomInt: function(min,max){
+			return Math.floor(Math.random()*(max-min+1)+min);
+		},
+		
+		//jquery's addClass without jquery
+		addClass: function(el,className){
+			if(el.classList){
+				el.classList.add(className);
+			}
+			else {
+				el.className += ' ' + className;
+			}
+		},
+		
+		removeClass: function(el,className){
+			el.className = el.className.replace(className,'');
+		},		
+		
 	}
 };
 window.www = www;
 })(window);
 
 window.onload = function(){
+	www.general.preGameInit();
+	www.general.setupMatter();
+	www.general.runMatter();
 	Deferred.when(loaders).then(
 		function(){
 			www.general.init();
