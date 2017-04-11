@@ -44,6 +44,9 @@
 		.message {
 			display:none;
 			padding:0.5em;
+			padding-top:0;
+			text-shadow:0 0.1em 0 @white;
+			text-align:center;
 			
 			&:first-child {
 				display:block;
@@ -56,7 +59,7 @@
 			}
 			.desc {
 				padding:0;
-				.fontcalculate(12);
+				.fontcalculate(14);
 			}
 		}
 	}
@@ -82,7 +85,6 @@
 		.popupinner {
 			position:relative;
 			padding:1em;
-			padding-top:0;
 			width:80%;
 			max-width:460px;
 			min-width:320px;
@@ -93,8 +95,11 @@
 			text-shadow:0 0.15em 0 @redDark;
 			
 			.title {
-				margin:0 -20%;
-				.transform(translateY(-50%));
+				position:absolute;
+				top:-0.3em;
+				left:50%;
+				width:120%;
+				.transform(translateY(-50%) translateX(-50%));
 				.fontcalculate(60);
 				font-weight:bold;
 				text-shadow:0 0.1em 0 @redDark,
@@ -102,12 +107,12 @@
 							0 -0.1em 0 @redDark,
 							-0.1em 0 0 @redDark;
 				color:@white;
+				text-align:center;
 			}
 			
 			.label {
 				display:block;
-				margin-top:-2em;
-				margin-bottom:1em;
+				margin:1em 0;
 			}
 			
 			select {
@@ -139,7 +144,6 @@
 			}
 			
 			.endgame {
-				margin-top:-3em;
 				.fontcalculate(18);
 			}
 		}
@@ -179,8 +183,8 @@
 			position:absolute;
 			top:0;
 			left:0;
-			height:0.5em;
-			background:green;
+			height:1em;
+			background:@red;
 			.transition( all 0.3s );
 		}
 	}
@@ -190,13 +194,15 @@
 		z-index:101;
 		bottom:0;
 		right:0;
-		padding:1em;
-		background:@white;
+		width:3em;
+		height:3em;
+		background:url('../img/menu.svg') no-repeat 50% 50% rgba(255,255,255,0.5);
+		background-size:60% auto;
 		.transform(translateY(100%));
 		.transition(all @transpeed);
 		cursor:pointer;
-		&:after {
-			content:"Menu";
+		&:hover {
+			background-color:@white;
 		}
 	}
 	

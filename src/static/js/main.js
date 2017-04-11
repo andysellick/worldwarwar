@@ -198,13 +198,22 @@ var www = {
 			www.general.createEnemies();		
 		},
 		
+		//once the engine and everything is initialised, run matter
 		runMatter: function(){
 			www.Engine.run(www.engine);	// run the engine			
 			www.Render.run(www.render); // run the renderer
 		},
+
+		//called before creating the matter engine, fixes the weird pausing and seeing old versions of the game bug
+		resetMatter: function(){
+			www.World.clear(www.engine.world);
+			www.Engine.clear(www.engine);
+			www.Render.stop(www.render);
+		},
 		
 		//setup and start the game
 		initGame: function(chosenmode){
+			www.general.resetMatter();
 			document.getElementById('wwwpage').className = 'gameon';
 			www.mode = chosenmode;
 			//setup game attributes according to mode
@@ -744,7 +753,7 @@ var www = {
 			x += www.translated.x;
 			y += www.translated.y;
 			
-			var bullet = www.general.createBullet(www.mycountry.position.x,www.mycountry.position.y,www.mycountry.myid,'red');			
+			var bullet = www.general.createBullet(www.mycountry.position.x,www.mycountry.position.y,www.mycountry.myid,'#c83737');			
 			www.general.fireBullet(bullet,x,y,www.mycountry);
 		},
 		
