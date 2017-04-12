@@ -915,6 +915,23 @@ window.onload = function(){
 		function(){
 			www.general.init();
 			www.general.addClass(document.getElementById('loadingwrap'),'fadeout');
+
+			function getMetaContentByName(name,attrtype,content){
+				var content = (content==null)?'content':content;
+				var ret = document.querySelector("meta["+attrtype+"='"+name+"']").getAttribute(content);
+				return ret.replace(/ /gi,'%20');
+			}
+			var el = document.getElementById('sharelinks');
+			var desc = getMetaContentByName('description','name');
+			var txt = el.innerHTML.replace(/SBDESC/gi,desc);
+			var title = getMetaContentByName('og:title','property');
+			txt = txt.replace(/SBTITLE/gi,title);
+			var img = getMetaContentByName('og:image','property');
+			txt = txt.replace(/SBIMG/gi,img);
+			var link = escape(window.location.href);
+			txt = txt.replace(/SBLINK/gi,link);
+			el.innerHTML = txt;
+			el.className += ' loaded';				
 		}
 	);	
 	/*
@@ -924,5 +941,6 @@ window.onload = function(){
 		resize = setTimeout(www.general.setCanvasSize,500);
 	});
 	*/
+	
 };
 

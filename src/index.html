@@ -9,22 +9,19 @@
     <meta name="viewport" content="initial-scale=1.0">
 
 	<link rel="canonical" href="https://fixme" />
-	<meta name="description" content="fixme" />
-	<meta property="og:title" content="fixme" />
+	<meta name="description" content="Ever wanted to destroy the world? Now's your chance." />
+	<meta property="og:title" content="World War War" />
 	<meta property="og:site_name" content="fixme" />
-	<meta property="og:description" content="fixme" />
-	<meta property="articlepublisher" content="https://www.facebook.com/fixme" />
+	<meta property="og:description" content="Ever wanted to destroy the world? Now's your chance." />
 	<meta property="og:url" content="https://fixme" />
 	<meta property="og:type" content="website" />
-	<meta property="og:image" content="https://fixme.jpg" />
+	<meta property="og:image" content="http://fixme/shareimg.jpg" />
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:site" content="@fixme" />
-	<meta name="twitter:title" content="fixme" />
-	<meta name="twitter:description" content="fixme" />
+	<meta name="twitter:title" content="World War War" />
+	<meta name="twitter:description" content="Ever wanted to destroy the world? Now's your chance." />
 	<meta name="twitter:url" content="http://fixme" />
-	<meta name="twitter:image" content="http://fixme.jpg" />
+	<meta name="twitter:image" content="http://fixme/shareimg.jpg" />
     <link rel="shortcut icon" href="/static/favicon.ico">
-
     <link rel="stylesheet" type="text/css" href="/static/css/styles.min.css"/>
 </head>
 
@@ -33,14 +30,21 @@
 		<div class="canvasparent" id="canvasparent">
 			<canvas id="canvas" class="canvas"></canvas>		
 			<div id="messages" class="messagewrapper"></div>
+			<div id="sharelinks" class="sharingbuttons">
+				<a href="https://www.facebook.com/sharer/sharer.php?u=SBLINK" class="fb" target="_blank">Share on Facebook</a>
+				<a href="https://twitter.com/intent/tweet?text=SBDESC%20SBLINK" class="tw" target="_blank">Share on Twitter</a>
+				<a href="https://plus.google.com/share?url=SBLINK" class="gp" target="_blank">Share on Google+</a>
+				<a href="https://pinterest.com/pin/create/button/?url=SBLINK&media=SBIMG&description=SBDESC" class="pin" target="_blank">Pin on Pinterest</a>
+				<a href="https://www.linkedin.com/shareArticle?mini=true&url=SBLINK&title=SBTITLE&summary=SBDESC&source=" class="li" target="_blank">Share on LinkedIn</a>			
+			</div>
+			<div id="menu" class="menu"></div>
 		</div>
 			
 		<div id="intro" class="popup">
 			<div class="popupinner">
 				<h1 class="title">World War War</h1>
 				<label class="label">
-					Pick a country:
-					<select id="choosecountry"></select>
+					Pick a country: <select id="choosecountry"></select>
 				</label>
 				<div class="levelselectwrap">
 					<div class="levelselect">
@@ -71,7 +75,7 @@
 		
 		<div id="gamewon" class="popup">
 			<div class="popupinner">
-				<h2 class="title">Alone at last</h2>
+				<h2 class="title">Game won</h2>
 				<p>Congratulations, your country is finally safe from the threat of strangers!</p>
 				<p>You scored: <span class="js-scoregeneral"></span></p>
 				<span class="btn" id="playagain">Play again</span>
@@ -89,29 +93,21 @@
 		
 		<div id="hud" class="hud">
 			<div class="huditemwrap left">
-				<span id="score" class="number"></span>
-				Score
+				<span id="score" class="number">0</span> Score
 			</div>
 			<div class="huditemwrap right">
-				<span id="count" class="number"></span>
-				Countries left 
+				<span id="count" class="number">0</span> Countries left 
 			</div>
-			<div id="health" class="healthbar"></div>
+			<div class="healthwrapper">
+				<div id="health" class="healthbar"></div>
+			</div>
 		</div>
-		
-		<div id="menu" class="menu"></div>
 		
 		<div id="loadingwrap" class="loadingwrap">
 			<div id="loadingbar" class="loadingbar"></div>
 		</div>
 	</div>
-	
-    <!--<script src="static/bower_components/jquery/dist/jquery.min.js"></script>-->
-    <!--[if lt IE 9 ]>
-    <script>(function() {$('body').addClass('iex');})();</script>
-    <![endif]-->
     <script src="/static/bower_components/Matter/build/matter.min.js"></script>
     <script src="/static/js/main.min.js"></script>
-
 </body>
 </html>

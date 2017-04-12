@@ -1,11 +1,10 @@
 {
-  "name": "house-styles",
-  "version": "2.0.0",
+  "name": "world-war-war",
+  "version": "1.0.0",
   "license": "MIT",
   "private": true,
   "devDependencies": {
-    "html5shiv": "~3.7.3",
-    "jquery": "~2.1.4"
+    "html5shiv": "~3.7.3"
   },
   "dependencies": {
     "Matter": "matter-js#~0.10.0"

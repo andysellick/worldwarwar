@@ -621,7 +621,9 @@ var allcountries = [
 		'y': 40.38,
 		'w': 35,
 		'h': 20,
-		'unique': []		
+		'unique': [
+			'coffee'
+		]		
 	},	
 	{	'name': 'Egypt',
 		'dir': dirafrica,
@@ -1105,7 +1107,9 @@ var allcountries = [
 		'y': 32.51,
 		'w': 40,
 		'h': 15,
-		'unique': []		
+		'unique': [
+			'buttons'
+		]		
 	},
 	{	'name': 'India',
 		'dir': dirasia,
@@ -1319,7 +1323,8 @@ var allcountries = [
 		'w': 60,
 		'h': 50,
 		'unique': [
-			'instant coffee'
+			'instant coffee',
+			'the tranquillizer gun'
 		]		
 	},
 	{	'name': 'Greenland',
@@ -1618,13 +1623,5 @@ var allcountries = [
 		'unique': []		
 	},
 ];
-var temp = [
 
-	
-];
-
-//alter SVGS:
-//background #CBE6A3
-
-//1090, 720
-//500, 300
+//SVGs background #CBE6A3
