@@ -226,6 +226,17 @@
 		}
 	}
 	
+	.homelink {
+		position:absolute;
+		z-index:101;
+		bottom:0;
+		right:0;
+		width:2.8em;
+		height:2.8em;
+		background:url('../img/cd.gif') no-repeat 50% 50%;
+		.transition(all @transpeed);
+	}
+	
 	.gameon {
 		.hud {
 			.transform(none);
@@ -236,8 +247,11 @@
 		.menu {
 			.transform(none);
 		}
-		.sharingbuttons {
+		.sharingbuttons.loaded {
 			.transform(translateY(100%) translateX(-50%));
+		}
+		.homelink {
+			.transform(translateY(100%));
 		}
 	}
 	
