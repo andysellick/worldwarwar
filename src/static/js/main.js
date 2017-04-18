@@ -590,7 +590,6 @@ var www = {
 						'We don\'t need',
 						'Who needs',
 						'Take a hike,',
-						'Begone,'
 					];
 					//if there's more than one item, construct a sentence with them
 					if(country.mythings.length > 1){
@@ -609,7 +608,7 @@ var www = {
 					var insults = [
 						'Take a hike, foreign country!',
 						'Take that, people I\'ve never met!',
-						'Adios, strangers!',
+						'Go away strangers!',
 						'Your country is less good than some arbitrary standard!',
 						'In your collective faces!',
 						'We disliked you because you were different from us!',
@@ -925,10 +924,9 @@ window.onload = function(){
 			www.general.init();
 			www.general.addClass(document.getElementById('loadingwrap'),'fadeout');
 
-			function getMetaContentByName(name,attrtype,content){
-				var content = (content==null)?'content':content;
-				var ret = document.querySelector("meta["+attrtype+"='"+name+"']").getAttribute(content);
-				return ret.replace(/ /gi,'%20');
+			function getMetaContentByName(name,attrtype){
+				var ret = document.querySelector("meta["+attrtype+"='"+name+"']").getAttribute('content');
+				return ret.replace(/ /gi,'+');
 			}
 			var el = document.getElementById('sharelinks');
 			var desc = getMetaContentByName('description','name');
