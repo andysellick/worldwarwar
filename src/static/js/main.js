@@ -8,7 +8,6 @@ if (!Date.now) {
 /* preload images */
 /* we're not actually using these specific objects once created, but the browser should indirectly cache them, apparently */
 var loaders = [];
-var imgpath = 'static/img/';
 var imageloadprogress = 0;
 var imageloadtotal = 0;
 
@@ -69,7 +68,7 @@ function callAllPreloads(array,dir){
 }
 for(var im = 0; im < allimages.length; im++){
 	imageloadtotal += allimages[im].images.length;
-	callAllPreloads(allimages[im].images, imgpath + allimages[im].dir + '/');
+	callAllPreloads(allimages[im].images, spritepath + allimages[im].dir + '/');
 }
 
 //main code
@@ -301,6 +300,16 @@ var www = {
 			clearInterval(www.timer);
 			www.general.saveGame();
 			www.general.addClass(document.getElementById('cancelbtn'),'hidden');
+		},
+		
+		//called if browser is resized. Too complex to rescale everything so just reset it all and reconfigure canvas
+		resizeGame: function(){
+			www.general.endGame();
+			www.general.setCanvasSize();
+			www.general.resetMatter();
+			www.general.setupMatter();
+			www.general.runMatter();		
+			www.general.showPopup('intro');
 		},
 		
 		//modify some elements to insert the player scores
@@ -934,13 +943,11 @@ window.onload = function(){
 			el.className += ' loaded';				
 		}
 	);	
-	/*
+
 	var resize;
 	window.addEventListener('resize', function(event){
 		clearTimeout(resize);
-		resize = setTimeout(www.general.setCanvasSize,500);
+		resize = setTimeout(www.general.resizeGame,500);
 	});
-	*/
-	
 };
 
