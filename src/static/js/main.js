@@ -108,7 +108,7 @@ var www = {
 	bulletlife: 800, //how many milliseconds a bullet should exist for
 	chosen: -1, //the country chosen by the player
 	timer: 0,
-	scaleFactor: 1.5,//1.5, //how big to draw everything. 
+	scaleFactor: 1.9,//1.5, //how big to draw everything. 
 	mode: 3,
 	bestscores: [
 		{'country':'','score':0},
@@ -681,12 +681,48 @@ var www = {
 				y:www.engine.world.bounds.min.y + (www.worldh / 2),
 				w:www.boundswidth,
 				h:www.worldh * 2
-			};			
+			};	
+			//top left corner
+			var wall5 = {
+				x:www.engine.world.bounds.min.x + 1,
+				y:www.engine.world.bounds.min.y + 1,
+				w:www.boundswidth,
+				h:www.worldh
+			};
+			//top right corner
+			var wall6 = {
+				x:www.engine.world.bounds.max.x - 1,
+				y:www.engine.world.bounds.min.y + 1,
+				w:www.boundswidth,
+				h:www.worldh
+			};
+			//bottom right corner
+			var wall7 = {
+				x:www.engine.world.bounds.max.x - 1,
+				y:www.engine.world.bounds.max.y - 1,
+				w:www.boundswidth,
+				h:www.worldh
+			};
+			//bottom left corner
+			var wall8 = {
+				x:www.engine.world.bounds.min.x + 1,
+				y:www.engine.world.bounds.max.y - 1,
+				w:www.boundswidth,
+				h:www.worldh
+			};
 			var topwall = www.Bodies.rectangle(wall1.x,wall1.y,wall1.w,wall1.h,walloptions);				
 			var rightwall = www.Bodies.rectangle(wall2.x,wall2.y,wall2.w,wall2.h,walloptions);
 			var bottomwall = www.Bodies.rectangle(wall3.x,wall3.y,wall3.w,wall3.h,walloptions);
 			var leftwall = www.Bodies.rectangle(wall4.x,wall4.y,wall4.w,wall4.h,walloptions);
-			www.World.add(www.engine.world, [topwall,rightwall,bottomwall,leftwall]);
+			var tlcorner = www.Bodies.rectangle(wall5.x,wall5.y,wall5.w,wall5.h,walloptions);
+			www.Body.rotate(tlcorner,45);
+			var trcorner = www.Bodies.rectangle(wall6.x,wall6.y,wall6.w,wall6.h,walloptions);
+			www.Body.rotate(trcorner,-45);
+			var brcorner = www.Bodies.rectangle(wall7.x,wall7.y,wall7.w,wall7.h,walloptions);
+			www.Body.rotate(brcorner,45);
+			var blcorner = www.Bodies.rectangle(wall8.x,wall8.y,wall8.w,wall8.h,walloptions);
+			www.Body.rotate(blcorner,-45);
+			www.World.add(www.engine.world, [topwall,rightwall,bottomwall,leftwall,tlcorner,trcorner,brcorner,blcorner]);
 		},
 			
 		//create player object
