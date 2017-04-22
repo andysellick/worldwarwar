@@ -370,129 +370,56 @@ var www = {
 			//new approach - make canvas as big as possible, but set world size within it according to fixed aspect ratio (elsewhere)
 			www.canvasw = www.canvas.width = www.parentel.offsetWidth;
 			www.canvash = www.canvas.height = www.parentel.offsetHeight;		
-			
-			//old approach - set canvas size according to fixed aspect ratio
-			/*
-			//account for padding within the parent element
-			var computedStyle = getComputedStyle(www.parentel);
-			targetw -= parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight);
-			targeth -= parseFloat(computedStyle.paddingTop) + parseFloat(computedStyle.paddingBottom);
-			var sizes = www.general.calculateAspectRatio(www.idealw,www.idealh,targetw,targeth);			
-			www.canvasw = www.canvas.width = sizes[0];
-			www.canvash = www.canvas.height = sizes[1];
-			*/
 		},
 		
 		createEvents: function(){			
 			//start the various game modes FIXME surely a more efficient way to do this
-			/*
-			var beginning1 = ((document.ontouchstart!==null)?'mousedown':'touchstart');
-			document.getElementById('startgame1').addEventListener(beginning1,function(e){
-				var dd = document.getElementById('choosecountry');
-				www.chosen = parseInt(dd.options[dd.selectedIndex].value);
-				www.general.initGame(1);
-				www.general.hideAllPopups();
-			},false);
-			*/
 			document.getElementById('startgame1').onmousedown = function(e){
 				var dd = document.getElementById('choosecountry');
 				www.chosen = parseInt(dd.options[dd.selectedIndex].value);
 				www.general.initGame(1);
 				www.general.hideAllPopups();
-			}
-
-			/*
-			var beginning2 = ((document.ontouchstart!==null)?'mousedown':'touchstart');
-			document.getElementById('startgame2').addEventListener(beginning2,function(e){
-				var dd = document.getElementById('choosecountry');
-				www.chosen = parseInt(dd.options[dd.selectedIndex].value);
-				www.general.initGame(2);
-				www.general.hideAllPopups();
-			},false);
-			*/
+			};
 			document.getElementById('startgame2').onmousedown = function(e){
 				var dd = document.getElementById('choosecountry');
 				www.chosen = parseInt(dd.options[dd.selectedIndex].value);
 				www.general.initGame(2);
 				www.general.hideAllPopups();
-			}
-			/*
-			var beginning3 = ((document.ontouchstart!==null)?'mousedown':'touchstart');
-			document.getElementById('startgame3').addEventListener(beginning3,function(e){
-				var dd = document.getElementById('choosecountry');
-				www.chosen = parseInt(dd.options[dd.selectedIndex].value);
-				www.general.initGame(3);
-				www.general.hideAllPopups();
-			},false);
-			*/
+			};
 			document.getElementById('startgame3').onmousedown = function(e){
 				var dd = document.getElementById('choosecountry');
 				www.chosen = parseInt(dd.options[dd.selectedIndex].value);
 				www.general.initGame(3);
 				www.general.hideAllPopups();
-			}
+			};
 						
 			//menu button, i.e. quit/pause
-			/*
-			var menu = ((document.ontouchstart!==null)?'mousedown':'touchstart');
-			document.getElementById('menu').addEventListener(menu,function(e){
-				www.general.pauseGame();
-				clearInterval(www.timer);
-				www.general.saveGame();
-				www.general.showPopup('intro');
-			},false);			
-			*/
 			document.getElementById('menu').onmousedown = function(e){
 				www.general.pauseGame();
 				clearInterval(www.timer);
 				www.general.saveGame();
 				www.general.showPopup('intro');
-			}
+			};
 			
-			/*
 			//cancel menu button i.e. resume
-			var cancelbtn = ((document.ontouchstart!==null)?'mousedown':'touchstart');
-			document.getElementById('cancelbtn').addEventListener(cancelbtn,function(e){
-				www.general.hideAllPopups();
-				www.general.resumeGame();
-			},false);			
-			*/
 			document.getElementById('cancelbtn').onmousedown = function(e){
 				www.general.hideAllPopups();
 				www.general.resumeGame();
-			}
+			};
 			
-			/*
 			//game over, restart			
-			var replay = ((document.ontouchstart!==null)?'mousedown':'touchstart');
-			document.getElementById('playagain').addEventListener(replay,function(e){
-				www.general.showPopup('intro');
-			},false);
-			*/
 			document.getElementById('playagain').onmousedown = function(e){
 				www.general.showPopup('intro');
-			}
-			/*
-			var replay2 = ((document.ontouchstart!==null)?'mousedown':'touchstart');
-			document.getElementById('playagain2').addEventListener(replay2,function(e){
-				www.general.showPopup('intro');
-			},false);
-			*/
+			};
 			document.getElementById('playagain2').onmousedown = function(e){
 				www.general.showPopup('intro');
-			}
+			};
 			
 			//click to fire
 			//we could use matter's built in mouse click stuff for this but it only works within the canvas, we want it outside as well
-			/*
-			var ondown = ((document.ontouchstart!==null)?'mousedown':'touchstart');
-			document.getElementById('canvasparent').addEventListener(ondown,function(e){ //FIXME using the canvas parent for this click event, so making our own canvas isn't necessary now
-				www.general.clickDown(e);
-			},false);			
-			*/
 			document.getElementById('canvasparent').onmousedown = function(e){
 				www.general.clickDown(e);
-			}
+			};
 		},
 			
 		createMatterEvents: function(){		
