@@ -1,4 +1,4 @@
-var spritepath = '/static/img/';
+var spritepath = '/static/img/countries/';
 var direurope = 'europe/';
 var dirasia = 'asia/';
 var dirafrica = 'africa/';

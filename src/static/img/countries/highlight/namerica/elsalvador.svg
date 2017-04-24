@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="24.175482mm"
+   height="14.754299mm"
+   viewBox="0 0 24.175482 14.754299"
+   version="1.1"
+   id="svg22074"
+   inkscape:version="0.92.0 r15299"
+   sodipodi:docname="elsalvador.svg">
+  <defs
+     id="defs22068" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35"
+     inkscape:cx="-284.31405"
+     inkscape:cy="479.31071"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata22071">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-58.21583,-260.89666)">
+    <path
+       inkscape:connector-curvature="0"
+       id="sv"
+       class="landxx sv"
+       d="m 58.382216,268.75264 c -0.283129,-1.15515 0.09305,-1.67224 0.818838,-2.34621 1.103331,-1.01823 2.083012,-0.60615 3.033459,-1.21232 0.132924,-0.0797 0.977028,-1.62573 2.060399,-2.1056 0.413424,-0.18343 0.06647,-0.8534 0.174132,-1.36784 0.241945,-1.13921 2.141502,-0.70054 2.88856,-0.49316 1.246891,0.34561 7.978426,4.55549 7.295164,6.09082 1.37183,-0.0134 4.430555,-2.53762 4.881171,0 1.184408,-0.78029 3.246146,-0.27517 2.693154,1.36253 -0.119634,0.35225 -1.088702,5.05664 -1.448941,3.61434 -0.988979,1.33328 0.996987,2.414 -1.722748,3.1584 -2.578827,0.70454 -4.453143,-1.81979 -6.699649,-1.24421 2.49641,0.68458 -1.293405,0.3589 -1.927475,0.0665 -1.556599,-0.71648 -2.864633,-1.98331 -4.524923,-2.48046 -1.553946,-0.46659 -3.357796,0.19406 -4.842615,-0.553 -0.874676,-0.44131 -1.709458,-1.89821 -2.678526,-2.48976"
+       style="fill:#c83737;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.14449541;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">
+      <title
+         id="title1597">El Salvador</title>
+    </path>
+  </g>
+</svg>

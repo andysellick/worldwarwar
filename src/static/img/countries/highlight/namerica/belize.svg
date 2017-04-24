@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="16.597523mm"
+   height="30.065672mm"
+   viewBox="0 0 16.597523 30.065672"
+   version="1.1"
+   id="svg22645"
+   inkscape:version="0.92.0 r15299"
+   sodipodi:docname="belize.svg">
+  <defs
+     id="defs22639" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35"
+     inkscape:cx="31.365414"
+     inkscape:cy="56.817013"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata22642">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(25.307694,-133.8005)">
+    <g
+       id="bz"
+       class="landxx coastxx bz"
+       style="fill:#c83737;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.10870087;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       transform="matrix(1.3292939,0,0,1.3292939,-818.95369,-663.17625)">
+      <title
+         id="title321">Belize</title>
+      <path
+         inkscape:connector-curvature="0"
+         id="path2808"
+         d="m 608.689,609.139 c 0.569,-0.172 0.946,-0.61 0.72,-1.225 -0.247,0.405 -0.487,0.813 -0.72,1.225"
+         style="fill:#c83737;fill-opacity:1;stroke:#000000;stroke-width:0.10870087;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path2810"
+         class="landxx bz"
+         d="m 597.097,622.099 c 0.575,-3.73 1.558,-7.252 1.916,-11.022 0.145,-1.521 0.451,-9.184 3.196,-6.186 0.76,-1.428 2.711,-5.697 4.824,-5.256 -0.441,0.407 -0.658,0.911 -0.648,1.512 3.185,-1.614 0.403,4.603 0.1,5.655 -0.374,1.277 -0.601,2.875 -0.823,4.22 -0.16,0.968 0.212,1.688 -0.119,2.677 -0.327,0.978 -0.831,1.884 -1.169,2.855 0.555,-1.992 -0.498,0.549 -0.726,0.834 -0.64,0.8 -1.467,1.097 -2.236,1.724 -0.652,0.531 -1.241,1.211 -1.633,1.958 -0.186,0.318 -0.286,0.661 -0.301,1.028 -0.786,-0.194 -1.587,-0.08 -2.376,0"
+         style="fill:#c83737;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.10870087;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    </g>
+  </g>
+</svg>

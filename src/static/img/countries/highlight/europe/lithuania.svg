@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="49.563839mm"
+   height="27.592079mm"
+   viewBox="0 0 49.563839 27.592079"
+   version="1.1"
+   id="svg32659"
+   inkscape:version="0.92.0 r15299"
+   sodipodi:docname="lithuania.svg">
+  <defs
+     id="defs32653" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35"
+     inkscape:cx="93.663946"
+     inkscape:cy="52.142496"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata32656">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(41.790848,-135.03729)">
+    <path
+       inkscape:connector-curvature="0"
+       id="lt"
+       class="landxx lt eu"
+       d="m -41.722371,138.89329 c 1.355863,0.21799 1.674894,-1.19106 2.578827,-1.81717 0.996963,-0.68324 2.751645,-0.9079 3.894821,-1.17509 2.977621,-0.69389 6.460381,-0.72181 9.504453,-0.549 1.794552,0.78696 4.001189,0.10635 5.636213,0.58488 1.980635,0.16883 6.194511,1.07807 8.095407,-0.15152 2.5921182,-1.68022 2.6984592,0.14622 4.3069032,1.42234 0.970384,0.77498 2.246509,0.63008 3.429577,0.8082 1.595155,0.23795 3.017494,0.91323 4.04105804,2.07902 0.651354,0.72846 4.71899196,3.41363 5.63621496,2.91779 -0.651378,2.86732 -0.425376,3.6117 2.166742,4.30294 -1.595155,0.78162 -0.425376,2.0963 -2.645302,1.65895 -1.701498,-0.33631 -1.900896,1.28146 -3.137125,2.0006 -3.044094,1.75466 -1.24954496,3.87089 -3.788502,6.58267 0.638064,0.26054 1.92747604,0.36554 2.10029404,1.24287 0.199398,1.05813 -1.20965104,1.28146 -1.91418604,1.0528 0.731115,-1.9607 -2.286376,-1.3758 -2.445904,-0.98102 -0.757695,1.83177 -3.070675,0.53306 -3.961294,2.38476 -0.305742,0.64605 -1.9141862,0.65534 -2.5921172,1.03021 -1.156489,0.63273 -3.296653,-0.0665 -4.586066,0.0532 -0.638062,0.0532 -3.48276,0.44135 -3.695448,-0.63806 -0.265847,-1.28277 -1.56855,-3.03609 -2.818094,-3.60237 -1.728078,-4.55284 -0.478534,-4.18995 0.199397,-5.97783 0.132924,-0.37487 -2.419324,-2.40603 -2.844698,-2.41667 -1.023542,-0.0266 -6.340724,0.2858 -8.042222,-1.07807 -1.874292,-1.48613 -4.506303,-1.99791 -4.838624,-0.53702 0,-1.41835 -2.273086,-3.2674 -2.990912,-4.47174 -0.890643,-1.47153 -0.757695,-3.14511 -1.289413,-4.72563"
+       style="fill:#c83737;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.14449541;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">
+      <title
+         id="title1994">Lithuania</title>
+    </path>
+  </g>
+</svg>

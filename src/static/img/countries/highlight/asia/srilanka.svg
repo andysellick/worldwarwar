@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="23.330702mm"
+   height="45.004311mm"
+   viewBox="0 0 23.330702 45.004311"
+   version="1.1"
+   id="svg17726"
+   inkscape:version="0.92.0 r15299"
+   sodipodi:docname="srilanka.svg">
+  <defs
+     id="defs17720" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35"
+     inkscape:cx="44.089634"
+     inkscape:cy="85.047511"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata17723">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(28.674311,-126.33118)">
+    <g
+       id="lk"
+       class="landxx coastxx lk"
+       style="fill:#c83737;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.10870087;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       transform="matrix(1.3292939,0,0,1.3292939,-2524.6763,-770.39804)">
+      <title
+         id="title2000">Sri Lanka</title>
+      <path
+         inkscape:connector-curvature="0"
+         id="path6496"
+         d="m 1877.74,680.83 c 0.22,0.51 1.04,0.828 1.44,1.151 -0.16,-0.684 -0.72,-1.183 -1.44,-1.151"
+         style="fill:#c83737;fill-opacity:1;stroke:#000000;stroke-width:0.10870087;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path6498"
+         d="m 1878.82,693.79 c 0,3.21 1.21,16.343 7.12,14.41 2.69,-0.88 6.69,-2.723 8.12,-5.29 1.17,-2.117 1.7,-5.852 0.24,-7.969 0,0.377 -1.33,-2.188 -1.65,-2.52 1.86,1.327 -0.43,-1.459 -0.7,-1.906 -0.87,-1.416 -0.89,-3.043 -1.61,-4.502 -0.55,0.464 -1.15,0.303 -1.51,-0.288 1.78,0.141 -2.25,-4.864 -2.46,-5.573 -0.24,-0.764 -4.76,-5.995 -5.6,-5.227 0.93,0.219 1.45,1.111 2.09,1.728 -0.98,-0.57 -2.78,-3.051 -3.96,-1.512 0.54,0.812 1.54,0.888 2.23,1.512 0.12,-0.886 2.47,0.541 2.95,1.225 -0.43,-0.328 -2.81,-0.885 -3.46,-0.864 0.49,0.673 0,0.693 -0.32,1.161 -0.48,0.646 0.55,1.699 -0.1,2.742 -1.48,2.429 -1.21,6.716 -1.32,9.561 -1.15,-0.336 -0.62,-1.835 -0.65,-2.664 -1.12,1.733 0.39,4.174 0.57,5.976"
+         style="fill:#c83737;fill-opacity:1;stroke:#000000;stroke-width:0.10870087;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path6500"
+         d="m 1878.75,675.72 c 0.13,0.483 0.1,0.689 0.72,0.576 -0.24,-0.192 -0.48,-0.384 -0.72,-0.576"
+         style="fill:#c83737;fill-opacity:1;stroke:#000000;stroke-width:0.10870087;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    </g>
+  </g>
+</svg>

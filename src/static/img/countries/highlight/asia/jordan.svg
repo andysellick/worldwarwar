@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="39.541122mm"
+   height="48.290165mm"
+   viewBox="0 0 39.541122 48.290165"
+   version="1.1"
+   id="svg40397"
+   inkscape:version="0.92.0 r15299"
+   sodipodi:docname="jordan.svg">
+  <defs
+     id="defs40391" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35"
+     inkscape:cx="-43.848048"
+     inkscape:cy="-465.88585"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata40394">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(5.4074659,22.722463)">
+    <path
+       inkscape:connector-curvature="0"
+       id="jo"
+       class="landxx jo"
+       d="m -5.3167609,23.51561 c -0.1861075,-3.208904 1.103306,-6.264953 1.1431758,-9.455261 0,-3.66753 1.6749184,-6.3872643 2.113583,-9.8779843 0.1861074,-1.454247 -0.2392672,-2.937752 -0.1329235,-4.41458703 0.1329235,-1.39575697 0.5715878,-2.76892597 0.6247717,-4.12878097 0.1329235,-2.850029 -0.2791611,-6.2742747 -0.3855048,-9.1508597 -0.1329235,-2.441936 2.95104214,-1.689547 4.3467994,-0.727124 2.2996663,1.584519 4.3600643,3.983883 7.4440303,3.377732 3.110545,-0.611482 5.968534,-3.529275 8.534071,-5.240096 3.283362,-2.185339 6.553411,-4.60201 9.996302,-6.514856 1.063437,3.402996 2.459193,6.687673 3.628974,10.050801 -1.183071,0.119633 -0.412085,1.740029 0.34561,1.935434 1.209651,0.309733 2.738355,0.119634 0.784275,2.1680807 -6.128036,3.744616 -12.269387,5.729267 -19.620364,7.56634197 L 24.4727,10.625443 c -0.983673,0.485204 -3.58908,0.426712 -4.293616,1.312024 -0.810855,1.018236 0.132923,3.073328 -0.757695,4.091567 -1.448942,1.708142 -5.117785,0.253894 -6.992076,2.048422 -2.140163,2.047132 -2.844699,5.895438 -5.902085,7.101097 -2.7782242,1.088702 -9.0524745,-0.935818 -11.8573032,-1.662943"
+       style="fill:#c83737;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.14449541;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">
+      <title
+         id="title295">Jordan</title>
+    </path>
+  </g>
+</svg>

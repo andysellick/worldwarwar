@@ -10,7 +10,6 @@ if (!Date.now) {
 var loaders = [];
 var imageloadprogress = 0;
 var imageloadtotal = 0;
-
 var allimages = [
 	{
 		'name': 'africa',
@@ -68,7 +67,8 @@ function callAllPreloads(array,dir){
 }
 for(var im = 0; im < allimages.length; im++){
 	imageloadtotal += allimages[im].images.length;
-	callAllPreloads(allimages[im].images, spritepath + allimages[im].dir + '/');
+	callAllPreloads(allimages[im].images, spritepath + 'highlight/' + allimages[im].dir + '/');
+	callAllPreloads(allimages[im].images, spritepath + 'regular/' + allimages[im].dir + '/');
 }
 
 //main code
@@ -106,9 +106,9 @@ var www = {
 	enemies: [],
 	bullets: [],
 	bulletlife: 800, //how many milliseconds a bullet should exist for
-	chosen: -1, //the country chosen by the player
+	chosen: 2000, //the country chosen by the player
 	timer: 0,
-	scaleFactor: 1.9,//1.5, //how big to draw everything. 
+	scaleFactor: 1.9,//1.9, //how big to draw everything. 
 	mode: 3,
 	bestscores: [
 		{'country':'','score':0},
@@ -194,6 +194,12 @@ var www = {
 			*/
 			www.general.setWorldSize();
 			www.general.drawBoundary(); //draw the boundary first, so countries overlap it			
+			if(www.chosen !== 2000){
+				if(www.chosen === -1){
+					www.chosen = www.general.randomInt(0,allcountries.length - 1);
+				}
+				www.mycountry = www.general.createPlayer(www.chosen,'player',www.playerhealth,www.chosen);			
+			}
 			www.general.createEnemies();		
 		},
 		
@@ -210,28 +216,36 @@ var www = {
 			www.Render.stop(www.render);
 		},
 		
-		//setup and start the game
-		initGame: function(chosenmode){
-			www.general.resetMatter();
-			document.getElementById('wwwpage').className = 'gameon';
+		determineGameSetup: function(chosenmode){
 			www.mode = chosenmode;
 			//setup game attributes according to mode
-			if(www.mode === 1){ //just float around destroying the world, sandbox				
+			if(www.mode === 1){ //sandbox				
 				www.enemyhealth = 2;
 				www.enemiesfire = 0;
 			}
-			else if(www.mode === 2){ //reasonable level of violence				
+			else if(www.mode === 2){ //normal
 				www.playerhealth = 10;
 				www.enemyhealth = 5;
 				www.enemiesfire = 1;
 				www.firechance = 10;
 			}
-			else { //extreme				
+			else if(www.mode === 3){ //extreme				
 				www.playerhealth = 5;
 				www.enemyhealth = 5;
 				www.enemiesfire = 1;
 				www.firechance = 3;
 			}
+			else if(www.mode === 4){ //versus
+			}
+			else if(www.mode === 5){ //assassinate
+			}
+		},
+		
+		//setup and start the game
+		initGame: function(chosenmode){
+			www.general.resetMatter();
+			document.getElementById('wwwpage').className = 'gameon';
+			www.general.determineGameSetup(chosenmode);
 			//reset some things
 			www.playerhealthorig = www.playerhealth;
 			www.enemycount = 0;
@@ -240,8 +254,6 @@ var www = {
 			www.playerscore = 0;
 			document.getElementById('messages').innerHTML = '';			
 			www.general.setupMatter();
-
-			www.mycountry = www.general.createPlayer(www.chosen,'player',www.playerhealth,www.chosen);			
 			
 			//recentre the canvas onto the player, this calculates how much we need to translate the viewport by
 			var translate = {
@@ -372,27 +384,23 @@ var www = {
 			www.canvash = www.canvas.height = www.parentel.offsetHeight;		
 		},
 		
+		createEventStart: function(btn){
+			btn.onmousedown = function(e){
+				var dd = document.getElementById('choosecountry');
+				www.chosen = parseInt(dd.options[dd.selectedIndex].value);
+				www.general.initGame(parseInt(e.target.dataset.gametype));
+				www.general.hideAllPopups();
+			};
+		},
+		
 		createEvents: function(){			
-			//start the various game modes FIXME surely a more efficient way to do this
-			document.getElementById('startgame1').onmousedown = function(e){
-				var dd = document.getElementById('choosecountry');
-				www.chosen = parseInt(dd.options[dd.selectedIndex].value);
-				www.general.initGame(1);
-				www.general.hideAllPopups();
-			};
-			document.getElementById('startgame2').onmousedown = function(e){
-				var dd = document.getElementById('choosecountry');
-				www.chosen = parseInt(dd.options[dd.selectedIndex].value);
-				www.general.initGame(2);
-				www.general.hideAllPopups();
-			};
-			document.getElementById('startgame3').onmousedown = function(e){
-				var dd = document.getElementById('choosecountry');
-				www.chosen = parseInt(dd.options[dd.selectedIndex].value);
-				www.general.initGame(3);
-				www.general.hideAllPopups();
-			};
-						
+			//start the various game modes
+			var startbtns = document.getElementsByClassName('startgame');
+			for(var b = 0; b < startbtns.length; b++){
+				var btn = startbtns[b];
+				www.general.createEventStart(btn);
+			}
+
 			//menu button, i.e. quit/pause
 			document.getElementById('menu').onmousedown = function(e){
 				www.general.pauseGame();
@@ -540,7 +548,6 @@ var www = {
 		},
 		
 		//check to see if an x,y movement falls outside of the boundaries in which we should scroll. If they do, return 0, otherwise return the original values
-		//FIXME this still isn't working for hawaii at a large screen size
 		checkBounds: function(posx,posy){
 			if(www.mycountry.myxpos < www.engine.world.bounds.min.x - (www.boundswidth / 2) + (www.canvas.width / 2) || www.mycountry.myxpos > www.engine.world.bounds.max.x + (www.boundswidth / 2) - (www.canvas.width / 2)){
 				posx = 0;
@@ -704,6 +711,8 @@ var www = {
 			var blcorner = www.Bodies.rectangle(wall8.x,wall8.y,wall8.w,wall8.h,walloptions);
 			www.Body.rotate(blcorner,-45);
 			www.World.add(www.engine.world, [topwall,rightwall,bottomwall,leftwall,tlcorner,trcorner,brcorner,blcorner]);
+			
+			//FIXME move the bottom boundary up, getting lost on mobile
 		},
 			
 		//create player object
@@ -717,6 +726,11 @@ var www = {
 			if(typeof(me.h) !== 'undefined'){
 				mass = Math.max(me.w,me.h) / 10;
 			}
+			var spath = spritepath + 'regular/';
+			if(type === 'player'){
+				spath = spritepath + 'highlight/';
+			}
+			
 			var options = {
 				density: 0.0001,
 				friction: 0,
@@ -726,7 +740,7 @@ var www = {
 				//inverseInertia: 1, //don't know what this property does
 				render: {
 					sprite: {
-						texture: spritepath + me.dir + me.sprite,
+						texture: spath + me.dir + me.sprite,
 						xScale: ((0.11) / 100) * percscalex, //slightly bad, partly based on legacy code (countries used to have different scale factors)
 						yScale: ((0.11) / 100) * percscalex,
 					}
@@ -841,6 +855,14 @@ var www = {
 				sorted.push(d);
 			}
 			sorted.sort(www.general.sortStuff);
+			
+			//add an independant option 'random'
+			var ran = document.createElement('option');
+			ran.value = -1;
+			ran.innerHTML = 'Random';
+			document.getElementById('choosecountry').appendChild(ran);				
+			
+			//add the rest
 			for(var o = 0; o < sorted.length; o++){
 				var opt = document.createElement('option');
 				opt.value = sorted[o].value;
