@@ -105,7 +105,7 @@ var www = {
 	boundswidth: 100, //used to determine the thickness of the walls we build to limit the game
 	enemies: [],
 	bullets: [],
-	bulletlife: 800, //how many milliseconds a bullet should exist for
+	bulletlife: 1000, //how many milliseconds a bullet should exist for
 	chosen: 2000, //the country chosen by the player
 	timer: 0,
 	scaleFactor: 1.9,//1.9, //how big to draw everything. 
@@ -381,9 +381,9 @@ var www = {
 		setCanvasSize: function(){
 			//new approach - make canvas as big as possible, but set world size within it according to fixed aspect ratio (elsewhere)
 			www.canvasw = www.canvas.width = www.parentel.offsetWidth;
-			www.canvash = www.canvas.height = www.parentel.offsetHeight;		
+			www.canvash = www.canvas.height = document.documentElement.clientHeight;//www.parentel.offsetHeight; //this should now be more ios mobile friendly
 		},
-		
+				
 		createEventStart: function(btn){
 			btn.onmousedown = function(e){
 				var dd = document.getElementById('choosecountry');
@@ -433,7 +433,6 @@ var www = {
 		createMatterEvents: function(){		
 			//on object collision
 			www.Events.on(www.engine,'collisionStart',function(e){			
-				//console.log(e.pairs);
 				for(var obj = 0; obj < e.pairs.length; obj++){				
 					var obj1 = e.pairs[obj].bodyA;
 					var obj2 = e.pairs[obj].bodyB;
@@ -915,7 +914,7 @@ var www = {
 			www.general.endGame();
 			www.general.showPopup('gamelost');			
 		},
-
+		
 		//given a width and height representing an aspect ratio, and the size of the containing thing, return the largest w and h matching that aspect ratio
 		calculateAspectRatio: function(idealw,idealh,parentw,parenth){
 			var aspect = Math.floor((parenth / idealh) * idealw);
