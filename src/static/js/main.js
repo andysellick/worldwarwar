@@ -106,7 +106,7 @@ var www = {
 	enemies: [],
 	bullets: [],
 	bulletlife: 1000, //how many milliseconds a bullet should exist for
-	chosen: 2000, //the country chosen by the player
+	chosen: 2000, //the country chosen by the player, starts at 2000 so that when the page first loads we don't draw a country red
 	chosenenemy: -1, //the enemy country, only used in some game modes
 	timer: 0,
 	scaleFactor: 1.9,//1.9, //how big to draw everything. 
@@ -195,20 +195,21 @@ var www = {
 			*/
 			www.general.setWorldSize();
 			www.general.drawBoundary(); //draw the boundary first, so countries overlap it			
-			if(www.chosen !== 2000){
+			if(www.chosen !== 2000){ //when the map first loads we're not in a game (www.chosen == 2000), so don't choose a player country
 				if(www.chosen === -1){
 					www.chosen = www.general.randomInt(0,allcountries.length - 1);
 				}
-				www.mycountry = www.general.createPlayer(www.chosen,'player',www.playerhealth,www.chosen);			
-			}
-			//if vs or assassinate mode, we need to pick a single adversary
-			if(www.mode === 4 || www.mode === 5){
-				www.chosenenemy = www.chosen;
-				console.log('Player is:',allcountries[www.chosen].name,'enemy is:',allcountries[www.chosenenemy].name);
-				while(www.chosenenemy === www.chosen){
-					www.chosenenemy = www.general.randomInt(0,allcountries.length - 1);
+				www.mycountry = www.general.createPlayer(www.chosen,'player',www.playerhealth);			
+			
+				//if vs or assassinate mode, we need to pick a single adversary
+				if(www.mode === 4 || www.mode === 5){
+					www.chosenenemy = www.chosen;
+					console.log('Player is:',allcountries[www.chosen].name,'enemy is:',allcountries[www.chosenenemy].name);
+					while(www.chosenenemy === www.chosen){
+						www.chosenenemy = www.general.randomInt(0,allcountries.length - 1);
+					}
+					console.log('Choosing enemy',allcountries[www.chosenenemy].name);
 				}
-				console.log('Choosing enemy',allcountries[www.chosenenemy].name);
 			}
 			www.general.createEnemies();		
 		},
@@ -228,10 +229,12 @@ var www = {
 		
 		determineGameSetup: function(chosenmode){
 			www.mode = chosenmode;
+			document.getElementById('wwwpage').dataset.gamemode = www.mode;
 			//setup game attributes according to mode
 			if(www.mode === 1){ //sandbox - enemies don't fire and take one hit				
 				www.enemyhealth = 2;
 				www.enemiesfire = 0;
+				//no healthbar or score
 			}
 			else if(www.mode === 2){ //normal - enemies fire at a normal rate, have good health, player has better health
 				www.playerhealth = 10;
@@ -250,20 +253,23 @@ var www = {
 				www.enemyhealth = 10;
 				www.enemiesfire = 1;
 				www.firechance = 1;
+				//no country count, no score
 			}
 			else if(www.mode === 5){ //assassinate - enemies don't fire, take one hit
 				www.playerhealth = 5;
 				www.enemyhealth = 1;
 				www.enemiesfire = 0;
+				//no healthbar, score or country count
 			}
+			
+			//FIXME sometimes in vs the wrong country is firing
 		},
 		
 		//setup and start the game
 		initGame: function(chosenmode){
 			www.general.resetMatter();
-			www.general.addClass(document.getElementById('wwwpage'),'gameon');
-			//document.getElementById('wwwpage').className = 'gameon';
 			www.general.determineGameSetup(chosenmode);
+			
 			//reset some things
 			www.playerhealthorig = www.playerhealth;
 			www.enemycount = 0;
@@ -295,6 +301,32 @@ var www = {
 			www.Render.run(www.render); // run the renderer
 			
 			www.general.removeClass(document.getElementById('cancelbtn'),'hidden');
+			www.general.showPopup('countdownwrap');
+			www.tally = 3;
+			www.general.countDown();
+		},
+		
+		//do countdown
+		countDown: function(){
+			if(www.tally > 0){
+				document.getElementById('countdown').innerHTML = www.tally + '...';
+				www.tally--;
+				setTimeout(www.general.countDown,1000);
+			}
+			else if(www.tally === 0){
+				document.getElementById('countdown').innerHTML = 'GO!';
+				www.tally--;
+				setTimeout(www.general.countDown,1000);
+			}
+			else {
+				document.getElementById('countdownwrap').dataset.shown = '';
+				www.general.addClass(document.getElementById('wwwpage'),'gameon');
+				document.getElementById('countdown').innerHTML = '';
+				www.general.startGame();
+			}
+		},
+		
+		startGame: function(){
 			if(www.enemiesfire){
 				www.timer = setInterval(www.general.gameLoop,500);
 			}
@@ -328,6 +360,7 @@ var www = {
 		
 		endGame: function(){
 			//console.log('end game');
+			document.getElementById('wwwpage').dataset.gamemode = '';
 			www.general.removeClass(document.getElementById('wwwpage'),'gameon');
 			//document.getElementById('wwwpage').className = '';
 			www.Render.stop(www.render);
@@ -347,6 +380,7 @@ var www = {
 		},
 		
 		//modify some elements to insert the player scores
+		//FIXME need to update with new game modes
 		updateScores: function(){
 			if(www.mode === 2 && www.playerscore > www.bestscores[0].score){
 				www.bestscores[0].score = www.playerscore;
@@ -463,7 +497,7 @@ var www = {
 				var dd = document.getElementById('choosecountry');
 				www.chosen = parseInt(dd.options[dd.selectedIndex].value);
 				www.general.initGame(parseInt(e.target.dataset.gametype));
-				www.general.hideAllPopups();
+				//www.general.hideAllPopups();
 			};
 		},
 		
@@ -678,7 +712,7 @@ var www = {
 
 				www.World.remove(www.engine.world, country);
 				www.enemycount--;
-				if(www.enemycount <= 0 || ((www.mode === 4 || www.mode === 5) && country.myid === www.chosenenemy)){
+				if(www.enemycount <= 0 || ((www.mode === 4 || www.mode === 5) && country.myid === www.chosenenemy)){ //FIXME game usually ends with 2 countries still in place
 					www.general.gameWon();
 				}
 			}
@@ -772,7 +806,7 @@ var www = {
 		},
 			
 		//create player object
-		createPlayer: function(which,type,health,theid){
+		createPlayer: function(which,type,health){
 			var me = allcountries[which];
 			var x = www.engine.world.bounds.min.x + ((www.worldw / 100) * me.x);
 			var y = www.engine.world.bounds.min.y + ((www.worldh / 100) * me.y);
@@ -810,7 +844,7 @@ var www = {
 				thisobj = www.Bodies.rectangle(x,y,w,h,options);
 			}
 			
-			thisobj.myid = theid;
+			thisobj.myid = which;
 			thisobj.myxpos = thisobj.position.x;
 			thisobj.myypos = thisobj.position.y;
 			thisobj.myname = me.name;
@@ -832,9 +866,8 @@ var www = {
 			//console.log('Found',allcountries.length,'countries. There should be 196.');
 			for(var i = 0; i < allcountries.length; i++){
 				if(i !== www.chosen){
-					var enemy = www.general.createPlayer(i,'enemy',www.enemyhealth,i);
+					var enemy = www.general.createPlayer(i,'enemy',www.enemyhealth);
 					www.enemies.push(enemy);
-					//www.World.add(www.engine.world, [enemy]);
 					www.enemycount++;
 				}
 			}
@@ -957,7 +990,7 @@ var www = {
 		gameLoop: function(){
 			for(var e = 0; e < www.enemies.length; e++){
 				if(www.enemies[e].myhealth > 0){
-					if((www.mode === 4 && e === www.chosenenemy) || (www.mode !== 5 && www.mode !== 4)){ //this is contorted but works. Could probably write better
+					if((www.mode === 4 && www.enemies[e].myid === www.chosenenemy) || (www.mode !== 5 && www.mode !== 4)){ //this is contorted but works. Could probably write better
 						if(!www.general.randomInt(0,www.firechance)){
 							var bullet = www.general.createBullet(www.enemies[e].position.x,www.enemies[e].position.y,www.enemies[e].myid,'black');			
 							var x = www.general.randomInt(0,www.canvas.width);

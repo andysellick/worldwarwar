@@ -7,6 +7,7 @@
 		width:100vw;
 		height:100vh;
 		overflow:hidden;
+		-webkit-tap-highlight-color: rgba(0,0,0,0);
 	}
 
     html {
@@ -43,6 +44,27 @@
 				.transform(translateY(100%) translateX(-50%));
 			}
 		}	
+		&[data-gamemode='1']{ //sandbox, no healthbar or score
+			.hud {
+				.left,
+				.healthwrapper {
+					display:none;
+				}
+			}
+		}
+		&[data-gamemode='4']{ //vs, no country count or score
+			.hud {
+				.left,
+				.right {
+					display:none;
+				}
+			}
+		}
+		&[data-gamemode='5']{ //assassinate, no hud
+			.hud {
+				display:none;
+			}
+		}
 	}
 	
 	@transpeed: 0.3s;
@@ -230,6 +252,13 @@
 				}
 			}
 		}
+		
+		.countdown {
+			margin-top:-1em;
+			.fontcalculate(60);
+			color:@white;
+			text-shadow:0 0.1em 0 @black;
+		}
 	}
 	
 	.hud {
@@ -325,7 +354,6 @@
 			top:50%;
 			left:0;
 			width:100%;
-			margin-top:-1em;
 			background:@red;
 			.transform(translateY(-50%));
 			.transition( opacity @transpeed );
@@ -379,9 +407,13 @@
 			background-position:50% 50%;
 			background-repeat:no-repeat;
 			text-indent:-9999px;
+			.transition(all @transpeed / 3);
 			&:focus,
 			&:active {
 				outline:0;
+			}
+			&:hover {
+				.transform(translateY(-10%));
 			}
 			
 			&.fb {
@@ -439,7 +471,7 @@
 	.messagewrapper {
 		width:100%;
 		.message {
-			padding:0 1em 0.5em 1em;
+			padding:0 0.5em 0.5em 0.5em;
 			.title {
 				.fontcalculate(15);
 			}
