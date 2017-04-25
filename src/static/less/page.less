@@ -5,6 +5,7 @@
 	body {
 		position:fixed; //helps with ios mobile devices to prevent scrolling
 		width:100vw;
+		height:100vh;
 		overflow:hidden;
 	}
 
@@ -19,7 +20,30 @@
         color:@black;
 		.no-select;
 		.font-pixel;
-    }
+		
+		&.loaded {
+			height:auto;
+			.loadingwrap {
+				.transparency(0);
+				z-index:-1;
+			}	
+		}
+
+		&.gameon {
+			.hud {
+				.transform(none);
+			}
+			.messagewrapper {
+				.transform(translateX(-50%));
+			}
+			.menu {
+				.transform(none);
+			}
+			.sharingbuttons.loaded {
+				.transform(translateY(100%) translateX(-50%));
+			}
+		}	
+	}
 	
 	@transpeed: 0.3s;
 		
@@ -233,80 +257,50 @@
 			background-color:@white;
 		}
 	}
-	
-	/*
-	.homelink {
-		position:fixed;
-		z-index:101;
-		bottom:0;
-		right:0;
-		width:2.8em;
-		height:2.8em;
-		background:url('../img/cd.gif') no-repeat 50% 50%;
-		.transition(all @transpeed);
-	}
-	*/
-	
-	.gameon {
-		.hud {
-			.transform(none);
-		}
-		.messagewrapper {
-			.transform(translateX(-50%));
-		}
-		.menu {
-			.transform(none);
-		}
-		.sharingbuttons.loaded {
-			.transform(translateY(100%) translateX(-50%));
-		}
-		/*
-		.homelink {
-			.transform(translateY(100%));
-		}
-		*/
-	}
-	
+			
 	.loadingwrap {
 		position:absolute;
 		z-index:900;
-		top:50%;
+		top:0;
 		left:0;
-		width:100%;
-		background:@red;
-		.transform(translateY(-50%));
-		.transition( opacity @transpeed );
-		&:after {
-			content:"Loading";
+		width:100vw;
+		height:100vh;
+		.loadinginner {	
 			position:absolute;
-			z-index:-1;
 			top:50%;
-			left:50%;
-			.transform(translateY(-50%) translateX(-50%));
-			.fontcalculate(30);
-		}
-		&.fadeout {
-			.transparency(0);
-			z-index:-1;
-		}
-		.loadingbar {
-			position:static;
-			z-index:2;
-			width:0;
-			height:20vh;
-			overflow:hidden;
-			background:@redDark;
-			//mix-blend-mode:multiply;
+			left:0;
+			width:100%;
+			margin-top:-1em;
+			background:@red;
+			.transform(translateY(-50%));
+			.transition( opacity @transpeed );
 			&:after {
 				content:"Loading";
 				position:absolute;
-				z-index:1;
+				z-index:-1;
 				top:50%;
 				left:50%;
 				.transform(translateY(-50%) translateX(-50%));
-				color:@white;
 				.fontcalculate(30);
-				text-shadow:0 0.1em 0 @redDark;
+			}
+			.loadingbar {
+				position:static;
+				z-index:2;
+				width:0;
+				height:20vh;
+				overflow:hidden;
+				background:@redDark;
+				&:after {
+					content:"Loading";
+					position:absolute;
+					z-index:1;
+					top:50%;
+					left:50%;
+					.transform(translateY(-50%) translateX(-50%));
+					color:@white;
+					.fontcalculate(30);
+					text-shadow:0 0.1em 0 @redDark;
+				}
 			}
 		}
 	}

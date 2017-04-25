@@ -244,7 +244,8 @@ var www = {
 		//setup and start the game
 		initGame: function(chosenmode){
 			www.general.resetMatter();
-			document.getElementById('wwwpage').className = 'gameon';
+			www.general.addClass('wwwpage','gameon');
+			//document.getElementById('wwwpage').className = 'gameon';
 			www.general.determineGameSetup(chosenmode);
 			//reset some things
 			www.playerhealthorig = www.playerhealth;
@@ -275,7 +276,7 @@ var www = {
 			www.Engine.run(www.engine);	// run the engine			
 			www.Render.run(www.render); // run the renderer
 			
-			www.general.removeClass(document.getElementById('cancelbtn'),'hidden');
+			www.general.removeClass('cancelbtn','hidden');
 			if(www.enemiesfire){
 				www.timer = setInterval(www.general.gameLoop,500);
 			}
@@ -291,14 +292,16 @@ var www = {
 		//pause matter js
 		pauseGame: function(){
 			//console.log('pause game');
-			document.getElementById('wwwpage').className = '';
+			www.general.removeClass('wwwpage','gameon');
+			//document.getElementById('wwwpage').className = '';
 			clearInterval(www.timer);
 			www.Render.stop(www.render);
 		},
 		
 		resumeGame: function(){
 			//console.log('resume game');
-			document.getElementById('wwwpage').className = 'gameon';
+			www.general.addClass('wwwpage','gameon');
+			//document.getElementById('wwwpage').className = 'gameon';
 			www.Render.run(www.render);
 			if(www.enemiesfire){
 				www.timer = setInterval(www.general.gameLoop,500);
@@ -307,11 +310,12 @@ var www = {
 		
 		endGame: function(){
 			//console.log('end game');
-			document.getElementById('wwwpage').className = '';
+			www.general.removeClass('wwwpage','gameon');
+			//document.getElementById('wwwpage').className = '';
 			www.Render.stop(www.render);
 			clearInterval(www.timer);
 			www.general.saveGame();
-			www.general.addClass(document.getElementById('cancelbtn'),'hidden');
+			www.general.addClass('cancelbtn','hidden');
 		},
 		
 		//called if browser is resized. Too complex to rescale everything so just reset it all and reconfigure canvas
@@ -936,6 +940,7 @@ var www = {
 		
 		//jquery's addClass without jquery
 		addClass: function(el,className){
+			el = document.getElementById(el);
 			if(el.classList){
 				el.classList.add(className);
 			}
@@ -945,6 +950,7 @@ var www = {
 		},
 		
 		removeClass: function(el,className){
+			el = document.getElementById(el);
 			el.className = el.className.replace(className,'');
 		},		
 		
@@ -960,7 +966,7 @@ window.onload = function(){
 	Deferred.when(loaders).then(
 		function(){
 			www.general.init();
-			www.general.addClass(document.getElementById('loadingwrap'),'fadeout');
+			www.general.addClass('wwwpage','loaded');
 
 			function getMetaContentByName(name,attrtype){
 				var ret = document.querySelector("meta["+attrtype+"='"+name+"']").getAttribute('content');

@@ -25,90 +25,91 @@
     <link rel="stylesheet" type="text/css" href="static/css/styles.min.css"/>
 </head>
 
-<body>
-	<div id="wwwpage">
-		<div class="canvasparent" id="canvasparent">
-			<canvas id="canvas" class="canvas"></canvas>		
-			<div id="messages" class="messagewrapper"></div>
-		</div>
-		<div id="sharelinks" class="sharingbuttons">
-			<a href="https://www.facebook.com/sharer/sharer.php?u=SBLINK" class="fb" target="_blank" title="Share on Facebook">Share on Facebook</a>
-			<a href="https://twitter.com/intent/tweet?text=SBDESC%20SBLINK" class="tw" target="_blank" title="Share on Twitter">Share on Twitter</a>
-			<a href="https://plus.google.com/share?url=SBLINK" class="gp" target="_blank" title="Share on Google+">Share on Google+</a>
-			<a href="https://pinterest.com/pin/create/button/?url=SBLINK&media=SBIMG&description=SBDESC" class="pin" target="_blank" title="Pin on Pinterest">Pin on Pinterest</a>
-			<a href="https://www.linkedin.com/shareArticle?mini=true&url=SBLINK&title=SBTITLE&summary=SBDESC&source=" class="li" target="_blank" title="Share on LinkedIn">Share on LinkedIn</a>			
-			<a href="http://custarddoughnuts.co.uk" class="homelink" title="custarddoughnuts.co.uk" target="_blank"></a>	
-		</div>
-		<div id="menu" class="menu"></div>
-		
-		<div id="intro" class="popup">
-			<div class="popupinner">
-				<h1 class="title">World War War</h1>
-				<label class="label">
-					Pick a country: <select id="choosecountry"></select>
-				</label>
-				<div class="levelselectwrap">
-					<div class="levelselect">
-						<div class="btnwrapper">
-							<span class="btn btn-block startgame" data-gametype="1">Sandbox</span>
-						</div>
-						<p>Destroy the world. Simple.</p>
+<body id="wwwpage">
+	<div class="canvasparent" id="canvasparent">
+		<canvas id="canvas" class="canvas"></canvas>		
+		<div id="messages" class="messagewrapper"></div>
+	</div>
+	<div id="sharelinks" class="sharingbuttons">
+		<a href="https://www.facebook.com/sharer/sharer.php?u=SBLINK" class="fb" target="_blank" title="Share on Facebook">Share on Facebook</a>
+		<a href="https://twitter.com/intent/tweet?text=SBDESC%20SBLINK" class="tw" target="_blank" title="Share on Twitter">Share on Twitter</a>
+		<a href="https://plus.google.com/share?url=SBLINK" class="gp" target="_blank" title="Share on Google+">Share on Google+</a>
+		<a href="https://pinterest.com/pin/create/button/?url=SBLINK&media=SBIMG&description=SBDESC" class="pin" target="_blank" title="Pin on Pinterest">Pin on Pinterest</a>
+		<a href="https://www.linkedin.com/shareArticle?mini=true&url=SBLINK&title=SBTITLE&summary=SBDESC&source=" class="li" target="_blank" title="Share on LinkedIn">Share on LinkedIn</a>			
+		<a href="http://custarddoughnuts.co.uk" class="homelink" title="custarddoughnuts.co.uk" target="_blank"></a>	
+	</div>
+	<div id="menu" class="menu"></div>
+	
+	<div id="intro" class="popup">
+		<div class="popupinner">
+			<h1 class="title">World War War</h1>
+			<label class="label">
+				Pick a country: <select id="choosecountry"></select>
+			</label>
+			<div class="levelselectwrap">
+				<div class="levelselect">
+					<div class="btnwrapper">
+						<span class="btn btn-block startgame" data-gametype="1">Sandbox</span>
 					</div>
-					<div class="levelselect">
-						<div class="btnwrapper">
-							<span class="btn btn-block startgame" data-gametype="2">Normal</span>
-							<div class="score" id="savedscore1">Best: 0</div>
-						</div>
-						<p>The other countries are fighting back!</p>
-					</div>
-					<div class="levelselect">
-						<div class="btnwrapper">
-							<span class="btn btn-block startgame" data-gametype="3">Extreme</span>
-							<div class="score" id="savedscore2">Best: 0</div>
-						</div>
-						<p>It's going to get messy, people.</p>
-					</div>
+					<p>Destroy the world. Simple.</p>
 				</div>
-				
-				<span class="btn cancelbtn hidden" id="cancelbtn">Cancel</span>
+				<div class="levelselect">
+					<div class="btnwrapper">
+						<span class="btn btn-block startgame" data-gametype="2">Normal</span>
+						<div class="score" id="savedscore1">Best: 0</div>
+					</div>
+					<p>The other countries are fighting back!</p>
+				</div>
+				<div class="levelselect">
+					<div class="btnwrapper">
+						<span class="btn btn-block startgame" data-gametype="3">Extreme</span>
+						<div class="score" id="savedscore2">Best: 0</div>
+					</div>
+					<p>It's going to get messy, people.</p>
+				</div>
 			</div>
+			
+			<span class="btn cancelbtn hidden" id="cancelbtn">Cancel</span>
 		</div>
-		
-		<div id="gamewon" class="popup">
-			<div class="popupinner">
-				<h2 class="title">Game won</h2>
-				<p>Congratulations, your country is finally safe from the threat of strangers!</p>
-				<p>You scored: <span class="js-scoregeneral"></span></p>
-				<span class="btn" id="playagain">Play again</span>
-			</div>
+	</div>
+	
+	<div id="gamewon" class="popup">
+		<div class="popupinner">
+			<h2 class="title">Game won</h2>
+			<p>Congratulations, your country is finally safe from the threat of strangers!</p>
+			<p>You scored: <span class="js-scoregeneral"></span></p>
+			<span class="btn" id="playagain">Play again</span>
 		</div>
-		
-		<div id="gamelost" class="popup">
-			<div class="popupinner">
-				<h2 class="title">Game over</h2>
-				<p>Clearly you need to work on your defence budget.</p>
-				<p>You scored: <span class="js-scoregeneral"></span></p>
-				<span class="btn" id="playagain2">Play again</span>
-			</div>
+	</div>
+	
+	<div id="gamelost" class="popup">
+		<div class="popupinner">
+			<h2 class="title">Game over</h2>
+			<p>Clearly you need to work on your defence budget.</p>
+			<p>You scored: <span class="js-scoregeneral"></span></p>
+			<span class="btn" id="playagain2">Play again</span>
 		</div>
-		
-		<div id="hud" class="hud">
-			<div class="huditemwrap left">
-				<span id="score" class="number">0</span> Score
-			</div>
-			<div class="huditemwrap right">
-				<span id="count" class="number">0</span> Countries<br/>left 
-			</div>
-			<div class="healthwrapper">
-				<div id="health" class="healthbar"></div>
-			</div>
+	</div>
+	
+	<div id="hud" class="hud">
+		<div class="huditemwrap left">
+			<span id="score" class="number">0</span> Score
 		</div>
-		
-		<div id="loadingwrap" class="loadingwrap">
+		<div class="huditemwrap right">
+			<span id="count" class="number">0</span> Countries<br/>left 
+		</div>
+		<div class="healthwrapper">
+			<div id="health" class="healthbar"></div>
+		</div>
+	</div>
+	
+	<div id="loadingwrap" class="loadingwrap">
+		<div class="loadinginner">
 			<div id="loadingbar" class="loadingbar"></div>
 		</div>
 	</div>
-    <script src="static/bower_components/Matter/build/matter.min.js"></script>
+
+	<script src="static/bower_components/Matter/build/matter.min.js"></script>
     <script src="static/js/main.min.js"></script>
 </body>
 </html>
