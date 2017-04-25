@@ -155,23 +155,78 @@
 				border:solid 0.3em @redDark;
 			}
 			
+			.levelselectwrap {
+				.flex;
+				.flex-wrap;
+				.justify-content(space-between);
+			}
 			.levelselect {
-				position:relative;
-				padding:0.5em 0;
-				.clearfix;
-				p {
-					padding:0;
-					text-align:center;
+				padding:0.25em 0;
+				width:48%;
+				
+				.btns {
+					.flex;
+				}
+				
+				&.fullwidth {
+					padding:0 0 0.5em 0;
+					width:100%;
+					.helpwrap {
+						.helptext {
+							width:300px;
+						}
+					}
 				}
 				.btnwrapper {
-					float:left;
-					width:40%;
-					padding-right:2%;
+					flex-grow:1;
 					text-align:center;
 				}
 				.score {
+					width:100%;
 					margin-top:0.5em;
 					.fontcalculate(11);
+				}
+				.helpwrap {
+					position:relative;
+					.helptext {
+						position:absolute;
+						top:50%;
+						right:100%;
+						width:150px;
+						padding:0.5em;
+						margin-right:0.4em;
+						background:@white;
+						border:solid 0.3em @black;
+						color:@black;
+						text-shadow:none;
+						.transform(translateY(-50%));
+						.fontcalculate(14);
+						z-index:-10;
+						.transparency(0);
+						&:before,
+						&:after {
+							content:"";
+							position:absolute;
+							top:50%;
+							left:100%;
+							border-left:solid 0.3em @white;
+							border-right:solid 0.3em @black;
+							.transform(translateY(-50%));
+						}
+						&:before {
+							height:1em;
+						}
+						&:after {
+							height:0.4em;
+							margin-left:0.3em;
+						}
+					}
+					&.active {
+						.helptext {
+							z-index:900;
+							.transparency(1);
+						}
+					}
 				}
 			}
 		}
@@ -306,7 +361,7 @@
 	}
 	
 	.sharingbuttons {
-		z-index:900;
+		z-index:100;
 		position:absolute;
 		bottom:0;
 		left:50%;
@@ -353,41 +408,29 @@
 @media @tabletWidth{
 	.popup {
 		.popupinner {
+			padding:0.5em;
 			width:100%;
 			margin-top:-2em;
 			min-width:0;
 			max-width:none;
+			border-width:0.3em;
 			.title {
-				font-size:10vmin;
+				font-size:11vmin;
 			}
-			.levelselectwrap {
-				.flex;
-				.flex-wrap();
-				.flex-direction(row);
-				.justify-content(center);
-				.align-items(flex-start);
-				margin:0 -0.5em;
-				.levelselect {
-					width:50%;
-					&:first-child {
-						width:100%;
+			.levelselect {
+				.helpwrap {
+					.helptext {
+						width:110px;
 					}
 				}
-				p {
-					display:none;
+				&.fullwidth {
+					.helpwrap {
+						.helptext {
+							width:240px;
+						}
+					}
 				}
-				.btnwrapper {
-					padding:0 0.5em;
-					float:none;
-					width:auto;
-				}
-				.score {
-					.fontcalculate(12);
-				}
-				.levelselect {
-					padding:0.3em 0;
-				}
-			}
+			}			
 			.label {
 				margin:0.5em 0;
 			}

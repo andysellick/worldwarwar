@@ -47,25 +47,74 @@
 				Pick a country: <select id="choosecountry"></select>
 			</label>
 			<div class="levelselectwrap">
-				<div class="levelselect">
-					<div class="btnwrapper">
-						<span class="btn btn-block startgame" data-gametype="1">Sandbox</span>
+				<div class="levelselect fullwidth">
+					<div class="btns">
+						<div class="btnwrapper">
+							<span class="btn btn-block startgame" data-gametype="1">Sandbox</span>
+						</div>
+						<div class="helpwrap js-help">
+							<span class="btn btn-secondary">?</span>
+							<div class="helptext">
+								Destroy the world, no one fights back. Simple. Click/tap to fire.
+							</div>
+						</div>
 					</div>
-					<p>Destroy the world. Simple.</p>
 				</div>
 				<div class="levelselect">
-					<div class="btnwrapper">
-						<span class="btn btn-block startgame" data-gametype="2">Normal</span>
-						<div class="score" id="savedscore1">Best: 0</div>
+					<div class="btns">
+						<div class="btnwrapper">
+							<span class="btn btn-block startgame" data-gametype="2">Normal</span>
+						</div>
+						<div class="helpwrap js-help">
+							<span class="btn btn-secondary">?</span>
+							<div class="helptext">
+								The other countries are fighting back! Click/tap to fire.
+							</div>
+						</div>
 					</div>
-					<p>The other countries are fighting back!</p>
+					<div class="score" id="savedscore1">Hi-score: 0</div>
 				</div>
 				<div class="levelselect">
-					<div class="btnwrapper">
-						<span class="btn btn-block startgame" data-gametype="3">Extreme</span>
-						<div class="score" id="savedscore2">Best: 0</div>
+					<div class="btns">
+						<div class="btnwrapper">
+							<span class="btn btn-block startgame" data-gametype="3">Extreme</span>
+						</div>
+						<div class="helpwrap js-help">
+							<span class="btn btn-secondary">?</span>
+							<div class="helptext">
+								Other countries are tougher and fire more. Click/tap to fire.
+							</div>
+						</div>
 					</div>
-					<p>It's going to get messy, people.</p>
+					<div class="score" id="savedscore2">Hi-score: 0</div>
+				</div>
+				<div class="levelselect">
+					<div class="btns">
+						<div class="btnwrapper">
+							<span class="btn btn-block startgame" data-gametype="4">Versus</span>
+						</div>
+						<div class="helpwrap js-help">
+							<span class="btn btn-secondary">?</span>
+							<div class="helptext">
+								Fight it out with only one other country. Click/tap to fire.
+							</div>
+						</div>
+					</div>
+					<div class="score" id="savedscore3">Hi-score: 0</div>
+				</div>
+				<div class="levelselect">
+					<div class="btns">
+						<div class="btnwrapper">
+							<span class="btn btn-block startgame" data-gametype="5">Assassinate</span>
+						</div>
+						<div class="helpwrap js-help">
+							<span class="btn btn-secondary">?</span>
+							<div class="helptext">
+								Find and destroy a specific country. Click/tap to fire.
+							</div>
+						</div>
+					</div>
+					<div class="score" id="savedscore4">Hi-score: 0</div>
 				</div>
 			</div>
 			

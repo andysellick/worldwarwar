@@ -107,6 +107,7 @@ var www = {
 	bullets: [],
 	bulletlife: 1000, //how many milliseconds a bullet should exist for
 	chosen: 2000, //the country chosen by the player
+	chosenenemy: -1, //the enemy country, only used in some game modes
 	timer: 0,
 	scaleFactor: 1.9,//1.9, //how big to draw everything. 
 	mode: 3,
@@ -200,6 +201,15 @@ var www = {
 				}
 				www.mycountry = www.general.createPlayer(www.chosen,'player',www.playerhealth,www.chosen);			
 			}
+			//if vs or assassinate mode, we need to pick a single adversary
+			if(www.mode === 4 || www.mode === 5){
+				www.chosenenemy = www.chosen;
+				console.log('Player is:',allcountries[www.chosen].name,'enemy is:',allcountries[www.chosenenemy].name);
+				while(www.chosenenemy === www.chosen){
+					www.chosenenemy = www.general.randomInt(0,allcountries.length - 1);
+				}
+				console.log('Choosing enemy',allcountries[www.chosenenemy].name);
+			}
 			www.general.createEnemies();		
 		},
 		
@@ -219,32 +229,39 @@ var www = {
 		determineGameSetup: function(chosenmode){
 			www.mode = chosenmode;
 			//setup game attributes according to mode
-			if(www.mode === 1){ //sandbox				
+			if(www.mode === 1){ //sandbox - enemies don't fire and take one hit				
 				www.enemyhealth = 2;
 				www.enemiesfire = 0;
 			}
-			else if(www.mode === 2){ //normal
+			else if(www.mode === 2){ //normal - enemies fire at a normal rate, have good health, player has better health
 				www.playerhealth = 10;
 				www.enemyhealth = 5;
 				www.enemiesfire = 1;
 				www.firechance = 10;
 			}
-			else if(www.mode === 3){ //extreme				
+			else if(www.mode === 3){ //extreme	- enemies fire at extreme rate, player and enemies have same, low health
 				www.playerhealth = 5;
 				www.enemyhealth = 5;
 				www.enemiesfire = 1;
 				www.firechance = 3;
 			}
-			else if(www.mode === 4){ //versus
+			else if(www.mode === 4){ //versus - only the one enemy fires, they and player have same health, all other countries have 1 health
+				www.playerhealth = 10;
+				www.enemyhealth = 10;
+				www.enemiesfire = 1;
+				www.firechance = 1;
 			}
-			else if(www.mode === 5){ //assassinate
+			else if(www.mode === 5){ //assassinate - enemies don't fire, take one hit
+				www.playerhealth = 5;
+				www.enemyhealth = 1;
+				www.enemiesfire = 0;
 			}
 		},
 		
 		//setup and start the game
 		initGame: function(chosenmode){
 			www.general.resetMatter();
-			www.general.addClass('wwwpage','gameon');
+			www.general.addClass(document.getElementById('wwwpage'),'gameon');
 			//document.getElementById('wwwpage').className = 'gameon';
 			www.general.determineGameSetup(chosenmode);
 			//reset some things
@@ -253,6 +270,7 @@ var www = {
 			www.translated = {x:0,y:0};		
 			www.enemies = [];
 			www.playerscore = 0;
+			www.chosenenemy = -1;
 			document.getElementById('messages').innerHTML = '';			
 			www.general.setupMatter();
 			
@@ -276,7 +294,7 @@ var www = {
 			www.Engine.run(www.engine);	// run the engine			
 			www.Render.run(www.render); // run the renderer
 			
-			www.general.removeClass('cancelbtn','hidden');
+			www.general.removeClass(document.getElementById('cancelbtn'),'hidden');
 			if(www.enemiesfire){
 				www.timer = setInterval(www.general.gameLoop,500);
 			}
@@ -292,7 +310,7 @@ var www = {
 		//pause matter js
 		pauseGame: function(){
 			//console.log('pause game');
-			www.general.removeClass('wwwpage','gameon');
+			www.general.removeClass(document.getElementById('wwwpage'),'gameon');
 			//document.getElementById('wwwpage').className = '';
 			clearInterval(www.timer);
 			www.Render.stop(www.render);
@@ -300,7 +318,7 @@ var www = {
 		
 		resumeGame: function(){
 			//console.log('resume game');
-			www.general.addClass('wwwpage','gameon');
+			www.general.addClass(document.getElementById('wwwpage'),'gameon');
 			//document.getElementById('wwwpage').className = 'gameon';
 			www.Render.run(www.render);
 			if(www.enemiesfire){
@@ -310,12 +328,12 @@ var www = {
 		
 		endGame: function(){
 			//console.log('end game');
-			www.general.removeClass('wwwpage','gameon');
+			www.general.removeClass(document.getElementById('wwwpage'),'gameon');
 			//document.getElementById('wwwpage').className = '';
 			www.Render.stop(www.render);
 			clearInterval(www.timer);
 			www.general.saveGame();
-			www.general.addClass('cancelbtn','hidden');
+			www.general.addClass(document.getElementById('cancelbtn'),'hidden');
 		},
 		
 		//called if browser is resized. Too complex to rescale everything so just reset it all and reconfigure canvas
@@ -387,16 +405,7 @@ var www = {
 			www.canvasw = www.canvas.width = www.parentel.offsetWidth;
 			www.canvash = www.canvas.height = document.documentElement.clientHeight;//www.parentel.offsetHeight; //this should now be more ios mobile friendly
 		},
-				
-		createEventStart: function(btn){
-			btn.onmousedown = function(e){
-				var dd = document.getElementById('choosecountry');
-				www.chosen = parseInt(dd.options[dd.selectedIndex].value);
-				www.general.initGame(parseInt(e.target.dataset.gametype));
-				www.general.hideAllPopups();
-			};
-		},
-		
+			
 		createEvents: function(){			
 			//start the various game modes
 			var startbtns = document.getElementsByClassName('startgame');
@@ -404,6 +413,20 @@ var www = {
 				var btn = startbtns[b];
 				www.general.createEventStart(btn);
 			}
+
+			//help buttons on main menu
+			var helpbtns = document.getElementsByClassName('js-help');
+			for(var d = 0; d < helpbtns.length; d++){
+				var hbtn = helpbtns[d];
+				www.general.createEventHelp(hbtn,helpbtns);
+			}	
+
+			document.getElementById('wwwpage').onmousedown = function(e){
+				var helpbtns = document.getElementsByClassName('js-help');
+				for(var p = 0; p < helpbtns.length; p++){
+					www.general.removeClass(helpbtns[p],'active');
+				}
+			};
 
 			//menu button, i.e. quit/pause
 			document.getElementById('menu').onmousedown = function(e){
@@ -433,7 +456,37 @@ var www = {
 				www.general.clickDown(e);
 			};
 		},
-			
+
+		//click event for all start game buttons
+		createEventStart: function(btn){
+			btn.onmousedown = function(e){
+				var dd = document.getElementById('choosecountry');
+				www.chosen = parseInt(dd.options[dd.selectedIndex].value);
+				www.general.initGame(parseInt(e.target.dataset.gametype));
+				www.general.hideAllPopups();
+			};
+		},
+		
+		//click event for all help buttons
+		createEventHelp: function(btn,helpbtns){
+			btn.onmousedown = function(e){
+				e.stopPropagation();
+				var addclass = 1;
+				if(btn.className.search('active') !== -1){
+					addclass = 0;
+				}
+				for(var o = 0; o < helpbtns.length; o++){
+					www.general.removeClass(helpbtns[o],'active');
+				}
+				if(addclass){
+					www.general.addClass(btn,'active');
+				}
+				else {
+					www.general.removeClass(btn,'active');
+				}
+			};
+		},	
+		
 		createMatterEvents: function(){		
 			//on object collision
 			www.Events.on(www.engine,'collisionStart',function(e){			
@@ -625,7 +678,7 @@ var www = {
 
 				www.World.remove(www.engine.world, country);
 				www.enemycount--;
-				if(www.enemycount <= 0){
+				if(www.enemycount <= 0 || ((www.mode === 4 || www.mode === 5) && country.myid === www.chosenenemy)){
 					www.general.gameWon();
 				}
 			}
@@ -730,7 +783,7 @@ var www = {
 				mass = Math.max(me.w,me.h) / 10;
 			}
 			var spath = spritepath + 'regular/';
-			if(type === 'player'){
+			if(type === 'player' || which === www.chosenenemy){
 				spath = spritepath + 'highlight/';
 			}
 			
@@ -762,7 +815,12 @@ var www = {
 			thisobj.myypos = thisobj.position.y;
 			thisobj.myname = me.name;
 			thisobj.myobjtype = type;
-			thisobj.myhealth = health;
+			if(www.mode === 4 && (which !== www.chosenenemy && type !== 'player')){
+				thisobj.myhealth = 1;
+			}
+			else {
+				thisobj.myhealth = health;
+			}
 			thisobj.mythings = me.unique;
 
 			www.World.add(www.engine.world, [thisobj]);			
@@ -899,11 +957,13 @@ var www = {
 		gameLoop: function(){
 			for(var e = 0; e < www.enemies.length; e++){
 				if(www.enemies[e].myhealth > 0){
-					if(!www.general.randomInt(0,www.firechance)){
-						var bullet = www.general.createBullet(www.enemies[e].position.x,www.enemies[e].position.y,www.enemies[e].myid,'black');			
-						var x = www.general.randomInt(0,www.canvas.width);
-						var y = www.general.randomInt(0,www.canvas.height);
-						www.general.fireBullet(bullet,x,y,www.enemies[e]);				
+					if((www.mode === 4 && e === www.chosenenemy) || (www.mode !== 5 && www.mode !== 4)){ //this is contorted but works. Could probably write better
+						if(!www.general.randomInt(0,www.firechance)){
+							var bullet = www.general.createBullet(www.enemies[e].position.x,www.enemies[e].position.y,www.enemies[e].myid,'black');			
+							var x = www.general.randomInt(0,www.canvas.width);
+							var y = www.general.randomInt(0,www.canvas.height);
+							www.general.fireBullet(bullet,x,y,www.enemies[e]);				
+						}
 					}
 				}
 			}		
@@ -940,7 +1000,6 @@ var www = {
 		
 		//jquery's addClass without jquery
 		addClass: function(el,className){
-			el = document.getElementById(el);
 			if(el.classList){
 				el.classList.add(className);
 			}
@@ -950,7 +1009,6 @@ var www = {
 		},
 		
 		removeClass: function(el,className){
-			el = document.getElementById(el);
 			el.className = el.className.replace(className,'');
 		},		
 		
@@ -966,7 +1024,7 @@ window.onload = function(){
 	Deferred.when(loaders).then(
 		function(){
 			www.general.init();
-			www.general.addClass('wwwpage','loaded');
+			www.general.addClass(document.getElementById('wwwpage'),'loaded');
 
 			function getMetaContentByName(name,attrtype){
 				var ret = document.querySelector("meta["+attrtype+"='"+name+"']").getAttribute('content');
