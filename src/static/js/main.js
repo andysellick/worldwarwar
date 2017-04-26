@@ -76,6 +76,7 @@ var www = {
 	hascountdown: 0,
 	hassplash: 0,
 	hasnextlevel: 0,
+	midlevel: 0,
 	scaleFactor: 1.9,//1.9, //how big to draw everything. 
 	mode: 3,
 	bestscores: [
@@ -229,6 +230,7 @@ var www = {
 				www.firechance = 1;
 				www.hascountdown = 1;		
 				www.hassplash = 1;
+				www.hasnextlevel = 1;
 				www.gamelostmsg = 'You were defeated! Better try harder next time.';
 				www.gamewonmsg = 'You won! You\'re clearly much better than that other country.';
 				//no country count, no score
@@ -382,6 +384,10 @@ var www = {
 			document.getElementById('gamewonmsg').innerHTML = www.gamewonmsg;
 			www.general.endGame();
 			if(www.hasnextlevel){
+				www.general.updateScores();
+				clearInterval(www.timer);
+				www.Render.stop(www.render);
+				www.general.showPopup('nextlevel');
 			}
 			else {
 				www.general.showPopup('gamewon');
@@ -472,6 +478,10 @@ var www = {
 				var btn = startbtns[b];
 				www.general.createEventStart(btn);
 			}
+			
+			document.getElementById('continuegame').onmousedown = function(e){
+				www.general.initGame(www.mode);
+			};
 
 			//help buttons on main menu
 			var helpbtns = document.getElementsByClassName('js-help');
@@ -681,7 +691,9 @@ var www = {
 			//console.log(country,origin,www.mycountry.myid);
 			if(country.myobjtype === 'enemy'){
 				if(origin === www.mycountry.myid){
-					www.playerscore++;
+					if(www.mode !== 4 && www.mode !== 5){
+						www.playerscore++;
+					}
 				}					
 				
 				var things = '';
