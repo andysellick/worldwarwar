@@ -1,4 +1,4 @@
-/* globals Matter, www, Deferred, allcountries, spritepath */
+/* globals Matter, www, Deferred, allcountries, spritepath, allimages */
 
 //date shim
 if (!Date.now) {
@@ -10,43 +10,7 @@ if (!Date.now) {
 var loaders = [];
 var imageloadprogress = 0;
 var imageloadtotal = 0;
-var allimages = [
-	{
-		'name': 'africa',
-		'images': ['algeria.svg','cameroon.svg','egypt.svg','ghana.svg','madagascar.svg','namibia.svg','sierraleone.svg','togo.svg','angola.svg','car.svg','equatorialguinea.svg','guinea.svg','malawi.svg','niger.svg','somalia.svg','tunisia.svg','benin.svg','chad.svg','eritrea.svg','guineabissau.svg','mali.svg','nigeria.svg','southafrica.svg','uganda.svg','botswana.svg','cotedivoire.svg','ethiopia.svg','kenya.svg','mauritania.svg','republicofthecongo.svg','southsudan.svg','westernsahara.svg','burkinafaso.svg','democraticrepublicofthecongo.svg','gabon.svg','liberia.svg','morocco.svg','rwanda.svg','sudan.svg','zambia.svg','burundi.svg','djibouti.svg','gambia.svg','libya.svg','mozambique.svg','senegal.svg','tanzania.svg','zimbabwe.svg'],
-		'dir': 'africa'
-	},
-	{
-		'name': 'asia',
-		'images': ['afghanistan.svg','cambodia.svg','iran.svg','jordan.svg','lebanon.svg','nepal.svg','palestine.svg','southkorea.svg','tajikistan.svg','uzbekistan.svg','azerbaijan.svg','china.svg','iraq.svg','kuwait.svg','malaysia.svg','northkorea.svg','philippines.svg','srilanka.svg','thailand.svg','vietnam.svg','bangladesh.svg','india.svg','israel.svg','kyrgyzstan.svg','mongolia.svg','oman.svg','qatar.svg','syria.svg','turkmenistan.svg','yemen.svg','bhutan.svg','indonesia.svg','japan.svg','laos.svg','myanmar.svg','pakistan.svg','saudiarabia.svg','taiwan.svg','uae.svg'],
-		'dir': 'asia'
-	},
-	{
-		'name': 'europe',
-		'images': ['albania.svg','belgium.svg','cyprus.svg','finland.svg','greece.svg','ireland.svg','lithuania.svg','montenegro.svg','portugal.svg','slovakia.svg','switzerland.svg','armenia.svg','bosniaandherz.svg','czechrepublic.svg','france.svg','greenland.svg','italy.svg','luxembourg.svg','netherlands.svg','romania.svg','slovenia.svg','turkey.svg','austria.svg','bulgaria.svg','denmark.svg','georgia.svg','hungary.svg','kazakhstan.svg','macedonia.svg','norway.svg','russia.svg','spain.svg','ukraine.svg','belarus.svg','croatia.svg','estonia.svg','germany.svg','iceland.svg','latvia.svg','moldova.svg','poland.svg','serbia.svg','sweden.svg','unitedkingdom.svg'],
-		'dir': 'europe'
-	},
-	{
-		'name': 'namerica',
-		'images': ['bahamas.svg','canada.svg','cuba.svg','elsalvador.svg','haiti.svg','jamaica.svg','nicaragua.svg','puertorico.svg','us_hawaii.svg','belize.svg','costarica.svg','dominicanrepublic.svg','guatemala.svg','honduras.svg','mexico.svg','panama.svg','us_alaska.svg','us_main.svg'],
-		'dir': 'namerica'
-	},
-	{
-		'name': 'namerica',
-		'images': ['bahamas.svg','canada.svg','cuba.svg','elsalvador.svg','haiti.svg','jamaica.svg','nicaragua.svg','puertorico.svg','us_hawaii.svg','belize.svg','costarica.svg','dominicanrepublic.svg','guatemala.svg','honduras.svg','mexico.svg','panama.svg','us_alaska.svg','us_main.svg'],
-		'dir': 'namerica'
-	},
-	{
-		'name': 'oceania',
-		'images': ['australia.svg','newzealand.svg','papuanewguinea.svg'],
-		'dir': 'oceania'
-	},
-	{
-		'name': 'samerica',
-		'images': ['argentina.svg','brazil.svg','colombia.svg','falklandislands.svg','guyana.svg','peru.svg','uruguay.svg','bolivia.svg','chile.svg','ecuador.svg','frenchguiana.svg','paraguay.svg','suriname.svg','venezuela.svg'],
-		'dir': 'samerica'
-	},
-];
+
 function loadFile(src,array,num){
 	var deferred = new Deferred();
 	var sprite = new Image();
@@ -56,7 +20,7 @@ function loadFile(src,array,num){
 		imageloadprogress++;
 		document.getElementById('loadingbar').style.width = (imageloadprogress / imageloadtotal) * 100 + '%';
 	};
-	sprite.src = src;
+	sprite.src = src + '.svg';
     return deferred.promise();
 }
 //loop through and call all the preload images
@@ -109,6 +73,9 @@ var www = {
 	chosen: 2000, //the country chosen by the player, starts at 2000 so that when the page first loads we don't draw a country red
 	chosenenemy: -1, //the enemy country, only used in some game modes
 	timer: 0,
+	hascountdown: 0,
+	hassplash: 0,
+	hasnextlevel: 0,
 	scaleFactor: 1.9,//1.9, //how big to draw everything. 
 	mode: 3,
 	bestscores: [
@@ -204,7 +171,7 @@ var www = {
 				//if vs or assassinate mode, we need to pick a single adversary
 				if(www.mode === 4 || www.mode === 5){
 					www.chosenenemy = www.chosen;
-					console.log('Player is:',allcountries[www.chosen].name,'enemy is:',allcountries[www.chosenenemy].name);
+					//console.log('Player is:',allcountries[www.chosen].name,'enemy is:',allcountries[www.chosenenemy].name);
 					while(www.chosenenemy === www.chosen){
 						www.chosenenemy = www.general.randomInt(0,allcountries.length - 1);
 					}
@@ -234,6 +201,7 @@ var www = {
 			if(www.mode === 1){ //sandbox - enemies don't fire and take one hit				
 				www.enemyhealth = 2;
 				www.enemiesfire = 0;
+				www.gamewonmsg = 'The world has finally been destroyed. There, wasn\'t that satisfying?';
 				//no healthbar or score
 			}
 			else if(www.mode === 2){ //normal - enemies fire at a normal rate, have good health, player has better health
@@ -241,35 +209,45 @@ var www = {
 				www.enemyhealth = 5;
 				www.enemiesfire = 1;
 				www.firechance = 10;
+				www.hascountdown = 1;
+				www.gamelostmsg = 'Clearly you need to work on your defence budget.';
+				www.gamewonmsg = 'Congratulations, your country is finally safe from the threat of strangers!';
 			}
 			else if(www.mode === 3){ //extreme	- enemies fire at extreme rate, player and enemies have same, low health
 				www.playerhealth = 5;
 				www.enemyhealth = 5;
 				www.enemiesfire = 1;
 				www.firechance = 3;
+				www.hascountdown = 1;
+				www.gamelostmsg = 'Clearly you need to work on your defence budget.';
+				www.gamewonmsg = 'Congratulations, your country is finally safe from the threat of strangers!';
 			}
 			else if(www.mode === 4){ //versus - only the one enemy fires, they and player have same health, all other countries have 1 health
-				www.playerhealth = 10;
-				www.enemyhealth = 10;
+				www.playerhealth = 5;
+				www.enemyhealth = 5;
 				www.enemiesfire = 1;
 				www.firechance = 1;
+				www.hascountdown = 1;		
+				www.hassplash = 1;
+				www.gamelostmsg = 'You were defeated! Better try harder next time.';
+				www.gamewonmsg = 'You won! You\'re clearly much better than that other country.';
 				//no country count, no score
 			}
 			else if(www.mode === 5){ //assassinate - enemies don't fire, take one hit
 				www.playerhealth = 5;
 				www.enemyhealth = 1;
 				www.enemiesfire = 0;
+				www.hascountdown = 1;
+				www.hassplash = 1;
+				www.hasnextlevel = 1;
+				www.gamelostmsg = 'You failed to destroy your target. Better try harder next time.';
+				www.gamewonmsg = 'You successfully assassinated your target. Well done.';
 				//no healthbar, score or country count
 			}
-			
-			//FIXME sometimes in vs the wrong country is firing
 		},
 		
 		//setup and start the game
 		initGame: function(chosenmode){
-			www.general.resetMatter();
-			www.general.determineGameSetup(chosenmode);
-			
 			//reset some things
 			www.playerhealthorig = www.playerhealth;
 			www.enemycount = 0;
@@ -277,7 +255,13 @@ var www = {
 			www.enemies = [];
 			www.playerscore = 0;
 			www.chosenenemy = -1;
+			www.hascountdown = 0;
+			www.hassplash = 0;
+			www.hasnextlevel = 0;
 			document.getElementById('messages').innerHTML = '';			
+			www.general.resetMatter();
+
+			www.general.determineGameSetup(chosenmode);		
 			www.general.setupMatter();
 			
 			//recentre the canvas onto the player, this calculates how much we need to translate the viewport by
@@ -301,6 +285,31 @@ var www = {
 			www.Render.run(www.render); // run the renderer
 			
 			www.general.removeClass(document.getElementById('cancelbtn'),'hidden');
+			
+			if(www.hassplash){
+				//console.log('Player is:',allcountries[www.chosen].name,'enemy is:',allcountries[www.chosenenemy].name);
+				var player1 = 'url(' + spritepath + 'highlight/' + allcountries[www.chosen].dir + allcountries[www.chosen].sprite + '.svg';
+				var player2 = 'url(' + spritepath + 'highlight/' + allcountries[www.chosenenemy].dir + allcountries[www.chosenenemy].sprite + '.svg';
+				document.getElementById('splashyou').style.backgroundImage = player1;
+				document.getElementById('splashyouname').innerHTML = allcountries[www.chosen].name;
+				document.getElementById('splashenemy').style.backgroundImage = player2;
+				document.getElementById('splashenemyname').innerHTML = allcountries[www.chosenenemy].name;
+				www.general.showPopup('splashwrap');
+				setTimeout(www.general.startCountDown,3000);
+			}
+			else {
+				if(www.hascountdown){
+					www.general.startCountDown();
+				}
+				else {
+					www.general.startGame();
+				}
+			}
+		},
+		
+		//initialise and call the countdown
+		startCountDown: function(){
+			//console.log('loading countdown');
 			www.general.showPopup('countdownwrap');
 			www.tally = 3;
 			www.general.countDown();
@@ -314,19 +323,20 @@ var www = {
 				setTimeout(www.general.countDown,1000);
 			}
 			else if(www.tally === 0){
-				document.getElementById('countdown').innerHTML = 'GO!';
+				document.getElementById('countdown').innerHTML = 'FIGHT!';
 				www.tally--;
 				setTimeout(www.general.countDown,1000);
 			}
 			else {
-				document.getElementById('countdownwrap').dataset.shown = '';
-				www.general.addClass(document.getElementById('wwwpage'),'gameon');
-				document.getElementById('countdown').innerHTML = '';
 				www.general.startGame();
 			}
 		},
 		
 		startGame: function(){
+			www.general.hideAllPopups();
+			//document.getElementById('countdownwrap').dataset.shown = '';
+			www.general.addClass(document.getElementById('wwwpage'),'gameon');
+			document.getElementById('countdown').innerHTML = '';
 			if(www.enemiesfire){
 				www.timer = setInterval(www.general.gameLoop,500);
 			}
@@ -362,11 +372,26 @@ var www = {
 			//console.log('end game');
 			document.getElementById('wwwpage').dataset.gamemode = '';
 			www.general.removeClass(document.getElementById('wwwpage'),'gameon');
-			//document.getElementById('wwwpage').className = '';
 			www.Render.stop(www.render);
 			clearInterval(www.timer);
 			www.general.saveGame();
 			www.general.addClass(document.getElementById('cancelbtn'),'hidden');
+		},
+
+		gameWon: function(){
+			document.getElementById('gamewonmsg').innerHTML = www.gamewonmsg;
+			www.general.endGame();
+			if(www.hasnextlevel){
+			}
+			else {
+				www.general.showPopup('gamewon');
+			}
+		},
+		//FIXME bug here, render doesn't pause, etc.
+		gameLost: function(){
+			document.getElementById('gamelostmsg').innerHTML = www.gamelostmsg;
+			www.general.endGame();
+			www.general.showPopup('gamelost');			
 		},
 		
 		//called if browser is resized. Too complex to rescale everything so just reset it all and reconfigure canvas
@@ -440,7 +465,7 @@ var www = {
 			www.canvash = www.canvas.height = document.documentElement.clientHeight;//www.parentel.offsetHeight; //this should now be more ios mobile friendly
 		},
 			
-		createEvents: function(){			
+		createEvents: function(){				
 			//start the various game modes
 			var startbtns = document.getElementsByClassName('startgame');
 			for(var b = 0; b < startbtns.length; b++){
@@ -453,7 +478,7 @@ var www = {
 			for(var d = 0; d < helpbtns.length; d++){
 				var hbtn = helpbtns[d];
 				www.general.createEventHelp(hbtn,helpbtns);
-			}	
+			}
 
 			document.getElementById('wwwpage').onmousedown = function(e){
 				var helpbtns = document.getElementsByClassName('js-help');
@@ -494,6 +519,7 @@ var www = {
 		//click event for all start game buttons
 		createEventStart: function(btn){
 			btn.onmousedown = function(e){
+				e.preventDefault();
 				var dd = document.getElementById('choosecountry');
 				www.chosen = parseInt(dd.options[dd.selectedIndex].value);
 				www.general.initGame(parseInt(e.target.dataset.gametype));
@@ -504,6 +530,7 @@ var www = {
 		//click event for all help buttons
 		createEventHelp: function(btn,helpbtns){
 			btn.onmousedown = function(e){
+				e.preventDefault();
 				e.stopPropagation();
 				var addclass = 1;
 				if(btn.className.search('active') !== -1){
@@ -751,7 +778,7 @@ var www = {
 				x:www.engine.world.bounds.min.x + (www.worldw / 2),
 				y:www.engine.world.bounds.max.y + (www.boundswidth / 2) - 1, //was outside the boundary so not 'solid', this tiny adjustment fixes it. Rounding error, I guess?
 				w:www.worldw * 2,
-				h:www.boundswidth
+				h:www.boundswidth * 1.5
 			};			
 			//left edge
 			var wall4 = {
@@ -830,7 +857,7 @@ var www = {
 				//inverseInertia: 1, //don't know what this property does
 				render: {
 					sprite: {
-						texture: spath + me.dir + me.sprite,
+						texture: spath + me.dir + me.sprite + '.svg',
 						xScale: ((0.11) / 100) * percscalex, //slightly bad, partly based on legacy code (countries used to have different scale factors)
 						yScale: ((0.11) / 100) * percscalex,
 					}
@@ -1001,17 +1028,7 @@ var www = {
 				}
 			}		
 		},
-		
-		gameWon: function(){
-			www.general.endGame();
-			www.general.showPopup('gamewon');
-		},
-		//FIXME bug here, render doesn't pause, etc.
-		gameLost: function(){
-			www.general.endGame();
-			www.general.showPopup('gamelost');			
-		},
-		
+				
 		//given a width and height representing an aspect ratio, and the size of the containing thing, return the largest w and h matching that aspect ratio
 		calculateAspectRatio: function(idealw,idealh,parentw,parenth){
 			var aspect = Math.floor((parenth / idealh) * idealw);

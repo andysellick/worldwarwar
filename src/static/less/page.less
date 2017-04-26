@@ -13,6 +13,8 @@
     html {
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+		-ms-touch-action: manipulation;
+		touch-action: manipulation;
     }
 
     body {
@@ -259,6 +261,55 @@
 			color:@white;
 			text-shadow:0 0.1em 0 @black;
 		}
+		
+		&.splashwrap {			
+			.splash {
+				.flex;
+				.justify-content(center);
+				.align-items(center);
+				flex-grow:1;
+				max-width:45%;
+				padding:1em;
+				height:100%;
+				background-size:contain;
+				background-repeat:no-repeat;
+				background-position:50% 50%;
+				font-size:8vmin;
+				color:@white;
+				font-style:italic;
+				text-shadow:0 0.1em 0 @black;
+				span {
+					display:block;
+					width:100%;
+					text-align:center;
+					.transition(all @transpeed * 3);
+				}
+				&.left span {
+					.transform(translateX(-100%));
+				}
+				&.right span {
+					.transform(translateX(100%));
+				}
+			}
+			.splashvs {				
+				padding:0.1em;
+				font-size:10vmin;
+				color:@white;
+				text-shadow:0 0.1em 0 @black;
+				.transition(all @transpeed * 3);
+				.transform(translateY(100%));
+			}
+			
+			&[data-shown='true']{
+				.splash.left span,
+				.splash.right span {
+					.transform(translateX(0));
+				}
+				.splashvs {
+					.transform(translateY(0));
+				}
+			}
+		}
 	}
 	
 	.hud {
@@ -489,4 +540,14 @@
 }
 
 @media @mobileWidth{
+}
+
+@media screen and (orientation:portrait) {
+	/* make opening vs screen vertical on portrait */
+	.popup.splashwrap {
+		.flex-direction(column);
+		.splash {
+			max-width:none;
+		}
+	}
 }

@@ -6,7 +6,7 @@
 <![endif]-->
     <title>World War War</title>
     <meta charset="utf-8" />
-    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no,width=device-width,height=device-height">
+    <meta name="viewport" content="initial-scale=1.0,minimum-scale=1,maximum-scale=1.0,user-scalable=no,width=device-width,height=device-height">
 
 	<link rel="canonical" href="http://custarddoughnuts.co.uk/worldwarwar/" />
 	<meta name="description" content="Ever wanted to destroy the world? Now's your chance." />
@@ -42,6 +42,12 @@
 	
 	<div id="countdownwrap" class="popup">
 		<div class="countdown" id="countdown"></div>
+	</div>
+
+	<div id="splashwrap" class="popup splashwrap">
+		<div class="splash left" id="splashyou"><span id="splashyouname"></span></div>
+		<div class="splashvs">VS</div>
+		<div class="splash right" id="splashenemy"><span id="splashenemyname"></span></div>
 	</div>
 	
 	<div id="intro" class="popup">
@@ -129,7 +135,7 @@
 	<div id="gamewon" class="popup">
 		<div class="popupinner">
 			<h2 class="title">Game won</h2>
-			<p>Congratulations, your country is finally safe from the threat of strangers!</p>
+			<p id="gamewonmsg">Congratulations, your country is finally safe from the threat of strangers!</p>
 			<p>You scored: <span class="js-scoregeneral"></span></p>
 			<span class="btn" id="playagain">Play again</span>
 		</div>
@@ -138,9 +144,17 @@
 	<div id="gamelost" class="popup">
 		<div class="popupinner">
 			<h2 class="title">Game over</h2>
-			<p>Clearly you need to work on your defence budget.</p>
+			<p id="gamelostmsg">Clearly you need to work on your defence budget.</p>
 			<p>You scored: <span class="js-scoregeneral"></span></p>
 			<span class="btn" id="playagain2">Play again</span>
+		</div>
+	</div>
+
+	<div id="nextlevel" class="popup">
+		<div class="popupinner">
+			<h2 class="title">Round clear</h2>
+			<p id="">You defeated your enemy. Good work.</p>
+			<span class="btn" id="continuegame">Next level</span>
 		</div>
 	</div>
 	
