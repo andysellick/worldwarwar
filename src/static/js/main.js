@@ -81,6 +81,8 @@ var www = {
 	mode: 3,
 	bestscores: [
 		{'country':'','score':0},
+		{'country':'','score':0},
+		{'country':'','score':0},
 		{'country':'','score':0}
 	],
 	enableZoom: 0, //FIXME this is mainly for debug, potentially remove for production
@@ -203,6 +205,8 @@ var www = {
 				www.enemyhealth = 2;
 				www.enemiesfire = 0;
 				www.gamewonmsg = 'The world has finally been destroyed. There, wasn\'t that satisfying?';
+				www.hascountdown = 0;
+				www.hasnextlevel = 0;
 				//no healthbar or score
 			}
 			else if(www.mode === 2){ //normal - enemies fire at a normal rate, have good health, player has better health
@@ -211,6 +215,7 @@ var www = {
 				www.enemiesfire = 1;
 				www.firechance = 10;
 				www.hascountdown = 1;
+				www.hasnextlevel = 0;
 				www.gamelostmsg = 'Clearly you need to work on your defence budget.';
 				www.gamewonmsg = 'Congratulations, your country is finally safe from the threat of strangers!';
 			}
@@ -220,6 +225,7 @@ var www = {
 				www.enemiesfire = 1;
 				www.firechance = 3;
 				www.hascountdown = 1;
+				www.hasnextlevel = 0;
 				www.gamelostmsg = 'Clearly you need to work on your defence budget.';
 				www.gamewonmsg = 'Congratulations, your country is finally safe from the threat of strangers!';
 			}
@@ -255,11 +261,11 @@ var www = {
 			www.enemycount = 0;
 			www.translated = {x:0,y:0};		
 			www.enemies = [];
-			www.playerscore = 0;
+			if(!www.hasnextlevel){
+				www.playerscore = 0;
+			}
 			www.chosenenemy = -1;
-			www.hascountdown = 0;
 			www.hassplash = 0;
-			www.hasnextlevel = 0;
 			document.getElementById('messages').innerHTML = '';			
 			www.general.resetMatter();
 
@@ -384,6 +390,7 @@ var www = {
 			document.getElementById('gamewonmsg').innerHTML = www.gamewonmsg;
 			www.general.endGame();
 			if(www.hasnextlevel){
+				www.playerscore++;
 				www.general.updateScores();
 				clearInterval(www.timer);
 				www.Render.stop(www.render);
@@ -421,8 +428,13 @@ var www = {
 				www.bestscores[1].score = www.playerscore;
 				www.bestscores[1].country = www.mycountry.myname;
 			}
-			document.getElementById('savedscore1').innerHTML = 'Hi-score: ' + www.bestscores[0].score + ' ' + www.bestscores[0].country;
-			document.getElementById('savedscore2').innerHTML = 'Hi-score: ' + www.bestscores[1].score + ' ' + www.bestscores[1].country;
+			else if(www.mode === 4 && www.playerscore > www.bestscores[2].score){
+				www.bestscores[2].score = www.playerscore;
+				www.bestscores[2].country = www.mycountry.myname;
+			}
+			document.getElementById('savedscore2').innerHTML = 'Hi-score: ' + www.bestscores[0].score + ' ' + www.bestscores[0].country;
+			document.getElementById('savedscore3').innerHTML = 'Hi-score: ' + www.bestscores[1].score + ' ' + www.bestscores[1].country;
+			document.getElementById('savedscore4').innerHTML = 'Hi-score: ' + www.bestscores[2].score + ' ' + www.bestscores[2].country;
 			var allels = document.getElementsByClassName('js-scoregeneral');
 			[].slice.call(allels).forEach(function(div){
 				div.innerHTML = www.playerscore;
