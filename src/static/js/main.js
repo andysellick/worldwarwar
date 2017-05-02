@@ -79,6 +79,8 @@ var www = {
 	midlevel: 0,
 	scaleFactor: 1.9,//1.9, //how big to draw everything. 
 	mode: 3,
+	gamelength: 30000, //if game mode hastimer, number of milliseconds in game
+	gameloopspeed: 500, //important that interval divisible by seconds for timer purposes
 	bestscores: [
 		{'country':'','score':0},
 		{'country':'','score':0},
@@ -103,7 +105,11 @@ var www = {
 			//load saved data if found
 			var saved = localStorage.getItem('worldwarwar');
 			if(saved !== null && saved.length > 0){
-				www.bestscores = JSON.parse(saved);	
+				www.bestscores = JSON.parse(saved);
+				if(www.bestscores.length < 4){ //check for the old saved value, which only saved 2 scores, not 4
+					www.bestscores.push({'country':'','score':0});
+					www.bestscores.push({'country':'','score':0});
+				}
 				www.general.updateScores();
 			}
 		},
@@ -178,7 +184,7 @@ var www = {
 					while(www.chosenenemy === www.chosen){
 						www.chosenenemy = www.general.randomInt(0,allcountries.length - 1);
 					}
-					console.log('Choosing enemy',allcountries[www.chosenenemy].name);
+					//console.log('Choosing enemy',allcountries[www.chosenenemy].name);
 				}
 			}
 			www.general.createEnemies();		
@@ -197,6 +203,21 @@ var www = {
 			www.Render.stop(www.render);
 		},
 		
+		//called when a new game button is pressed, resets stuff to do with the game
+		resetGame: function(){
+			www.playerscore = 0;
+			www.playerhealthorig = www.playerhealth;
+			www.enemycount = 0;
+			www.enemies = [];
+			www.chosenenemy = -1;
+			www.hassplash = 0;
+			www.counttime = www.gamelength;
+			www.hascountdown = 0;
+			www.hasnextlevel = 0;
+			www.hastimer = 0;
+			document.getElementById('messages').innerHTML = '';			
+		},
+		
 		determineGameSetup: function(chosenmode){
 			www.mode = chosenmode;
 			document.getElementById('wwwpage').dataset.gamemode = www.mode;
@@ -205,8 +226,6 @@ var www = {
 				www.enemyhealth = 2;
 				www.enemiesfire = 0;
 				www.gamewonmsg = 'The world has finally been destroyed. There, wasn\'t that satisfying?';
-				www.hascountdown = 0;
-				www.hasnextlevel = 0;
 				//no healthbar or score
 			}
 			else if(www.mode === 2){ //normal - enemies fire at a normal rate, have good health, player has better health
@@ -215,7 +234,6 @@ var www = {
 				www.enemiesfire = 1;
 				www.firechance = 10;
 				www.hascountdown = 1;
-				www.hasnextlevel = 0;
 				www.gamelostmsg = 'Clearly you need to work on your defence budget.';
 				www.gamewonmsg = 'Congratulations, your country is finally safe from the threat of strangers!';
 			}
@@ -225,7 +243,6 @@ var www = {
 				www.enemiesfire = 1;
 				www.firechance = 3;
 				www.hascountdown = 1;
-				www.hasnextlevel = 0;
 				www.gamelostmsg = 'Clearly you need to work on your defence budget.';
 				www.gamewonmsg = 'Congratulations, your country is finally safe from the threat of strangers!';
 			}
@@ -248,6 +265,7 @@ var www = {
 				www.hascountdown = 1;
 				www.hassplash = 1;
 				www.hasnextlevel = 1;
+				www.hastimer = 1;
 				www.gamelostmsg = 'You failed to destroy your target. Better try harder next time.';
 				www.gamewonmsg = 'You successfully assassinated your target. Well done.';
 				//no healthbar, score or country count
@@ -256,19 +274,8 @@ var www = {
 		
 		//setup and start the game
 		initGame: function(chosenmode){
-			//reset some things
-			www.playerhealthorig = www.playerhealth;
-			www.enemycount = 0;
-			www.translated = {x:0,y:0};		
-			www.enemies = [];
-			if(!www.hasnextlevel){
-				www.playerscore = 0;
-			}
-			www.chosenenemy = -1;
-			www.hassplash = 0;
-			document.getElementById('messages').innerHTML = '';			
 			www.general.resetMatter();
-
+			www.translated = {x:0,y:0};		
 			www.general.determineGameSetup(chosenmode);		
 			www.general.setupMatter();
 			
@@ -345,8 +352,9 @@ var www = {
 			//document.getElementById('countdownwrap').dataset.shown = '';
 			www.general.addClass(document.getElementById('wwwpage'),'gameon');
 			document.getElementById('countdown').innerHTML = '';
-			if(www.enemiesfire){
-				www.timer = setInterval(www.general.gameLoop,500);
+			if(www.enemiesfire || www.hastimer){
+				console.log('starting game loop');
+				www.timer = setInterval(www.general.gameLoop,www.gameloopspeed); //important that interval divisible by seconds for timer purposes
 			}
 		},
 		
@@ -418,7 +426,6 @@ var www = {
 		},
 		
 		//modify some elements to insert the player scores
-		//FIXME need to update with new game modes
 		updateScores: function(){
 			if(www.mode === 2 && www.playerscore > www.bestscores[0].score){
 				www.bestscores[0].score = www.playerscore;
@@ -432,9 +439,14 @@ var www = {
 				www.bestscores[2].score = www.playerscore;
 				www.bestscores[2].country = www.mycountry.myname;
 			}
-			document.getElementById('savedscore2').innerHTML = 'Hi-score: ' + www.bestscores[0].score + ' ' + www.bestscores[0].country;
-			document.getElementById('savedscore3').innerHTML = 'Hi-score: ' + www.bestscores[1].score + ' ' + www.bestscores[1].country;
-			document.getElementById('savedscore4').innerHTML = 'Hi-score: ' + www.bestscores[2].score + ' ' + www.bestscores[2].country;
+			else if(www.mode === 5 && www.playerscore > www.bestscores[3].score){
+				www.bestscores[3].score = www.playerscore;
+				www.bestscores[3].country = www.mycountry.myname;
+			}
+			document.getElementById('savedscore2').innerHTML = 'Hi-score: ' + www.bestscores[0].score + ' ' + www.bestscores[0].country; //normal
+			document.getElementById('savedscore3').innerHTML = 'Hi-score: ' + www.bestscores[1].score + ' ' + www.bestscores[1].country; //extreme
+			document.getElementById('savedscore4').innerHTML = 'Hi-score: ' + www.bestscores[2].score + ' ' + www.bestscores[2].country; //versus
+			document.getElementById('savedscore5').innerHTML = 'Hi-score: ' + www.bestscores[3].score + ' ' + www.bestscores[3].country; //assassinate
 			var allels = document.getElementsByClassName('js-scoregeneral');
 			[].slice.call(allels).forEach(function(div){
 				div.innerHTML = www.playerscore;
@@ -488,6 +500,7 @@ var www = {
 			var startbtns = document.getElementsByClassName('startgame');
 			for(var b = 0; b < startbtns.length; b++){
 				var btn = startbtns[b];
+				www.general.resetGame();
 				www.general.createEventStart(btn);
 			}
 			
@@ -502,6 +515,7 @@ var www = {
 				www.general.createEventHelp(hbtn,helpbtns);
 			}
 
+			//hide all help popups
 			document.getElementById('wwwpage').onmousedown = function(e){
 				var helpbtns = document.getElementsByClassName('js-help');
 				for(var p = 0; p < helpbtns.length; p++){
@@ -669,7 +683,9 @@ var www = {
 				}				
 				//now update the HUD
 				document.getElementById('score').innerHTML = www.playerscore;
-				document.getElementById('count').innerHTML = www.enemycount;
+				if(!www.hastimer){
+					document.getElementById('count').innerHTML = www.enemycount;
+				}
 				document.getElementById('health').style.width = (www.mycountry.myhealth / www.playerhealthorig) * 100 + '%';				
 			});
 			
@@ -1039,18 +1055,31 @@ var www = {
 		},
 		
 		gameLoop: function(){
-			for(var e = 0; e < www.enemies.length; e++){
-				if(www.enemies[e].myhealth > 0){
-					if((www.mode === 4 && www.enemies[e].myid === www.chosenenemy) || (www.mode !== 5 && www.mode !== 4)){ //this is contorted but works. Could probably write better
-						if(!www.general.randomInt(0,www.firechance)){
-							var bullet = www.general.createBullet(www.enemies[e].position.x,www.enemies[e].position.y,www.enemies[e].myid,'black');			
-							var x = www.general.randomInt(0,www.canvas.width);
-							var y = www.general.randomInt(0,www.canvas.height);
-							www.general.fireBullet(bullet,x,y,www.enemies[e]);				
+			if(www.hastimer){
+				//console.log('has timer',www.counttime,www.counttime % 1000);
+				if(www.counttime % 1000 === 0){
+					//console.log('should update timer to',www.counttime / 1000);
+					document.getElementById('count').innerHTML = www.counttime / 1000;
+				}
+				www.counttime -= www.gameloopspeed;
+				if(www.counttime <= 0){
+					www.general.gameLost();
+				}
+			}
+			if(www.enemiesfire){
+				for(var e = 0; e < www.enemies.length; e++){
+					if(www.enemies[e].myhealth > 0){
+						if((www.mode === 4 && www.enemies[e].myid === www.chosenenemy) || (www.mode !== 5 && www.mode !== 4)){ //this is contorted but works. Could probably write better
+							if(!www.general.randomInt(0,www.firechance)){
+								var bullet = www.general.createBullet(www.enemies[e].position.x,www.enemies[e].position.y,www.enemies[e].myid,'black');			
+								var x = www.general.randomInt(0,www.canvas.width);
+								var y = www.general.randomInt(0,www.canvas.height);
+								www.general.fireBullet(bullet,x,y,www.enemies[e]);				
+							}
 						}
 					}
 				}
-			}		
+			}
 		},
 				
 		//given a width and height representing an aspect ratio, and the size of the containing thing, return the largest w and h matching that aspect ratio

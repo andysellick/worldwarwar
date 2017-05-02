@@ -64,7 +64,14 @@
 		}
 		&[data-gamemode='5']{ //assassinate, no hud
 			.hud {
-				display:none;
+				.left,
+				.healthwrapper,
+				.countrycounttext {
+					display:none;
+				}
+				.timetext {
+					display:block;
+				}
 			}
 		}
 	}
@@ -342,6 +349,9 @@
 				font-size:10vmin;
 				line-height:1em;
 				letter-spacing:-1.5px;
+			}
+			.timetext {
+				display:none;
 			}
 		}
 		
