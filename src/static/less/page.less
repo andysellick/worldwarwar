@@ -64,7 +64,6 @@
 		}
 		&[data-gamemode='5']{ //assassinate, no hud
 			.hud {
-				.left,
 				.healthwrapper,
 				.countrycounttext {
 					display:none;
@@ -321,7 +320,6 @@
 	
 	.hud {
 		position:absolute;
-		z-index:0;
 		top:0;
 		left:0;
 		width:100%;
@@ -333,6 +331,8 @@
 		text-shadow:0 0.2em 0 @black;
 		
 		.huditemwrap {
+			position:relative;
+			z-index:10;
 			padding:0 0.5em;
 			margin-top:-0.5em;
 			letter-spacing:0px;
@@ -357,6 +357,7 @@
 		
 		.healthwrapper {
 			position:absolute;
+			z-index:10;
 			top:1em;
 			left:25%;
 			width:50%;

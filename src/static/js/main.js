@@ -87,7 +87,7 @@ var www = {
 		{'country':'','score':0},
 		{'country':'','score':0}
 	],
-	enableZoom: 0, //FIXME this is mainly for debug, potentially remove for production
+	//enableZoom: 0, //FIXME this is mainly for debug, potentially remove for production
 	translated: {x:0,y:0}, //keep a track of any view translations for locating click events
 	
 	general: {
@@ -184,7 +184,6 @@ var www = {
 					while(www.chosenenemy === www.chosen){
 						www.chosenenemy = www.general.randomInt(0,allcountries.length - 1);
 					}
-					//console.log('Choosing enemy',allcountries[www.chosenenemy].name);
 				}
 			}
 			www.general.createEnemies();		
@@ -206,12 +205,10 @@ var www = {
 		//called when a new game button is pressed, resets stuff to do with the game
 		resetGame: function(){
 			www.playerscore = 0;
-			www.playerhealthorig = www.playerhealth;
 			www.enemycount = 0;
 			www.enemies = [];
 			www.chosenenemy = -1;
 			www.hassplash = 0;
-			www.counttime = www.gamelength;
 			www.hascountdown = 0;
 			www.hasnextlevel = 0;
 			www.hastimer = 0;
@@ -270,11 +267,13 @@ var www = {
 				www.gamewonmsg = 'You successfully assassinated your target. Well done.';
 				//no healthbar, score or country count
 			}
+			www.playerhealthorig = www.playerhealth;
 		},
 		
 		//setup and start the game
 		initGame: function(chosenmode){
 			www.general.resetMatter();
+			www.counttime = www.gamelength;
 			www.translated = {x:0,y:0};		
 			www.general.determineGameSetup(chosenmode);		
 			www.general.setupMatter();
@@ -353,7 +352,7 @@ var www = {
 			www.general.addClass(document.getElementById('wwwpage'),'gameon');
 			document.getElementById('countdown').innerHTML = '';
 			if(www.enemiesfire || www.hastimer){
-				console.log('starting game loop');
+				//console.log('starting game loop');
 				www.timer = setInterval(www.general.gameLoop,www.gameloopspeed); //important that interval divisible by seconds for timer purposes
 			}
 		},
@@ -377,7 +376,6 @@ var www = {
 		resumeGame: function(){
 			//console.log('resume game');
 			www.general.addClass(document.getElementById('wwwpage'),'gameon');
-			//document.getElementById('wwwpage').className = 'gameon';
 			www.Render.run(www.render);
 			if(www.enemiesfire){
 				www.timer = setInterval(www.general.gameLoop,500);
@@ -408,7 +406,7 @@ var www = {
 				www.general.showPopup('gamewon');
 			}
 		},
-		//FIXME bug here, render doesn't pause, etc.
+		//FIXME bug here, render doesn't actually pause all the objects moving, matter problem
 		gameLost: function(){
 			document.getElementById('gamelostmsg').innerHTML = www.gamelostmsg;
 			www.general.endGame();
@@ -500,7 +498,6 @@ var www = {
 			var startbtns = document.getElementsByClassName('startgame');
 			for(var b = 0; b < startbtns.length; b++){
 				var btn = startbtns[b];
-				www.general.resetGame();
 				www.general.createEventStart(btn);
 			}
 			
@@ -556,10 +553,10 @@ var www = {
 		createEventStart: function(btn){
 			btn.onmousedown = function(e){
 				e.preventDefault();
+				www.general.resetGame();
 				var dd = document.getElementById('choosecountry');
 				www.chosen = parseInt(dd.options[dd.selectedIndex].value);
 				www.general.initGame(parseInt(e.target.dataset.gametype));
-				//www.general.hideAllPopups();
 			};
 		},
 		
@@ -593,14 +590,6 @@ var www = {
 									
 					//don't care about country/country collisions, or country/wall
 					if(obj1.myobjtype === 'bullet' || obj2.myobjtype === 'bullet'){
-						/*
-						if(obj1.myobjtype === 'player' || obj2.myobjtype === 'player'){
-							console.log('you got hit');
-						}
-						*/
-						//console.log('Collision!',obj1.myorigin,obj1.myid,obj1.myname);
-						//console.log('Collision!',obj2.myorigin,obj2.myid,obj2.myname);
-											
 						//this bullet just came from this country, so disable the collision
 						if(obj1.myorigin === obj2.myid || obj2.myorigin === obj1.myid){
 							e.pairs[obj].isActive = false;
@@ -613,6 +602,13 @@ var www = {
 							}
 							if(e.pairs[obj].bodyB.myhealth === 0){
 								www.general.killObject(e.pairs[obj].bodyB,e.pairs[obj].bodyA.myorigin);
+							}
+							//remove bullets after collision
+							if(obj1.myobjtype === 'bullet'){
+								www.World.remove(www.engine.world, e.pairs[obj].bodyA);//remove bullet bodyA
+							}
+							if(obj2.myobjtype === 'bullet'){
+								www.World.remove(www.engine.world, e.pairs[obj].bodyB);//remove bullet bodyB
 							}
 						}
 					}
@@ -673,18 +669,23 @@ var www = {
 				www.translated.y += translate.y;						
 				www.Bounds.translate(www.render.bounds,translate);
 				
-				//check to see if we should remove any bullets
+				//check to see if we should remove any bullets, functionality now disabled
+				/*
 				var now = Date.now();
 				for(var b = 0; b < www.bullets.length; b++){
 					var lifespan = now - www.bullets[b].mycreated;
 					if(lifespan > www.bulletlife){
 						www.World.remove(www.engine.world, www.bullets[b]);
 					}
-				}				
+				}
+				*/
 				//now update the HUD
 				document.getElementById('score').innerHTML = www.playerscore;
 				if(!www.hastimer){
 					document.getElementById('count').innerHTML = www.enemycount;
+				}
+				else {
+					document.getElementById('count').innerHTML = Math.floor(www.counttime / 1000);
 				}
 				document.getElementById('health').style.width = (www.mycountry.myhealth / www.playerhealthorig) * 100 + '%';				
 			});
@@ -715,8 +716,6 @@ var www = {
 				
 		//reduce health and 'kill' a country
 		killObject: function(country,origin){
-			//console.log('killObject',country.myname);
-			//console.log(country,origin,www.mycountry.myid);
 			if(country.myobjtype === 'enemy'){
 				if(origin === www.mycountry.myid){
 					if(www.mode !== 4 && www.mode !== 5){
@@ -763,7 +762,6 @@ var www = {
 					];
 					things = insults[www.general.randomInt(0,insults.length - 1)];
 				}
-				
 				//update the messages window
 				var div = document.createElement('div');
 				div.className = 'message';
@@ -868,8 +866,6 @@ var www = {
 			var blcorner = www.Bodies.rectangle(wall8.x,wall8.y,wall8.w,wall8.h,walloptions);
 			www.Body.rotate(blcorner,-45);
 			www.World.add(www.engine.world, [topwall,rightwall,bottomwall,leftwall,tlcorner,trcorner,brcorner,blcorner]);
-			
-			//FIXME move the bottom boundary up, getting lost on mobile
 		},
 			
 		//create player object
@@ -879,7 +875,7 @@ var www = {
 			var y = www.engine.world.bounds.min.y + ((www.worldh / 100) * me.y);
 			var percscalex = (www.worldw / www.idealw) * 100;
 			var w = (me.w / 100) * percscalex;
-			var mass = me.w / 10; //countries now move slower if they're bigger
+			var mass = Math.max(0.4,me.w / 10); //countries now move slower if they're bigger
 			if(typeof(me.h) !== 'undefined'){
 				mass = Math.max(me.w,me.h) / 10;
 			}
@@ -923,7 +919,6 @@ var www = {
 				thisobj.myhealth = health;
 			}
 			thisobj.mythings = me.unique;
-
 			www.World.add(www.engine.world, [thisobj]);			
 			return(thisobj);
 		},
@@ -976,7 +971,7 @@ var www = {
 			bullet.myname = 'bullet';
 			bullet.myorigin = origin;
 			bullet.myhealth = 1;
-			bullet.mycreated = Date.now();
+			//bullet.mycreated = Date.now(); //used to have bullets expire after set time, but too heavy on browser and inconsistent across screen sizes
 			www.bullets.push(bullet);
 			www.World.add(www.engine.world, [bullet]);
 			return(bullet);
@@ -1056,11 +1051,6 @@ var www = {
 		
 		gameLoop: function(){
 			if(www.hastimer){
-				//console.log('has timer',www.counttime,www.counttime % 1000);
-				if(www.counttime % 1000 === 0){
-					//console.log('should update timer to',www.counttime / 1000);
-					document.getElementById('count').innerHTML = www.counttime / 1000;
-				}
 				www.counttime -= www.gameloopspeed;
 				if(www.counttime <= 0){
 					www.general.gameLost();
