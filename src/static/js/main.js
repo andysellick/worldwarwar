@@ -77,7 +77,7 @@ var www = {
 	hassplash: 0,
 	hasnextlevel: 0,
 	midlevel: 0,
-	scaleFactor: 1.9,//1.9, //how big to draw everything. 
+	scaleFactor: 3.5,//1.9, //how big to draw everything. 
 	mode: 3,
 	gamelength: 30000, //if game mode hastimer, number of milliseconds in game
 	gameloopspeed: 500, //important that interval divisible by seconds for timer purposes
@@ -227,43 +227,43 @@ var www = {
 			}
 			else if(www.mode === 2){ //normal - enemies fire at a normal rate, have good health, player has better health
 				www.playerhealth = 10;
-				www.enemyhealth = 5;
+				www.enemyhealth = 6;
 				www.enemiesfire = 1;
-				www.firechance = 10;
+				www.firechance = 8;
 				www.hascountdown = 1;
 				www.gamelostmsg = 'Clearly you need to work on your defence budget.';
 				www.gamewonmsg = 'Congratulations, your country is finally safe from the threat of strangers!';
 			}
 			else if(www.mode === 3){ //extreme	- enemies fire at extreme rate, player and enemies have same, low health
-				www.playerhealth = 5;
-				www.enemyhealth = 5;
+				www.playerhealth = 6;
+				www.enemyhealth = 6;
 				www.enemiesfire = 1;
-				www.firechance = 3;
+				www.firechance = 2;
 				www.hascountdown = 1;
 				www.gamelostmsg = 'Clearly you need to work on your defence budget.';
 				www.gamewonmsg = 'Congratulations, your country is finally safe from the threat of strangers!';
 			}
 			else if(www.mode === 4){ //versus - only the one enemy fires, they and player have same health, all other countries have 1 health
-				www.playerhealth = 5;
-				www.enemyhealth = 5;
+				www.playerhealth = 6;
+				www.enemyhealth = 6;
 				www.enemiesfire = 1;
 				www.firechance = 1;
 				www.hascountdown = 1;		
 				www.hassplash = 1;
 				www.hasnextlevel = 1;
+				www.hastimer = 1;
 				www.gamelostmsg = 'You were defeated! Better try harder next time.';
 				www.gamewonmsg = 'You won! You\'re clearly much better than that other country.';
 				//no country count, no score
 			}
 			else if(www.mode === 5){ //assassinate - enemies don't fire, take one hit
-				www.playerhealth = 5;
-				www.enemyhealth = 1;
+				www.enemyhealth = 3;
 				www.enemiesfire = 0;
 				www.hascountdown = 1;
 				www.hassplash = 1;
 				www.hasnextlevel = 1;
 				www.hastimer = 1;
-				www.gamelostmsg = 'You failed to destroy your target. Better try harder next time.';
+				www.gamelostmsg = 'You ran out of time. Better try harder next time.';
 				www.gamewonmsg = 'You successfully assassinated your target. Well done.';
 				//no healthbar, score or country count
 			}
@@ -912,8 +912,9 @@ var www = {
 			thisobj.myypos = thisobj.position.y;
 			thisobj.myname = me.name;
 			thisobj.myobjtype = type;
-			if(www.mode === 4 && (which !== www.chosenenemy && type !== 'player')){
-				thisobj.myhealth = 1;
+			if(www.mode === 4 && (which !== www.chosenenemy && type !== 'player')){ //vs is only game mode where countries require different health levels
+				//console.log('setting enemy health to 2');
+				thisobj.myhealth = 2;
 			}
 			else {
 				thisobj.myhealth = health;
@@ -965,7 +966,7 @@ var www = {
 					lineWidth: 0
 				}
 			};
-			var bullet = www.Bodies.circle(posx,posy,www.worldw / 400, options);
+			var bullet = www.Bodies.circle(posx,posy,Math.min(www.worldw,www.worldh) / 400, options);
 			bullet.myid = -1;
 			bullet.myobjtype = 'bullet';
 			bullet.myname = 'bullet';
